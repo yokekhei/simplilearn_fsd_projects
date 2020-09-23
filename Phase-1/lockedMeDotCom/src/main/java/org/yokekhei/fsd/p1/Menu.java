@@ -9,6 +9,7 @@ public class Menu {
 	private boolean exit;
 	private boolean back;
 	private WelcomeScreen welcomeScreen;
+	private FileHandler fileHandler;
 	private Scanner scanner;
 	
 	private enum MenuOption {
@@ -26,11 +27,13 @@ public class Menu {
 	
 	public Menu() {
 		welcomeScreen = new WelcomeScreen();
+		fileHandler = new FileHandler();
 		scanner = new Scanner(System.in);
 	}
 
 	public Menu(String applicationName, String developerName, String companyName) {
 		welcomeScreen = new WelcomeScreen(applicationName, developerName, companyName);
+		fileHandler = new FileHandler();
 		scanner = new Scanner(System.in);
 	}
 	
@@ -76,6 +79,7 @@ public class Menu {
 				break;
 			
 			case LIST_FILES:
+				fileHandler.list();
 				break;
 			
 			case BUSINESS_OPS:
@@ -101,12 +105,15 @@ public class Menu {
 				break;
 		
 			case ADD_FILE:
+				fileHandler.add("test.txt");
 				break;
 		
 			case DELETE_FILE:
+				fileHandler.delete("test.txt");
 				break;
 		
 			case SEARCH_FILE:
+				fileHandler.search("test.txt");
 				break;
 			
 			default:
