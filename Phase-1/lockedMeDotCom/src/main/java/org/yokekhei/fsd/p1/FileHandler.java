@@ -24,7 +24,7 @@ public class FileHandler {
 	public TreeSet<String> list() throws FileHandlerException {
 		try (Stream<Path> stream = Files.walk(Paths.get(CommonUtils.ROOT_DIRECTORY), 1)) {
 			return new TreeSet<>(stream
-					.filter(file -> !Files.isDirectory(file))
+					.filter(file -> Files.isRegularFile(file))
 					.map(Path::getFileName)
 					.map(Path::toString)
 					.collect(Collectors.toSet()));
