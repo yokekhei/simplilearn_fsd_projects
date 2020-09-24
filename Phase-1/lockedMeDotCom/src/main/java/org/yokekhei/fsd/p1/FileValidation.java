@@ -11,7 +11,7 @@ public class FileValidation {
 		File file = new File(CommonUtils.getFilePath(fileName));
 		
 		if (file.exists() && !file.isDirectory()) {
-			throw new FileHandlerException(fileName + " exists in root directory. Please try again.");
+			throw new FileHandlerException("'" + fileName + "' exists in root directory. Please try again.");
 		}
 		
 		return true;

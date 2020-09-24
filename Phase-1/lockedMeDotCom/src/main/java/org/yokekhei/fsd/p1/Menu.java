@@ -147,8 +147,10 @@ public class Menu {
 						System.err.println("File name cannot be empty. Please retry.");
 					} else {
 						if (fileValidation.isValidAdd(fileName)) {
-							fileHandler.add(fileName);
-							System.out.println(fileName + " has been added successfully");
+							System.out.print(System.lineSeparator() + "Enter file content: ");
+							String content = scanner.nextLine();
+							fileHandler.add(fileName, content);
+							System.out.println("'" + fileName + "' has been added successfully.");
 							success = true;
 						}
 					}
