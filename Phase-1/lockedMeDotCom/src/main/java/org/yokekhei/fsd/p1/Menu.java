@@ -105,15 +105,15 @@ public class Menu {
 				break;
 		
 			case ADD_FILE:
-				fileHandler.add("test.txt");
+				addFile();
 				break;
 		
 			case DELETE_FILE:
-				fileHandler.delete("test.txt");
+				fileHandler.delete("");
 				break;
 		
 			case SEARCH_FILE:
-				fileHandler.search("test.txt");
+				fileHandler.search("");
 				break;
 			
 			default:
@@ -127,6 +127,29 @@ public class Menu {
 		System.out.println("2) Delete file");
 		System.out.println("3) Search file");
 		System.out.println("0) Back");
+	}
+	
+	private void addFile() {
+		boolean success = false;
+		
+		while (!success) {
+			try {
+				System.out.print(System.lineSeparator() + "Enter file name: ");
+				String fileName = scanner.nextLine();
+				
+				if (fileName != null) {
+					if (fileName.isEmpty()) {
+						System.err.println("File name cannot be empty. Please retry.");
+					} else {
+						fileHandler.add(fileName);
+						System.out.println(fileName + " has been added successfully");
+						success = true;
+					}
+				}
+			} catch (FileHandlerException e) {
+				System.err.println(e.getMessage());
+			}
+		}
 	}
 	
 }
