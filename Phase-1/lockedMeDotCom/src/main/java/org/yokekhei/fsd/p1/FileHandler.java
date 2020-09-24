@@ -40,13 +40,7 @@ public class FileHandler {
 			bw.write(content);
 			bw.newLine();
 		} catch (IOException e) {
-			if (e.getMessage().contains("Access is denied") &&
-					(new File(CommonUtils.getFilePath(fileName))).isDirectory()) {
-				throw new FileHandlerException("There is already a folder with the same "
-						+ "name as the file name you specified. Specify a different name.");
-			} else {
-				throw new FileHandlerException(e.getMessage());
-			}
+			throw new FileHandlerException(e.getMessage());
 		}
 	}
 	

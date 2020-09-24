@@ -158,16 +158,12 @@ public class Menu {
 				String fileName = scanner.nextLine();
 				
 				if (fileName != null) {
-					if (fileName.isEmpty()) {
-						System.err.println("File name cannot be empty. Please retry.");
-					} else {
-						if (fileValidation.isValidAdd(fileName)) {
-							System.out.print(System.lineSeparator() + "Enter file content: ");
-							String content = scanner.nextLine();
-							fileHandler.add(fileName, content);
-							System.out.println("'" + fileName + "' has been added successfully.");
-							success = true;
-						}
+					if (fileValidation.isValidAdd(fileName)) {
+						System.out.print(System.lineSeparator() + "Enter file content: ");
+						String content = scanner.nextLine();
+						fileHandler.add(fileName, content);
+						System.out.println("'" + fileName + "' has been added successfully.");
+						success = true;
 					}
 				}
 			} catch (FileHandlerException e) {
