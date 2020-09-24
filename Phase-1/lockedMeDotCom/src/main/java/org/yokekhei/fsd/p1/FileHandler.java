@@ -4,6 +4,12 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FileHandler {
 	
@@ -15,8 +21,16 @@ public class FileHandler {
 		}
 	}
 	
-	public void list() {
-		System.out.println("list files");
+	public TreeSet<String> list() throws FileHandlerException {
+		try (Stream<Path> stream = Files.walk(Paths.get(CommonUtils.ROOT_DIRECTORY), 1)) {
+			return new TreeSet<>(stream
+					.filter(file -> !Files.isDirectory(file))
+					.map(Path::getFileName)
+					.map(Path::toString)
+					.collect(Collectors.toSet()));
+		} catch (IOException e) {
+			throw new FileHandlerException(e.getMessage());
+		}
 	}
 	
 	public void add(String fileName, String content) throws FileHandlerException {

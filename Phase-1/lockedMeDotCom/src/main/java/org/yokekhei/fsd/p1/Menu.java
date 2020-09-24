@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p1;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class Menu {
 	
@@ -84,7 +85,7 @@ public class Menu {
 				break;
 			
 			case LIST_FILES:
-				fileHandler.list();
+				listFiles();
 				break;
 			
 			case BUSINESS_OPS:
@@ -132,6 +133,20 @@ public class Menu {
 		System.out.println("2) Delete file");
 		System.out.println("3) Search file");
 		System.out.println("0) Back");
+	}
+	
+	private void listFiles() {
+		try {
+			Set<String> fileNames = fileHandler.list();
+			
+			if (!fileNames.isEmpty()) {
+				System.out.println(fileNames);
+			} else {
+				System.out.println("No file exists in the directory.");
+			}
+		} catch (FileHandlerException e) {
+			System.err.println(e.getMessage());
+		}
 	}
 	
 	private void addFile() {
