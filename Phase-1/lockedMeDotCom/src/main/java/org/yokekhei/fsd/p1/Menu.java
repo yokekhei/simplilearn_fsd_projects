@@ -10,6 +10,7 @@ public class Menu {
 	private boolean back;
 	private WelcomeScreen welcomeScreen;
 	private FileHandler fileHandler;
+	private FileValidation fileValidation;
 	private Scanner scanner;
 	
 	private enum MenuOption {
@@ -27,14 +28,12 @@ public class Menu {
 	
 	public Menu() {
 		welcomeScreen = new WelcomeScreen();
-		fileHandler = new FileHandler();
-		scanner = new Scanner(System.in);
+		init();
 	}
 
 	public Menu(String applicationName, String developerName, String companyName) {
 		welcomeScreen = new WelcomeScreen(applicationName, developerName, companyName);
-		fileHandler = new FileHandler();
-		scanner = new Scanner(System.in);
+		init();
 	}
 	
 	public void run() {
@@ -46,6 +45,12 @@ public class Menu {
 			int choice = getInput(MenuOption.EXIT.ordinal(), MenuOption.BUSINESS_OPS.ordinal());
 			performAction(MenuOption.values()[choice]);
 		}
+	}
+	
+	private void init() {
+		fileHandler = new FileHandler();
+		fileValidation = new FileValidation();
+		scanner = new Scanner(System.in);
 	}
 	
 	private void print() {
@@ -141,9 +146,11 @@ public class Menu {
 					if (fileName.isEmpty()) {
 						System.err.println("File name cannot be empty. Please retry.");
 					} else {
-						fileHandler.add(fileName);
-						System.out.println(fileName + " has been added successfully");
-						success = true;
+						if (fileValidation.isValidAdd(fileName)) {
+							fileHandler.add(fileName);
+							System.out.println(fileName + " has been added successfully");
+							success = true;
+						}
 					}
 				}
 			} catch (FileHandlerException e) {
