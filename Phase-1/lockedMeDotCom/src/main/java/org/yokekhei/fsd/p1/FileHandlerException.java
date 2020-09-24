@@ -8,7 +8,7 @@ public class FileHandlerException extends Exception {
 		super();
 	}
 
-	public FileHandlerException(String message) {
+	public FileHandlerException(final String message) {
 		super(message);
 	}
 	
