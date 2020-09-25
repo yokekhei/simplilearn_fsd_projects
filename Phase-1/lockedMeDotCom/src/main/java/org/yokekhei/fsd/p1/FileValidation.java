@@ -16,6 +16,11 @@ public class FileValidation {
 			throw new FileHandlerException("File name cannot be empty.");
 		}
 		
+		if (fileName.replaceAll("[\\\\/:\\*\\?\\\"<>\\|]", "").length() != fileName.length()) {
+			throw new FileHandlerException("A file name can't contain any of the following characters:"
+					+ System.lineSeparator() + "\\ / : * ? \" < > |");
+		}
+		
 		File file = new File(CommonUtils.getFilePath(fileName));
 		
 		if (file.exists()) {
