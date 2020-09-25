@@ -150,25 +150,18 @@ public class Menu {
 	}
 	
 	private void addFile() {
-		boolean success = false;
+		System.out.print(System.lineSeparator() + "Enter file name: ");
+		String fileName = scanner.nextLine();
 		
-		while (!success) {
-			try {
-				System.out.print(System.lineSeparator() + "Enter file name: ");
-				String fileName = scanner.nextLine();
-				
-				if (fileName != null) {
-					if (fileValidation.isValidAdd(fileName)) {
-						System.out.print(System.lineSeparator() + "Enter file content: ");
-						String content = scanner.nextLine();
-						fileHandler.add(fileName, content);
-						System.out.println("'" + fileName + "' has been added successfully.");
-						success = true;
-					}
-				}
-			} catch (FileHandlerException e) {
-				System.err.println(e.getMessage());
+		try {
+			if (fileValidation.isValidAdd(fileName)) {
+				System.out.print(System.lineSeparator() + "Enter file content: ");
+				String content = scanner.nextLine();
+				fileHandler.add(fileName, content);
+				System.out.println("'" + fileName + "' has been added successfully.");
 			}
+		} catch (FileHandlerException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 	

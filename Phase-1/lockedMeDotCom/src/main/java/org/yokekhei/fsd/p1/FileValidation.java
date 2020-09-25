@@ -8,6 +8,10 @@ public class FileValidation {
 	}
 	
 	public boolean isValidAdd(String fileName) throws FileHandlerException {
+		if (fileName == null) {
+			throw new FileHandlerException("Invalid null file name.");
+		}
+		
 		if (fileName.isEmpty()) {
 			throw new FileHandlerException("File name cannot be empty.");
 		}
