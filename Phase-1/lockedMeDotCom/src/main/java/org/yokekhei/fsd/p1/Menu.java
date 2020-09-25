@@ -115,7 +115,7 @@ public class Menu {
 				break;
 		
 			case DELETE_FILE:
-				fileHandler.delete("");
+				deleteFile();
 				break;
 		
 			case SEARCH_FILE:
@@ -169,6 +169,20 @@ public class Menu {
 			} catch (FileHandlerException e) {
 				System.err.println(e.getMessage());
 			}
+		}
+	}
+	
+	private void deleteFile() {
+		System.out.print(System.lineSeparator() + "Enter file name: ");
+		String fileName = scanner.nextLine();
+		
+		try {
+			if (fileValidation.isValidDelete(fileName)) {
+				fileHandler.delete(fileName);
+				System.out.println("'" + fileName + "' has been deleted successfully.");
+			}
+		} catch (FileHandlerException e) {
+			System.err.println(e.getMessage());
 		}
 	}
 	

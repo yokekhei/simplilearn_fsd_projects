@@ -44,8 +44,11 @@ public class FileHandler {
 		}
 	}
 	
-	public void delete(String fileName) {
-		System.out.println("delete " + fileName);
+	public void delete(String fileName) throws FileHandlerException {
+		// Case sensitivity file name handling
+		if (!list().contains(fileName)) {
+			throw new FileHandlerException("'" + fileName + "' is not found in the directory.");
+		}
 	}
 	
 	public void search(String fileName) {
