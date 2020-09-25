@@ -49,6 +49,14 @@ public class FileHandler {
 		if (!list().contains(fileName)) {
 			throw new FileHandlerException("'" + fileName + "' is not found in the directory.");
 		}
+		
+		File file = new File(CommonUtils.getFilePath(fileName));
+		
+		try {
+			Files.delete(file.toPath());
+		} catch (IOException e) {
+			throw new FileHandlerException(e.getMessage());
+		}
 	}
 	
 	public void search(String fileName) {
