@@ -24,7 +24,8 @@ public class WelcomeScreen {
 		this.companyName = companyName;
 	}
 	
-	public void print() {
+	@Override
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append(getTopBottomLine());
@@ -50,7 +51,7 @@ public class WelcomeScreen {
 		sb.append(getEmptyLine());
 		sb.append(getTopBottomLine());
 		
-		System.out.println(sb.toString());
+		return sb.toString();
 	}
 	
 	private String getEmptyLine() {

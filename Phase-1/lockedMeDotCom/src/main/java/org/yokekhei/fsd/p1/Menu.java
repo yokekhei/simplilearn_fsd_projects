@@ -9,7 +9,6 @@ public class Menu {
 	
 	private boolean exit;
 	private boolean back;
-	private WelcomeScreen welcomeScreen;
 	private FileHandler fileHandler;
 	private FileValidation fileValidation;
 	private Scanner scanner;
@@ -28,30 +27,18 @@ public class Menu {
 	};
 	
 	public Menu() {
-		welcomeScreen = new WelcomeScreen();
-		init();
-	}
-
-	public Menu(String applicationName, String developerName, String companyName) {
-		welcomeScreen = new WelcomeScreen(applicationName, developerName, companyName);
-		init();
+		fileHandler = new FileHandler();
+		fileValidation = new FileValidation();
+		scanner = new Scanner(System.in);
 	}
 	
 	public void run() {
-		welcomeScreen.print();
-		
 		while (!exit) {
 			print();
 			
 			int choice = getInput(MenuOption.EXIT.ordinal(), MenuOption.BUSINESS_OPS.ordinal());
 			performAction(MenuOption.values()[choice]);
 		}
-	}
-	
-	private void init() {
-		fileHandler = new FileHandler();
-		fileValidation = new FileValidation();
-		scanner = new Scanner(System.in);
 	}
 	
 	private void print() {
