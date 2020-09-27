@@ -59,8 +59,10 @@ public class FileHandler {
 		}
 	}
 	
-	public void search(String fileName) {
-		System.out.println("search " + fileName);
+	public void search(String fileName) throws FileHandlerException {
+		if (!list().contains(fileName)) {
+			throw new FileHandlerException("'" + fileName + "' is not found in the directory.");
+		}
 	}
 	
 }

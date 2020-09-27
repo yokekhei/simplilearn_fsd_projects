@@ -47,4 +47,16 @@ public class FileValidation {
 		return true;
 	}
 	
+	public boolean isValidSearch(String fileName) throws FileHandlerException {
+		if (fileName == null) {
+			throw new FileHandlerException("Invalid null file name.");
+		}
+		
+		if (fileName.isEmpty()) {
+			throw new FileHandlerException("File name cannot be empty.");
+		}
+		
+		return true;
+	}
+	
 }

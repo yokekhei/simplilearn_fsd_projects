@@ -119,7 +119,7 @@ public class Menu {
 				break;
 		
 			case SEARCH_FILE:
-				fileHandler.search("");
+				searchFile();
 				break;
 			
 			default:
@@ -173,6 +173,20 @@ public class Menu {
 			if (fileValidation.isValidDelete(fileName)) {
 				fileHandler.delete(fileName);
 				System.out.println("'" + fileName + "' has been deleted successfully.");
+			}
+		} catch (FileHandlerException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
+	private void searchFile() {
+		System.out.print(System.lineSeparator() + "Enter file name: ");
+		String fileName = scanner.nextLine();
+		
+		try {
+			if (fileValidation.isValidSearch(fileName)) {
+				fileHandler.search(fileName);
+				System.out.println("'" + fileName + "' is found in the directory.");
 			}
 		} catch (FileHandlerException e) {
 			System.err.println(e.getMessage());
