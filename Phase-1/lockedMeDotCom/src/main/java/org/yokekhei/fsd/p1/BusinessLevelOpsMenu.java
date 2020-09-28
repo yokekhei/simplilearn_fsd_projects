@@ -102,8 +102,8 @@ public class BusinessLevelOpsMenu extends Menu {
 		
 		try {
 			if (fileValidation.isValidSearch(fileName)) {
-				fileHandler.search(fileName);
-				System.out.println("'" + fileName + "' is found in the directory.");
+				String location = fileHandler.search(fileName);
+				System.out.println("'" + fileName + "' is found at " + location + ".");
 			}
 		} catch (FileHandlerException e) {
 			System.err.println(e.getMessage());

@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -59,10 +62,28 @@ public class FileHandler {
 		}
 	}
 	
-	public void search(String fileName) throws FileHandlerException {
-		if (!list().contains(fileName)) {
-			throw new FileHandlerException("'" + fileName + "' is not found in the directory.");
+	public String search(String fileName) throws FileHandlerException {
+		int index = -1;
+		List<File> files = new ArrayList<>();
+		
+		try (Stream<Path> stream = Files.walk(Paths.get(CommonUtils.ROOT_DIRECTORY))) {
+			files = stream
+						.filter(file -> Files.isRegularFile(file))
+						.map(Path::toFile)
+						.collect(Collectors.toList());
+			
+			FileNameComparator c = new FileNameComparator();
+			Collections.sort(files, c);
+			index = Collections.binarySearch(files, new File(fileName), c);
+			
+			if (index < 0) {
+				throw new FileHandlerException("'" + fileName + "' is not found in the directory.");
+			}
+		} catch (IOException e) {
+			throw new FileHandlerException(e.getMessage());
 		}
+		
+		return files.get(index).getAbsolutePath();
 	}
 	
 }

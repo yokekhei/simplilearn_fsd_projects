@@ -39,7 +39,16 @@ public class FileValidation {
 	}
 	
 	public boolean isValidSearch(String fileName) throws FileHandlerException {
-		return isValid(fileName);
+		if (isValid(fileName)) {
+			File file = new File(CommonUtils.getFilePath(fileName));
+			
+			if (file.exists() && file.isDirectory()) {
+				throw new FileHandlerException("'" + fileName + "' is a directory. "
+						+ "Directory search is not supported.");
+			}
+		}
+		
+		return true;
 	}
 	
 	private boolean isValid(String fileName) throws FileHandlerException {
