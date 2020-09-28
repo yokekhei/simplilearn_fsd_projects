@@ -6,7 +6,7 @@ public class LockedMeDotCom {
 		System.out.println(new WelcomeScreen("LockedMe.com",
 				"Yoke Khei Lam",
 				"Lockers Pvt. Ltd."));
-		Menu menu = new Menu();
+		Menu menu = new MainMenu();
 		menu.run();
 	}
 
