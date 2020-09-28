@@ -25,8 +25,12 @@ public abstract class Menu {
 			
 			try {
 				choice = Integer.parseInt(scanner.nextLine());
+				
+				if (choice < min || choice > max) {
+					System.err.println("Invalid choice.");
+				}
 			} catch (NumberFormatException e) {
-				System.err.println("Invalid choice. Please try again.");
+				System.err.println("Invalid choice.");
 			}
 		}
 		
