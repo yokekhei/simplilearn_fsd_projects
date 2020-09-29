@@ -7,7 +7,7 @@ public class MainMenu extends Menu {
 	
 	private boolean exit;
 	private FileHandler fileHandler;
-	private BusinessLevelOpsMenu businessLevelOpsMenu;
+	private Menu businessLevelOpsMenu;
 	
 	private enum MenuOption {
 		EXIT,
