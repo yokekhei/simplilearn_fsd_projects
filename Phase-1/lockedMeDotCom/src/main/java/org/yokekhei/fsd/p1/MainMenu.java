@@ -15,8 +15,8 @@ public class MainMenu extends Menu {
 		BUSINESS_LEVEL_OPS
 	};
 	
-	public MainMenu() {
-		super(new Scanner(System.in));
+	public MainMenu(Scanner scanner) {
+		super(scanner);
 		
 		fileHandler = new FileHandler();
 		businessLevelOpsMenu = new BusinessLevelOpsMenu(getScanner(), fileHandler);
