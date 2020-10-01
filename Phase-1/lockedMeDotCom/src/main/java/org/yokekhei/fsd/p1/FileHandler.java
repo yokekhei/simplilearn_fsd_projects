@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -73,8 +72,8 @@ public class FileHandler {
 						.collect(Collectors.toList());
 			
 			FileNameComparator c = new FileNameComparator();
-			Collections.sort(files, c);
-			index = Collections.binarySearch(files, new File(fileName), c);
+			Algorithms.sort(files, c);
+			index = Algorithms.binarySearch(files, new File(fileName), c);
 			
 			if (index < 0) {
 				throw new FileHandlerException("'" + fileName + "' is not found in the directory.");
