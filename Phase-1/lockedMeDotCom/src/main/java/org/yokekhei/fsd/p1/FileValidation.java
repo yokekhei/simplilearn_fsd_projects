@@ -52,12 +52,12 @@ public class FileValidation {
 	}
 	
 	private boolean isValid(String fileName) throws FileHandlerException {
-		if (fileName == null) {
+		try {
+			if (fileName.isEmpty()) {
+				throw new FileHandlerException("File name cannot be empty.");
+			}
+		} catch (NullPointerException e) {
 			throw new FileHandlerException("Invalid null file name.");
-		}
-		
-		if (fileName.isEmpty()) {
-			throw new FileHandlerException("File name cannot be empty.");
 		}
 		
 		if (fileName.replaceAll("[\\\\/:\\*\\?\\\"<>\\|]", "").length() != fileName.length()) {
