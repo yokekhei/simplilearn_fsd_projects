@@ -45,7 +45,7 @@ public class WelcomeScreen {
 		
 		if (!companyName.isEmpty()) {
 			sb.append(getEmptyLine());
-			sb.append(getOutput("Copyright " + RELEASE_YEAR + " " + companyName + ". All Rights Reserved"));
+			sb.append(getOutput("Copyright " + RELEASE_YEAR + " " + companyName + " All Rights Reserved."));
 		}
 		
 		sb.append(getEmptyLine());
