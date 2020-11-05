@@ -40,7 +40,7 @@ public class AdminLoginServlet extends HttpServlet {
 			AdminUser adminUser = service.login(email, password);
 			HttpSession session = request.getSession();
 			session.setAttribute("adminUser", adminUser);
-			response.sendRedirect("FlightsListServlet");
+			response.sendRedirect(View.ADMIN_FLIGHT_LIST_SERVLET);
 		} catch (FlyAwayServiceException e) {
 			response.sendRedirect(View.ADMIN_SIGNIN_ERROR);
 		}

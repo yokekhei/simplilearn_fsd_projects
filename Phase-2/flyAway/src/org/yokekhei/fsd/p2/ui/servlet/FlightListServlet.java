@@ -13,16 +13,15 @@ import org.yokekhei.fsd.p2.bean.AdminUser;
 /**
  * Servlet implementation class FlightsListServlet
  */
-@WebServlet("/FlightsListServlet")
-public class FlightsListServlet extends HttpServlet {
+@WebServlet("/FlightListServlet")
+public class FlightListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FlightsListServlet() {
+    public FlightListServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -31,7 +30,7 @@ public class FlightsListServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		AdminUser adminUser = (AdminUser)session.getAttribute("adminUser");
-		response.sendRedirect(View.ADMIN_FLIGHTS_LIST);
+		response.sendRedirect(View.ADMIN_FLIGHT_LIST);
 	}
 
 }

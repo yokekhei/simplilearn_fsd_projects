@@ -10,11 +10,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 
-public class AdminDaoImpl implements AdminDao {
+public class AdminUserDaoImpl implements AdminUserDao {
 
 	SessionFactory sessionFactory;
 	
-	public AdminDaoImpl() {
+	public AdminUserDaoImpl() {
 		Configuration configuration = new Configuration().configure();
 		configuration.addAnnotatedClass(org.yokekhei.fsd.p2.bean.AdminUser.class);
 		StandardServiceRegistryBuilder builder =
@@ -23,7 +23,7 @@ public class AdminDaoImpl implements AdminDao {
 	}
 	
 	@Override
-	public AdminUser getAdminDetails(String email, String password) throws FlyAwayDaoException {
+	public AdminUser getAdminUser(String email, String password) throws FlyAwayDaoException {
 		Session session = null;
 		AdminUser adminUser = null;
 		
