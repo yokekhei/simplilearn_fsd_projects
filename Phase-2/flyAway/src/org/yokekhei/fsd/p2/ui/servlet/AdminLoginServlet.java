@@ -43,8 +43,7 @@ public class AdminLoginServlet extends HttpServlet {
 			session.setAttribute("adminUser", adminUser);
 			response.sendRedirect("FlightsListServlet");
 		} catch (FlyAwayServiceException e) {
-			e.printStackTrace();
-			response.sendRedirect(View.ADMIN_SIGNIN);
+			response.sendRedirect(View.ADMIN_SIGNIN_ERROR);
 		}
 	}
 
