@@ -6,20 +6,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 
 public class AdminUserDaoImpl implements AdminUserDao {
 
 	SessionFactory sessionFactory;
 	
-	public AdminUserDaoImpl() {
-		Configuration configuration = new Configuration().configure();
-		configuration.addAnnotatedClass(org.yokekhei.fsd.p2.bean.AdminUser.class);
-		StandardServiceRegistryBuilder builder =
-				new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
-		sessionFactory = configuration.buildSessionFactory(builder.build());
+	public AdminUserDaoImpl(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 	
 	@Override

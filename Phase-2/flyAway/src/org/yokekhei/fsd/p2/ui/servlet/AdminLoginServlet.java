@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
@@ -36,7 +37,8 @@ public class AdminLoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		try {
-			AdminService service = new AdminServiceImpl();
+			AdminService service = new AdminServiceImpl(
+					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			AdminUser adminUser = service.login(email, password);
 			HttpSession session = request.getSession();
 			session.setAttribute("adminUser", adminUser);
