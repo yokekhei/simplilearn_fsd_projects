@@ -11,10 +11,10 @@ import javax.persistence.Table;
 public class AdminUser {
 
 	@Id
-	@Column(nullable=false, name="admin_email")
+	@Column(nullable=false, name="admin_email", length=100)
 	private String email;
 	
-	@Column(nullable=false, name="admin_password")
+	@Column(nullable=false, name="admin_password", length=50)
 	private String password;
 	
 	public AdminUser() {
