@@ -2,7 +2,6 @@ package org.yokekhei.fsd.p2.dao;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -34,7 +33,7 @@ public class AdminUserDaoImpl implements AdminUserDao {
 			}
 			
 			adminUser = result.get(0);
-		} catch (HibernateException e) {
+		} catch (Exception e) {
 			throw new FlyAwayDaoException("Failed to query admin details - " + e.getMessage());
 		} finally {
 			if (session != null) {
