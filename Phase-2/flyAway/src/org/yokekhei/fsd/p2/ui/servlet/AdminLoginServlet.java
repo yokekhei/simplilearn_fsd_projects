@@ -18,7 +18,7 @@ import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
 /**
  * Servlet implementation class AdminLoginServlet
  */
-@WebServlet("/AdminLoginServlet")
+@WebServlet("/login")
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

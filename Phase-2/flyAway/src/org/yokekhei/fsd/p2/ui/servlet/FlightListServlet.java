@@ -8,12 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.yokekhei.fsd.p2.bean.AdminUser;
-
 /**
  * Servlet implementation class FlightsListServlet
  */
-@WebServlet("/FlightListServlet")
+@WebServlet("/flight")
 public class FlightListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -28,9 +26,12 @@ public class FlightListServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		AdminUser adminUser = (AdminUser)session.getAttribute("adminUser");
-		response.sendRedirect(View.ADMIN_FLIGHT_LIST);
+		try {
+			HttpSession session = request.getSession(false);
+			response.sendRedirect(View.ADMIN_FLIGHT_LIST);
+		} catch (Exception e) {
+			Common.viewError(e.getMessage(), request, response);
+		}
 	}
 
 }
