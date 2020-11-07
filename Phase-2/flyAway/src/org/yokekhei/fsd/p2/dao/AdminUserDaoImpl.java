@@ -9,7 +9,7 @@ import org.yokekhei.fsd.p2.bean.AdminUser;
 
 public class AdminUserDaoImpl implements AdminUserDao {
 
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	public AdminUserDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;

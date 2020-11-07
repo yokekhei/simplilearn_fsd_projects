@@ -10,7 +10,7 @@ import org.yokekhei.fsd.p2.bean.Place;
 
 public class PlaceDaoImpl implements PlaceDao {
 
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	public PlaceDaoImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
