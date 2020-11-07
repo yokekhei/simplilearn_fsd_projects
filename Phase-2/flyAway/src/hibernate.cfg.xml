@@ -5,7 +5,7 @@
 
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/flyaway</property>
         <property name="connection.username">flyaway_user</property>
         <property name="connection.password">password</property>
@@ -16,5 +16,8 @@
         <property name="show_sql">true</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="org.yokekhei.fsd.p2.bean.AdminUser"/>
+        <mapping class="org.yokekhei.fsd.p2.bean.Place"/>
+        <mapping class="org.yokekhei.fsd.p2.bean.Airline"/>
+        <mapping class="org.yokekhei.fsd.p2.bean.Flight"/>
     </session-factory>
 </hibernate-configuration>
