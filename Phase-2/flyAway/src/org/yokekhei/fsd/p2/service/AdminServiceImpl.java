@@ -4,16 +4,19 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.bean.AdminUser;
+import org.yokekhei.fsd.p2.bean.Airline;
 import org.yokekhei.fsd.p2.bean.Place;
 import org.yokekhei.fsd.p2.dao.AdminUserDao;
 import org.yokekhei.fsd.p2.dao.AdminUserDaoImpl;
+import org.yokekhei.fsd.p2.dao.AirlineDao;
+import org.yokekhei.fsd.p2.dao.AirlineDaoImpl;
 import org.yokekhei.fsd.p2.dao.FlyAwayDaoException;
 import org.yokekhei.fsd.p2.dao.PlaceDao;
 import org.yokekhei.fsd.p2.dao.PlaceDaoImpl;
 
 public class AdminServiceImpl implements AdminService {
 
-	SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 	
 	public AdminServiceImpl(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
@@ -34,23 +37,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Place> getAllPlace() throws FlyAwayServiceException {
+	public List<Place> getAllPlaces() throws FlyAwayServiceException {
 		List<Place> places = null;
 		
 		try {
 			PlaceDao dao = new PlaceDaoImpl(sessionFactory);
 			places = dao.getAllPlaces();
 		} catch (FlyAwayDaoException e) {
-			throw new FlyAwayServiceException("Failed to add place - " + e.getMessage());
+			throw new FlyAwayServiceException("Failed to get all places - " + e.getMessage());
 		}
 		
 		return places;
-	}
-	
-	@Override
-	public Place getPlace(String locationCode) throws FlyAwayServiceException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	@Override
@@ -80,6 +77,50 @@ public class AdminServiceImpl implements AdminService {
 			dao.deletePlace(locationCode);
 		} catch (FlyAwayDaoException e) {
 			throw new FlyAwayServiceException("Failed to delete place - " + e.getMessage());
+		}
+	}
+
+	@Override
+	public List<Airline> getAllAirlines() throws FlyAwayServiceException {
+		List<Airline> airlines = null;
+		
+		try {
+			AirlineDao dao = new AirlineDaoImpl(sessionFactory);
+			airlines = dao.getAllAirlines();
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to get all airlines - " + e.getMessage());
+		}
+		
+		return airlines;
+	}
+
+	@Override
+	public void addAirline(Airline data) throws FlyAwayServiceException {
+		try {
+			AirlineDao dao = new AirlineDaoImpl(sessionFactory);
+			dao.addAirline(data);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to add airline - " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void updateAirline(Airline data) throws FlyAwayServiceException {
+		try {
+			AirlineDao dao = new AirlineDaoImpl(sessionFactory);
+			dao.updateAirline(data);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to update airline - " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void deleteAirline(int airlineCode) throws FlyAwayServiceException {
+		try {
+			AirlineDao dao = new AirlineDaoImpl(sessionFactory);
+			dao.deleteAirline(airlineCode);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to delete airline - " + e.getMessage());
 		}
 	}
 
