@@ -26,6 +26,14 @@ public class Airline {
 	public Airline() {
 	}
 
+	public Airline(int airlineCode, String flightCode, String companyName, String country) {
+		super();
+		this.airlineCode = airlineCode;
+		this.flightCode = flightCode;
+		this.companyName = companyName;
+		this.country = country;
+	}
+	
 	public int getAirlineCode() {
 		return airlineCode;
 	}
