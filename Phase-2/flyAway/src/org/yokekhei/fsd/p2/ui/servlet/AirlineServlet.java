@@ -37,10 +37,10 @@ public class AirlineServlet extends HttpServlet {
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
-			List<Airline> places = service.getAllAirlines();
+			List<Airline> airlines = service.getAllAirlines();
 			
 			HttpSession session = request.getSession(false);
-			session.setAttribute("airlineList", places);
+			session.setAttribute("airlineList", airlines);
 			response.sendRedirect(View.ADMIN_AIRLINE_LIST);
 		} catch (FlyAwayServiceException e) {
 			Common.viewError(e.getMessage(), request, response);
