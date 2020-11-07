@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.yokekhei.fsd.p2.Common;
+
 /**
  * Servlet implementation class AdminLogoutServlet
  */

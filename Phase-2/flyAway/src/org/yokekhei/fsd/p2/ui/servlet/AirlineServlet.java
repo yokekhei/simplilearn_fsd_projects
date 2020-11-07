@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
+import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.Airline;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
