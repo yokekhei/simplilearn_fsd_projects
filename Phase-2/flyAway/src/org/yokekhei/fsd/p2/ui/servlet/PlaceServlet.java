@@ -37,7 +37,7 @@ public class PlaceServlet extends HttpServlet {
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
-			List<Place> places = service.getAllPlace();
+			List<Place> places = service.getAllPlaces();
 			
 			HttpSession session = request.getSession(false);
 			session.setAttribute("placeList", places);
@@ -122,4 +122,5 @@ public class PlaceServlet extends HttpServlet {
 		
 		response.sendRedirect(View.ADMIN_PLACE_LIST_SERVLET);
 	}
+	
 }
