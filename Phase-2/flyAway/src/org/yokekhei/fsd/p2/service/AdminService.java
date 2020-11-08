@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
+import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.bean.Place;
 
 public interface AdminService {
@@ -19,5 +20,18 @@ public interface AdminService {
 	void addAirline(Airline data) throws FlyAwayServiceException;
 	void updateAirline(Airline data) throws FlyAwayServiceException;
 	void deleteAirline(int airlineCode) throws FlyAwayServiceException;
+	
+	List<Flight> getAllFlights() throws FlyAwayServiceException;
+	void addFlight(Flight data) throws FlyAwayServiceException;
+	void addFlight(int flightNo, int airlineCode,
+			String srcLocationCode, String dstLocationCode,
+			String departDate, String departTime,
+			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException;
+	void updateFlight(Flight data) throws FlyAwayServiceException;
+	void updateFlight(int flightId, int flightNo, int airlineCode,
+			String srcLocationCode, String dstLocationCode,
+			String departDate, String departTime,
+			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException;
+	void deleteFlight(int flightId) throws FlyAwayServiceException;
 	
 }

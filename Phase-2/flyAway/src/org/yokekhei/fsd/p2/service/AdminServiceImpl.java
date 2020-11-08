@@ -3,13 +3,17 @@ package org.yokekhei.fsd.p2.service;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
+import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
+import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.bean.Place;
 import org.yokekhei.fsd.p2.dao.AdminUserDao;
 import org.yokekhei.fsd.p2.dao.AdminUserDaoImpl;
 import org.yokekhei.fsd.p2.dao.AirlineDao;
 import org.yokekhei.fsd.p2.dao.AirlineDaoImpl;
+import org.yokekhei.fsd.p2.dao.FlightDao;
+import org.yokekhei.fsd.p2.dao.FlightDaoImpl;
 import org.yokekhei.fsd.p2.dao.FlyAwayDaoException;
 import org.yokekhei.fsd.p2.dao.PlaceDao;
 import org.yokekhei.fsd.p2.dao.PlaceDaoImpl;
@@ -121,6 +125,101 @@ public class AdminServiceImpl implements AdminService {
 			dao.deleteAirline(airlineCode);
 		} catch (FlyAwayDaoException e) {
 			throw new FlyAwayServiceException("Failed to delete airline - " + e.getMessage());
+		}
+	}
+
+	@Override
+	public List<Flight> getAllFlights() throws FlyAwayServiceException {
+		List<Flight> flights = null;
+		
+		try {
+			FlightDao dao = new FlightDaoImpl(sessionFactory);
+			flights = dao.getAllFlights();
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to get all flights - " + e.getMessage());
+		}
+		
+		return flights;
+	}
+
+	@Override
+	public void addFlight(Flight data) throws FlyAwayServiceException {
+		try {
+			FlightDao dao = new FlightDaoImpl(sessionFactory);
+			dao.addFlight(data);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to add flight - " + e.getMessage());
+		}
+	}
+	
+	@Override
+	public void addFlight(int flightNo, int airlineCode, String srcLocationCode, String dstLocationCode,
+			String departDate, String departTime, double adultPrice, double childPrice, double infantPrice)
+					throws FlyAwayServiceException {
+		try {
+			AirlineDao airlineDao = new AirlineDaoImpl(sessionFactory);
+			Airline airline = airlineDao.getAirline(airlineCode);
+			
+			PlaceDao placeDao = new PlaceDaoImpl(sessionFactory);
+			Place srcLocation = placeDao.getPlace(srcLocationCode);
+			Place dstLocation = placeDao.getPlace(dstLocationCode);
+			
+			addFlight(new Flight(flightNo, airline, srcLocation, dstLocation,
+					Common.toLocalDate(departDate), Common.toLocalTime(departTime),
+					adultPrice, childPrice, infantPrice));
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to add flight - " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void updateFlight(Flight data) throws FlyAwayServiceException {
+		try {
+			FlightDao dao = new FlightDaoImpl(sessionFactory);
+			dao.updateFlight(data);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to update flight - " + e.getMessage());
+		}
+	}
+	
+	@Override
+	public void updateFlight(int flightId, int flightNo, int airlineCode,
+			String srcLocationCode, String dstLocationCode,
+			String departDate, String departTime, double adultPrice, double childPrice, double infantPrice)
+			throws FlyAwayServiceException {
+		try {
+			AirlineDao airlineDao = new AirlineDaoImpl(sessionFactory);
+			Airline airline = airlineDao.getAirline(airlineCode);
+			
+			PlaceDao placeDao = new PlaceDaoImpl(sessionFactory);
+			Place srcLocation = placeDao.getPlace(srcLocationCode);
+			Place dstLocation = placeDao.getPlace(dstLocationCode);
+			
+			FlightDao flightDao = new FlightDaoImpl(sessionFactory);
+			Flight flight = flightDao.getFlight(flightId);
+			flight.setFlightNo(flightNo);
+			flight.setAirline(airline);
+			flight.setSource(srcLocation);
+			flight.setDestination(dstLocation);
+			flight.setDepartDate(departDate);
+			flight.setDepartTime(departTime);
+			flight.setAdultPrice(adultPrice);
+			flight.setChildPrice(childPrice);
+			flight.setInfantPrice(infantPrice);
+			
+			flightDao.updateFlight(flight);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to update flight - " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void deleteFlight(int flightId) throws FlyAwayServiceException {
+		try {
+			FlightDao dao = new FlightDaoImpl(sessionFactory);
+			dao.deleteFlight(flightId);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to delete flight - " + e.getMessage());
 		}
 	}
 
