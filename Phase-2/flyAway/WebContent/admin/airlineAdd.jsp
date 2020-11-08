@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col">
               <label for="airlineCode">Airline Code</label>
-              <input type="text" class="form-control" name="airlineCode" placeholder="" value="" required>
+              <input type="text" class="form-control" name="airlineCode" placeholder="123" value="" required />
               <div class="invalid-feedback">
                 Valid airline code is required.
               </div>
@@ -19,7 +19,7 @@
           <div class="row">
              <div class="col">
               <label for="flightCode">Flight Code</label>
-              <input type="text" class="form-control" name="flightCode" placeholder="" value="" required>
+              <input type="text" class="form-control" name="flightCode" placeholder="AB" value="" required />
               <div class="invalid-feedback">
                 Valid flight code is required.
               </div>
@@ -28,7 +28,7 @@
           <div class="row">
              <div class="col">
               <label for="companyName">Company Name</label>
-              <input type="text" class="form-control" name="companyName" placeholder="" value="" required>
+              <input type="text" class="form-control" name="companyName" placeholder="" value="" required />
               <div class="invalid-feedback">
                 Valid company name is required.
               </div>
@@ -37,7 +37,7 @@
           <div class="row">
              <div class="col">
               <label for="country">Country</label>
-              <input type="text" class="form-control" name="country" placeholder="" value="" required>
+              <input type="text" class="form-control" name="country" placeholder="" value="" required />
               <div class="invalid-feedback">
                 Valid country is required.
               </div>

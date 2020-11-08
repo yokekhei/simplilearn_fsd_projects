@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col">
               <label for="locationCode">Location Code</label>
-              <input type="text" class="form-control locationCode" name="locationCode" placeholder="" required readonly>
+              <input type="text" class="form-control locationCode" name="locationCode" placeholder="" required readonly />
               <div class="invalid-feedback">
                 Valid location code is required.
               </div>
@@ -34,7 +34,7 @@
           <div class="row">
              <div class="col">
               <label for="locationName">Location Name</label>
-              <input type="text" class="form-control locationName" name="locationName" placeholder="" required>
+              <input type="text" class="form-control locationName" name="locationName" placeholder="" required />
               <div class="invalid-feedback">
                 Valid location name is required.
               </div>
@@ -43,7 +43,7 @@
           <div class="row">
              <div class="col">
               <label for="cityName">City Name</label>
-              <input type="text" class="form-control cityName" name="cityName" placeholder="" required>
+              <input type="text" class="form-control cityName" name="cityName" placeholder="" required />
               <div class="invalid-feedback">
                 Valid city name is required.
               </div>

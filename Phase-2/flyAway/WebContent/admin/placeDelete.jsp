@@ -25,19 +25,19 @@
           <div class="row">
             <div class="col">
               <label for="locationCode">Location Code</label>
-              <input type="text" class="form-control locationCode" name="locationCode" placeholder="" required readonly>
+              <input type="text" class="form-control locationCode" name="locationCode" placeholder="" required readonly />
             </div>
           </div>
           <div class="row">
              <div class="col">
               <label for="locationName">Location Name</label>
-              <input type="text" class="form-control locationName" name="locationName" placeholder="" required readonly>
+              <input type="text" class="form-control locationName" name="locationName" placeholder="" required readonly />
             </div>
           </div>
           <div class="row">
              <div class="col">
               <label for="cityName">City Name</label>
-              <input type="text" class="form-control cityName" name="cityName" placeholder="" required readonly>
+              <input type="text" class="form-control cityName" name="cityName" placeholder="" required readonly />
             </div>
           </div>
           <hr class="mb-4">

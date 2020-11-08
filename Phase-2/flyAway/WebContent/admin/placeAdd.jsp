@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col">
               <label for="locationCode">Location Code</label>
-              <input type="text" class="form-control" name="locationCode" placeholder="" value="" required>
+              <input type="text" class="form-control" name="locationCode" placeholder="ABC" value="" required />
               <div class="invalid-feedback">
                 Valid location code is required.
               </div>
@@ -19,7 +19,7 @@
           <div class="row">
              <div class="col">
               <label for="locationName">Location Name</label>
-              <input type="text" class="form-control" name="locationName" placeholder="" value="" required>
+              <input type="text" class="form-control" name="locationName" placeholder="" value="" required />
               <div class="invalid-feedback">
                 Valid location name is required.
               </div>
@@ -28,7 +28,7 @@
           <div class="row">
              <div class="col">
               <label for="cityName">City Name</label>
-              <input type="text" class="form-control" name="cityName" placeholder="" value="" required>
+              <input type="text" class="form-control" name="cityName" placeholder="" value="" required />
               <div class="invalid-feedback">
                 Valid city name is required.
               </div>
