@@ -28,36 +28,24 @@
             <div class="col">
               <label for="airlineCode">Airline Code</label>
               <input type="text" class="form-control airlineCode" name="airlineCode" placeholder="" required readonly />
-              <div class="invalid-feedback">
-                Valid airline code is required.
-              </div>
             </div>
           </div>
           <div class="row">
              <div class="col">
               <label for="flightCode">Flight Code</label>
               <input type="text" class="form-control flightCode" name="flightCode" placeholder="" required readonly />
-              <div class="invalid-feedback">
-                Valid flight code is required.
-              </div>
             </div>
           </div>
           <div class="row">
              <div class="col">
               <label for="companyName">Company Name</label>
               <input type="text" class="form-control companyName" name="companyName" placeholder="" required readonly />
-              <div class="invalid-feedback">
-                Valid company name is required.
-              </div>
             </div>
           </div>
           <div class="row">
              <div class="col">
               <label for="country">Country</label>
               <input type="text" class="form-control country" name="country" placeholder="" required readonly />
-              <div class="invalid-feedback">
-                Valid country is required.
-              </div>
             </div>
           </div>
           <hr class="mb-4">
