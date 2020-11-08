@@ -6,7 +6,6 @@
   <link href="${pageContext.request.contextPath}/css/sticky-footer-navbar.css" rel="stylesheet" type="text/css">
 </head>
 <%@ include file="/admin/navbar.jsp" %>
-<%@ include file="/jsScript.jsp" %>
 <main role="main" class="flex-shrink-0">
   <div class="container">
     <div class="mt-5 card card-cascade narrower">
