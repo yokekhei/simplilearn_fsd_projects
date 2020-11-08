@@ -1,5 +1,9 @@
 package org.yokekhei.fsd.p2.bean;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.yokekhei.fsd.p2.Common;
 
 @Entity
 
@@ -29,11 +35,11 @@ public class Flight {
 	private Airline airline;
 	
 	@OneToOne(cascade = CascadeType.ALL, targetEntity = Place.class)
-	@JoinColumn(name="location_code", insertable=false, updatable=false)
+	@JoinColumn(name="src_location")
 	private Place source;
 	
 	@OneToOne(cascade = CascadeType.ALL, targetEntity = Place.class)
-	@JoinColumn(name="location_code", insertable=false, updatable=false)
+	@JoinColumn(name="dest_location")
 	private Place destination;
 	
 	@Basic
@@ -56,6 +62,20 @@ public class Flight {
 	public Flight() {
 	}
 
+	public Flight(int flightNo, Airline airline, Place source, Place destination, LocalDate departDate,
+			LocalTime departTime, double adultPrice, double childPrice, double infantPrice) {
+		super();
+		this.flightNo = flightNo;
+		this.airline = airline;
+		this.source = source;
+		this.destination = destination;
+		this.departDate = departDate;
+		this.departTime = departTime;
+		this.adultPrice = adultPrice;
+		this.childPrice = childPrice;
+		this.infantPrice = infantPrice;
+	}
+	
 	public int getFlightId() {
 		return flightId;
 	}
@@ -99,17 +119,35 @@ public class Flight {
 	public java.time.LocalDate getDepartDate() {
 		return departDate;
 	}
+	
+	public String getDepartDateInString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Common.DATE_FORMAT);
+		return departDate.format(formatter); 
+	}
 
 	public void setDepartDate(java.time.LocalDate departDate) {
 		this.departDate = departDate;
+	}
+	
+	public void setDepartDate(String departDate) {
+		this.departDate = Common.toLocalDate(departDate);
 	}
 
 	public java.time.LocalTime getDepartTime() {
 		return departTime;
 	}
+	
+	public String getDepartTimeInString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Common.TIME_FORMAT);
+		return departTime.format(formatter);
+	}
 
 	public void setDepartTime(java.time.LocalTime departTime) {
 		this.departTime = departTime;
+	}
+	
+	public void setDepartTime(String departTime) {
+		this.departTime = Common.toLocalTime(departTime);
 	}
 
 	public double getAdultPrice() {
