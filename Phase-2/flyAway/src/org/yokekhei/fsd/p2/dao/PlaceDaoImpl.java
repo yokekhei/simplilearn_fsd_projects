@@ -46,8 +46,7 @@ public class PlaceDaoImpl implements PlaceDao {
 		
 		try {
 			session = sessionFactory.openSession();
-			Query<Place> query = session.createQuery("from Place");
-			places = query.list();
+			places = session.createQuery("from Place").getResultList();
 		} catch (Exception e) {
 			throw new FlyAwayDaoException("Failed to retrieve places - " + e.getMessage());
 		} finally {
@@ -66,15 +65,11 @@ public class PlaceDaoImpl implements PlaceDao {
 		
 		try {
 			session = sessionFactory.openSession();
-			Query<Place> query = session.createQuery("from Place where location_code=:locationCode");
-			query.setParameter("locationCode", locationCode);
-			List<Place> result = query.list();
+			place = session.get(Place.class, locationCode);
 			
-			if (result.isEmpty()) {
+			if (place == null) {
 				throw new FlyAwayDaoException("No place found for location code " + locationCode);
 			}
-			
-			place = result.get(0);
 		} catch (Exception e) {
 			throw new FlyAwayDaoException("Failed to query place details - " + e.getMessage());
 		} finally {

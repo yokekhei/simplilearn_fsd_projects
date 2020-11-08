@@ -46,8 +46,7 @@ public class AirlineDaoImpl implements AirlineDao {
 		
 		try {
 			session = sessionFactory.openSession();
-			Query<Airline> query = session.createQuery("from Airline");
-			airlines = query.list();
+			airlines = session.createQuery("from Airline").getResultList();
 		} catch (Exception e) {
 			throw new FlyAwayDaoException("Failed to retrieve airlines - " + e.getMessage());
 		} finally {
@@ -66,15 +65,11 @@ public class AirlineDaoImpl implements AirlineDao {
 		
 		try {
 			session = sessionFactory.openSession();
-			Query<Airline> query = session.createQuery("from Airline where airline_code=:airlineCode");
-			query.setParameter("airlineCode", airlineCode);
-			List<Airline> result = query.list();
+			airline = session.get(Airline.class, airlineCode);
 			
-			if (result.isEmpty()) {
+			if (airline == null) {
 				throw new FlyAwayDaoException("No airline found for airline code " + airlineCode);
 			}
-			
-			airline = result.get(0);
 		} catch (Exception e) {
 			throw new FlyAwayDaoException("Failed to query airline details - " + e.getMessage());
 		} finally {
