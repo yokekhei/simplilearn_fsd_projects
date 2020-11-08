@@ -79,16 +79,6 @@ public class FlightServlet extends HttpServlet {
 	private void doPostAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		
-		System.out.println("flightNo = " + request.getParameter("flightNo"));
-		System.out.println("airline = " + request.getParameter("airline"));
-		System.out.println("srcLocation = " + request.getParameter("srcLocation"));
-		System.out.println("dstLocation = " + request.getParameter("dstLocation"));
-		System.out.println("departDate = " + request.getParameter("departDate"));
-		System.out.println("departTime = " + request.getParameter("departTime"));
-		System.out.println("adultPrice = " + request.getParameter("adultPrice"));
-		System.out.println("childPrice = " + request.getParameter("childPrice"));
-		System.out.println("infantPrice" + request.getParameter("infantPrice"));
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
