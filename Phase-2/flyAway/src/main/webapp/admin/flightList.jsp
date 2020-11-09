@@ -73,9 +73,9 @@
                 <td class="dstLocation"><c:out value="${flight.getDestination().getLocationCode()}"/></td>
                 <td class="departDateTime"><c:out value="${flight.getDepartDateTime()}"/></td>
                 <td class="arriveDateTime"><c:out value="${flight.getArriveDateTime()}"/></td>
-                <td class="adultPrice"><c:out value="${flight.getAdultPrice()}"/></td>
-                <td class="childPrice"><c:out value="${flight.getChildPrice()}"/></td>
-                <td class="infantPrice"><c:out value="${flight.getInfantPrice()}"/></td>
+                <td class="adultPrice"><c:out value="${flight.getAdultPriceString()}"/></td>
+                <td class="childPrice"><c:out value="${flight.getChildPriceString()}"/></td>
+                <td class="infantPrice"><c:out value="${flight.getInfantPriceString()}"/></td>
                 <td class="flightId" style="display:none;"><c:out value="${flight.getFlightId()}"/></td>
                 <td class="airlineCode" style="display:none;"><c:out value="${flight.getAirline().getAirlineCode()}"/></td>
             </tr>

@@ -1,5 +1,6 @@
 package org.yokekhei.fsd.p2.bean;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -169,6 +170,11 @@ public class Flight {
 	public double getAdultPrice() {
 		return adultPrice;
 	}
+	
+	public String getAdultPriceString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(adultPrice, 2));
+	}
 
 	public void setAdultPrice(double adultPrice) {
 		this.adultPrice = adultPrice;
@@ -177,6 +183,11 @@ public class Flight {
 	public double getChildPrice() {
 		return childPrice;
 	}
+	
+	public String getChildPriceString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(childPrice, 2));
+	}
 
 	public void setChildPrice(double childPrice) {
 		this.childPrice = childPrice;
@@ -184,6 +195,11 @@ public class Flight {
 
 	public double getInfantPrice() {
 		return infantPrice;
+	}
+	
+	public String getInfantPriceString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(infantPrice, 2));
 	}
 
 	public void setInfantPrice(double infantPrice) {
