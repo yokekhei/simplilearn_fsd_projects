@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="/header.jsp" %>
+<%@ include file="/common/header.jsp" %>
   <link href="${pageContext.request.contextPath}/css/navbar-top-fixed.css" rel="stylesheet" type="text/css">
   <link href="${pageContext.request.contextPath}/css/sticky-footer-navbar.css" rel="stylesheet" type="text/css">
 </head>
@@ -89,4 +89,4 @@
   </div>
 </main>
 <%@ include file="/admin/alert.jsp" %>
-<%@ include file="/footer.html" %>
+<%@ include file="/common/footer.html" %>

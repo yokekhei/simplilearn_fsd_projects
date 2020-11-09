@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ include file="/header.jsp" %>
+<%@ include file="/common/header.jsp" %>
   <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet" type="text/css">
 </head>
 <body class="text-center">
