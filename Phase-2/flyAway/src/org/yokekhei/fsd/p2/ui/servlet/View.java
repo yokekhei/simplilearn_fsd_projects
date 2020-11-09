@@ -8,6 +8,7 @@ public class View {
 	public static final String ADMIN_FLIGHT_LIST = "admin/flightList.jsp";
 	public static final String ADMIN_PLACE_LIST = "admin/placeList.jsp";
 	public static final String ADMIN_AIRLINE_LIST = "admin/airlineList.jsp";
+	public static final String ADMIN_CHANGE_PASSWORD = "admin/changePassword.jsp";
 	
 	public static final String ADMIN_LOGIN_SERVLET = "login";
 	public static final String ADMIN_LOGOUT_SERVLET = "logout";

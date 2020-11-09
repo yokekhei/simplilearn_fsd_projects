@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 
 public class AdminUserDaoImpl implements AdminUserDao {
@@ -42,6 +43,29 @@ public class AdminUserDaoImpl implements AdminUserDao {
 		}
 		
 		return adminUser;
+	}
+
+	@Override
+	public void updateAdminUser(AdminUser data) throws FlyAwayDaoException {
+		Session session = null;
+		Transaction transaction = null;
+		
+		try {
+			session = sessionFactory.openSession();
+			transaction = session.beginTransaction();
+			session.update(data);
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			
+			throw new FlyAwayDaoException("Failed to update admin user - " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
 
 }

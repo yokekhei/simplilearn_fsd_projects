@@ -10,6 +10,7 @@ import org.yokekhei.fsd.p2.bean.Place;
 public interface AdminService {
 
 	AdminUser login(String email, String password) throws FlyAwayServiceException;
+	void updateAdminUser(AdminUser data) throws FlyAwayServiceException;
 	
 	List<Place> getAllPlaces() throws FlyAwayServiceException;
 	void addPlace(Place data) throws FlyAwayServiceException;

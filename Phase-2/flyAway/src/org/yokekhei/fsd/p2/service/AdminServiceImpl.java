@@ -39,6 +39,16 @@ public class AdminServiceImpl implements AdminService {
 		
 		return adminUser;
 	}
+	
+	@Override
+	public void updateAdminUser(AdminUser data) throws FlyAwayServiceException {
+		try {
+			AdminUserDao dao = new AdminUserDaoImpl(sessionFactory);
+			dao.updateAdminUser(data);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to update admin user - " + e.getMessage());
+		}
+	}
 
 	@Override
 	public List<Place> getAllPlaces() throws FlyAwayServiceException {
@@ -222,5 +232,5 @@ public class AdminServiceImpl implements AdminService {
 			throw new FlyAwayServiceException("Failed to delete flight - " + e.getMessage());
 		}
 	}
-
+	
 }

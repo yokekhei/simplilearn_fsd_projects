@@ -22,7 +22,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#">Change password</a>
+            <a class="dropdown-item" href="${pageContext.request.contextPath}/admin/changePassword.jsp">Change password</a>
             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Sign out</a>
           </div>
         </li>
