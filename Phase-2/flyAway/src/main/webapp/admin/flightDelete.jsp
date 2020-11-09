@@ -63,7 +63,7 @@
           </div>
           <div class="row">
              <div class="col">
-              <label for="srcLocation">Source</label>
+              <label for="srcLocation">From City</label>
               <select name="srcLocation" class="custom-select srcLocation" required disabled>
                 <option value="">Choose...</option>
                 <c:forEach var="place" items="${sessionScope.placeList}">
@@ -74,7 +74,7 @@
           </div>
           <div class="row">
              <div class="col">
-              <label for="dstLocation">Destination</label>
+              <label for="dstLocation">To City</label>
               <select name="dstLocation" class="custom-select dstLocation" required disabled>
                 <option value="">Choose...</option>
                 <c:forEach var="place" items="${sessionScope.placeList}">
