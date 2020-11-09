@@ -2,7 +2,6 @@ package org.yokekhei.fsd.p2.bean;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -50,6 +49,14 @@ public class Flight {
 	@Column(nullable=false, name="depart_time")
 	private java.time.LocalTime departTime;
 	
+	@Basic
+	@Column(nullable=false, name="arrive_date")
+	private java.time.LocalDate arriveDate;
+	
+	@Basic
+	@Column(nullable=false, name="arrive_time")
+	private java.time.LocalTime arriveTime;
+	
 	@Column(nullable=false, name="adult_price")
 	private double adultPrice;
 	
@@ -63,7 +70,8 @@ public class Flight {
 	}
 
 	public Flight(int flightNo, Airline airline, Place source, Place destination, LocalDate departDate,
-			LocalTime departTime, double adultPrice, double childPrice, double infantPrice) {
+			LocalTime departTime, LocalDate arriveDate, LocalTime arriveTime, double adultPrice, double childPrice,
+			double infantPrice) {
 		super();
 		this.flightNo = flightNo;
 		this.airline = airline;
@@ -71,6 +79,8 @@ public class Flight {
 		this.destination = destination;
 		this.departDate = departDate;
 		this.departTime = departTime;
+		this.arriveDate = arriveDate;
+		this.arriveTime = arriveTime;
 		this.adultPrice = adultPrice;
 		this.childPrice = childPrice;
 		this.infantPrice = infantPrice;
@@ -119,35 +129,41 @@ public class Flight {
 	public java.time.LocalDate getDepartDate() {
 		return departDate;
 	}
-	
-	public String getDepartDateInString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Common.DATE_FORMAT);
-		return departDate.format(formatter); 
-	}
 
 	public void setDepartDate(java.time.LocalDate departDate) {
 		this.departDate = departDate;
 	}
-	
-	public void setDepartDate(String departDate) {
-		this.departDate = Common.toLocalDate(departDate);
-	}
 
 	public java.time.LocalTime getDepartTime() {
 		return departTime;
-	}
-	
-	public String getDepartTimeInString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Common.TIME_FORMAT);
-		return departTime.format(formatter);
 	}
 
 	public void setDepartTime(java.time.LocalTime departTime) {
 		this.departTime = departTime;
 	}
 	
-	public void setDepartTime(String departTime) {
-		this.departTime = Common.toLocalTime(departTime);
+	public String getDepartDateTime() {
+		return Common.toLocalDateTime(departDate, departTime);
+	}
+
+	public java.time.LocalDate getArriveDate() {
+		return arriveDate;
+	}
+
+	public void setArriveDate(java.time.LocalDate arriveDate) {
+		this.arriveDate = arriveDate;
+	}
+
+	public java.time.LocalTime getArriveTime() {
+		return arriveTime;
+	}
+
+	public void setArriveTime(java.time.LocalTime arriveTime) {
+		this.arriveTime = arriveTime;
+	}
+	
+	public String getArriveDateTime() {
+		return Common.toLocalDateTime(arriveDate, arriveTime);
 	}
 
 	public double getAdultPrice() {
@@ -176,9 +192,10 @@ public class Flight {
 
 	@Override
 	public String toString() {
-		return "Flight [flightId=" + flightId + ", airline=" + airline + ", source=" + source + ", destination="
-				+ destination + ", departDate=" + departDate + ", departTime=" + departTime + ", adultPrice="
-				+ adultPrice + ", childPrice=" + childPrice + ", infantPrice=" + infantPrice + "]";
+		return "Flight [flightId=" + flightId + ", flightNo=" + flightNo + ", airline=" + airline + ", source=" + source
+				+ ", destination=" + destination + ", departDate=" + departDate + ", departTime=" + departTime
+				+ ", arriveDate=" + arriveDate + ", arriveTime=" + arriveTime + ", adultPrice=" + adultPrice
+				+ ", childPrice=" + childPrice + ", infantPrice=" + infantPrice + "]";
 	}
 	
 }

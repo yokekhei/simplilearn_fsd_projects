@@ -8,8 +8,8 @@
 			var _airline = _row.find(".airlineCode").text();
 			var _srcLocation = _row.find(".srcLocation").text();
 			var _dstLocation = _row.find(".dstLocation").text();
-			var _departDate = _row.find(".departDate").text();
-			var _departTime = _row.find(".departTime").text();
+			var _departDateTime = _row.find(".departDateTime").text();
+			var _arriveDateTime = _row.find(".arriveDateTime").text();
 			var _adultPrice = _row.find(".adultPrice").text();
 			var _childPrice = _row.find(".childPrice").text();
 			var _infantPrice = _row.find(".infantPrice").text();
@@ -19,8 +19,10 @@
 			$(this).find(".airline").val(_airline);
 			$(this).find(".srcLocation").val(_srcLocation);
 			$(this).find(".dstLocation").val(_dstLocation);
-			$(this).find(".departDate").val(_departDate);
-			$(this).find(".departTime").val(_departTime);
+			$(this).find(".departDate").val(_departDateTime.substring(0, 10));
+			$(this).find(".departTime").val(_departDateTime.substring(11));
+			$(this).find(".arriveDate").val(_arriveDateTime.substring(0, 10));
+			$(this).find(".arriveTime").val(_arriveDateTime.substring(11));
 			$(this).find(".adultPrice").val(_adultPrice);
 			$(this).find(".childPrice").val(_childPrice);
 			$(this).find(".infantPrice").val(_infantPrice);
@@ -94,7 +96,7 @@
             </div>
           </div>
           <div class="row">
-             <div class="col">
+             <div class="col-md-6">
               <label for="departDate">Depart Date</label>
               <input id="departDateUpdate" name="departDate" class="departDate" required />
               <div class="invalid-feedback">
@@ -107,9 +109,7 @@
               	});
               </script>
             </div>
-          </div>
-          <div class="row">
-             <div class="col">
+            <div class="col-md-6">
               <label for="departTime">Depart Time</label>
               <input id="departTimeUpdate" name="departTime" class="departTime" required />
               <div class="invalid-feedback">
@@ -117,6 +117,34 @@
               </div>
               <script>
               	$('#departTimeUpdate').timepicker({
+              		format: 'HH:MM',
+              		uiLibrary: 'bootstrap4'
+                });
+              </script>
+            </div>
+          </div>
+          <div class="row">
+             <div class="col-md-6">
+              <label for="arriveDate">Arrive Date</label>
+              <input id="arriveDateUpdate" name="arriveDate" class="arriveDate" required />
+              <div class="invalid-feedback">
+                Valid arrive date is required.
+              </div>
+              <script>
+              	$('#arriveDateUpdate').datepicker({
+              		format: 'dd-mm-yyyy',
+              		uiLibrary: 'bootstrap4'
+              	});
+              </script>
+            </div>
+            <div class="col-md-6">
+              <label for="arriveTime">Arrive Time</label>
+              <input id="arriveTimeUpdate" name="arriveTime" class="arriveTime" required />
+              <div class="invalid-feedback">
+                Valid arrive time is required.
+              </div>
+              <script>
+              	$('#arriveTimeUpdate').timepicker({
               		format: 'HH:MM',
               		uiLibrary: 'bootstrap4'
                 });

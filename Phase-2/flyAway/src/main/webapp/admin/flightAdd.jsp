@@ -59,7 +59,7 @@
             </div>
           </div>
           <div class="row">
-             <div class="col">
+             <div class="col-md-6">
               <label for="departDate">Depart Date</label>
               <input id="departDateAdd" name="departDate" required />
               <div class="invalid-feedback">
@@ -72,9 +72,7 @@
               	});
               </script>
             </div>
-          </div>
-          <div class="row">
-             <div class="col">
+            <div class="col-md-6">
               <label for="departTime">Depart Time</label>
               <input id="departTimeAdd" name="departTime" required />
               <div class="invalid-feedback">
@@ -82,6 +80,34 @@
               </div>
               <script>
               	$('#departTimeAdd').timepicker({
+              		format: 'HH:MM',
+              		uiLibrary: 'bootstrap4'
+                });
+              </script>
+            </div>
+          </div>
+          <div class="row">
+             <div class="col-md-6">
+              <label for="arriveDate">Arrive Date</label>
+              <input id="arriveDateAdd" name="arriveDate" required />
+              <div class="invalid-feedback">
+                Valid arrive date is required.
+              </div>
+              <script>
+              	$('#arriveDateAdd').datepicker({
+              		format: 'dd-mm-yyyy',
+              		uiLibrary: 'bootstrap4'
+              	});
+              </script>
+            </div>
+            <div class="col-md-6">
+              <label for="arriveTime">Arrive Time</label>
+              <input id="arriveTimeAdd" name="arriveTime" required />
+              <div class="invalid-feedback">
+                Valid arrive time is required.
+              </div>
+              <script>
+              	$('#arriveTimeAdd').timepicker({
               		format: 'HH:MM',
               		uiLibrary: 'bootstrap4'
                 });

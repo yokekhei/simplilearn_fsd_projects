@@ -27,11 +27,13 @@ public interface AdminService {
 	void addFlight(int flightNo, int airlineCode,
 			String srcLocationCode, String dstLocationCode,
 			String departDate, String departTime,
+			String arriveDate, String arriveTime,
 			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException;
 	void updateFlight(Flight data) throws FlyAwayServiceException;
 	void updateFlight(int flightId, int flightNo, int airlineCode,
 			String srcLocationCode, String dstLocationCode,
 			String departDate, String departTime,
+			String arriveDate, String arriveTime,
 			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException;
 	void deleteFlight(int flightId) throws FlyAwayServiceException;
 	

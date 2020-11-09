@@ -40,10 +40,10 @@
                 <span>To City</span>
               </th>
               <th>
-                <span>Date</span>
+                <span>Depart Date/Time</span>
               </th>
               <th>
-                <span>Time</span>
+                <span>Arrive Date/Time</span>
               </th>
               <th>
                 <span>Adult ($)</span>
@@ -71,8 +71,8 @@
                 <td class="flightCode"><c:out value="${flight.getAirline().getFlightCode()}"/></td>
                 <td class="srcLocation"><c:out value="${flight.getSource().getLocationCode()}"/></td>
                 <td class="dstLocation"><c:out value="${flight.getDestination().getLocationCode()}"/></td>
-                <td class="departDate"><c:out value="${flight.getDepartDateInString()}"/></td>
-                <td class="departTime"><c:out value="${flight.getDepartTimeInString()}"/></td>
+                <td class="departDateTime"><c:out value="${flight.getDepartDateTime()}"/></td>
+                <td class="arriveDateTime"><c:out value="${flight.getArriveDateTime()}"/></td>
                 <td class="adultPrice"><c:out value="${flight.getAdultPrice()}"/></td>
                 <td class="childPrice"><c:out value="${flight.getChildPrice()}"/></td>
                 <td class="infantPrice"><c:out value="${flight.getInfantPrice()}"/></td>

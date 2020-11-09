@@ -88,6 +88,8 @@ public class FlightServlet extends HttpServlet {
 					request.getParameter("dstLocation"),
 					request.getParameter("departDate"),
 					request.getParameter("departTime"),
+					request.getParameter("arriveDate"),
+					request.getParameter("arriveTime"),
 					Double.parseDouble(request.getParameter("adultPrice")),
 					Double.parseDouble(request.getParameter("childPrice")),
 					Double.parseDouble(request.getParameter("infantPrice")));
@@ -113,6 +115,8 @@ public class FlightServlet extends HttpServlet {
 					request.getParameter("dstLocation"),
 					request.getParameter("departDate"),
 					request.getParameter("departTime"),
+					request.getParameter("arriveDate"),
+					request.getParameter("arriveTime"),
 					Double.parseDouble(request.getParameter("adultPrice")),
 					Double.parseDouble(request.getParameter("childPrice")),
 					Double.parseDouble(request.getParameter("infantPrice")));

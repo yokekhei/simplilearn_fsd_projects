@@ -164,8 +164,8 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Override
 	public void addFlight(int flightNo, int airlineCode, String srcLocationCode, String dstLocationCode,
-			String departDate, String departTime, double adultPrice, double childPrice, double infantPrice)
-					throws FlyAwayServiceException {
+			String departDate, String departTime, String arriveDate, String arriveTime, double adultPrice,
+			double childPrice, double infantPrice) throws FlyAwayServiceException {
 		try {
 			AirlineDao airlineDao = new AirlineDaoImpl(sessionFactory);
 			Airline airline = airlineDao.getAirline(airlineCode);
@@ -176,6 +176,7 @@ public class AdminServiceImpl implements AdminService {
 			
 			addFlight(new Flight(flightNo, airline, srcLocation, dstLocation,
 					Common.toLocalDate(departDate), Common.toLocalTime(departTime),
+					Common.toLocalDate(arriveDate), Common.toLocalTime(arriveTime),
 					adultPrice, childPrice, infantPrice));
 		} catch (FlyAwayDaoException e) {
 			throw new FlyAwayServiceException("Failed to add flight - " + e.getMessage());
@@ -193,10 +194,9 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public void updateFlight(int flightId, int flightNo, int airlineCode,
-			String srcLocationCode, String dstLocationCode,
-			String departDate, String departTime, double adultPrice, double childPrice, double infantPrice)
-			throws FlyAwayServiceException {
+	public void updateFlight(int flightId, int flightNo, int airlineCode, String srcLocationCode,
+			String dstLocationCode, String departDate, String departTime, String arriveDate, String arriveTime,
+			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException {
 		try {
 			AirlineDao airlineDao = new AirlineDaoImpl(sessionFactory);
 			Airline airline = airlineDao.getAirline(airlineCode);
@@ -211,8 +211,10 @@ public class AdminServiceImpl implements AdminService {
 			flight.setAirline(airline);
 			flight.setSource(srcLocation);
 			flight.setDestination(dstLocation);
-			flight.setDepartDate(departDate);
-			flight.setDepartTime(departTime);
+			flight.setDepartDate(Common.toLocalDate(departDate));
+			flight.setDepartTime(Common.toLocalTime(departTime));
+			flight.setArriveDate(Common.toLocalDate(arriveDate));
+			flight.setArriveTime(Common.toLocalTime(arriveTime));
 			flight.setAdultPrice(adultPrice);
 			flight.setChildPrice(childPrice);
 			flight.setInfantPrice(infantPrice);

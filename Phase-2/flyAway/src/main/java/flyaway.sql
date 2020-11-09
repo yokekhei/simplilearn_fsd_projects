@@ -37,6 +37,8 @@ CREATE TABLE Flight (
     dest_location VARCHAR(3) NOT NULL,
     depart_date DATE NOT NULL,
     depart_time TIME NOT NULL,
+    arrive_date DATE NOT NULL,
+    arrive_time TIME NOT NULL,
     adult_price DECIMAL(18, 5) NOT NULL,
     child_price DECIMAL(18, 5) NOT NULL,
     infant_price DECIMAL(18, 5) NOT NULL,
