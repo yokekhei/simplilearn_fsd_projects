@@ -68,7 +68,11 @@
               <script>
               	$('#departDateAdd').datepicker({
               		format: 'dd-mm-yyyy',
-              		uiLibrary: 'bootstrap4'
+              		uiLibrary: 'bootstrap4',
+              		disableDates: function (date) {
+              			const currentDate = new Date();
+              			return date > currentDate ? true : false;
+              		}
               	});
               </script>
             </div>
@@ -96,7 +100,11 @@
               <script>
               	$('#arriveDateAdd').datepicker({
               		format: 'dd-mm-yyyy',
-              		uiLibrary: 'bootstrap4'
+              		uiLibrary: 'bootstrap4',
+              		disableDates: function (date) {
+              			const currentDate = new Date();
+              			return date > currentDate ? true : false;
+              		}
               	});
               </script>
             </div>
