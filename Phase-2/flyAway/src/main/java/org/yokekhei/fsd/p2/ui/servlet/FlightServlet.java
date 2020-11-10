@@ -64,10 +64,7 @@ public class FlightServlet extends HttpServlet {
 		
 		if (action == null) {
 			doGet(request, response);
-			return;
-		}
-		
-		if (action.equals("add")) {
+		} else if (action.equals("add")) {
 			doPostAdd(request, response);
 		} else if (action.equals("update")) {
 			doPostUpdate(request, response);

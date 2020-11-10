@@ -36,10 +36,7 @@ public class AdminPasswordServlet extends HttpServlet {
 		
 		if (action == null) {
 			response.sendRedirect(View.ADMIN_CHANGE_PASSWORD);
-			return;
-		}
-		
-		if (action.equals("change")) {
+		} else if (action.equals("change")) {
 			doPostChange(request, response);
 		} else {
 			response.sendRedirect(View.ADMIN_CHANGE_PASSWORD);
