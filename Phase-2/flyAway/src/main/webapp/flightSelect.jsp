@@ -51,19 +51,19 @@
             <c:forEach var="flight" items="${requestScope.flightSearchResult}">
               <tr>
                 <td>
-                  <button type="button" class="btn btn-sm px-2" onclick="location.href='${pageContext.request.contextPath}/guest?action=book&id=${flight.getFlightId()}'">
+                  <button type="button" class="btn btn-sm px-2"
+                    onclick="location.href='${pageContext.request.contextPath}/guest?action=book&id=${flight.getFlightId()}&adult=${requestScope.adultNo}&child=${requestScope.childNo}&infant=${requestScope.infantNo}'">
                     <i class="fas fa-book mt-0 text-primary"></i>
                   </button>
                 </td>
-                <td class="flightCode"><c:out value="${flight.getAirline().getFlightCode()}${flight.getFlightNo()}"/></td>
-                <td class="srcLocation"><c:out value="${flight.getSource().getLocationCode()}"/></td>
-                <td class="dstLocation"><c:out value="${flight.getDestination().getLocationCode()}"/></td>
-                <td class="departDateTime"><c:out value="${flight.getDepartDateTime()}"/></td>
-                <td class="arriveDateTime"><c:out value="${flight.getArriveDateTime()}"/></td>
-                <td class="adultPrice"><c:out value="${flight.getAdultPriceString()}"/></td>
-                <td class="childPrice"><c:out value="${flight.getChildPriceString()}"/></td>
-                <td class="infantPrice"><c:out value="${flight.getInfantPriceString()}"/></td>
-                <td class="flightId" style="display:none;"><c:out value="${flight.getFlightId()}"/></td>
+                <td><c:out value="${flight.getAirline().getFlightCode()}${flight.getFlightNo()}"/></td>
+                <td><c:out value="${flight.getSource().getLocationCode()}"/></td>
+                <td><c:out value="${flight.getDestination().getLocationCode()}"/></td>
+                <td><c:out value="${flight.getDepartDateTime()}"/></td>
+                <td><c:out value="${flight.getArriveDateTime()}"/></td>
+                <td><c:out value="${flight.getAdultPriceString()}"/></td>
+                <td><c:out value="${flight.getChildPriceString()}"/></td>
+                <td><c:out value="${flight.getInfantPriceString()}"/></td>
             </tr>
             </c:forEach>
           </tbody>

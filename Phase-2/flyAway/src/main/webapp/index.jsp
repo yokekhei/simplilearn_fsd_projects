@@ -116,7 +116,7 @@ try {
           </div>
           <div class="col-md-4">
             <label for="childNo">Child</label>
-            <input type="number" class="form-control" name="childNo" placeholder="0" min="0" />
+            <input type="number" class="form-control" name="childNo" placeholder="0" value="0" min="0" />
             <small class="w-100 text-secondary">2 to 11 years</small>
             <div class="invalid-feedback">
               Valid child number is required.
@@ -124,7 +124,7 @@ try {
           </div>
           <div class="col-md-4">
             <label for="infantNo">Infant</label>
-            <input type="number" class="form-control" name="infantNo" placeholder="0" min="0" />
+            <input type="number" class="form-control" name="infantNo" placeholder="0" value="0" min="0" />
             <small class="w-100 text-secondary">Under 2 years</small>
             <div class="invalid-feedback">
               Valid infant number is required.
