@@ -25,6 +25,8 @@ import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
 @WebServlet("/flight")
 public class FlightServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String INVALID_DATE_SELECTION = "Arrive date/time must be later than depart date/time";
+	private static final String INVALID_PLACE_SELECTION = "From city must not same as To city";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -79,6 +81,11 @@ public class FlightServlet extends HttpServlet {
 	private void doPostAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		
+		if (!isValid(session, request, response)) {
+			response.sendRedirect(View.ADMIN_FLIGHT_LIST_SERVLET);
+			return;
+		}
+		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
@@ -104,6 +111,11 @@ public class FlightServlet extends HttpServlet {
 	
 	private void doPostUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		
+		if (!isValid(session, request, response)) {
+			response.sendRedirect(View.ADMIN_FLIGHT_LIST_SERVLET);
+			return;
+		}
 		
 		try {
 			AdminService service = new AdminServiceImpl(
@@ -143,6 +155,35 @@ public class FlightServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect(View.ADMIN_FLIGHT_LIST_SERVLET);
+	}
+	
+	private boolean isValid(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		if (!isDateSelectionValid(request.getParameter("departDate"),
+				request.getParameter("departTime"),
+				request.getParameter("arriveDate"),
+				request.getParameter("arriveTime"))) {
+			session.setAttribute("alert", INVALID_DATE_SELECTION);
+			return false;
+		}
+		
+		if (request.getParameter("srcLocation").equals(request.getParameter("dstLocation"))) {
+			session.setAttribute("alert", INVALID_PLACE_SELECTION);
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private boolean isDateSelectionValid(String departDate, String departTime,
+			String arriveDate, String arriveTime) {
+		String departDateTime = departDate + departTime;
+		String arriveDateTime = arriveDate + arriveTime;
+		
+		if (arriveDateTime.compareTo(departDateTime) <= 0) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 }
