@@ -23,6 +23,8 @@ public interface AdminService {
 	void deleteAirline(int airlineCode) throws FlyAwayServiceException;
 	
 	List<Flight> getAllFlights() throws FlyAwayServiceException;
+	List<Flight> getFlights(String srcLocationCode, String dstLocationCode,
+			String departDate) throws FlyAwayServiceException;
 	void addFlight(Flight data) throws FlyAwayServiceException;
 	void addFlight(int flightNo, int airlineCode,
 			String srcLocationCode, String dstLocationCode,

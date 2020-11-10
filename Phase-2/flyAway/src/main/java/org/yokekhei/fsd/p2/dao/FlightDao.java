@@ -8,6 +8,8 @@ public interface FlightDao {
 
 	void addFlight(Flight data) throws FlyAwayDaoException;
 	List<Flight> getAllFlights() throws FlyAwayDaoException;
+	List<Flight> getFlights(String srcLocationCode, String dstLocationCode,
+			String departDate) throws FlyAwayDaoException;
 	Flight getFlight(int flightId) throws FlyAwayDaoException;
 	void updateFlight(Flight data) throws FlyAwayDaoException;
 	void deleteFlight(int flightId) throws FlyAwayDaoException;

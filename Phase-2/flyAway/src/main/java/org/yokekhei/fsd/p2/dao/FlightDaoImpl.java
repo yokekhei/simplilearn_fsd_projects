@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.Flight;
 
 public class FlightDaoImpl implements FlightDao {
@@ -52,6 +53,33 @@ public class FlightDaoImpl implements FlightDao {
 					.jdbcTimeZone(TimeZone.getTimeZone("UTC"))
 					.openSession();
 			flights = session.createQuery("from Flight").getResultList();
+		} catch (Exception e) {
+			throw new FlyAwayDaoException("Failed to retrieve flights - " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+		return flights;
+	}
+	
+	@Override
+	public List<Flight> getFlights(String srcLocationCode, String dstLocationCode, String departDate)
+			throws FlyAwayDaoException {
+		Session session = null;
+		List<Flight> flights = null;
+		
+		try {
+			session = sessionFactory.withOptions()
+					.jdbcTimeZone(TimeZone.getTimeZone("UTC"))
+					.openSession();
+			Query query = session.createQuery("from Flight where source.locationCode=:srcLocationCode and " +
+					"destination.locationCode=:dstLocationCode and departDate=:departDate");
+			query.setParameter("srcLocationCode", srcLocationCode);
+			query.setParameter("dstLocationCode", dstLocationCode);
+			query.setParameter("departDate", Common.toLocalDate(departDate));
+			flights = query.getResultList();
 		} catch (Exception e) {
 			throw new FlyAwayDaoException("Failed to retrieve flights - " + e.getMessage());
 		} finally {

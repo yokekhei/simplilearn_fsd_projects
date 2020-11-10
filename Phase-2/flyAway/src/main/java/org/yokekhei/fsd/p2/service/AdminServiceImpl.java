@@ -151,6 +151,21 @@ public class AdminServiceImpl implements AdminService {
 		
 		return flights;
 	}
+	
+	@Override
+	public List<Flight> getFlights(String srcLocationCode, String dstLocationCode, String departDate)
+			throws FlyAwayServiceException {
+		List<Flight> flights = null;
+		
+		try {
+			FlightDao dao = new FlightDaoImpl(sessionFactory);
+			flights = dao.getFlights(srcLocationCode, dstLocationCode, departDate);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to get flights - " + e.getMessage());
+		}
+		
+		return flights;
+	}
 
 	@Override
 	public void addFlight(Flight data) throws FlyAwayServiceException {
