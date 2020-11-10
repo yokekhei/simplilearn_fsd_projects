@@ -2,8 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/common/header.jsp" %>
-  <link href="${pageContext.request.contextPath}/css/navbar-top-fixed.css" rel="stylesheet" type="text/css">
-  <link href="${pageContext.request.contextPath}/css/sticky-footer-navbar.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/css/navbar-top.css" rel="stylesheet" type="text/css">
 </head>
 <%@ include file="/admin/navbar.jsp" %>
 <main role="main" class="flex-shrink-0">
