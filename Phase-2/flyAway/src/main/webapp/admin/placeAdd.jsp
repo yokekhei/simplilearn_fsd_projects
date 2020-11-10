@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col">
               <label for="locationCode">Location Code</label>
-              <input type="text" class="form-control" name="locationCode" placeholder="ABC" value="" required />
+              <input type="text" class="form-control" name="locationCode" placeholder="ABC" value="" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid location code is required.
               </div>

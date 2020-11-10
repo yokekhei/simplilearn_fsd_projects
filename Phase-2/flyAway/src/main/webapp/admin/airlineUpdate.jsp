@@ -36,7 +36,7 @@
           <div class="row">
              <div class="col">
               <label for="flightCode">Flight Code</label>
-              <input type="text" class="form-control flightCode" name="flightCode" placeholder="AB" required />
+              <input type="text" class="form-control flightCode" name="flightCode" placeholder="AB" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid flight code is required.
               </div>
@@ -45,7 +45,7 @@
           <div class="row">
              <div class="col">
               <label for="companyName">Company Name</label>
-              <input type="text" class="form-control companyName" name="companyName" placeholder="" required />
+              <input type="text" class="form-control companyName" name="companyName" placeholder="" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid company name is required.
               </div>

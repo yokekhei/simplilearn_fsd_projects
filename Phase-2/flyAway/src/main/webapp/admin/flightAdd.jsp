@@ -10,7 +10,7 @@
           <div class="row">
             <div class="col">
               <label for="flightNo">Flight No.</label>
-              <input type="text" class="form-control" name="flightNo" placeholder="1234" value="" required />
+              <input type="text" class="form-control" name="flightNo" placeholder="1234" value="" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid flight no. is required.
               </div>
@@ -61,7 +61,7 @@
           <div class="row">
              <div class="col-md-6">
               <label for="departDate">Depart Date</label>
-              <input id="departDateAdd" name="departDate" required />
+              <input id="departDateAdd" name="departDate" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid depart date is required.
               </div>
@@ -74,7 +74,7 @@
             </div>
             <div class="col-md-6">
               <label for="departTime">Depart Time</label>
-              <input id="departTimeAdd" name="departTime" required />
+              <input id="departTimeAdd" name="departTime" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid depart time is required.
               </div>
@@ -89,7 +89,7 @@
           <div class="row">
              <div class="col-md-6">
               <label for="arriveDate">Arrive Date</label>
-              <input id="arriveDateAdd" name="arriveDate" required />
+              <input id="arriveDateAdd" name="arriveDate" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid arrive date is required.
               </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="col-md-6">
               <label for="arriveTime">Arrive Time</label>
-              <input id="arriveTimeAdd" name="arriveTime" required />
+              <input id="arriveTimeAdd" name="arriveTime" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid arrive time is required.
               </div>
@@ -117,7 +117,7 @@
           <div class="row">
             <div class="col">
               <label for="adultPrice">Adult Price</label>
-              <input type="text" class="form-control" name="adultPrice" placeholder="0.00" value="" required />
+              <input type="text" class="form-control" name="adultPrice" placeholder="0.00" value="" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid adult price is required.
               </div>
@@ -126,7 +126,7 @@
           <div class="row">
             <div class="col">
               <label for="childPrice">Child Price</label>
-              <input type="text" class="form-control" name="childPrice" placeholder="0.00" value="" required />
+              <input type="text" class="form-control" name="childPrice" placeholder="0.00" value="" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid child price is required.
               </div>
@@ -135,7 +135,7 @@
           <div class="row">
             <div class="col">
               <label for="infantPrice">Infant Price</label>
-              <input type="text" class="form-control" name="infantPrice" placeholder="0.00" value="" required />
+              <input type="text" class="form-control" name="infantPrice" placeholder="0.00" value="" autocomplete="off" required />
               <div class="invalid-feedback">
                 Valid infant price is required.
               </div>
