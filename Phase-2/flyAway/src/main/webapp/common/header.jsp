@@ -5,7 +5,7 @@
 <head>
   <meta charset="ISO-8859-1">
   <title>FlyAway</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
   <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">
@@ -15,3 +15,4 @@
   <script type="text/javascript" src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script type="text/javascript" src="${pageContext.request.contextPath}/js/form-validation.js"></script>
+  <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/x-icon" />
