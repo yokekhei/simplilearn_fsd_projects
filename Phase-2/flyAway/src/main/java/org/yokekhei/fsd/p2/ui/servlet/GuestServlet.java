@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.SessionFactory;
+import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
@@ -34,7 +35,13 @@ public class GuestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(View.GUEST_FLIGHT_SEARCH);
+		String action = request.getParameter("action");
+		
+		if (action == null) {
+			response.sendRedirect(View.GUEST_FLIGHT_SEARCH);
+		} else if (action.equals("book")) {
+			doGetBook(request, response);
+		}
 	}
 
 	/**
@@ -45,10 +52,7 @@ public class GuestServlet extends HttpServlet {
 		
 		if (action == null) {
 			doGet(request, response);
-			return;
-		}
-		
-		if (action.equals("search")) {
+		} else if (action.equals("search")) {
 			doPostSearch(request, response);
 		} else {
 			doGet(request, response);
@@ -68,7 +72,6 @@ public class GuestServlet extends HttpServlet {
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
-			service.getAllFlights();
 			List<Flight> flights = service.getFlights(request.getParameter("srcLocation"),
 					request.getParameter("dstLocation"),
 					request.getParameter("departDate"));
@@ -90,6 +93,25 @@ public class GuestServlet extends HttpServlet {
 			request.setAttribute("searchFlightStatus", "fail");
 			rd = request.getRequestDispatcher(View.GUEST_FLIGHT_SEARCH);
 			rd.include(request, response);
+		}
+	}
+	
+	private void doGetBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = null;
+		
+		try {
+			Integer adultNo = Integer.parseInt(request.getParameter("adult"));
+			Integer childNo = Integer.parseInt(request.getParameter("child"));
+			Integer infantNo = Integer.parseInt(request.getParameter("infant"));
+			request.setAttribute("adultNo", adultNo);
+			request.setAttribute("childNo", childNo);
+			request.setAttribute("infantNo", infantNo);
+			request.setAttribute("totalPerson", (adultNo + childNo + infantNo));
+			request.setAttribute("flightId", request.getParameter("id"));
+			rd = request.getRequestDispatcher(View.GUEST_DETAILS);
+			rd.include(request, response);
+		} catch (NumberFormatException e) {
+			Common.viewError(e.getMessage(), request, response);
 		}
 	}
 

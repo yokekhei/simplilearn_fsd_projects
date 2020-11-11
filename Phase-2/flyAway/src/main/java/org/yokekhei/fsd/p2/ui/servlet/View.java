@@ -11,6 +11,7 @@ public class View {
 	public static final String ADMIN_CHANGE_PASSWORD = "admin/changePassword.jsp";
 	public static final String GUEST_FLIGHT_SEARCH = "index.jsp";
 	public static final String GUEST_FLIGHT_SELECT = "flightSelect.jsp";
+	public static final String GUEST_DETAILS = "guestDetails.jsp";
 	
 	public static final String ADMIN_LOGIN_SERVLET = "login";
 	public static final String ADMIN_LOGOUT_SERVLET = "logout";
