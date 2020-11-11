@@ -44,19 +44,19 @@ public class Flight {
 	
 	@Basic
 	@Column(nullable=false, name="depart_date")
-	private java.time.LocalDate departDate;
+	private LocalDate departDate;
 	 
 	@Basic
 	@Column(nullable=false, name="depart_time")
-	private java.time.LocalTime departTime;
+	private LocalTime departTime;
 	
 	@Basic
 	@Column(nullable=false, name="arrive_date")
-	private java.time.LocalDate arriveDate;
+	private LocalDate arriveDate;
 	
 	@Basic
 	@Column(nullable=false, name="arrive_time")
-	private java.time.LocalTime arriveTime;
+	private LocalTime arriveTime;
 	
 	@Column(nullable=false, name="adult_price")
 	private double adultPrice;
@@ -127,19 +127,19 @@ public class Flight {
 		this.destination = destination;
 	}
 
-	public java.time.LocalDate getDepartDate() {
+	public LocalDate getDepartDate() {
 		return departDate;
 	}
 
-	public void setDepartDate(java.time.LocalDate departDate) {
+	public void setDepartDate(LocalDate departDate) {
 		this.departDate = departDate;
 	}
 
-	public java.time.LocalTime getDepartTime() {
+	public LocalTime getDepartTime() {
 		return departTime;
 	}
 
-	public void setDepartTime(java.time.LocalTime departTime) {
+	public void setDepartTime(LocalTime departTime) {
 		this.departTime = departTime;
 	}
 	
@@ -147,19 +147,19 @@ public class Flight {
 		return Common.toLocalDateTime(departDate, departTime);
 	}
 
-	public java.time.LocalDate getArriveDate() {
+	public LocalDate getArriveDate() {
 		return arriveDate;
 	}
 
-	public void setArriveDate(java.time.LocalDate arriveDate) {
+	public void setArriveDate(LocalDate arriveDate) {
 		this.arriveDate = arriveDate;
 	}
 
-	public java.time.LocalTime getArriveTime() {
+	public LocalTime getArriveTime() {
 		return arriveTime;
 	}
 
-	public void setArriveTime(java.time.LocalTime arriveTime) {
+	public void setArriveTime(LocalTime arriveTime) {
 		this.arriveTime = arriveTime;
 	}
 	
