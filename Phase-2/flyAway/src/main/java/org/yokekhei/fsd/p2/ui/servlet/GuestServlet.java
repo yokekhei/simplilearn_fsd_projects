@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,7 +142,8 @@ public class GuestServlet extends HttpServlet {
 				Passenger p = new Passenger(request.getParameter("adultFirstName" + i),
 						request.getParameter("adultLastName" + i),
 						Common.toLocalDate(request.getParameter("adultDob" + i)),
-						request.getParameter("adultGender" + i));
+						request.getParameter("adultGender" + i),
+						Common.PASSENGER_ADULT);
 				passengers.add(p);
 			}
 			
@@ -149,7 +151,8 @@ public class GuestServlet extends HttpServlet {
 				Passenger p = new Passenger(request.getParameter("childFirstName" + i),
 						request.getParameter("childLastName" + i),
 						Common.toLocalDate(request.getParameter("childDob" + i)),
-						request.getParameter("childGender" + i));
+						request.getParameter("childGender" + i),
+						Common.PASSENGER_CHILD);
 				passengers.add(p);
 			}
 			
@@ -157,7 +160,8 @@ public class GuestServlet extends HttpServlet {
 				Passenger p = new Passenger(request.getParameter("infantFirstName" + i),
 						request.getParameter("infantLastName" + i),
 						Common.toLocalDate(request.getParameter("infantDob" + i)),
-						request.getParameter("infantGender" + i));
+						request.getParameter("infantGender" + i),
+						Common.PASSENGER_INFANT);
 				passengers.add(p);
 			}
 			
@@ -171,6 +175,16 @@ public class GuestServlet extends HttpServlet {
 					(adultNo + childNo) * service.getRegulatoryServiceCharge());
 			
 			request.setAttribute("bookingDetails", b);
+			DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+			request.setAttribute("totalCharge", df2.format(Common.roundBigDecimal(
+					b.getTotalAdultFare() + b.getTotalChildFare() + b.getTotalInfantFare() +
+					b.getTotalPassengerServiceCharge() + b.getTotalServiceTax() +
+					b.getTotalRegulatoryServiceCharge(), 2)));
+			request.setAttribute("flightDuration", Common.getDurationInHourMinute(
+					b.getFlight().getDepartDateTime(), b.getFlight().getArriveDateTime()));
+			request.setAttribute("adultNo", adultNo);
+			request.setAttribute("childNo", childNo);
+			request.setAttribute("infantNo", infantNo);
 			
 			RequestDispatcher rd = request.getRequestDispatcher(View.BOOKING_DETAILS);
 			rd.include(request, response);

@@ -1,5 +1,6 @@
 package org.yokekhei.fsd.p2.bean;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.yokekhei.fsd.p2.Common;
 
 @Entity
 
@@ -110,6 +113,11 @@ public class Booking {
 	public double getTotalAdultFare() {
 		return totalAdultFare;
 	}
+	
+	public String getTotalAdultFareString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(totalAdultFare, 2));
+	}
 
 	public void setTotalAdultFare(double totalAdultFare) {
 		this.totalAdultFare = totalAdultFare;
@@ -117,6 +125,11 @@ public class Booking {
 
 	public double getTotalChildFare() {
 		return totalChildFare;
+	}
+	
+	public String getTotalChildFareString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(totalChildFare, 2));
 	}
 
 	public void setTotalChildFare(double totalChildFare) {
@@ -126,6 +139,11 @@ public class Booking {
 	public double getTotalInfantFare() {
 		return totalInfantFare;
 	}
+	
+	public String getTotalInfantFareString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(totalInfantFare, 2));
+	}
 
 	public void setTotalInfantFare(double totalInfantFare) {
 		this.totalInfantFare = totalInfantFare;
@@ -133,6 +151,11 @@ public class Booking {
 
 	public double getTotalPassengerServiceCharge() {
 		return totalPassengerServiceCharge;
+	}
+	
+	public String getTotalPassengerServiceChargeString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(totalPassengerServiceCharge, 2));
 	}
 
 	public void setTotalPassengerServiceCharge(double totalPassengerServiceCharge) {
@@ -142,6 +165,11 @@ public class Booking {
 	public double getTotalServiceTax() {
 		return totalServiceTax;
 	}
+	
+	public String getTotalServiceTaxString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(totalServiceTax, 2));
+	}
 
 	public void setTotalServiceTax(double totalServiceTax) {
 		this.totalServiceTax = totalServiceTax;
@@ -149,6 +177,11 @@ public class Booking {
 
 	public double getTotalRegulatoryServiceCharge() {
 		return totalRegulatoryServiceCharge;
+	}
+	
+	public String getTotalRegulatoryServiceChargeString() {
+		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+		return df2.format(Common.roundBigDecimal(totalRegulatoryServiceCharge, 2));
 	}
 
 	public void setTotalRegulatoryServiceCharge(double totalRegulatoryServiceCharge) {

@@ -3,6 +3,7 @@ package org.yokekhei.fsd.p2.bean;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -129,6 +130,11 @@ public class Flight {
 
 	public LocalDate getDepartDate() {
 		return departDate;
+	}
+	
+	public String getDepartDateString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Common.DATE_FORMAT2);
+		return departDate.format(formatter);
 	}
 
 	public void setDepartDate(LocalDate departDate) {

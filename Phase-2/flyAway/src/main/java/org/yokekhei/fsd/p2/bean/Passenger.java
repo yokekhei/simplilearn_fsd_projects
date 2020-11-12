@@ -31,17 +31,21 @@ public class Passenger {
 	@Column(nullable=false, name="passenger_gender", length=1)
 	private String gender;
 	
+	@Column(nullable=false, name="passenger_type", length=1)
+	private String type;
+	
 	public Passenger() {
 	}
 
-	public Passenger(String firstName, String lastName, LocalDate dob, String gender) {
+	public Passenger(String firstName, String lastName, LocalDate dob, String gender, String type) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dob = dob;
 		this.gender = gender;
+		this.type = type;
 	}
-
+	
 	public int getPassengerId() {
 		return passengerId;
 	}
@@ -82,10 +86,18 @@ public class Passenger {
 		this.gender = gender;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
 	public String toString() {
 		return "Passenger [passengerId=" + passengerId + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", dob=" + dob + ", gender=" + gender + "]";
+				+ ", dob=" + dob + ", gender=" + gender + ", type=" + type + "]";
 	}
 	
 }

@@ -77,6 +77,7 @@ CREATE TABLE Passenger (
     passenger_lname VARCHAR(50) NOT NULL,
     passenger_dob DATE NOT NULL,
     passenger_gender CHAR(1) NOT NULL,
+    passenger_type CHAR(1) NOT NULL,
     PRIMARY KEY (passenger_id)
 ) ENGINE=INNODB;
 DROP TABLE IF EXISTS Booking_Passenger;

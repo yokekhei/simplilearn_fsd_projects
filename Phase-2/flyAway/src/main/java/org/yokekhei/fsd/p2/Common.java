@@ -2,6 +2,7 @@ package org.yokekhei.fsd.p2;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -17,9 +18,14 @@ import org.yokekhei.fsd.p2.ui.servlet.View;
 public class Common {
 
 	public static final String DATE_FORMAT = "dd-MM-yyyy";
+	public static final String DATE_FORMAT2 = "dd MMM yyyy";
 	public static final String TIME_FORMAT = "HH:mm";
 	public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
 	public static final String DECIMAL_FORMAT_DF2 = "########0.00";
+	
+	public static final String PASSENGER_ADULT = "A";
+	public static final String PASSENGER_CHILD = "C";
+	public static final String PASSENGER_INFANT = "I";
 	
 	public static void viewError(String message, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("error", message);
@@ -55,6 +61,15 @@ public class Common {
 		return dt.format(formatter);
 	}
 	
+	public static String getDurationInHourMinute(String fromLocalDateTime, String toLocalDateTime) {
+		Duration duration = Duration.between(toLocalDateTime(fromLocalDateTime),
+				toLocalDateTime(toLocalDateTime));
+		Long hours = duration.getSeconds()/3600;
+		Long minutes = (duration.getSeconds()%3600)/60;
+		
+		return hours.toString() + "h " + minutes.toString() + "m"; 
+	}
+
 	public static BigDecimal roundBigDecimal(Object value, int scale) {
 		return new BigDecimal(String.valueOf(value)).setScale(scale, BigDecimal.ROUND_HALF_UP);
 	}
