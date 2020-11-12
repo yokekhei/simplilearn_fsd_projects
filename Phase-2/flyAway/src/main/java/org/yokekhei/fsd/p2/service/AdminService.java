@@ -25,6 +25,7 @@ public interface AdminService {
 	List<Flight> getAllFlights() throws FlyAwayServiceException;
 	List<Flight> getFlights(String srcLocationCode, String dstLocationCode,
 			String departDate) throws FlyAwayServiceException;
+	Flight getFlight(int flightId) throws FlyAwayServiceException;
 	void addFlight(Flight data) throws FlyAwayServiceException;
 	void addFlight(int flightNo, int airlineCode,
 			String srcLocationCode, String dstLocationCode,
@@ -38,5 +39,9 @@ public interface AdminService {
 			String arriveDate, String arriveTime,
 			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException;
 	void deleteFlight(int flightId) throws FlyAwayServiceException;
+	
+	double getPassengerServiceCharge() throws FlyAwayServiceException;
+	double getRegulatoryServiceCharge() throws FlyAwayServiceException;
+	double getServiceTax() throws FlyAwayServiceException;
 	
 }

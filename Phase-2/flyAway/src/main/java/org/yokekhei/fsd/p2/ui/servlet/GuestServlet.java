@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -12,7 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.Common;
+import org.yokekhei.fsd.p2.bean.Booking;
 import org.yokekhei.fsd.p2.bean.Flight;
+import org.yokekhei.fsd.p2.bean.Guest;
+import org.yokekhei.fsd.p2.bean.Passenger;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
@@ -52,6 +56,8 @@ public class GuestServlet extends HttpServlet {
 		
 		if (action == null) {
 			doGet(request, response);
+		} else if (action.equals("register")) {
+			doPostRegister(request, response);
 		} else if (action.equals("search")) {
 			doPostSearch(request, response);
 		} else {
@@ -111,6 +117,64 @@ public class GuestServlet extends HttpServlet {
 			rd = request.getRequestDispatcher(View.GUEST_DETAILS);
 			rd.include(request, response);
 		} catch (NumberFormatException e) {
+			Common.viewError(e.getMessage(), request, response);
+		}
+	}
+	
+	private void doPostRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			AdminService service = new AdminServiceImpl(
+					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
+			Flight flight = service.getFlight(Integer.parseInt(request.getParameter("id")));
+			
+			Guest guest = new Guest(request.getParameter("email"),
+					request.getParameter("firstName"),
+					request.getParameter("lastName"),
+					request.getParameter("phone"));
+			
+			int adultNo = Integer.parseInt(request.getParameter("adult"));
+			int childNo = Integer.parseInt(request.getParameter("child"));
+			int infantNo = Integer.parseInt(request.getParameter("infant"));
+			List<Passenger> passengers = new ArrayList<>();
+			
+			for (int i=1; i<=adultNo; i++) {
+				Passenger p = new Passenger(request.getParameter("adultFirstName" + i),
+						request.getParameter("adultLastName" + i),
+						Common.toLocalDate(request.getParameter("adultDob" + i)),
+						request.getParameter("adultGender" + i));
+				passengers.add(p);
+			}
+			
+			for (int i=1; i<=childNo; i++) {
+				Passenger p = new Passenger(request.getParameter("childFirstName" + i),
+						request.getParameter("childLastName" + i),
+						Common.toLocalDate(request.getParameter("childDob" + i)),
+						request.getParameter("childGender" + i));
+				passengers.add(p);
+			}
+			
+			for (int i=1; i<=infantNo; i++) {
+				Passenger p = new Passenger(request.getParameter("infantFirstName" + i),
+						request.getParameter("infantLastName" + i),
+						Common.toLocalDate(request.getParameter("infantDob" + i)),
+						request.getParameter("infantGender" + i));
+				passengers.add(p);
+			}
+			
+			
+			Booking b = new Booking(flight, guest, passengers,
+					adultNo * flight.getAdultPrice(),
+					childNo * flight.getChildPrice(),
+					infantNo * flight.getInfantPrice(),
+					(adultNo + childNo) * service.getPassengerServiceCharge(),
+					(adultNo + childNo) * service.getServiceTax(),
+					(adultNo + childNo) * service.getRegulatoryServiceCharge());
+			
+			request.setAttribute("bookingDetails", b);
+			
+			RequestDispatcher rd = request.getRequestDispatcher(View.BOOKING_DETAILS);
+			rd.include(request, response);
+		} catch (FlyAwayServiceException | NumberFormatException e) {
 			Common.viewError(e.getMessage(), request, response);
 		}
 	}

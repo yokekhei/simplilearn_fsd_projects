@@ -14,7 +14,7 @@
       <hr class="mb-5">
     </div>
     <div class="px-4">
-      <form id="guestDetailsForm" action="${pageContext.request.contextPath}/guest?action=register&id=${flight.getFlightId()}&adult=${requestScope.adultNo}&child=${requestScope.childNo}&infant=${requestScope.infantNo}" method="post">
+      <form id="guestDetailsForm" action="${pageContext.request.contextPath}/guest?action=register&id=${requestScope.flightId}&adult=${requestScope.adultNo}&child=${requestScope.childNo}&infant=${requestScope.infantNo}" method="post">
         <div class="tab">
           <h4>Contact details</h4>
           <div class="row">
@@ -65,11 +65,11 @@
               <div class="col-md-6">
                 <div class="d-block my-3">
                   <div class="custom-control custom-radio">
-                    <input id="adultMale${i}" name="adultGender${i}" type="radio" class="custom-control-input" checked required>
+                    <input type="radio" class="custom-control-input" id="adultMale${i}" name="adultGender${i}" value="M" checked required>
                     <label class="custom-control-label" for="adultMale${i}">Male</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input id="adultFemale${i}" name="adultGender${i}" type="radio" class="custom-control-input" required>
+                    <input type="radio" class="custom-control-input" id="adultFemale${i}" name="adultGender${i}" value="F" required>
                     <label class="custom-control-label" for="adultFemale${i}">Female</label>
                   </div>
                 </div>
@@ -107,11 +107,11 @@
               <div class="col-md-6">
                 <div class="d-block my-3">
                   <div class="custom-control custom-radio">
-                    <input id="childMale${i}" name="childGender${i}" type="radio" class="custom-control-input" checked required>
+                    <input type="radio" class="custom-control-input" id="childMale${i}" name="childGender${i}" value="M" checked required>
                     <label class="custom-control-label" for="childMale${i}">Male</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input id="childFemale${i}" name="childGender${i}" type="radio" class="custom-control-input" required>
+                    <input type="radio" class="custom-control-input" id="childFemale${i}" name="childGender${i}" value="F" required>
                     <label class="custom-control-label" for="childFemale${i}">Female</label>
                   </div>
                 </div>
@@ -148,11 +148,11 @@
               <div class="col-md-6">
                 <div class="d-block my-3">
                   <div class="custom-control custom-radio">
-                    <input id="infantMale${i}" name="infantGender${i}" type="radio" class="custom-control-input" checked required>
+                    <input type="radio" class="custom-control-input" id="infantMale${i}" name="infantGender${i}" value="M" checked required>
                     <label class="custom-control-label" for="infantMale${i}">Male</label>
                   </div>
                   <div class="custom-control custom-radio">
-                    <input id="infantFemale${i}" name="infantGender${i}" type="radio" class="custom-control-input" required>
+                    <input type="radio" class="custom-control-input" id="infantFemale${i}" name="infantGender${i}" value="F" required>
                     <label class="custom-control-label" for="infantFemale${i}">Female</label>
                   </div>
                 </div>

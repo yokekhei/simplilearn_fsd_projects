@@ -47,8 +47,53 @@ CREATE TABLE Flight (
     CONSTRAINT fk_src_location FOREIGN KEY (src_location) REFERENCES Place(location_code),
     CONSTRAINT fk_dest_location FOREIGN KEY (dest_location) REFERENCES Place(location_code)
 ) ENGINE=INNODB;
+DROP TABLE IF EXISTS Guest;
+CREATE TABLE Guest (
+	guest_email VARCHAR(100) NOT NULL,
+    guest_fname VARCHAR(50) NOT NULL,
+    guest_lname VARCHAR(50) NOT NULL,
+    guest_phone VARCHAR(50) NOT NULL,
+    PRIMARY KEY (guest_email)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS Booking;
+CREATE TABLE Booking (
+    booking_id INT NOT NULL AUTO_INCREMENT,
+    flight_id INT NOT NULL,
+    guest_email VARCHAR(100) NOT NULL,
+    total_adult_fare DECIMAL(18, 5) NOT NULL,
+    total_child_fare DECIMAL(18, 5) NOT NULL DEFAULT 0,
+    total_infant_fare DECIMAL(18, 5) NOT NULL DEFAULT 0,
+    total_passenger_service_charge DECIMAL(18, 5) NOT NULL DEFAULT 0,
+    total_service_tax DECIMAL(18, 5) NOT NULL DEFAULT 0,
+    total_regulatory_service_charge DECIMAL(18, 5) NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (booking_id),
+    CONSTRAINT fk_guest_email FOREIGN KEY (guest_email) REFERENCES Guest(guest_email)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS Passenger;
+CREATE TABLE Passenger (
+	passenger_id INT NOT NULL AUTO_INCREMENT,
+    passenger_fname VARCHAR(50) NOT NULL,
+    passenger_lname VARCHAR(50) NOT NULL,
+    passenger_dob DATE NOT NULL,
+    passenger_gender CHAR(1) NOT NULL,
+    PRIMARY KEY (passenger_id)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS Booking_Passenger;
+CREATE TABLE Booking_Passenger (
+	booking_id INT NOT NULL,
+    passenger_id INT NOT NULL,
+    CONSTRAINT fk_booking FOREIGN KEY (booking_id) REFERENCES Booking(booking_id),
+    CONSTRAINT fk_passenger FOREIGN KEY (passenger_id) REFERENCES Passenger(passenger_id)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS Fee;
+CREATE TABLE Fee (
+	fee_type VARCHAR(50) NOT NULL,
+    fee_value DECIMAL(18, 5) NOT NULL DEFAULT 0
+) ENGINE=INNODB;
 
 /* DATA */
 INSERT INTO AdminUser(admin_email, admin_password) VALUES('admin@flyaway.com', 'password');
 INSERT INTO Place(location_code, location_name, city_name) VALUES('KUL', 'Metropolitan Area', 'Kuala Lumpur');
 INSERT INTO Airline(airline_code, flight_code, company_name, country) VALUES(232, 'MH', 'Malaysia Airlines Berhad dba Malaysia Airlines', 'Malaysia');
+INSERT INTO Fee(fee_type, fee_value) VALUES("passenger_service_change", 11.0), ("regulatory_service_charge", 1.0), ("service_tax", 3.53);
