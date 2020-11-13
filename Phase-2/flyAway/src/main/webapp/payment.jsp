@@ -101,8 +101,8 @@
                 <div class="col-md-7">
                   <span>Total</span>
                 </div>
-                <div class="col-md-5">
-                  <span class="text-right"><strong>${requestScope.totalCharge} $</strong></span>
+                <div class="col-md-5 text-right">
+                  <strong>${requestScope.totalCharge} $</strong>
                 </div>
               </div>
             </div>
