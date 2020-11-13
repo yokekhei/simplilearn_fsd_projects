@@ -47,6 +47,7 @@ public class ApplicationListener implements ServletContextListener {
 		configuration.addAnnotatedClass(org.yokekhei.fsd.p2.bean.Passenger.class);
 		configuration.addAnnotatedClass(org.yokekhei.fsd.p2.bean.Booking.class);
 		configuration.addAnnotatedClass(org.yokekhei.fsd.p2.bean.Fee.class);
+		configuration.addAnnotatedClass(org.yokekhei.fsd.p2.bean.Payment.class);
 		StandardServiceRegistryBuilder builder =
 				new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
 		

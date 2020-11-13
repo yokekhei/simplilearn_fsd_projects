@@ -7,6 +7,7 @@ import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
 import org.yokekhei.fsd.p2.bean.Flight;
+import org.yokekhei.fsd.p2.bean.Payment;
 import org.yokekhei.fsd.p2.bean.Place;
 import org.yokekhei.fsd.p2.dao.AdminUserDao;
 import org.yokekhei.fsd.p2.dao.AdminUserDaoImpl;
@@ -17,6 +18,8 @@ import org.yokekhei.fsd.p2.dao.FeeDaoImpl;
 import org.yokekhei.fsd.p2.dao.FlightDao;
 import org.yokekhei.fsd.p2.dao.FlightDaoImpl;
 import org.yokekhei.fsd.p2.dao.FlyAwayDaoException;
+import org.yokekhei.fsd.p2.dao.PaymentDao;
+import org.yokekhei.fsd.p2.dao.PaymentDaoImpl;
 import org.yokekhei.fsd.p2.dao.PlaceDao;
 import org.yokekhei.fsd.p2.dao.PlaceDaoImpl;
 
@@ -294,6 +297,16 @@ public class AdminServiceImpl implements AdminService {
 			return dao.getServiceTax();
 		} catch (FlyAwayDaoException e) {
 			throw new FlyAwayServiceException("Failed to get service tax - " + e.getMessage());
+		}
+	}
+
+	@Override
+	public void addPayment(Payment data) throws FlyAwayServiceException {
+		try {
+			PaymentDao dao = new PaymentDaoImpl(sessionFactory);
+			dao.addPayment(data);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to add payment - " + e.getMessage());
 		}
 	}
 	

@@ -19,6 +19,7 @@ import org.yokekhei.fsd.p2.bean.Booking;
 import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.bean.Guest;
 import org.yokekhei.fsd.p2.bean.Passenger;
+import org.yokekhei.fsd.p2.bean.Payment;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
@@ -64,6 +65,8 @@ public class GuestServlet extends HttpServlet {
 			doPostSearch(request, response);
 		} else if (action.equals("pay")) {
 			doPostPay(request, response);
+		} else if (action.equals("paid")) {
+			doPostPaid(request, response);
 		} else {
 			doGet(request, response);
 		}
@@ -177,6 +180,7 @@ public class GuestServlet extends HttpServlet {
 					(adultNo + childNo) * service.getRegulatoryServiceCharge());
 			
 			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(1800);  // session expired in 30 minutes
 			session.setAttribute("bookingDetails", b);
 			
 			DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
@@ -200,8 +204,7 @@ public class GuestServlet extends HttpServlet {
 	private void doPostPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		
-		try {	
-			session.setMaxInactiveInterval(1800);  // session expired in 30 minutes
+		try {
 			Booking b = (Booking)session.getAttribute("bookingDetails");
 			
 			DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
@@ -213,6 +216,30 @@ public class GuestServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher(View.PAYMENT);
 			rd.include(request, response);
+		} catch (Exception e) {
+			if (session == null) {
+				response.sendRedirect(View.GUEST_FLIGHT_SEARCH);
+				return;
+			}
+			
+			Common.viewError(e.getMessage(), request, response);
+		}
+	}
+	
+	private void doPostPaid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		
+		try {
+			Booking b = (Booking)session.getAttribute("bookingDetails");
+			Payment p = new Payment(b, request.getParameter("nameOnCard"),
+					b.getTotalAdultFare() + b.getTotalChildFare() + b.getTotalInfantFare() +
+					b.getTotalPassengerServiceCharge() + b.getTotalServiceTax() +
+					b.getTotalRegulatoryServiceCharge());
+			AdminService service = new AdminServiceImpl(
+					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
+			service.addPayment(p);
+			
+			session.invalidate();
 		} catch (Exception e) {
 			if (session == null) {
 				response.sendRedirect(View.GUEST_FLIGHT_SEARCH);

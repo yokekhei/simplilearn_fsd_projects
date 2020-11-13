@@ -92,6 +92,16 @@ CREATE TABLE Fee (
 	fee_type VARCHAR(50) NOT NULL,
     fee_value DECIMAL(18, 5) NOT NULL DEFAULT 0
 ) ENGINE=INNODB;
+DROP TABLE IF EXISTS Payment;
+CREATE TABLE Payment (
+	payment_id INT NOT NULL AUTO_INCREMENT,
+    booking_id INT NOT NULL,
+    payor_name VARCHAR(100) NOT NULL,
+    total_paid DECIMAL(18, 5) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (payment_id),
+    CONSTRAINT fk_payment_booking FOREIGN KEY (booking_id) REFERENCES Booking(booking_id)
+) ENGINE=INNODB;
 
 /* DATA */
 INSERT INTO AdminUser(admin_email, admin_password) VALUES('admin@flyaway.com', 'password');

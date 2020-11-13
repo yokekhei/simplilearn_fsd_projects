@@ -5,6 +5,7 @@ import java.util.List;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
 import org.yokekhei.fsd.p2.bean.Flight;
+import org.yokekhei.fsd.p2.bean.Payment;
 import org.yokekhei.fsd.p2.bean.Place;
 
 public interface AdminService {
@@ -43,5 +44,7 @@ public interface AdminService {
 	double getPassengerServiceCharge() throws FlyAwayServiceException;
 	double getRegulatoryServiceCharge() throws FlyAwayServiceException;
 	double getServiceTax() throws FlyAwayServiceException;
+	
+	void addPayment(Payment data) throws FlyAwayServiceException;
 	
 }
