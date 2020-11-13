@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <body class="d-flex flex-column h-100">
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp"><img class="mb-4" src="${pageContext.request.contextPath}/images/logo.jpg" alt="" width="54" height="47"></a>
+    <a class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp"><img src="${pageContext.request.contextPath}/images/logo.jpg" alt="" width="54" height="47"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
