@@ -68,7 +68,8 @@ CREATE TABLE Booking (
     total_regulatory_service_charge DECIMAL(18, 5) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (booking_id),
-    CONSTRAINT fk_guest_email FOREIGN KEY (guest_email) REFERENCES Guest(guest_email)
+    CONSTRAINT fk_guest_email FOREIGN KEY (guest_email) REFERENCES Guest(guest_email),
+    CONSTRAINT fk_flight FOREIGN KEY (flight_id) REFERENCES Flight(flight_id)
 ) ENGINE=INNODB;
 DROP TABLE IF EXISTS Passenger;
 CREATE TABLE Passenger (
