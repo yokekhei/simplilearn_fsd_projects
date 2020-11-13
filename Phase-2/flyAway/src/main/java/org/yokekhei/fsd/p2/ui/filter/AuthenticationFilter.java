@@ -5,12 +5,12 @@ import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.yokekhei.fsd.p2.ui.servlet.View;
@@ -26,9 +26,12 @@ import org.yokekhei.fsd.p2.ui.servlet.View;
 		}
 					, 
 		servletNames = {
-				"FlightServlet",
-				"PlaceServlet",
-				"AirlineServlet"
+				"org.yokekhei.fsd.p2.ui.servlet.AdminLogoutServlet",
+				"org.yokekhei.fsd.p2.ui.servlet.AdminPasswordServlet",
+				"org.yokekhei.fsd.p2.ui.servlet.AirlineServlet",
+				"org.yokekhei.fsd.p2.ui.servlet.FlightServlet",
+				"org.yokekhei.fsd.p2.ui.servlet.PlaceServlet"
+				
 		})
 public class AuthenticationFilter implements Filter {
 
@@ -49,13 +52,12 @@ public class AuthenticationFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
 		
-		System.out.println("Authentication filter called");
-		
-		if (session == null) {
-			res.sendRedirect(View.ADMIN_SIGNIN);
+		if (session == null || session.getAttribute("adminUser") == null) {
+			request.setAttribute("sessionStatus", "invalid");
+			RequestDispatcher rd = request.getRequestDispatcher(View.ADMIN_SIGNIN);
+			rd.include(request, response);
 		} else {
 			chain.doFilter(request, response);
 		}

@@ -31,7 +31,11 @@ public class AdminLogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			HttpSession session = request.getSession(false);
-			session.invalidate();
+			
+			if (session != null) {
+				session.invalidate();
+			}
+			
 			response.sendRedirect(View.ADMIN_SIGNIN);
 		} catch (Exception e) {
 			Common.viewError(e.getMessage(), request, response);

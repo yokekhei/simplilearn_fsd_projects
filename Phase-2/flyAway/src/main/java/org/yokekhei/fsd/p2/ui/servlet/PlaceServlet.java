@@ -68,8 +68,6 @@ public class PlaceServlet extends HttpServlet {
 	}
 	
 	private void doPostAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
@@ -78,6 +76,8 @@ public class PlaceServlet extends HttpServlet {
 					request.getParameter("locationName"),
 					request.getParameter("cityName")));
 		} catch (FlyAwayServiceException e) {
+			HttpSession session = request.getSession(false);
+			
 			if (session != null) {
 				session.setAttribute("alert", "Add place failed. Please try again.");
 			}
@@ -87,8 +87,6 @@ public class PlaceServlet extends HttpServlet {
 	}
 	
 	private void doPostUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
@@ -97,6 +95,8 @@ public class PlaceServlet extends HttpServlet {
 					request.getParameter("locationName"),
 					request.getParameter("cityName")));
 		} catch (FlyAwayServiceException e) {
+			HttpSession session = request.getSession(false);
+			
 			if (session != null) {
 				session.setAttribute("alert", "Update place failed. Please try again.");
 			}
@@ -106,13 +106,13 @@ public class PlaceServlet extends HttpServlet {
 	}
 	
 	private void doPostDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			service.deletePlace(request.getParameter("locationCode"));
 		} catch (FlyAwayServiceException e) {
+			HttpSession session = request.getSession(false);
+			
 			if (session != null) {
 				session.setAttribute("alert", "Delete place failed. Please try again.");
 			}

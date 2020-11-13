@@ -68,8 +68,6 @@ public class AirlineServlet extends HttpServlet {
 	}
 	
 	private void doPostAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
@@ -79,6 +77,8 @@ public class AirlineServlet extends HttpServlet {
 					request.getParameter("companyName"),
 					request.getParameter("country")));
 		} catch (FlyAwayServiceException | NumberFormatException e) {
+			HttpSession session = request.getSession(false);
+			
 			if (session != null) {
 				session.setAttribute("alert", "Add airline failed. Please try again.");
 			}
@@ -88,8 +88,6 @@ public class AirlineServlet extends HttpServlet {
 	}
 	
 	private void doPostUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
@@ -99,6 +97,8 @@ public class AirlineServlet extends HttpServlet {
 					request.getParameter("companyName"),
 					request.getParameter("country")));
 		} catch (FlyAwayServiceException | NumberFormatException e) {
+			HttpSession session = request.getSession(false);
+			
 			if (session != null) {
 				session.setAttribute("alert", "Update airline failed. Please try again.");
 			}
@@ -108,13 +108,13 @@ public class AirlineServlet extends HttpServlet {
 	}
 	
 	private void doPostDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			service.deleteAirline(Integer.parseInt(request.getParameter("airlineCode")));
 		} catch (FlyAwayServiceException | NumberFormatException e) {
+			HttpSession session = request.getSession(false);
+			
 			if (session != null) {
 				session.setAttribute("alert", "Delete airline failed. Please try again.");
 			}

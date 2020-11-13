@@ -139,13 +139,13 @@ public class FlightServlet extends HttpServlet {
 	}
 	
 	private void doPostDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		
 		try {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			service.deleteFlight(Integer.parseInt(request.getParameter("flightId")));
 		} catch (FlyAwayServiceException | NumberFormatException e) {
+			HttpSession session = request.getSession(false);
+			
 			if (session != null) {
 				session.setAttribute("alert", "Delete flight failed. Please try again.");
 			}
