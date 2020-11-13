@@ -21,6 +21,8 @@ public class Common {
 	public static final String DATE_FORMAT2 = "dd MMM yyyy";
 	public static final String TIME_FORMAT = "HH:mm";
 	public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
+	public static final String YEAR_FORMAT = "yy";
+	
 	public static final String DECIMAL_FORMAT_DF2 = "########0.00";
 	
 	public static final String PASSENGER_ADULT = "A";
@@ -72,6 +74,12 @@ public class Common {
 
 	public static BigDecimal roundBigDecimal(Object value, int scale) {
 		return new BigDecimal(String.valueOf(value)).setScale(scale, BigDecimal.ROUND_HALF_UP);
+	}
+	
+	public static String getCurrentYear(String format) {
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		return now.format(formatter);
 	}
 	
 }

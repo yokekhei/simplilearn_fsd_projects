@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.Common;
@@ -61,6 +62,8 @@ public class GuestServlet extends HttpServlet {
 			doPostRegister(request, response);
 		} else if (action.equals("search")) {
 			doPostSearch(request, response);
+		} else if (action.equals("pay")) {
+			doPostPay(request, response);
 		} else {
 			doGet(request, response);
 		}
@@ -165,7 +168,6 @@ public class GuestServlet extends HttpServlet {
 				passengers.add(p);
 			}
 			
-			
 			Booking b = new Booking(flight, guest, passengers,
 					adultNo * flight.getAdultPrice(),
 					childNo * flight.getChildPrice(),
@@ -174,7 +176,9 @@ public class GuestServlet extends HttpServlet {
 					(adultNo + childNo) * service.getServiceTax(),
 					(adultNo + childNo) * service.getRegulatoryServiceCharge());
 			
-			request.setAttribute("bookingDetails", b);
+			HttpSession session = request.getSession();
+			session.setAttribute("bookingDetails", b);
+			
 			DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
 			request.setAttribute("totalCharge", df2.format(Common.roundBigDecimal(
 					b.getTotalAdultFare() + b.getTotalChildFare() + b.getTotalInfantFare() +
@@ -189,6 +193,32 @@ public class GuestServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(View.BOOKING_DETAILS);
 			rd.include(request, response);
 		} catch (FlyAwayServiceException | NumberFormatException e) {
+			Common.viewError(e.getMessage(), request, response);
+		}
+	}
+	
+	private void doPostPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		
+		try {	
+			session.setMaxInactiveInterval(1800);  // session expired in 30 minutes
+			Booking b = (Booking)session.getAttribute("bookingDetails");
+			
+			DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
+			request.setAttribute("totalCharge", df2.format(Common.roundBigDecimal(
+					b.getTotalAdultFare() + b.getTotalChildFare() + b.getTotalInfantFare() +
+					b.getTotalPassengerServiceCharge() + b.getTotalServiceTax() +
+					b.getTotalRegulatoryServiceCharge(), 2)));
+			request.setAttribute("currentYear", Integer.parseInt(Common.getCurrentYear(Common.YEAR_FORMAT)));
+			
+			RequestDispatcher rd = request.getRequestDispatcher(View.PAYMENT);
+			rd.include(request, response);
+		} catch (Exception e) {
+			if (session == null) {
+				response.sendRedirect(View.GUEST_FLIGHT_SEARCH);
+				return;
+			}
+			
 			Common.viewError(e.getMessage(), request, response);
 		}
 	}

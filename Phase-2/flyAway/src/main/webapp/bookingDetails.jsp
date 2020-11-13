@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/common/header.jsp" %>
 </head>
+<body>
 <main role="main" class="flex-shrink-0">
   <div class="container">
     <div class="py-4">
@@ -18,12 +19,12 @@
           <div class="row">
             <div class="col-md-5">
               <h4 class="text-primary">Depart date</h4>
-              <p>${requestScope.bookingDetails.getFlight().getDepartDateString()}</p>
+              <p>${sessionScope.bookingDetails.getFlight().getDepartDateString()}</p>
             </div>
             <div class="col-md-7">
-              <h5>${requestScope.bookingDetails.getFlight().getSource().getCityName()} <strong class="text-danger">-</strong> ${requestScope.bookingDetails.getFlight().getDestination().getCityName()}</h5>
-              <small>${requestScope.bookingDetails.getFlight().getAirline().getFlightCode()} ${requestScope.bookingDetails.getFlight().getFlightNo()} <strong class="text-danger">|</strong> 
-                ${requestScope.bookingDetails.getFlight().getDepartDateTime()} ~ ${requestScope.bookingDetails.getFlight().getArriveDateTime()} <strong class="text-danger">|</strong>
+              <h5>${sessionScope.bookingDetails.getFlight().getSource().getCityName()} <strong class="text-danger">-</strong> ${sessionScope.bookingDetails.getFlight().getDestination().getCityName()}</h5>
+              <small>${sessionScope.bookingDetails.getFlight().getAirline().getFlightCode()} ${sessionScope.bookingDetails.getFlight().getFlightNo()} <strong class="text-danger">|</strong> 
+                ${sessionScope.bookingDetails.getFlight().getDepartDateTime()} ~ ${sessionScope.bookingDetails.getFlight().getArriveDateTime()} <strong class="text-danger">|</strong>
                 ${requestScope.flightDuration}
               </small>
               <hr />
@@ -38,55 +39,55 @@
               <h5 class="text-success">Fares, taxes and fees</h5>
               <div class="row">
                 <div class="col-md-9">
-                  <p><small>${requestScope.adultNo}x Adult</small><p>
+                  <p><small>${requestScope.adultNo}x Adult</small></p>
                 </div>
                 <div class="col-md-3">
-                  <p class="text-right"><small>${requestScope.bookingDetails.getTotalAdultFareString()} $</small></p>
+                  <p class="text-right"><small>${sessionScope.bookingDetails.getTotalAdultFareString()} $</small></p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-9">
-                  <p><small>${requestScope.childNo}x Child</small><p>
+                  <p><small>${requestScope.childNo}x Child</small></p>
                 </div>
                 <div class="col-md-3">
-                  <p class="text-right"><small>${requestScope.bookingDetails.getTotalChildFareString()} $</small></p>
+                  <p class="text-right"><small>${sessionScope.bookingDetails.getTotalChildFareString()} $</small></p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-9">
-                  <p><small>${requestScope.infantNo}x Infant</small><p>
+                  <p><small>${requestScope.infantNo}x Infant</small></p>
                 </div>
                 <div class="col-md-3">
-                  <p class="text-right"><small>${requestScope.bookingDetails.getTotalInfantFareString()} $</small></p>
+                  <p class="text-right"><small>${sessionScope.bookingDetails.getTotalInfantFareString()} $</small></p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-9">
-                  <p><small>${requestScope.adultNo + requestScope.childNo}x Passenger Service Charge</small><p>
+                  <p><small>${requestScope.adultNo + requestScope.childNo}x Passenger Service Charge</small></p>
                 </div>
                 <div class="col-md-3">
-                  <p class="text-right"><small>${requestScope.bookingDetails.getTotalPassengerServiceChargeString()} $</small></p>
+                  <p class="text-right"><small>${sessionScope.bookingDetails.getTotalPassengerServiceChargeString()} $</small></p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-9">
-                  <p><small>${requestScope.adultNo + requestScope.childNo}x Service Tax</small><p>
+                  <p><small>${requestScope.adultNo + requestScope.childNo}x Service Tax</small></p>
                 </div>
                 <div class="col-md-3">
-                  <p class="text-right"><small>${requestScope.bookingDetails.getTotalServiceTaxString()} $</small></p>
+                  <p class="text-right"><small>${sessionScope.bookingDetails.getTotalServiceTaxString()} $</small></p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-9">
-                  <p><small>${requestScope.adultNo + requestScope.childNo}x Regulatory Service Charge</small><p>
+                  <p><small>${requestScope.adultNo + requestScope.childNo}x Regulatory Service Charge</small></p>
                 </div>
                 <div class="col-md-3">
-                  <p class="text-right"><small>${requestScope.bookingDetails.getTotalRegulatoryServiceChargeString()} $</small></p>
+                  <p class="text-right"><small>${sessionScope.bookingDetails.getTotalRegulatoryServiceChargeString()} $</small></p>
                 </div>
               </div>
               <hr />
               <h5 class="text-success">Passengers</h5>
-              <c:forEach var="p" items="${requestScope.bookingDetails.getPassengers()}">
+              <c:forEach var="p" items="${sessionScope.bookingDetails.getPassengers()}">
                 <p>
                   <small>
                     <c:if test="${p.getType() == 'A'}">
@@ -107,7 +108,6 @@
         </div>
         <div class="card-footer">
           <form action="${pageContext.request.contextPath}/guest?action=pay" method="post">
-            <input type="hidden" name="bookingDetails" value="${requestScope.bookingDetails}" />
             <button class="btn btn-danger btn-lg btn-block" type="submit">Continue</button>
           </form>
         </div>
