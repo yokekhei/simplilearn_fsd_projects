@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/common/header.jsp" %>
   <link href="${pageContext.request.contextPath}/css/signin.css" rel="stylesheet" type="text/css">
 </head>
@@ -9,6 +10,20 @@
       <img class="mb-4" src="${pageContext.request.contextPath}/images/logo.jpg" alt="" width="99" height="86">
     </a>
     <h1 class="h3 mb-3 font-weight-normal">Administrator Sign In</h1>
+    <c:if test="${requestScope.sessionStatus == 'login_fail'}">
+      <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          Invalid credentials.
+      </div>
+      <c:remove var="sessionStatus" scope="request" />
+    </c:if>
+    <c:if test="${requestScope.sessionStatus == 'invalid'}">
+      <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          Session expired.
+      </div>
+      <c:remove var="sessionStatus" scope="request" />
+    </c:if>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="email" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>

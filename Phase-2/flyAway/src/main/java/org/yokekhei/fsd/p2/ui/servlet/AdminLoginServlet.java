@@ -2,6 +2,7 @@ package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,7 +45,9 @@ public class AdminLoginServlet extends HttpServlet {
 			session.setAttribute("adminUser", adminUser);
 			response.sendRedirect(View.ADMIN_FLIGHT_LIST_SERVLET);
 		} catch (FlyAwayServiceException e) {
-			response.sendRedirect(View.ADMIN_SIGNIN_ERROR);
+			request.setAttribute("sessionStatus", "login_fail");
+			RequestDispatcher rd = request.getRequestDispatcher(View.ADMIN_SIGNIN);
+			rd.include(request, response);
 		}
 	}
 
