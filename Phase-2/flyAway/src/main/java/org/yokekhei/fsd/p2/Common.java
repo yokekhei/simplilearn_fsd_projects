@@ -35,6 +35,12 @@ public class Common {
 		rd.forward(request, response);
 	}
 	
+	public static void viewSessionExpired(HttpServletRequest request, HttpServletResponse response, String nextPage) throws ServletException, IOException {
+		request.setAttribute("sessionStatus", "expired");
+		RequestDispatcher rd = request.getRequestDispatcher(nextPage);
+		rd.include(request, response);
+	}
+	
 	public static LocalDate toLocalDate(String strDate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
 		return LocalDate.parse(strDate, formatter);

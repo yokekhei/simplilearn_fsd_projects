@@ -33,6 +33,13 @@ try {
       <hr class="mb-4">
     </div>
     <div class="py-4">
+      <c:if test="${requestScope.sessionStatus == 'expired'}">
+        <div class="alert alert-danger alert-dismissible">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          Session expired. Please start over.
+        </div>
+        <c:remove var="sessionStatus" scope="request" />
+      </c:if>
       <c:if test="${requestScope.searchFlightStatus == 'fail'}">
         <div class="alert alert-danger alert-dismissible">
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

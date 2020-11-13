@@ -218,7 +218,7 @@ public class GuestServlet extends HttpServlet {
 			rd.include(request, response);
 		} catch (Exception e) {
 			if (session == null) {
-				response.sendRedirect(View.GUEST_FLIGHT_SEARCH);
+				Common.viewSessionExpired(request, response, View.GUEST_FLIGHT_SEARCH);
 				return;
 			}
 			
