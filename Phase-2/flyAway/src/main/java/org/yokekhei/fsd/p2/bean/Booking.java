@@ -28,7 +28,7 @@ public class Booking {
 	@Column(nullable=false, name="booking_id")
 	private int bookingId;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = Flight.class)
+	@OneToOne(targetEntity = Flight.class)
 	@JoinColumn(name="flight_id")
 	private Flight flight;
 	

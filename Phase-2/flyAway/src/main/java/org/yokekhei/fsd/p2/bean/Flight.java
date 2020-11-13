@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,15 +30,15 @@ public class Flight {
 	@Column(nullable=false, name="flight_no")
 	private int flightNo;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = Airline.class)
+	@OneToOne(targetEntity = Airline.class)
 	@JoinColumn(name="airline_code")
 	private Airline airline;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = Place.class)
+	@OneToOne(targetEntity = Place.class)
 	@JoinColumn(name="src_location")
 	private Place source;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = Place.class)
+	@OneToOne(targetEntity = Place.class)
 	@JoinColumn(name="dest_location")
 	private Place destination;
 	
