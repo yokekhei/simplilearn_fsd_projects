@@ -2,6 +2,7 @@ package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -203,9 +204,10 @@ public class GuestServlet extends HttpServlet {
 	
 	private void doPostPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		Booking b = null;
 		
 		try {
-			Booking b = (Booking)session.getAttribute("bookingDetails");
+			b = (Booking)session.getAttribute("bookingDetails");
 			
 			DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
 			request.setAttribute("totalCharge", df2.format(Common.roundBigDecimal(
@@ -217,7 +219,7 @@ public class GuestServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher(View.PAYMENT);
 			rd.include(request, response);
 		} catch (Exception e) {
-			if (session == null) {
+			if (session == null || b == null) {
 				Common.viewSessionExpired(request, response, View.GUEST_FLIGHT_SEARCH);
 				return;
 			}
@@ -228,9 +230,10 @@ public class GuestServlet extends HttpServlet {
 	
 	private void doPostPaid(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
+		Booking b = null;
 		
 		try {
-			Booking b = (Booking)session.getAttribute("bookingDetails");
+			b = (Booking)session.getAttribute("bookingDetails");
 			Payment p = new Payment(b, request.getParameter("nameOnCard"),
 					b.getTotalAdultFare() + b.getTotalChildFare() + b.getTotalInfantFare() +
 					b.getTotalPassengerServiceCharge() + b.getTotalServiceTax() +
@@ -240,9 +243,23 @@ public class GuestServlet extends HttpServlet {
 			service.addPayment(p);
 			
 			session.invalidate();
+			
+			request.setAttribute("bookingDetails", b);
+			
+			LocalDateTime boardingDateTime = Common.toLocalDateTime(
+					Common.toLocalDateTime(b.getFlight().getDepartDate(),
+							b.getFlight().getDepartTime())).minusHours(1);
+			
+			request.setAttribute("boardingDate",
+					Common.toLocalDateString(boardingDateTime.toLocalDate(), Common.DATE_FORMAT2));
+			request.setAttribute("boardingTime",
+					Common.toLocalTimeString(boardingDateTime.toLocalTime(), Common.TIME_FORMAT));
+			
+			RequestDispatcher rd = request.getRequestDispatcher(View.BOARDING_PASS);
+			rd.include(request, response);
 		} catch (Exception e) {
-			if (session == null) {
-				response.sendRedirect(View.GUEST_FLIGHT_SEARCH);
+			if (session == null || b == null) {
+				Common.viewSessionExpired(request, response, View.GUEST_FLIGHT_SEARCH);
 				return;
 			}
 			

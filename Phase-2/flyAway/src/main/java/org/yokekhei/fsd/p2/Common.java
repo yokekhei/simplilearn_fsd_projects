@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,12 +51,22 @@ public class Common {
 		return localDateTime.toLocalDate();
 	}
 	
+	public static String toLocalDateString(LocalDate localDate, String format) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		return localDate.format(formatter);
+	}
+	
 	public static LocalTime toLocalTime(String strTime) {
 		return LocalTime.parse(strTime);
 	}
 	
 	public static LocalTime toLocalTime(LocalDateTime localDateTime) {
 		return localDateTime.toLocalTime();
+	}
+	
+	public static String toLocalTimeString(LocalTime localTime, String format) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		return localTime.format(formatter);
 	}
 	
 	public static LocalDateTime toLocalDateTime(String strDateTime) {
@@ -86,6 +97,13 @@ public class Common {
 		LocalDate now = LocalDate.now();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 		return now.format(formatter);
+	}
+	
+	public static int getRandomSeatNo() {
+		Random r = new Random();
+		int low = 100;
+		int high = 287;
+		return r.nextInt(high-low) + low;
 	}
 	
 }
