@@ -4,6 +4,7 @@
 <%@ include file="/common/header.jsp" %>
   <link href="${pageContext.request.contextPath}/css/multi-page-form.css" rel="stylesheet" type="text/css">
 </head>
+<body>
 <main role="main" class="flex-shrink-0">
   <div class="container">
     <div class="py-4">
