@@ -17,6 +17,9 @@
         <li class="nav-item">
           <a class="nav-link" href="${pageContext.request.contextPath}/place">Places</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="${pageContext.request.contextPath}/booking">Bookings</a>
+        </li>
       </ul>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">

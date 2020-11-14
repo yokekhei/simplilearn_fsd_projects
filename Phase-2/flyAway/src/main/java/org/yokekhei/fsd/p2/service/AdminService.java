@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
+import org.yokekhei.fsd.p2.bean.Booking;
 import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.bean.Payment;
 import org.yokekhei.fsd.p2.bean.Place;
@@ -46,5 +47,8 @@ public interface AdminService {
 	double getServiceTax() throws FlyAwayServiceException;
 	
 	void addPayment(Payment data) throws FlyAwayServiceException;
+	
+	List<Booking> getAllBookings() throws FlyAwayServiceException;
+	Booking getBooking(int bookingId) throws FlyAwayServiceException;
 	
 }

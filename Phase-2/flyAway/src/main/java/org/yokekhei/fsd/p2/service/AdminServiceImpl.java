@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
+import org.yokekhei.fsd.p2.bean.Booking;
 import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.bean.Payment;
 import org.yokekhei.fsd.p2.bean.Place;
@@ -13,6 +14,8 @@ import org.yokekhei.fsd.p2.dao.AdminUserDao;
 import org.yokekhei.fsd.p2.dao.AdminUserDaoImpl;
 import org.yokekhei.fsd.p2.dao.AirlineDao;
 import org.yokekhei.fsd.p2.dao.AirlineDaoImpl;
+import org.yokekhei.fsd.p2.dao.BookingDao;
+import org.yokekhei.fsd.p2.dao.BookingDaoImpl;
 import org.yokekhei.fsd.p2.dao.FeeDao;
 import org.yokekhei.fsd.p2.dao.FeeDaoImpl;
 import org.yokekhei.fsd.p2.dao.FlightDao;
@@ -184,7 +187,6 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		return flight;
-		
 	}
 
 	@Override
@@ -308,6 +310,34 @@ public class AdminServiceImpl implements AdminService {
 		} catch (FlyAwayDaoException e) {
 			throw new FlyAwayServiceException("Failed to add payment - " + e.getMessage());
 		}
+	}
+
+	@Override
+	public List<Booking> getAllBookings() throws FlyAwayServiceException {
+		List<Booking> bookings = null;
+		
+		try {
+			BookingDao dao = new BookingDaoImpl(sessionFactory);
+			bookings = dao.getAllBookings();
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to get bookings - " + e.getMessage());
+		}
+		
+		return bookings;
+	}
+	
+	@Override
+	public Booking getBooking(int bookingId) throws FlyAwayServiceException {
+		Booking booking = null;
+		
+		try {
+			BookingDao dao = new BookingDaoImpl(sessionFactory);
+			booking = dao.getBooking(bookingId);
+		} catch (FlyAwayDaoException e) {
+			throw new FlyAwayServiceException("Failed to get booking - " + e.getMessage());
+		}
+		
+		return booking;
 	}
 	
 }
