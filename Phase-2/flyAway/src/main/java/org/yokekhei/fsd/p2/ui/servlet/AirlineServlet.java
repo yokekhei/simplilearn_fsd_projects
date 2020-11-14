@@ -43,7 +43,7 @@ public class AirlineServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			session.setAttribute("airlineList", airlines);
 			response.sendRedirect(View.ADMIN_AIRLINE_LIST);
-		} catch (FlyAwayServiceException e) {
+		} catch (Exception e) {
 			Common.viewError(e.getMessage(), request, response);
 		}
 	}
@@ -81,6 +81,9 @@ public class AirlineServlet extends HttpServlet {
 			
 			if (session != null) {
 				session.setAttribute("alert", "Add airline failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
@@ -101,6 +104,9 @@ public class AirlineServlet extends HttpServlet {
 			
 			if (session != null) {
 				session.setAttribute("alert", "Update airline failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
@@ -117,6 +123,9 @@ public class AirlineServlet extends HttpServlet {
 			
 			if (session != null) {
 				session.setAttribute("alert", "Delete airline failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		

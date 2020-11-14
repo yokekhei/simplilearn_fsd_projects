@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.SessionFactory;
+import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
-import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
 
 /**
  * Servlet implementation class AdminPasswordServlet
@@ -45,27 +45,31 @@ public class AdminPasswordServlet extends HttpServlet {
 	
 	private void doPostChange(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		AdminUser adminUser = (AdminUser)session.getAttribute("adminUser");
 		
-		if (request.getParameter("password") == null ||
-				request.getParameter("confirmPassword") == null) {
-			session.setAttribute("changePasswordStatus", "fail");
-		} else if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
-			session.setAttribute("changePasswordStatus", "notMatch");
-		} else if (request.getParameter("password").equals(adminUser.getPassword())) {
-			session.setAttribute("changePasswordStatus", "same");
-		} else {
-			try {
+		try {
+			AdminUser adminUser = (AdminUser)session.getAttribute("adminUser");
+			
+			if (request.getParameter("password") == null ||
+					request.getParameter("confirmPassword") == null) {
+				session.setAttribute("changePasswordStatus", "fail");
+			} else if (!request.getParameter("password").equals(request.getParameter("confirmPassword"))) {
+				session.setAttribute("changePasswordStatus", "notMatch");
+			} else if (request.getParameter("password").equals(adminUser.getPassword())) {
+				session.setAttribute("changePasswordStatus", "same");
+			} else {
 				AdminService service = new AdminServiceImpl(
 						(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 				
 				adminUser.setPassword(request.getParameter("password"));
 				service.updateAdminUser(adminUser);
 				session.setAttribute("changePasswordStatus", "success");
-			} catch (FlyAwayServiceException | NumberFormatException e) {
-				if (session != null) {
-					session.setAttribute("changePasswordStatus", "fail");
-				}
+			}
+		} catch (Exception e) {
+			if (session != null) {
+				session.setAttribute("changePasswordStatus", "fail");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		

@@ -197,7 +197,7 @@ public class GuestServlet extends HttpServlet {
 			
 			RequestDispatcher rd = request.getRequestDispatcher(View.BOOKING_DETAILS);
 			rd.include(request, response);
-		} catch (FlyAwayServiceException | NumberFormatException e) {
+		} catch (Exception e) {
 			Common.viewError(e.getMessage(), request, response);
 		}
 	}

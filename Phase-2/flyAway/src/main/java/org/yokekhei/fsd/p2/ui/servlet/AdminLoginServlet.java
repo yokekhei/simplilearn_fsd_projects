@@ -14,7 +14,6 @@ import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
-import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
 
 /**
  * Servlet implementation class AdminLoginServlet
@@ -44,7 +43,7 @@ public class AdminLoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("adminUser", adminUser);
 			response.sendRedirect(View.ADMIN_FLIGHT_LIST_SERVLET);
-		} catch (FlyAwayServiceException e) {
+		} catch (Exception e) {
 			request.setAttribute("sessionStatus", "login_fail");
 			RequestDispatcher rd = request.getRequestDispatcher(View.ADMIN_SIGNIN);
 			rd.include(request, response);

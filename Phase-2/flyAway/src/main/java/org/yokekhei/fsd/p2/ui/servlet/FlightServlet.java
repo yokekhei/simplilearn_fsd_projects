@@ -51,7 +51,7 @@ public class FlightServlet extends HttpServlet {
 			session.setAttribute("placeList", places);
 			session.setAttribute("airlineList", airlines);
 			response.sendRedirect(View.ADMIN_FLIGHT_LIST);
-		} catch (FlyAwayServiceException e) {
+		} catch (Exception e) {
 			Common.viewError(e.getMessage(), request, response);
 		}
 	}
@@ -100,6 +100,9 @@ public class FlightServlet extends HttpServlet {
 		} catch (FlyAwayServiceException | NumberFormatException e) {
 			if (session != null) {
 				session.setAttribute("alert", "Add flight failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
@@ -132,6 +135,9 @@ public class FlightServlet extends HttpServlet {
 		} catch (FlyAwayServiceException | NumberFormatException e) {
 			if (session != null) {
 				session.setAttribute("alert", "Update flight failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
@@ -148,23 +154,31 @@ public class FlightServlet extends HttpServlet {
 			
 			if (session != null) {
 				session.setAttribute("alert", "Delete flight failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
 		response.sendRedirect(View.ADMIN_FLIGHT_LIST_SERVLET);
 	}
 	
-	private boolean isValid(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
-		if (!isDateSelectionValid(request.getParameter("departDate"),
-				request.getParameter("departTime"),
-				request.getParameter("arriveDate"),
-				request.getParameter("arriveTime"))) {
-			session.setAttribute("alert", INVALID_DATE_SELECTION);
-			return false;
-		}
-		
-		if (request.getParameter("srcLocation").equals(request.getParameter("dstLocation"))) {
-			session.setAttribute("alert", INVALID_PLACE_SELECTION);
+	private boolean isValid(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			if (!isDateSelectionValid(request.getParameter("departDate"),
+					request.getParameter("departTime"),
+					request.getParameter("arriveDate"),
+					request.getParameter("arriveTime"))) {
+				session.setAttribute("alert", INVALID_DATE_SELECTION);
+				return false;
+			}
+			
+			if (request.getParameter("srcLocation").equals(request.getParameter("dstLocation"))) {
+				session.setAttribute("alert", INVALID_PLACE_SELECTION);
+				return false;
+			}
+		} catch (Exception e) {
+			Common.viewError(e.getMessage(), request, response);
 			return false;
 		}
 		

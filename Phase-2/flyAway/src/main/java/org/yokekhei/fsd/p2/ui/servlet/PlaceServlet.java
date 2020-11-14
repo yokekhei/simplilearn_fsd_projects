@@ -43,7 +43,7 @@ public class PlaceServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			session.setAttribute("placeList", places);
 			response.sendRedirect(View.ADMIN_PLACE_LIST);
-		} catch (FlyAwayServiceException e) {
+		} catch (Exception e) {
 			Common.viewError(e.getMessage(), request, response);
 		}
 	}
@@ -80,6 +80,9 @@ public class PlaceServlet extends HttpServlet {
 			
 			if (session != null) {
 				session.setAttribute("alert", "Add place failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
@@ -99,6 +102,9 @@ public class PlaceServlet extends HttpServlet {
 			
 			if (session != null) {
 				session.setAttribute("alert", "Update place failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
@@ -115,6 +121,9 @@ public class PlaceServlet extends HttpServlet {
 			
 			if (session != null) {
 				session.setAttribute("alert", "Delete place failed. Please try again.");
+			} else {
+				Common.viewError(e.getMessage(), request, response);
+				return;
 			}
 		}
 		
