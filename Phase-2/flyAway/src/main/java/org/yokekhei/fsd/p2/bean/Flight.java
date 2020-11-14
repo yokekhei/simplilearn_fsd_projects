@@ -1,9 +1,7 @@
 package org.yokekhei.fsd.p2.bean;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -130,11 +128,6 @@ public class Flight {
 	public LocalDate getDepartDate() {
 		return departDate;
 	}
-	
-	public String getDepartDateString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Common.DATE_FORMAT2);
-		return departDate.format(formatter);
-	}
 
 	public void setDepartDate(LocalDate departDate) {
 		this.departDate = departDate;
@@ -171,14 +164,13 @@ public class Flight {
 	public String getArriveDateTime() {
 		return Common.toLocalDateTime(arriveDate, arriveTime);
 	}
+	
+	public String getDuration() {
+		return Common.getDurationInHourMinute(getDepartDateTime(), getArriveDateTime());
+	}
 
 	public double getAdultPrice() {
 		return adultPrice;
-	}
-	
-	public String getAdultPriceString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(adultPrice, 2));
 	}
 
 	public void setAdultPrice(double adultPrice) {
@@ -188,11 +180,6 @@ public class Flight {
 	public double getChildPrice() {
 		return childPrice;
 	}
-	
-	public String getChildPriceString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(childPrice, 2));
-	}
 
 	public void setChildPrice(double childPrice) {
 		this.childPrice = childPrice;
@@ -200,11 +187,6 @@ public class Flight {
 
 	public double getInfantPrice() {
 		return infantPrice;
-	}
-	
-	public String getInfantPriceString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(infantPrice, 2));
 	}
 
 	public void setInfantPrice(double infantPrice) {
