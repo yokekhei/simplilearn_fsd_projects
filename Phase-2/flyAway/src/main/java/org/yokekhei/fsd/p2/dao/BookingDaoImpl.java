@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p2.dao;
 
 import java.util.List;
+import java.util.TimeZone;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -45,7 +46,9 @@ public class BookingDaoImpl implements BookingDao {
 		List<Booking> bookings = null;
 		
 		try {
-			session = sessionFactory.openSession();
+			session = sessionFactory.withOptions()
+					.jdbcTimeZone(TimeZone.getTimeZone("UTC"))
+					.openSession();
 			bookings = session.createQuery("from Booking").getResultList();
 		} catch (Exception e) {
 			throw new FlyAwayDaoException("Failed to retrieve bookings - " + e.getMessage());
@@ -64,7 +67,9 @@ public class BookingDaoImpl implements BookingDao {
 		Booking booking = null;
 		
 		try {
-			session = sessionFactory.openSession();
+			session = sessionFactory.withOptions()
+					.jdbcTimeZone(TimeZone.getTimeZone("UTC"))
+					.openSession();
 			booking = session.get(Booking.class, bookingId);
 			
 			if (booking == null) {
