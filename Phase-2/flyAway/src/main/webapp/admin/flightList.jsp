@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="st" uri="/WEB-INF/customTags.tld" %>
 <%@ include file="/common/header.jsp" %>
   <link href="${pageContext.request.contextPath}/css/navbar-top.css" rel="stylesheet" type="text/css">
 </head>
@@ -72,9 +73,9 @@
                 <td class="dstLocation"><c:out value="${flight.getDestination().getLocationCode()}"/></td>
                 <td class="departDateTime"><c:out value="${flight.getDepartDateTime()}"/></td>
                 <td class="arriveDateTime"><c:out value="${flight.getArriveDateTime()}"/></td>
-                <td class="adultPrice"><c:out value="${flight.getAdultPriceString()}"/></td>
-                <td class="childPrice"><c:out value="${flight.getChildPriceString()}"/></td>
-                <td class="infantPrice"><c:out value="${flight.getInfantPriceString()}"/></td>
+                <td class="adultPrice"><st:CustomDecimalTag scale="2">${flight.getAdultPrice()}</st:CustomDecimalTag></td>
+                <td class="childPrice"><st:CustomDecimalTag scale="2">${flight.getChildPrice()}</st:CustomDecimalTag></td>
+                <td class="infantPrice"><st:CustomDecimalTag scale="2">${flight.getInfantPrice()}</st:CustomDecimalTag></td>
                 <td class="flightId" style="display:none;"><c:out value="${flight.getFlightId()}"/></td>
                 <td class="airlineCode" style="display:none;"><c:out value="${flight.getAirline().getAirlineCode()}"/></td>
             </tr>

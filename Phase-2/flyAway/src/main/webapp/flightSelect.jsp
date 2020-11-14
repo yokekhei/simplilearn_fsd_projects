@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="st" uri="/WEB-INF/customTags.tld" %>
 <%@ include file="/common/header.jsp" %>
 </head>
 <body>
@@ -62,9 +63,9 @@
               <td><c:out value="${flight.getDestination().getLocationCode()}"/></td>
               <td><c:out value="${flight.getDepartDateTime()}"/></td>
               <td><c:out value="${flight.getArriveDateTime()}"/></td>
-              <td><c:out value="${flight.getAdultPriceString()}"/></td>
-              <td><c:out value="${flight.getChildPriceString()}"/></td>
-              <td><c:out value="${flight.getInfantPriceString()}"/></td>
+              <td><st:CustomDecimalTag scale="2">${flight.getAdultPrice()}</st:CustomDecimalTag></td>
+              <td><st:CustomDecimalTag scale="2">${flight.getChildPrice()}</st:CustomDecimalTag></td>
+              <td><st:CustomDecimalTag scale="2">${flight.getInfantPrice()}</st:CustomDecimalTag></td>
             </tr>
           </c:forEach>
         </tbody>
