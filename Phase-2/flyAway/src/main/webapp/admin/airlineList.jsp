@@ -28,15 +28,19 @@
               </th>
               <th>
                 <span>Airline Code</span>
+                <a href="${pageContext.request.contextPath}/airline?sortBy=airlineCode"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Flight Code</span>
+                <a href="${pageContext.request.contextPath}/airline?sortBy=flightCode"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Company Name</span>
+                <a href="${pageContext.request.contextPath}/airline?sortBy=companyName"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Country</span>
+                <a href="${pageContext.request.contextPath}/airline?sortBy=country"><i class="fa fa-fw fa-sort"></i></a>
               </th>
             </tr>
           </thead>

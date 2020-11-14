@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.Airline;
+import org.yokekhei.fsd.p2.comparator.airline.AirlineCodeComparator;
+import org.yokekhei.fsd.p2.comparator.airline.CompanyNameComparator;
+import org.yokekhei.fsd.p2.comparator.airline.CountryComparator;
+import org.yokekhei.fsd.p2.comparator.airline.FlightCodeComparator;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
@@ -39,6 +44,10 @@ public class AirlineServlet extends HttpServlet {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			List<Airline> airlines = service.getAllAirlines();
+			
+			if (request.getParameter("sortBy") != null) {
+				sort(airlines, request.getParameter("sortBy"));
+			}
 			
 			HttpSession session = request.getSession(false);
 			session.setAttribute("airlineList", airlines);
@@ -130,6 +139,22 @@ public class AirlineServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect(View.ADMIN_AIRLINE_LIST_SERVLET);
+	}
+	
+	private void sort(List<Airline> airlines, String method) {
+		if (airlines == null || airlines.isEmpty()) {
+			return;
+		}
+		
+		if (method.equals("airlineCode")) {
+			Collections.sort(airlines, new AirlineCodeComparator());
+		} else if (method.equals("flightCode")) {
+			Collections.sort(airlines, new FlightCodeComparator());
+		} else if (method.equals("companyName")) {
+			Collections.sort(airlines, new CompanyNameComparator());
+		} else if (method.equals("country")) {
+			Collections.sort(airlines, new CountryComparator());
+		}
 	}
 
 }
