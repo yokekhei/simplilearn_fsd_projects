@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.Place;
+import org.yokekhei.fsd.p2.comparator.place.CityNameComparator;
+import org.yokekhei.fsd.p2.comparator.place.LocationCodeComparator;
+import org.yokekhei.fsd.p2.comparator.place.LocationNameComparator;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
@@ -39,6 +43,10 @@ public class PlaceServlet extends HttpServlet {
 			AdminService service = new AdminServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			List<Place> places = service.getAllPlaces();
+			
+			if (request.getParameter("sortBy") != null) {
+				sort(places, request.getParameter("sortBy"));
+			}
 			
 			HttpSession session = request.getSession(false);
 			session.setAttribute("placeList", places);
@@ -128,6 +136,20 @@ public class PlaceServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect(View.ADMIN_PLACE_LIST_SERVLET);
+	}
+	
+	private void sort(List<Place> places, String method) {
+		if (places == null || places.isEmpty()) {
+			return;
+		}
+		
+		if (method.equals("locationCode")) {
+			Collections.sort(places, new LocationCodeComparator());
+		} else if (method.equals("locationName")) {
+			Collections.sort(places, new LocationNameComparator());
+		} else if (method.equals("cityName")) {
+			Collections.sort(places, new CityNameComparator());
+		}
 	}
 	
 }

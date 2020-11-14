@@ -28,12 +28,15 @@
               </th>
               <th>
                 <span>Location Code</span>
+                <a href="${pageContext.request.contextPath}/place?sortBy=locationCode"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Location Name</span>
+                <a href="${pageContext.request.contextPath}/place?sortBy=locationName"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>City Name</span>
+                <a href="${pageContext.request.contextPath}/place?sortBy=cityName"><i class="fa fa-fw fa-sort"></i></a>
               </th>
             </tr>
           </thead>
