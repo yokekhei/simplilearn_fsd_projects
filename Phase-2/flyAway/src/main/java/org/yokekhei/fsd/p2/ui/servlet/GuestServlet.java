@@ -182,15 +182,8 @@ public class GuestServlet extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(1800);  // session expired in 30 minutes
-			session.setAttribute("bookingDetails", b);
 			
-			DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-			request.setAttribute("totalCharge", df2.format(Common.roundBigDecimal(
-					b.getTotalAdultFare() + b.getTotalChildFare() + b.getTotalInfantFare() +
-					b.getTotalPassengerServiceCharge() + b.getTotalServiceTax() +
-					b.getTotalRegulatoryServiceCharge(), 2)));
-			request.setAttribute("flightDuration", Common.getDurationInHourMinute(
-					b.getFlight().getDepartDateTime(), b.getFlight().getArriveDateTime()));
+			session.setAttribute("bookingDetails", b);
 			request.setAttribute("adultNo", adultNo);
 			request.setAttribute("childNo", childNo);
 			request.setAttribute("infantNo", infantNo);
