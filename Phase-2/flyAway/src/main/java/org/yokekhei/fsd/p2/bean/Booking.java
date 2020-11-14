@@ -1,12 +1,12 @@
 package org.yokekhei.fsd.p2.bean;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,8 +15,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.yokekhei.fsd.p2.Common;
 
 @Entity
 
@@ -36,7 +34,7 @@ public class Booking {
 	@JoinColumn(name="guest_email")
 	private Guest guest;
 	
-	@OneToMany(cascade = CascadeType.ALL, targetEntity = Passenger.class)
+	@OneToMany(cascade = CascadeType.ALL, targetEntity = Passenger.class, fetch = FetchType.EAGER)
 	@JoinTable(name="Booking_Passenger",
 		joinColumns = @JoinColumn( name="booking_id"),
 		inverseJoinColumns = @JoinColumn( name="passenger_id"))
@@ -113,11 +111,6 @@ public class Booking {
 	public double getTotalAdultFare() {
 		return totalAdultFare;
 	}
-	
-	public String getTotalAdultFareString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(totalAdultFare, 2));
-	}
 
 	public void setTotalAdultFare(double totalAdultFare) {
 		this.totalAdultFare = totalAdultFare;
@@ -125,11 +118,6 @@ public class Booking {
 
 	public double getTotalChildFare() {
 		return totalChildFare;
-	}
-	
-	public String getTotalChildFareString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(totalChildFare, 2));
 	}
 
 	public void setTotalChildFare(double totalChildFare) {
@@ -139,11 +127,6 @@ public class Booking {
 	public double getTotalInfantFare() {
 		return totalInfantFare;
 	}
-	
-	public String getTotalInfantFareString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(totalInfantFare, 2));
-	}
 
 	public void setTotalInfantFare(double totalInfantFare) {
 		this.totalInfantFare = totalInfantFare;
@@ -151,11 +134,6 @@ public class Booking {
 
 	public double getTotalPassengerServiceCharge() {
 		return totalPassengerServiceCharge;
-	}
-	
-	public String getTotalPassengerServiceChargeString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(totalPassengerServiceCharge, 2));
 	}
 
 	public void setTotalPassengerServiceCharge(double totalPassengerServiceCharge) {
@@ -165,11 +143,6 @@ public class Booking {
 	public double getTotalServiceTax() {
 		return totalServiceTax;
 	}
-	
-	public String getTotalServiceTaxString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(totalServiceTax, 2));
-	}
 
 	public void setTotalServiceTax(double totalServiceTax) {
 		this.totalServiceTax = totalServiceTax;
@@ -178,14 +151,15 @@ public class Booking {
 	public double getTotalRegulatoryServiceCharge() {
 		return totalRegulatoryServiceCharge;
 	}
-	
-	public String getTotalRegulatoryServiceChargeString() {
-		DecimalFormat df2 = new DecimalFormat(Common.DECIMAL_FORMAT_DF2);
-		return df2.format(Common.roundBigDecimal(totalRegulatoryServiceCharge, 2));
-	}
 
 	public void setTotalRegulatoryServiceCharge(double totalRegulatoryServiceCharge) {
 		this.totalRegulatoryServiceCharge = totalRegulatoryServiceCharge;
+	}
+	
+	public double getTotalCharge() {
+		return totalAdultFare + totalChildFare + totalInfantFare +
+				totalPassengerServiceCharge + totalServiceTax +
+				totalRegulatoryServiceCharge;
 	}
 
 	@Override
