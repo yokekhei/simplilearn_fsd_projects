@@ -16,7 +16,7 @@
     <div class="px-4">
       <div class="alert alert-success alert-dismissible">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-          Thank you, your payment was successful.
+          Thank you. Your payment was successful.
       </div>
       <%! int seatNo = Common.getRandomSeatNo(); %>
       <c:forEach var="passenger" items="${requestScope.bookingDetails.getPassengers()}">
