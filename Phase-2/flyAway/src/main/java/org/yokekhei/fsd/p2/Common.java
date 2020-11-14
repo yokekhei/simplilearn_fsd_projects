@@ -43,7 +43,11 @@ public class Common {
 	}
 	
 	public static LocalDate toLocalDate(String strDate) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+		return Common.toLocalDate(strDate, DATE_FORMAT);
+	}
+	
+	public static LocalDate toLocalDate(String strDate, String format) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 		return LocalDate.parse(strDate, formatter);
 	}
 	
