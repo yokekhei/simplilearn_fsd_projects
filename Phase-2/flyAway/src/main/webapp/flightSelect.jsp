@@ -15,7 +15,7 @@
       <hr class="mb-4">
     </div>
     <div class="px-4">
-      <table class="table table-hover mb-0">
+      <table class="table table-hover mb-0 small">
         <thead>
           <tr>
             <th>
@@ -25,6 +25,7 @@
             </th>
             <th>
               <span>Flight Code</span>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=flightCode&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>From City</span>
@@ -34,18 +35,23 @@
             </th>
             <th>
               <span>Depart Date/Time</span>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=departDt&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Arrive Date/Time</span>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=arriveDt&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Adult ($)</span>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=adultPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Child ($)</span>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=childPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Infant ($)</span>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=infantPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
           </tr>
         </thead>
@@ -58,7 +64,7 @@
                   <i class="fas fa-book mt-0 text-primary"></i>
                 </button>
               </td>
-              <td><c:out value="${flight.getAirline().getFlightCode()}${flight.getFlightNo()}"/></td>
+              <td><c:out value="${flight.getAirline().getFlightCode()} ${flight.getFlightNo()}"/></td>
               <td><c:out value="${flight.getSource().getLocationCode()}"/></td>
               <td><c:out value="${flight.getDestination().getLocationCode()}"/></td>
               <td><c:out value="${flight.getDepartDateTime()}"/></td>

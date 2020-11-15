@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,6 +22,12 @@ import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.bean.Guest;
 import org.yokekhei.fsd.p2.bean.Passenger;
 import org.yokekhei.fsd.p2.bean.Payment;
+import org.yokekhei.fsd.p2.comparator.flight.AdultPriceComparator;
+import org.yokekhei.fsd.p2.comparator.flight.ArriveDateTimeComparator;
+import org.yokekhei.fsd.p2.comparator.flight.ChildPriceComparator;
+import org.yokekhei.fsd.p2.comparator.flight.DepartDateTimeComparator;
+import org.yokekhei.fsd.p2.comparator.flight.FlightNumberComparator;
+import org.yokekhei.fsd.p2.comparator.flight.InfantPriceComparator;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
@@ -49,6 +56,8 @@ public class GuestServlet extends HttpServlet {
 			response.sendRedirect(View.GUEST_FLIGHT_SEARCH);
 		} else if (action.equals("book")) {
 			doGetBook(request, response);
+		} else if (action.equals("search")) {
+			doPostSearch(request, response);
 		}
 	}
 
@@ -97,10 +106,18 @@ public class GuestServlet extends HttpServlet {
 				return;
 			}
 			
+			if (request.getParameter("sortBy") != null) {
+				sort(flights, request.getParameter("sortBy"));
+			}
+			
 			request.setAttribute("flightSearchResult", flights);
 			request.setAttribute("adultNo", request.getParameter("adultNo"));
 			request.setAttribute("childNo", request.getParameter("childNo"));
 			request.setAttribute("infantNo", request.getParameter("infantNo"));
+			request.setAttribute("srcLocation", request.getParameter("srcLocation"));
+			request.setAttribute("dstLocation", request.getParameter("dstLocation"));
+			request.setAttribute("departDate", request.getParameter("departDate"));
+			
 			rd = request.getRequestDispatcher(View.GUEST_FLIGHT_SELECT);
 			rd.include(request, response);
 		} catch (FlyAwayServiceException e) {
@@ -257,6 +274,26 @@ public class GuestServlet extends HttpServlet {
 			}
 			
 			Common.viewError(e.getMessage(), request, response);
+		}
+	}
+	
+	private void sort(List<Flight> flights, String method) {
+		if (flights == null || flights.isEmpty()) {
+			return;
+		}
+		
+		if (method.equals("flightCode")) {
+			Collections.sort(flights, new FlightNumberComparator());
+		} else if (method.equals("departDt")) {
+			Collections.sort(flights, new DepartDateTimeComparator());
+		} else if (method.equals("arriveDt")) {
+			Collections.sort(flights, new ArriveDateTimeComparator());
+		} else if (method.equals("adultPrice")) {
+			Collections.sort(flights, new AdultPriceComparator());
+		} else if (method.equals("childPrice")) {
+			Collections.sort(flights, new ChildPriceComparator());
+		} else if (method.equals("infantPrice")) {
+			Collections.sort(flights, new InfantPriceComparator());
 		}
 	}
 
