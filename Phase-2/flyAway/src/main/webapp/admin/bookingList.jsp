@@ -13,7 +13,7 @@
         <h4 class="text-primary">Bookings</h4>
       </div>
       <div class="px-4">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 small">
           <thead>
             <tr>
               <th>
@@ -23,27 +23,35 @@
               </th>
               <th>
                 <span>Booking ID</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=bookingId"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Guest</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=guest"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Flight Code</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=flightCode"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>From City</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=fromCity"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>To City</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=toCity"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Depart Date/Time</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=departDt"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Arrive Date/Time</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=arriveDt"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Total ($)</span>
+                <a href="${pageContext.request.contextPath}/booking?sortBy=totalPrice"><i class="fa fa-fw fa-sort"></i></a>
               </th>
             </tr>
           </thead>

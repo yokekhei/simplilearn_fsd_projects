@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +16,14 @@ import org.hibernate.SessionFactory;
 import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.Booking;
 import org.yokekhei.fsd.p2.bean.Passenger;
+import org.yokekhei.fsd.p2.comparator.booking.ArriveDateTimeComparator;
+import org.yokekhei.fsd.p2.comparator.booking.BookingIdComparator;
+import org.yokekhei.fsd.p2.comparator.booking.DepartDateTimeComparator;
+import org.yokekhei.fsd.p2.comparator.booking.FlightNumberComparator;
+import org.yokekhei.fsd.p2.comparator.booking.FromCityComparator;
+import org.yokekhei.fsd.p2.comparator.booking.GuestNameComparator;
+import org.yokekhei.fsd.p2.comparator.booking.ToCityComparator;
+import org.yokekhei.fsd.p2.comparator.booking.TotalPriceComparator;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 
@@ -91,11 +100,39 @@ public class BookingServlet extends HttpServlet {
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			List<Booking> bookings = service.getAllBookings();
 			
+			if (request.getParameter("sortBy") != null) {
+				sort(bookings, request.getParameter("sortBy"));
+			}
+			
 			HttpSession session = request.getSession(false);
 			session.setAttribute("bookingList", bookings);
 			response.sendRedirect(View.ADMIN_BOOKING_LIST);
 		} catch (Exception e) {
 			Common.viewError(e.getMessage(), request, response);
+		}
+	}
+	
+	private void sort(List<Booking> bookings, String method) {
+		if (bookings == null || bookings.isEmpty()) {
+			return;
+		}
+		
+		if (method.equals("bookingId")) {
+			Collections.sort(bookings, new BookingIdComparator());
+		} else if (method.equals("guest")) {
+			Collections.sort(bookings, new GuestNameComparator());
+		} else if (method.equals("flightCode")) {
+			Collections.sort(bookings, new FlightNumberComparator());
+		} else if (method.equals("fromCity")) {
+			Collections.sort(bookings, new FromCityComparator());
+		} else if (method.equals("toCity")) {
+			Collections.sort(bookings, new ToCityComparator());
+		} else if (method.equals("departDt")) {
+			Collections.sort(bookings, new DepartDateTimeComparator());
+		} else if (method.equals("arriveDt")) {
+			Collections.sort(bookings, new ArriveDateTimeComparator());
+		} else if (method.equals("totalPrice")) {
+			Collections.sort(bookings, new TotalPriceComparator());
 		}
 	}
 
