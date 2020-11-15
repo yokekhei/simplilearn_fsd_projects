@@ -85,6 +85,27 @@ public class BookingDaoImpl implements BookingDao {
 		
 		return booking;
 	}
+	
+	@Override
+	public List<Booking> getBookingsByFlightId(int flightId) throws FlyAwayDaoException {
+		Session session = null;
+		List<Booking> bookings = null;
+		
+		try {
+			session = sessionFactory.withOptions()
+					.jdbcTimeZone(TimeZone.getTimeZone("UTC"))
+					.openSession();
+			bookings = session.createQuery("from Booking where flight.flightId=" + flightId).getResultList();
+		} catch (Exception e) {
+			throw new FlyAwayDaoException("Failed to retrieve bookings - " + e.getMessage());
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		
+		return bookings;
+	}
 
 	@Override
 	public void updateBooking(Booking data) throws FlyAwayDaoException {

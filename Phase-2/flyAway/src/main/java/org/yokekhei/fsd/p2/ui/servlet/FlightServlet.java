@@ -148,7 +148,7 @@ public class FlightServlet extends HttpServlet {
 					Double.parseDouble(request.getParameter("infantPrice")));
 		} catch (FlyAwayServiceException | NumberFormatException e) {
 			if (session != null) {
-				session.setAttribute("alert", "Update flight failed. Please try again.");
+				session.setAttribute("alert", "Update flight failed (" + e.getMessage() + ")");
 			} else {
 				Common.viewError(e.getMessage(), request, response);
 				return;
@@ -167,7 +167,7 @@ public class FlightServlet extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			
 			if (session != null) {
-				session.setAttribute("alert", "Delete flight failed. Please try again.");
+				session.setAttribute("alert", "Delete flight failed (" + e.getMessage() + ")");
 			} else {
 				Common.viewError(e.getMessage(), request, response);
 				return;

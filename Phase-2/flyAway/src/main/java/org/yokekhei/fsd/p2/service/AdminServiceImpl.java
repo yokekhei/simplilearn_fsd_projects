@@ -201,6 +201,13 @@ public class AdminServiceImpl implements AdminService {
 			String dstLocationCode, String departDate, String departTime, String arriveDate, String arriveTime,
 			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException {
 		try {
+			BookingDao bookingDao = new BookingDaoImpl(sessionFactory);
+			List<Booking> bookings = bookingDao.getBookingsByFlightId(flightId);
+			
+			if (!bookings.isEmpty()) {
+				throw new FlyAwayServiceException("Flight is booked");
+			}
+			
 			AirlineDao airlineDao = new AirlineDaoImpl(sessionFactory);
 			Airline airline = airlineDao.getAirline(airlineCode);
 			
@@ -231,6 +238,13 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteFlight(int flightId) throws FlyAwayServiceException {
 		try {
+			BookingDao bookingDao = new BookingDaoImpl(sessionFactory);
+			List<Booking> bookings = bookingDao.getBookingsByFlightId(flightId);
+			
+			if (!bookings.isEmpty()) {
+				throw new FlyAwayServiceException("Flight is booked");
+			}
+			
 			FlightDao dao = new FlightDaoImpl(sessionFactory);
 			dao.deleteFlight(flightId);
 		} catch (FlyAwayDaoException e) {
