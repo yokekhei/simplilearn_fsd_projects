@@ -29,6 +29,7 @@ import org.yokekhei.fsd.p2.ui.servlet.View;
 				"org.yokekhei.fsd.p2.ui.servlet.AdminLogoutServlet",
 				"org.yokekhei.fsd.p2.ui.servlet.AdminPasswordServlet",
 				"org.yokekhei.fsd.p2.ui.servlet.AirlineServlet",
+				"org.yokekhei.fsd.p2.ui.servlet.BookingServlet",
 				"org.yokekhei.fsd.p2.ui.servlet.FlightServlet",
 				"org.yokekhei.fsd.p2.ui.servlet.PlaceServlet"
 				
