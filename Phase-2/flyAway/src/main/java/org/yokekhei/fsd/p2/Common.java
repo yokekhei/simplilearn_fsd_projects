@@ -22,6 +22,7 @@ public class Common {
 	public static final String DATE_FORMAT2 = "dd MMM yyyy";
 	public static final String TIME_FORMAT = "HH:mm";
 	public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm";
+	public static final String DATETIME_FORMAT2 = "MMM dd yyyy HH:mm";
 	public static final String YEAR_FORMAT = "yy";
 	
 	public static final String DECIMAL_FORMAT_DF2 = "########0.00";
@@ -74,7 +75,11 @@ public class Common {
 	}
 	
 	public static LocalDateTime toLocalDateTime(String strDateTime) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
+		return Common.toLocalDateTime(strDateTime, DATETIME_FORMAT);
+	}
+	
+	public static LocalDateTime toLocalDateTime(String strDateTime, String format) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 		return LocalDateTime.parse(strDateTime, formatter);
 	}
 	
@@ -82,6 +87,11 @@ public class Common {
 		LocalDateTime dt = LocalDateTime.of(date, time);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
 		return dt.format(formatter);
+	}
+	
+	public static String toLocalDateTime(LocalDateTime localDateTime) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_FORMAT);
+		return localDateTime.format(formatter);
 	}
 	
 	public static String getDurationInHourMinute(String fromLocalDateTime, String toLocalDateTime) {

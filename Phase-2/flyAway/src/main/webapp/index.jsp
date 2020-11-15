@@ -138,6 +138,10 @@ try {
               Valid infant number is required.
             </div>
           </div>
+          <input type="hidden" class="form-control" name="dateNow" id="dateNow" />
+          <script>
+          	document.getElementById('dateNow').value = new Date().toString().substring(4, 21);
+          </script> 
         </div>
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Search</button>

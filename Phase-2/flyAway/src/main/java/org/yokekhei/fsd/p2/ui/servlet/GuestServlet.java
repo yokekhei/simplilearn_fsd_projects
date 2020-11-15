@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -106,7 +107,17 @@ public class GuestServlet extends HttpServlet {
 				return;
 			}
 			
-			if (request.getParameter("sortBy") != null) {
+			// filter out old flights
+			try {
+				final String dateNow = Common.toLocalDateTime(Common.toLocalDateTime(
+						request.getParameter("dateNow"), Common.DATETIME_FORMAT2));
+				flights = flights.stream().filter(
+						flight -> flight.getDepartDateTime().compareTo(dateNow) > 0)
+							.collect(Collectors.toList());
+			} catch (Exception e) {
+			}
+			
+			if (!flights.isEmpty() && request.getParameter("sortBy") != null) {
 				sort(flights, request.getParameter("sortBy"));
 			}
 			
@@ -117,6 +128,7 @@ public class GuestServlet extends HttpServlet {
 			request.setAttribute("srcLocation", request.getParameter("srcLocation"));
 			request.setAttribute("dstLocation", request.getParameter("dstLocation"));
 			request.setAttribute("departDate", request.getParameter("departDate"));
+			request.setAttribute("dateNow", request.getParameter("dateNow"));
 			
 			rd = request.getRequestDispatcher(View.GUEST_FLIGHT_SELECT);
 			rd.include(request, response);

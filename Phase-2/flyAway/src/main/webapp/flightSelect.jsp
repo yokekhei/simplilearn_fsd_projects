@@ -25,7 +25,7 @@
             </th>
             <th>
               <span>Flight Code</span>
-              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=flightCode&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=flightCode&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}&dateNow=${requestScope.dateNow}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>From City</span>
@@ -35,23 +35,23 @@
             </th>
             <th>
               <span>Depart Date/Time</span>
-              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=departDt&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=departDt&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}&dateNow=${requestScope.dateNow}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Arrive Date/Time</span>
-              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=arriveDt&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=arriveDt&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}&dateNow=${requestScope.dateNow}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Adult ($)</span>
-              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=adultPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=adultPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}&dateNow=${requestScope.dateNow}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Child ($)</span>
-              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=childPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=childPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}&dateNow=${requestScope.dateNow}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
             <th>
               <span>Infant ($)</span>
-              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=infantPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}"><i class="fa fa-fw fa-sort"></i></a>
+              <a href="${pageContext.request.contextPath}/guest?action=search&sortBy=infantPrice&srcLocation=${requestScope.srcLocation}&dstLocation=${requestScope.dstLocation}&departDate=${requestScope.departDate}&dateNow=${requestScope.dateNow}"><i class="fa fa-fw fa-sort"></i></a>
             </th>
           </tr>
         </thead>
