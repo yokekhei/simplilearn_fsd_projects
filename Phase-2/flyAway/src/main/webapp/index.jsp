@@ -2,8 +2,8 @@
 <%@page import="org.yokekhei.fsd.p2.bean.Place"%>
 <%@page import="java.util.List"%>
 <%@page import="org.hibernate.SessionFactory"%>
-<%@page import="org.yokekhei.fsd.p2.service.AdminService"%>
-<%@page import="org.yokekhei.fsd.p2.service.AdminServiceImpl"%>
+<%@page import="org.yokekhei.fsd.p2.service.GuestService"%>
+<%@page import="org.yokekhei.fsd.p2.service.GuestServiceImpl"%>
 <%@page import="org.yokekhei.fsd.p2.service.FlyAwayServiceException"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -16,7 +16,7 @@ List<Place> places;
 %>
 <%
 try {
-	AdminService service = new AdminServiceImpl(
+	GuestService service = new GuestServiceImpl(
 			(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 	places = service.getAllPlaces();
 } catch (FlyAwayServiceException e) {

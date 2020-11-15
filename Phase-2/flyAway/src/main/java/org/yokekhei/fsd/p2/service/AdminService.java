@@ -6,7 +6,6 @@ import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
 import org.yokekhei.fsd.p2.bean.Booking;
 import org.yokekhei.fsd.p2.bean.Flight;
-import org.yokekhei.fsd.p2.bean.Payment;
 import org.yokekhei.fsd.p2.bean.Place;
 
 public interface AdminService {
@@ -25,9 +24,6 @@ public interface AdminService {
 	void deleteAirline(int airlineCode) throws FlyAwayServiceException;
 	
 	List<Flight> getAllFlights() throws FlyAwayServiceException;
-	List<Flight> getFlights(String srcLocationCode, String dstLocationCode,
-			String departDate) throws FlyAwayServiceException;
-	Flight getFlight(int flightId) throws FlyAwayServiceException;
 	void addFlight(Flight data) throws FlyAwayServiceException;
 	void addFlight(int flightNo, int airlineCode,
 			String srcLocationCode, String dstLocationCode,
@@ -41,12 +37,6 @@ public interface AdminService {
 			String arriveDate, String arriveTime,
 			double adultPrice, double childPrice, double infantPrice) throws FlyAwayServiceException;
 	void deleteFlight(int flightId) throws FlyAwayServiceException;
-	
-	double getPassengerServiceCharge() throws FlyAwayServiceException;
-	double getRegulatoryServiceCharge() throws FlyAwayServiceException;
-	double getServiceTax() throws FlyAwayServiceException;
-	
-	void addPayment(Payment data) throws FlyAwayServiceException;
 	
 	List<Booking> getAllBookings() throws FlyAwayServiceException;
 	Booking getBooking(int bookingId) throws FlyAwayServiceException;

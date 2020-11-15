@@ -8,7 +8,6 @@ import org.yokekhei.fsd.p2.bean.AdminUser;
 import org.yokekhei.fsd.p2.bean.Airline;
 import org.yokekhei.fsd.p2.bean.Booking;
 import org.yokekhei.fsd.p2.bean.Flight;
-import org.yokekhei.fsd.p2.bean.Payment;
 import org.yokekhei.fsd.p2.bean.Place;
 import org.yokekhei.fsd.p2.dao.AdminUserDao;
 import org.yokekhei.fsd.p2.dao.AdminUserDaoImpl;
@@ -16,13 +15,9 @@ import org.yokekhei.fsd.p2.dao.AirlineDao;
 import org.yokekhei.fsd.p2.dao.AirlineDaoImpl;
 import org.yokekhei.fsd.p2.dao.BookingDao;
 import org.yokekhei.fsd.p2.dao.BookingDaoImpl;
-import org.yokekhei.fsd.p2.dao.FeeDao;
-import org.yokekhei.fsd.p2.dao.FeeDaoImpl;
 import org.yokekhei.fsd.p2.dao.FlightDao;
 import org.yokekhei.fsd.p2.dao.FlightDaoImpl;
 import org.yokekhei.fsd.p2.dao.FlyAwayDaoException;
-import org.yokekhei.fsd.p2.dao.PaymentDao;
-import org.yokekhei.fsd.p2.dao.PaymentDaoImpl;
 import org.yokekhei.fsd.p2.dao.PlaceDao;
 import org.yokekhei.fsd.p2.dao.PlaceDaoImpl;
 
@@ -159,35 +154,6 @@ public class AdminServiceImpl implements AdminService {
 		
 		return flights;
 	}
-	
-	@Override
-	public List<Flight> getFlights(String srcLocationCode, String dstLocationCode, String departDate)
-			throws FlyAwayServiceException {
-		List<Flight> flights = null;
-		
-		try {
-			FlightDao dao = new FlightDaoImpl(sessionFactory);
-			flights = dao.getFlights(srcLocationCode, dstLocationCode, departDate);
-		} catch (FlyAwayDaoException e) {
-			throw new FlyAwayServiceException("Failed to get flights - " + e.getMessage());
-		}
-		
-		return flights;
-	}
-	
-	@Override
-	public Flight getFlight(int flightId) throws FlyAwayServiceException {
-		Flight flight = null;
-		
-		try {
-			FlightDao dao = new FlightDaoImpl(sessionFactory);
-			flight = dao.getFlight(flightId);
-		} catch (FlyAwayDaoException e) {
-			throw new FlyAwayServiceException("Failed to get flight - " + e.getMessage());
-		}
-		
-		return flight;
-	}
 
 	@Override
 	public void addFlight(Flight data) throws FlyAwayServiceException {
@@ -269,46 +235,6 @@ public class AdminServiceImpl implements AdminService {
 			dao.deleteFlight(flightId);
 		} catch (FlyAwayDaoException e) {
 			throw new FlyAwayServiceException("Failed to delete flight - " + e.getMessage());
-		}
-	}
-
-	@Override
-	public double getPassengerServiceCharge() throws FlyAwayServiceException {
-		try {
-			FeeDao dao = new FeeDaoImpl(sessionFactory);
-			return dao.getPassengerServiceCharge();
-		} catch (FlyAwayDaoException e) {
-			throw new FlyAwayServiceException("Failed to get passenger service charge - " + e.getMessage());
-		}
-	}
-
-	@Override
-	public double getRegulatoryServiceCharge() throws FlyAwayServiceException {
-		try {
-			FeeDao dao = new FeeDaoImpl(sessionFactory);
-			return dao.getRegulatoryServiceCharge();
-		} catch (FlyAwayDaoException e) {
-			throw new FlyAwayServiceException("Failed to get regulatory service charge - " + e.getMessage());
-		}
-	}
-
-	@Override
-	public double getServiceTax() throws FlyAwayServiceException {
-		try {
-			FeeDao dao = new FeeDaoImpl(sessionFactory);
-			return dao.getServiceTax();
-		} catch (FlyAwayDaoException e) {
-			throw new FlyAwayServiceException("Failed to get service tax - " + e.getMessage());
-		}
-	}
-
-	@Override
-	public void addPayment(Payment data) throws FlyAwayServiceException {
-		try {
-			PaymentDao dao = new PaymentDaoImpl(sessionFactory);
-			dao.addPayment(data);
-		} catch (FlyAwayDaoException e) {
-			throw new FlyAwayServiceException("Failed to add payment - " + e.getMessage());
 		}
 	}
 

@@ -28,9 +28,9 @@ import org.yokekhei.fsd.p2.comparator.flight.ChildPriceComparator;
 import org.yokekhei.fsd.p2.comparator.flight.DepartDateTimeComparator;
 import org.yokekhei.fsd.p2.comparator.flight.FlightNumberComparator;
 import org.yokekhei.fsd.p2.comparator.flight.InfantPriceComparator;
-import org.yokekhei.fsd.p2.service.AdminService;
-import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
+import org.yokekhei.fsd.p2.service.GuestService;
+import org.yokekhei.fsd.p2.service.GuestServiceImpl;
 
 /**
  * Servlet implementation class GuestServlet
@@ -93,7 +93,7 @@ public class GuestServlet extends HttpServlet {
 		}
 		
 		try {
-			AdminService service = new AdminServiceImpl(
+			GuestService service = new GuestServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			List<Flight> flights = service.getFlights(request.getParameter("srcLocation"),
 					request.getParameter("dstLocation"),
@@ -148,7 +148,7 @@ public class GuestServlet extends HttpServlet {
 	
 	private void doPostRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			AdminService service = new AdminServiceImpl(
+			GuestService service = new GuestServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			Flight flight = service.getFlight(Integer.parseInt(request.getParameter("id")));
 			
@@ -248,7 +248,7 @@ public class GuestServlet extends HttpServlet {
 					b.getTotalAdultFare() + b.getTotalChildFare() + b.getTotalInfantFare() +
 					b.getTotalPassengerServiceCharge() + b.getTotalServiceTax() +
 					b.getTotalRegulatoryServiceCharge());
-			AdminService service = new AdminServiceImpl(
+			GuestService service = new GuestServiceImpl(
 					(SessionFactory) (getServletContext().getAttribute("hbmSessionFactory")));
 			service.addPayment(p);
 			
