@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="px-4">
-        <table class="table table-hover mb-0">
+        <table class="table table-hover mb-0 small">
           <thead>
             <tr>
               <th>
@@ -29,30 +29,39 @@
               </th>
               <th>
                 <span>Flight No.</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=flightNo"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Airline</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=flightCode"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>From City</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=fromCity"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>To City</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=toCity"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Depart Date/Time</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=departDt"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Arrive Date/Time</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=arriveDt"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Adult ($)</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=adultPrice"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Child ($)</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=childPrice"><i class="fa fa-fw fa-sort"></i></a>
               </th>
               <th>
                 <span>Infant ($)</span>
+                <a href="${pageContext.request.contextPath}/flight?sortBy=infantPrice"><i class="fa fa-fw fa-sort"></i></a>
               </th>
             </tr>
           </thead>

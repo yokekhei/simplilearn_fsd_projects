@@ -1,6 +1,7 @@
 package org.yokekhei.fsd.p2.ui.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,6 +16,15 @@ import org.yokekhei.fsd.p2.Common;
 import org.yokekhei.fsd.p2.bean.Airline;
 import org.yokekhei.fsd.p2.bean.Flight;
 import org.yokekhei.fsd.p2.bean.Place;
+import org.yokekhei.fsd.p2.comparator.flight.AdultPriceComparator;
+import org.yokekhei.fsd.p2.comparator.flight.ArriveDateTimeComparator;
+import org.yokekhei.fsd.p2.comparator.flight.ChildPriceComparator;
+import org.yokekhei.fsd.p2.comparator.flight.DepartDateTimeComparator;
+import org.yokekhei.fsd.p2.comparator.flight.FlightCodeComparator;
+import org.yokekhei.fsd.p2.comparator.flight.FlightNoComparator;
+import org.yokekhei.fsd.p2.comparator.flight.FromCityComparator;
+import org.yokekhei.fsd.p2.comparator.flight.InfantPriceComparator;
+import org.yokekhei.fsd.p2.comparator.flight.ToCityComparator;
 import org.yokekhei.fsd.p2.service.AdminService;
 import org.yokekhei.fsd.p2.service.AdminServiceImpl;
 import org.yokekhei.fsd.p2.service.FlyAwayServiceException;
@@ -45,6 +55,10 @@ public class FlightServlet extends HttpServlet {
 			List<Flight> flights = service.getAllFlights();
 			List<Place> places = service.getAllPlaces();
 			List<Airline> airlines = service.getAllAirlines();
+			
+			if (request.getParameter("sortBy") != null) {
+				sort(flights, request.getParameter("sortBy"));
+			}
 			
 			HttpSession session = request.getSession(false);
 			session.setAttribute("flightList", flights);
@@ -195,6 +209,32 @@ public class FlightServlet extends HttpServlet {
 		}
 		
 		return true;
+	}
+	
+	private void sort(List<Flight> flights, String method) {
+		if (flights == null || flights.isEmpty()) {
+			return;
+		}
+		
+		if (method.equals("flightNo")) {
+			Collections.sort(flights, new FlightNoComparator());
+		} else if (method.equals("flightCode")) {
+			Collections.sort(flights, new FlightCodeComparator());
+		} else if (method.equals("fromCity")) {
+			Collections.sort(flights, new FromCityComparator());
+		} else if (method.equals("toCity")) {
+			Collections.sort(flights, new ToCityComparator());
+		} else if (method.equals("departDt")) {
+			Collections.sort(flights, new DepartDateTimeComparator());
+		} else if (method.equals("arriveDt")) {
+			Collections.sort(flights, new ArriveDateTimeComparator());
+		} else if (method.equals("adultPrice")) {
+			Collections.sort(flights, new AdultPriceComparator());
+		} else if (method.equals("childPrice")) {
+			Collections.sort(flights, new ChildPriceComparator());
+		} else if (method.equals("infantPrice")) {
+			Collections.sort(flights, new InfantPriceComparator());
+		}
 	}
 	
 }
