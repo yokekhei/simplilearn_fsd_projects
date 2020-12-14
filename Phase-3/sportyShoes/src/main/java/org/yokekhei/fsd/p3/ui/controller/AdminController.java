@@ -22,7 +22,7 @@ import org.yokekhei.fsd.p3.ui.View;
 public class AdminController {
 	
 	@Autowired
-	private AdminService adminService;
+	private AdminService service;
 	
 	@GetMapping("/admin")
 	public String home(Model model) {
@@ -42,7 +42,7 @@ public class AdminController {
 			return View.V_ADMIN_SIGNIN;
 		}
 		
-		User loginUser = adminService.login(user.getEmail(), user.getPassword());
+		User loginUser = service.login(user.getEmail(), user.getPassword());
 		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("loginUser", loginUser);

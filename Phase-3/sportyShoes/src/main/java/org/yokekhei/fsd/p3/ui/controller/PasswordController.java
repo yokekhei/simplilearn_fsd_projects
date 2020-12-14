@@ -23,7 +23,7 @@ import org.yokekhei.fsd.p3.ui.View;
 public class PasswordController {
 	
 	@Autowired
-	private AdminService adminService;
+	private AdminService service;
 
 	@GetMapping("/admin/password")
 	public String entry(Model model,
@@ -60,7 +60,7 @@ public class PasswordController {
 		} else if (user.getPassword().equals(loginUser.getPassword())) {
 			session.setAttribute("changePasswordStatus", "same");
 		} else {
-			loginUser = adminService.changePassword(loginUser, user.getPassword());
+			loginUser = service.changePassword(loginUser, user.getPassword());
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("changePasswordStatus", "success");
 		}
