@@ -1,7 +1,5 @@
 package org.yokekhei.fsd.p3.ui.controller;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -37,7 +35,7 @@ public class AdminController {
 	public String loginForm(@Valid @ModelAttribute("user") User user,
 			BindingResult result,
 			ModelMap modelMap,
-			HttpServletRequest request) throws SportyShoesServiceException, IOException {
+			HttpServletRequest request) throws SportyShoesServiceException {
 		if (result.hasErrors()) {
 			modelMap.addAttribute("user", new User(user.getEmail()));
 			modelMap.addAttribute("authMsg", result.getAllErrors().get(0).getDefaultMessage());
