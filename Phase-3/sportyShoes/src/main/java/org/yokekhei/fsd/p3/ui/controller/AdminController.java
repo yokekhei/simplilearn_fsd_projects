@@ -50,6 +50,14 @@ public class AdminController {
 		return "redirect:/" + View.C_ADMIN_CATEGORY;
 	}
 	
+	@GetMapping("/admin/logout")
+	public String logout(Model model, HttpServletRequest request) {
+		request.getSession(false).invalidate();
+		model.addAttribute("user", new User());
+		
+		return View.V_ADMIN_SIGNIN;
+	}
+	
 	@ExceptionHandler(SportyShoesServiceException.class)
 	public String handlerException(SportyShoesServiceException exception, Model model) {
 		model.addAttribute("user", new User());
