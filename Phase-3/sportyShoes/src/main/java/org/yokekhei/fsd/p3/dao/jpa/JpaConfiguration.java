@@ -12,4 +12,9 @@ public class JpaConfiguration {
 		return Mappers.getMapper(UserMapper.class);
 	}
 	
+	@Bean
+	public CategoryMapper categoryMapper() {
+		return Mappers.getMapper(CategoryMapper.class);
+	}
+	
 }

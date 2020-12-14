@@ -18,3 +18,10 @@ CREATE TABLE Users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_email)
 ) ENGINE=INNODB;
+DROP TABLE IF EXISTS Categories;
+CREATE TABLE Categories (
+    category_id BIGINT NOT NULL AUTO_INCREMENT,
+    category_name VARCHAR(255) NOT NULL,
+    category_desc VARCHAR(255) NOT NULL,
+    PRIMARY KEY (category_id)
+) ENGINE=INNODB;
