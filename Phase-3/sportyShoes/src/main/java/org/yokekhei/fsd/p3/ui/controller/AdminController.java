@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.yokekhei.fsd.p3.entity.User;
+import org.yokekhei.fsd.p3.dto.User;
 import org.yokekhei.fsd.p3.service.AdminService;
 import org.yokekhei.fsd.p3.service.SportyShoesServiceException;
 import org.yokekhei.fsd.p3.ui.View;

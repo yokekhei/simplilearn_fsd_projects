@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.yokekhei.fsd.p3.Common;
 import org.yokekhei.fsd.p3.dao.UserDao;
-import org.yokekhei.fsd.p3.entity.User;
+import org.yokekhei.fsd.p3.dto.User;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -23,7 +23,7 @@ public class AdminServiceImpl implements AdminService {
 			throw new SportyShoesServiceException("Invalid credentials");
 		} else if (!user.getRole().equals(Common.ROLE_ADMIN)) {
 			throw new SportyShoesServiceException("Insufficient administrator privileges");
-		} else if (!user.isEnabled()) {
+		} else if (!user.getEnabled()) {
 			throw new SportyShoesServiceException("Administrator permission is disabled");
 		}
 	}

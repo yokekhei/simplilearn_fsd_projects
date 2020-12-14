@@ -6,21 +6,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "users")
 public class User {
 
 	@Id
-	@NotEmpty(message = "Email must not empty")
 	@Column(name = "user_email")
 	private String email;
 	
-	@NotEmpty(message = "Password must not empty")
-	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
-	message = "At least one upper case, one lower case, one digit and one special character, minimum eight in length")
 	@Column(name = "user_password", nullable = false)
 	private String password;
 	
@@ -43,21 +37,6 @@ public class User {
 	private Boolean enabled;
 	
 	public User() {
-	}
-	
-	public User(String email) {
-		this.email = email;
-	}
-
-	public User(String email, String password, String firstName, String lastName, LocalDate dob, String gender,
-			String role) {
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dob = dob;
-		this.gender = gender;
-		this.role = role;
 	}
 	
 	public String getEmail() {
@@ -116,7 +95,7 @@ public class User {
 		this.role = role;
 	}
 
-	public Boolean isEnabled() {
+	public Boolean getEnabled() {
 		return enabled;
 	}
 

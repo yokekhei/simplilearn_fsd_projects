@@ -1,6 +1,6 @@
 package org.yokekhei.fsd.p3.dao;
 
-import org.yokekhei.fsd.p3.entity.User;
+import org.yokekhei.fsd.p3.dto.User;
 
 public interface UserDao {
 
