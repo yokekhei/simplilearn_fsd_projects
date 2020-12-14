@@ -5,8 +5,7 @@ import org.mapstruct.Mapping;
 
 @Mapper
 public interface UserMapper {
-
-	@Mapping(target = "enabled", ignore = true)
+	
 	org.yokekhei.fsd.p3.entity.User toEntity(org.yokekhei.fsd.p3.dto.User dto);
 	
 	@Mapping(target = "confirmPassword", ignore = true)

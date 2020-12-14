@@ -6,8 +6,10 @@ public class View {
 	
 	public static final String V_ADMIN_HOME = "admin";
 	public static final String V_ADMIN_SIGNIN = "admin/index";
+	public static final String V_ADMIN_CHANGE_PASSWORD = "admin/change_password";
 	public static final String V_ADMIN_CATEGORY_LIST = "admin/category_list";
 	
 	public static final String C_ADMIN_CATEGORY = "admin/category";
+	public static final String C_ADMIN_PASSWORD = "admin/password";
 	
 }

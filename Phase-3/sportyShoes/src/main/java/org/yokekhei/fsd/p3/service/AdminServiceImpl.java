@@ -16,16 +16,38 @@ public class AdminServiceImpl implements AdminService {
 	private UserDao userDao;
 	
 	@Override
-	public void login(String email, String password) throws SportyShoesServiceException {
-		User user = userDao.getUser(email, password);
+	public User login(String email, String password) throws SportyShoesServiceException {
+		User user = null;
 		
-		if (user == null) {
-			throw new SportyShoesServiceException("Invalid credentials");
-		} else if (!user.getRole().equals(Common.ROLE_ADMIN)) {
-			throw new SportyShoesServiceException("Insufficient administrator privileges");
-		} else if (!user.getEnabled()) {
-			throw new SportyShoesServiceException("Administrator permission is disabled");
+		try {
+			user = userDao.getUser(email, password);
+			
+			if (user == null) {
+				throw new SportyShoesServiceException("Invalid credentials");
+			} else if (!user.getRole().equals(Common.ROLE_ADMIN)) {
+				throw new SportyShoesServiceException("Insufficient administrator privileges");
+			} else if (!user.getEnabled()) {
+				throw new SportyShoesServiceException("Administrator permission is disabled");
+			}
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
 		}
+		
+		return user;
+	}
+
+	@Override
+	public User changePassword(User user, String newPassword) throws SportyShoesServiceException {
+		User savedUser = null;
+		
+		try {
+			user.setPassword(newPassword);
+			savedUser = userDao.save(user);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return savedUser;
 	}
 
 }

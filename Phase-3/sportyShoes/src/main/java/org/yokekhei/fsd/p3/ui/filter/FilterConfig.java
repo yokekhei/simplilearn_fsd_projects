@@ -12,7 +12,8 @@ public class FilterConfig {
 	public FilterRegistrationBean<AuthenticationFilter> authenticationFilter() {
         FilterRegistrationBean<AuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new AuthenticationFilter());
-        registrationBean.addUrlPatterns("/" + View.C_ADMIN_CATEGORY + "/*");
+        registrationBean.addUrlPatterns("/" + View.C_ADMIN_CATEGORY + "/*",
+        		"/" + View.C_ADMIN_PASSWORD + "/*");
 
         return registrationBean;
 

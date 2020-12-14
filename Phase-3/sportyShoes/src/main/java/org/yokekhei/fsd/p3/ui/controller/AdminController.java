@@ -42,10 +42,10 @@ public class AdminController {
 			return View.V_ADMIN_SIGNIN;
 		}
 		
-		adminService.login(user.getEmail(), user.getPassword());
+		User loginUser = adminService.login(user.getEmail(), user.getPassword());
 		
 		HttpSession session = request.getSession(true);
-		session.setAttribute("loginUser", user);
+		session.setAttribute("loginUser", loginUser);
 		
 		return "redirect:/" + View.C_ADMIN_CATEGORY;
 	}
