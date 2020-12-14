@@ -1,0 +1,8 @@
+body {
+  min-height: 39rem;
+  padding-top: 1rem;
+}
+
+main > .container {
+  padding: 60px 15px 0;
+}
