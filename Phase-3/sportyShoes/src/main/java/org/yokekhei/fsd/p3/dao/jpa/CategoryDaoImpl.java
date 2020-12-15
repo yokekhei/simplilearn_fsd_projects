@@ -70,7 +70,6 @@ public class CategoryDaoImpl implements CategoryDao {
 	@Override
 	@Transactional
 	public void remove(Long id) throws SportyShoesDaoException {
-		
 		try {
 			repository.deleteById(id);
 		} catch (Exception e) {
