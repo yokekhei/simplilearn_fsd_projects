@@ -21,7 +21,7 @@
   </div>
   <div class="form-row">
     <div class="col">
-      <form:input path="dobString" id="dob" autocomplete="off" placeholder="DD-MM-YYYY" required="required" />
+      <form:input path="dobString" id="dob" autocomplete="off" placeholder="DOB (DD-MM-YYYY)" required="required" />
       <script>
       	$('#dob${i}').datepicker({
       		format: 'dd-mm-yyyy',
