@@ -13,7 +13,8 @@ public class FilterConfig {
         FilterRegistrationBean<AuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new AuthenticationFilter());
         registrationBean.addUrlPatterns("/" + View.C_ADMIN_CATEGORY + "/*",
-        		"/" + View.C_ADMIN_PASSWORD + "/*");
+        		"/" + View.C_ADMIN_PASSWORD + "/*",
+        		"/" + View.C_ADMIN_PRODUCT + "/*");
 
         return registrationBean;
 

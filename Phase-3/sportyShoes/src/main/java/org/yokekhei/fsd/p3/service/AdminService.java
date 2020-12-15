@@ -3,6 +3,7 @@ package org.yokekhei.fsd.p3.service;
 import java.util.List;
 
 import org.yokekhei.fsd.p3.dto.Category;
+import org.yokekhei.fsd.p3.dto.Product;
 import org.yokekhei.fsd.p3.dto.User;
 
 public interface AdminService {
@@ -14,5 +15,10 @@ public interface AdminService {
 	void addCategory(Category data) throws SportyShoesServiceException;
 	void updateCategory(Category data) throws SportyShoesServiceException;
 	void deleteCategory(Long id) throws SportyShoesServiceException;
+	
+	List<Product> getAllProducts() throws SportyShoesServiceException;
+	void addProduct(Product data) throws SportyShoesServiceException;
+	void updateProduct(Product data) throws SportyShoesServiceException;
+	void deleteProduct(Long id) throws SportyShoesServiceException;
 	
 }

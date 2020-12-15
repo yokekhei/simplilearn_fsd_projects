@@ -17,4 +17,9 @@ public class JpaConfiguration {
 		return Mappers.getMapper(CategoryMapper.class);
 	}
 	
+	@Bean
+	public ProductMapper productMapper() {
+		return Mappers.getMapper(ProductMapper.class);
+	}
+	
 }

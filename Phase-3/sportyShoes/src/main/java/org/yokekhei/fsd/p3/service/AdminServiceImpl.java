@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.yokekhei.fsd.p3.Common;
 import org.yokekhei.fsd.p3.dao.CategoryDao;
+import org.yokekhei.fsd.p3.dao.ProductDao;
 import org.yokekhei.fsd.p3.dao.UserDao;
 import org.yokekhei.fsd.p3.dto.Category;
+import org.yokekhei.fsd.p3.dto.Product;
 import org.yokekhei.fsd.p3.dto.User;
 
 @Service
@@ -22,6 +24,10 @@ public class AdminServiceImpl implements AdminService {
 	@Resource
 	@Qualifier("jpa")
 	private CategoryDao categoryDao;
+	
+	@Resource
+	@Qualifier("jpa")
+	private ProductDao productDao;
 	
 	@Override
 	public User login(String email, String password) throws SportyShoesServiceException {
@@ -92,7 +98,55 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteCategory(Long id) throws SportyShoesServiceException {
 		try {
-			categoryDao.remove(id);;
+			categoryDao.remove(id);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public List<Product> getAllProducts() throws SportyShoesServiceException {
+		List<Product> products = null;
+		
+		try {
+			products = productDao.getAllProducts();
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return products;
+	}
+
+	@Override
+	public void addProduct(Product data) throws SportyShoesServiceException {
+		try {
+			if (data.getCategory() == null) {
+				data.setCategory(categoryDao.getCategory(data.getCategoryId()));
+			}
+			
+			productDao.save(data);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void updateProduct(Product data) throws SportyShoesServiceException {
+		try {
+			if (data.getCategory() == null) {
+				data.setCategory(categoryDao.getCategory(data.getCategoryId()));
+			}
+			
+			productDao.update(data);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+	}
+
+	@Override
+	public void deleteProduct(Long id) throws SportyShoesServiceException {
+		try {
+			productDao.remove(id);
 		} catch (Exception e) {
 			throw new SportyShoesServiceException(e.getMessage());
 		}
