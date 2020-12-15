@@ -56,7 +56,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		try {
 			user.setPassword(newPassword);
-			savedUser = userDao.save(user);
+			savedUser = userDao.update(user);
 		} catch (Exception e) {
 			throw new SportyShoesServiceException(e.getMessage());
 		}

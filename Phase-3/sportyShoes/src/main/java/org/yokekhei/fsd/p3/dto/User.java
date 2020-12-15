@@ -17,7 +17,7 @@ public class User {
 	@NotNull
 	@NotEmpty(message = "Password must not empty")
 	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
-	message = "At least one upper case, one lower case, one digit and one special character, minimum eight in length")
+	message = "Password must have at least one upper case, one lower case, one digit and one special character, minimum eight in length")
 	private String password;
 	
 	@Pattern(regexp = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
@@ -27,6 +27,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private LocalDate dob;
+	private String dobString;
 	private String gender;
 	private String role;
 	private Boolean enabled;
@@ -96,6 +97,14 @@ public class User {
 
 	public void setDob(LocalDate dob) {
 		this.dob = dob;
+	}
+
+	public String getDobString() {
+		return dobString;
+	}
+
+	public void setDobString(String dobString) {
+		this.dobString = dobString;
 	}
 
 	public String getGender() {
