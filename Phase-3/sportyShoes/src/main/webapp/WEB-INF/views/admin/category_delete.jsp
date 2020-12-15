@@ -24,7 +24,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <form:form action="${pageContext.request.contextPath}/admin/category?action=delete" method="post" class="needs-validation" modelAttribute="category">
+        <form:form action="${pageContext.request.contextPath}/admin/category?action=delete" method="post" modelAttribute="category">
           <div class="row" style="display:none;">
             <div class="col">
               <form:label path="id" for="categoryId">Category ID</form:label>
