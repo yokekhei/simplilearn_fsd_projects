@@ -19,5 +19,7 @@ public class View {
 	public static final String C_ADMIN_PASSWORD = "admin/password";
 	public static final String C_ADMIN_PRODUCT = "admin/product";
 	public static final String C_ADMIN_USER_REPORT = "admin/report/user";
+
+	public static final String DEFAULT_CATALOG_PRODUCT_IMAGE = "static/images/default.png";
 	
 }

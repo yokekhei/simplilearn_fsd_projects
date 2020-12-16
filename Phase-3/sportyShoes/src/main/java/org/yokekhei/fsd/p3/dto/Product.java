@@ -17,7 +17,7 @@ public class Product {
 	
 	@NotNull
 	@NotEmpty(message = "Product name must not empty")
-	@Size(max = 30, message = "Product name length must be less than or equal to 30")
+	@Size(max = 50, message = "Product name length must be less than or equal to 50")
 	private String name;
 	
 	@NotNull

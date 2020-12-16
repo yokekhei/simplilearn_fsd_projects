@@ -1,11 +1,17 @@
 package org.yokekhei.fsd.p3.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.yokekhei.fsd.p3.Common;
+import org.yokekhei.fsd.p3.dao.CategoryDao;
+import org.yokekhei.fsd.p3.dao.ProductDao;
 import org.yokekhei.fsd.p3.dao.UserDao;
+import org.yokekhei.fsd.p3.dto.Category;
+import org.yokekhei.fsd.p3.dto.Product;
 import org.yokekhei.fsd.p3.dto.User;
 
 @Service
@@ -14,6 +20,14 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	@Qualifier("jpa")
 	private UserDao userDao;
+	
+	@Resource
+	@Qualifier("jpa")
+	private CategoryDao categoryDao;
+	
+	@Resource
+	@Qualifier("jpa")
+	private ProductDao productDao;
 	
 	@Override
 	public User login(String email, String password) throws SportyShoesServiceException {
@@ -59,6 +73,51 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return savedUser;
+	}
+
+	@Override
+	public List<Category> getAllCategories() throws SportyShoesServiceException {
+		List<Category> categories = null;
+		
+		try {
+			categories = categoryDao.getAllCategories();
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return categories;
+	}
+
+	@Override
+	public List<Product> getProductsByCategory(Long categoryId) throws SportyShoesServiceException {
+		List<Product> products = null;
+		
+		try {
+			Category category = categoryDao.getCategory(categoryId);
+			
+			if (category == null) {
+				throw new SportyShoesServiceException("Invalid category id " + categoryId);
+			}
+			
+			products = productDao.getProductsByCategory(category);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return products;
+	}
+
+	@Override
+	public byte[] getProductPicture(Long productId) throws SportyShoesServiceException {
+		byte[] picture = null;
+		
+		try {
+			picture = productDao.getProductPicture(productId);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return picture;
 	}
 
 }

@@ -9,16 +9,24 @@ import org.yokekhei.fsd.p3.ui.View;
 public class FilterConfig {
 
 	@Bean
-	public FilterRegistrationBean<AuthenticationFilter> authenticationFilter() {
-        FilterRegistrationBean<AuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new AuthenticationFilter());
+	public FilterRegistrationBean<AdminAuthenticationFilter> adminAuthenticationFilter() {
+        FilterRegistrationBean<AdminAuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new AdminAuthenticationFilter());
         registrationBean.addUrlPatterns("/" + View.C_ADMIN_CATEGORY + "/*",
         		"/" + View.C_ADMIN_PASSWORD + "/*",
         		"/" + View.C_ADMIN_PRODUCT + "/*",
         		"/" + View.C_ADMIN_USER_REPORT + "/*");
 
         return registrationBean;
+    }
+	
+	@Bean
+	public FilterRegistrationBean<UserAuthenticationFilter> userAuthenticationFilter() {
+        FilterRegistrationBean<UserAuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new UserAuthenticationFilter());
+        registrationBean.addUrlPatterns("/" + View.C_USER_CATALOG + "/*");
 
+        return registrationBean;
     }
 	
 }

@@ -13,9 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import org.yokekhei.fsd.p3.ui.View;
 
-public class AuthenticationFilter implements Filter {
+public class AdminAuthenticationFilter implements Filter {
 	
-    public AuthenticationFilter() {
+    public AdminAuthenticationFilter() {
     }
     
 	public void init(FilterConfig fConfig) throws ServletException {

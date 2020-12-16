@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.yokekhei.fsd.p3.dao.ProductDao;
 import org.yokekhei.fsd.p3.dao.SportyShoesDaoException;
+import org.yokekhei.fsd.p3.dto.Category;
 import org.yokekhei.fsd.p3.dto.Product;
 
 @Repository
@@ -22,6 +23,9 @@ public class ProductDaoImpl implements ProductDao {
 	
 	@Resource
 	private ProductMapper mapper;
+	
+	@Resource
+	private CategoryMapper categoryMapper;
 	
 	@Override
 	public List<Product> getAllProducts() throws SportyShoesDaoException {
@@ -115,6 +119,39 @@ public class ProductDaoImpl implements ProductDao {
 		} catch (Exception e) {
 			throw new SportyShoesDaoException(e.getMessage());
 		}
+	}
+
+	@Override
+	public List<Product> getProductsByCategory(Category category) throws SportyShoesDaoException {
+		List<Product> products = null;
+		
+		try {
+			org.yokekhei.fsd.p3.entity.Category categoryEntity = categoryMapper.toEntity(category);
+			
+			products = repository.findByCategory(categoryEntity)
+					.stream()
+					.map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return products;
+	}
+
+	@Override
+	public byte[] getProductPicture(Long id) throws SportyShoesDaoException {
+		byte[] picture = null;
+		
+		try {
+			org.yokekhei.fsd.p3.entity.Product product =
+					repository.findWithPictureAttachedById(id);
+			picture = product.getPicture();
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return picture;
 	}
 
 }
