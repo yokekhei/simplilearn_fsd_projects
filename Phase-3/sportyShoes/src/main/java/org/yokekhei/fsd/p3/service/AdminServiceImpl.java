@@ -1,6 +1,8 @@
 package org.yokekhei.fsd.p3.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -62,6 +64,65 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 		return savedUser;
+	}
+	
+	@Override
+	public List<User> getAllUsers() throws SportyShoesServiceException {
+		List<User> users = null;
+		
+		try {
+			users = userDao.getAllUsers();
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return users;
+	}
+	
+	@Override
+	public List<User> getUsersWithUserRole() throws SportyShoesServiceException {
+		List<User> users = null;
+		
+		try {
+			users = userDao.getUsersWithUserRole();
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return users;
+	}
+	
+	@Override
+	public List<User> getAllUsersWithUserRoleCreatedBetween(LocalDateTime start, LocalDateTime end)
+			throws SportyShoesServiceException {
+		List<User> users = null;
+		
+		try {
+			users = userDao.getAllUsersCreatedBetween(start, end)
+						.stream()
+						.filter(user -> user.getRole().equals(Common.ROLE_USER))
+						.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return users;
+	}
+	
+	@Override
+	public List<User> getUsersByFirstName(String firstName) throws SportyShoesServiceException {
+		List<User> users = null;
+		
+		try {
+			users = userDao.getUsersByFirstName(firstName)
+						.stream()
+						.filter(user -> user.getRole().equals(Common.ROLE_USER))
+						.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return users;
 	}
 
 	@Override

@@ -1,11 +1,14 @@
 package org.yokekhei.fsd.p3.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import org.yokekhei.fsd.p3.Common;
 
 public class User {
 	
@@ -31,6 +34,8 @@ public class User {
 	private String gender;
 	private String role;
 	private Boolean enabled;
+	private LocalDateTime createdDateTime;
+	private String createdDateString;
 	
 	public User() {
 	}
@@ -100,6 +105,10 @@ public class User {
 	}
 
 	public String getDobString() {
+		if (dobString == null && dob != null) {
+			dobString = Common.toLocalDateString(dob);
+		}
+		
 		return dobString;
 	}
 
@@ -131,11 +140,31 @@ public class User {
 		this.enabled = enabled;
 	}
 
+	public LocalDateTime getCreatedDateTime() {
+		return createdDateTime;
+	}
+
+	public void setCreatedDateTime(LocalDateTime createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
+
+	public String getCreatedDateString() {
+		if (createdDateString == null && createdDateTime != null) {
+			createdDateString = Common.toLocalDateString(createdDateTime);
+		}
+		
+		return createdDateString;
+	}
+
+	public void setCreatedDateString(String createdDateString) {
+		this.createdDateString = createdDateString;
+	}
+
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", confirmPassword=" + confirmPassword
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", dob=" + dob + ", gender=" + gender
-				+ ", role=" + role + ", enabled=" + enabled + "]";
+				+ ", role=" + role + ", enabled=" + enabled + ", createdDateTime=" + createdDateTime + "]";
 	}
 	
 }

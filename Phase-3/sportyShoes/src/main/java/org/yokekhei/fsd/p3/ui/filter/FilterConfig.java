@@ -14,7 +14,8 @@ public class FilterConfig {
         registrationBean.setFilter(new AuthenticationFilter());
         registrationBean.addUrlPatterns("/" + View.C_ADMIN_CATEGORY + "/*",
         		"/" + View.C_ADMIN_PASSWORD + "/*",
-        		"/" + View.C_ADMIN_PRODUCT + "/*");
+        		"/" + View.C_ADMIN_PRODUCT + "/*",
+        		"/" + View.C_ADMIN_USER_REPORT + "/*");
 
         return registrationBean;
 

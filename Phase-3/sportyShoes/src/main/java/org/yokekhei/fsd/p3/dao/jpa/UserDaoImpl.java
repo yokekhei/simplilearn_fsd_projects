@@ -1,5 +1,9 @@
 package org.yokekhei.fsd.p3.dao.jpa;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -82,5 +86,85 @@ public class UserDaoImpl implements UserDao {
 		
 		return savedUser;
 	}
+	
+	@Override
+	public User getUser(String email) throws SportyShoesDaoException {
+		User user = null;
+		
+		try {
+			user = repository.findById(email)
+					.map(entity -> mapper.toDto(entity))
+					.orElse(null);
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return user;
+	}
 
+	@Override
+	public List<User> getAllUsers() throws SportyShoesDaoException {
+		List<User> users = null;
+		
+		try {
+			users = repository.findAll()
+					.stream()
+					.map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return users;
+	}
+
+	@Override
+	public List<User> getUsersWithUserRole() throws SportyShoesDaoException {
+		List<User> users = null;
+		
+		try {
+			users = repository.usersWithUserRole()
+					.stream()
+					.map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return users;
+	}
+
+	@Override
+	public List<User> getAllUsersCreatedBetween(LocalDateTime start, LocalDateTime end)
+			throws SportyShoesDaoException {
+		List<User> users = null;
+		
+		try {
+			users = repository.findAllByCreatedDateTimeBetween(start, end)
+					.stream()
+					.map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return users;
+	}
+
+	@Override
+	public List<User> getUsersByFirstName(String firstName) throws SportyShoesDaoException {
+		List<User> users = null;
+		
+		try {
+			users = repository.findByFirstNameIgnoreCaseStartingWith(firstName)
+					.stream()
+					.map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return users;
+	}
+	
 }
