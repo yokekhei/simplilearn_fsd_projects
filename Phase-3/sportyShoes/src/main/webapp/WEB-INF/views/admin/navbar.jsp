@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <body class="d-flex flex-column h-100">
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/logo.png" alt="" width="54" height="47"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
