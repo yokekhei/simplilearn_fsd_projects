@@ -15,5 +15,6 @@ public interface UserService {
 	
 	List<Product> getProductsByCategory(Long categoryId) throws SportyShoesServiceException;
 	byte[] getProductPicture(Long productId) throws SportyShoesServiceException;
+	Product getProduct(Long productId) throws SportyShoesServiceException;
 	
 }

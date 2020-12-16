@@ -120,4 +120,17 @@ public class UserServiceImpl implements UserService {
 		return picture;
 	}
 
+	@Override
+	public Product getProduct(Long productId) throws SportyShoesServiceException {
+		Product product = null;
+		
+		try {
+			product = productDao.getProduct(productId);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return product;
+	}
+
 }
