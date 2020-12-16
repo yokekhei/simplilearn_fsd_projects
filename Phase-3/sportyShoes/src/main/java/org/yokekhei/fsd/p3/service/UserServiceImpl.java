@@ -41,6 +41,12 @@ public class UserServiceImpl implements UserService {
 		User savedUser = null;
 		
 		try {
+			User registeredUser = userDao.getUser(user.getEmail());
+			
+			if (registeredUser != null) {
+				throw new SportyShoesServiceException("User already exists");
+			}
+			
 			if (user.getDob() == null &&
 					user.getDobString() != null &&
 					!user.getDobString().isEmpty()) {
