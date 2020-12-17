@@ -112,7 +112,6 @@ public class BagController {
 	
 	@ExceptionHandler(SportyShoesServiceException.class)
 	public String handlerException(SportyShoesServiceException exception,
-			Model model,
 			HttpServletRequest request) {
 		request.getSession(false).setAttribute("alert", exception.getMessage());
 		
