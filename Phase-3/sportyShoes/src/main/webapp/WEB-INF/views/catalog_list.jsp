@@ -18,7 +18,7 @@
             <div class="col-md-4">
               <a href="${pageContext.request.contextPath}/catalog/product?id=${product.getId()}" class="custom-card">
                 <div class="card h-100">
-                  <img class="card-img-top" src="${pageContext.request.contextPath}/catalog/image?productId=${product.getId()}" alt="${product.getName()}">
+                  <img class="card-img-top" src="${pageContext.request.contextPath}/catalog/product/image?productId=${product.getId()}" alt="${product.getName()}">
                   <div class="card-body">
                     <h6 class="card-title">${product.getName()}</h6>
                     <p class="card-text grey">${product.getShortDesc()}</p>
