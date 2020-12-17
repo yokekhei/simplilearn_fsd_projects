@@ -8,17 +8,18 @@ import java.util.List;
 public class Purchase {
 
 	private Long id;
+	private User user;
 	private List<PurchaseItem> items = new ArrayList<>();
 	private BigDecimal totalPrice;
 	private LocalDateTime createdDateTime;
 	
 	public Purchase() {
 	}
-
-	public Purchase(List<PurchaseItem> items, BigDecimal totalPrice, LocalDateTime createdDateTime) {
+	
+	public Purchase(User user, List<PurchaseItem> items, BigDecimal totalPrice) {
+		this.user = user;
 		this.items = items;
 		this.totalPrice = totalPrice;
-		this.createdDateTime = createdDateTime;
 	}
 	
 	public Long getId() {
@@ -27,6 +28,14 @@ public class Purchase {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<PurchaseItem> getItems() {
@@ -55,8 +64,8 @@ public class Purchase {
 
 	@Override
 	public String toString() {
-		return "Purchase [id=" + id + ", items=" + items + ", totalPrice=" + totalPrice + ", createdDateTime="
-				+ createdDateTime + "]";
+		return "Purchase [id=" + id + ", user=" + user + ", items=" + items + ", totalPrice=" + totalPrice
+				+ ", createdDateTime=" + createdDateTime + "]";
 	}
 	
 }

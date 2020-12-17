@@ -18,6 +18,7 @@ import org.yokekhei.fsd.p3.dto.BagItem;
 import org.yokekhei.fsd.p3.dto.Payment;
 import org.yokekhei.fsd.p3.dto.Purchase;
 import org.yokekhei.fsd.p3.dto.PurchaseItem;
+import org.yokekhei.fsd.p3.dto.User;
 import org.yokekhei.fsd.p3.service.SportyShoesServiceException;
 import org.yokekhei.fsd.p3.service.UserService;
 import org.yokekhei.fsd.p3.ui.View;
@@ -51,6 +52,7 @@ public class PaymentController {
 		
 		Bag bag = (Bag) session.getAttribute("bag");
 		Purchase purchaseOrder = new Purchase();
+		purchaseOrder.setUser((User) session.getAttribute("loginUser"));
 		purchaseOrder.setTotalPrice(bag.getTotalPrice());
 		
 		for (BagItem bi : bag.getItems()) {

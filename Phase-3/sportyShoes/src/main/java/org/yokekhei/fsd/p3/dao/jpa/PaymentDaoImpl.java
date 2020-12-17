@@ -19,13 +19,19 @@ public class PaymentDaoImpl implements PaymentDao {
 	@Resource
 	PaymentMapper mapper;
 	
+	@Resource
+	UserMapper userMapper;
+	
 	@Override
 	@Transactional
 	public Payment save(Payment payment) throws SportyShoesDaoException {
 		Payment savedPayment = null;
 		
 		try {
-			savedPayment = mapper.toDto(repository.save(mapper.toEntity(payment)));
+			org.yokekhei.fsd.p3.entity.Payment entity = mapper.toEntity(payment);
+			entity.getPurchaseOrder().setUser(userMapper.toEntity(
+					payment.getPurchaseOrder().getUser()));
+			savedPayment = mapper.toDto(repository.save(entity));
 		} catch (Exception e) {
 			throw new SportyShoesDaoException(e.getMessage());
 		}
@@ -38,9 +44,14 @@ public class PaymentDaoImpl implements PaymentDao {
 		Payment payment = null;
 		
 		try {
-			payment = repository.findById(id)
-					.map(entity -> mapper.toDto(entity))
+			org.yokekhei.fsd.p3.entity.Payment entity = repository.findById(id)
 					.orElse(null);
+			
+			if (entity != null) {
+				payment = mapper.toDto(entity);
+				payment.getPurchaseOrder().setUser(userMapper.toDto(
+						entity.getPurchaseOrder().getUser()));
+			}
 		} catch (Exception e) {
 			throw new SportyShoesDaoException(e.getMessage());
 		}

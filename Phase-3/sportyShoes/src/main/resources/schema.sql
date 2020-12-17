@@ -50,9 +50,11 @@ CREATE TABLE PurchaseItems (
 DROP TABLE IF EXISTS Purchases;
 CREATE TABLE Purchases (
     purchase_id BIGINT NOT NULL AUTO_INCREMENT,
+    purchase_user VARCHAR(255) NOT NULL,
     purchase_price DECIMAL(18, 5) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (purchase_id)
+    PRIMARY KEY (purchase_id),
+    CONSTRAINT fk_purchases_user FOREIGN KEY (purchase_user) REFERENCES Users(user_email)
 ) ENGINE=INNODB;
 DROP TABLE IF EXISTS PurchaseDetails;
 CREATE TABLE PurchaseDetails (

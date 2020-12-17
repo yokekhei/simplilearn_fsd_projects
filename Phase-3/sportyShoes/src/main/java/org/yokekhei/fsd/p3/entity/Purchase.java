@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,6 +28,10 @@ public class Purchase {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "purchase_id")
 	private Long id;
+	
+	@OneToOne(targetEntity = User.class)
+	@JoinColumn(name = "purchase_user")
+	private User user;
 	
 	@OneToMany(cascade = CascadeType.ALL, targetEntity = PurchaseItem.class, fetch = FetchType.EAGER)
 	@JoinTable(name = "purchasedetails",
@@ -44,17 +49,26 @@ public class Purchase {
 	public Purchase() {
 	}
 
-	public Purchase(List<PurchaseItem> items, BigDecimal totalPrice) {
+	public Purchase(User user, List<PurchaseItem> items, BigDecimal totalPrice) {
+		this.user = user;
 		this.items = items;
 		this.totalPrice = totalPrice;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<PurchaseItem> getItems() {
@@ -83,8 +97,8 @@ public class Purchase {
 
 	@Override
 	public String toString() {
-		return "Purchase [id=" + id + ", items=" + items + ", totalPrice=" + totalPrice + ", createdDateTime="
-				+ createdDateTime + "]";
+		return "Purchase [id=" + id + ", user=" + user + ", items=" + items + ", totalPrice=" + totalPrice
+				+ ", createdDateTime=" + createdDateTime + "]";
 	}
 	
 }
