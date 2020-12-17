@@ -61,7 +61,7 @@
               </div>
               <div class="row">
                 <div class="col-md-7">
-                  <p>Delivery &amp; Handling</p>
+                  <p>Shipping &amp; Handling</p>
                 </div>
                 <div class="col-md-5">
                   <p class="text-right">0.00 $</p>
@@ -79,7 +79,7 @@
               <hr />
               <div class="row">
                 <div class="col-md-12">
-                  <form action="${pageContext.request.contextPath}/checkout" method="post">
+                  <form action="${pageContext.request.contextPath}/checkout" method="get">
                     <button class="btn btn-danger btn-lg btn-block" type="submit">Checkout</button>
                   </form>
                 </div>

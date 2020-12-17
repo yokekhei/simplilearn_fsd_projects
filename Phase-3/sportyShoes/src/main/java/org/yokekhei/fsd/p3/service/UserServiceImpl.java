@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.yokekhei.fsd.p3.Common;
 import org.yokekhei.fsd.p3.dao.CategoryDao;
+import org.yokekhei.fsd.p3.dao.PaymentDao;
 import org.yokekhei.fsd.p3.dao.ProductDao;
 import org.yokekhei.fsd.p3.dao.UserDao;
 import org.yokekhei.fsd.p3.dto.Category;
+import org.yokekhei.fsd.p3.dto.Payment;
 import org.yokekhei.fsd.p3.dto.Product;
 import org.yokekhei.fsd.p3.dto.User;
 
@@ -28,6 +30,10 @@ public class UserServiceImpl implements UserService {
 	@Resource
 	@Qualifier("jpa")
 	private ProductDao productDao;
+	
+	@Resource
+	@Qualifier("jpa")
+	private PaymentDao paymentDao;
 	
 	@Override
 	public User login(String email, String password) throws SportyShoesServiceException {
@@ -131,6 +137,32 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return product;
+	}
+
+	@Override
+	public Payment pay(Payment payment) throws SportyShoesServiceException {
+		Payment savedPayment = null;
+		
+		try {
+			savedPayment = paymentDao.save(payment);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return savedPayment;
+	}
+
+	@Override
+	public Payment getPayment(Long paymentId) throws SportyShoesServiceException {
+		Payment payment = null;
+		
+		try {
+			payment = paymentDao.getPayment(paymentId);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return payment;
 	}
 
 }

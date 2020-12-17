@@ -13,6 +13,7 @@ public class Common {
 	
 	public static final String DATE_FORMAT = "dd-MM-yyyy";
 	public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
+	public static final String YEAR_FORMAT = "yy";
 	
 	public static LocalDate toLocalDate(String strDate) {
 		return Common.toLocalDate(strDate, DATE_FORMAT);
@@ -48,6 +49,12 @@ public class Common {
 	public static LocalDateTime toLocalDateTime(String strDateTime, String format) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 		return LocalDateTime.parse(strDateTime, formatter);
+	}
+	
+	public static String getCurrentYear(String format) {
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		return now.format(formatter);
 	}
 	
 }
