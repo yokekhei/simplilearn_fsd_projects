@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.yokekhei.fsd.p3.dto.BagItem;
 import org.yokekhei.fsd.p3.dto.Product;
 import org.yokekhei.fsd.p3.service.SportyShoesServiceException;
 import org.yokekhei.fsd.p3.service.UserService;
@@ -31,6 +32,7 @@ public class CatalogProductController {
 			Model model) throws SportyShoesServiceException {
 		Product product = service.getProduct(productId);
 		model.addAttribute("product", product);
+		model.addAttribute("bagItem", new BagItem());
 		
 		return View.V_USER_PRODUCT;
 	}

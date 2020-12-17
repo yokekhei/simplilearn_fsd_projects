@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
   <link href="${pageContext.request.contextPath}/css/navbar-top.css" rel="stylesheet" type="text/css">
 </head>
@@ -38,9 +39,12 @@
           </div>
         </div>
         <div class="card-footer">
-          <form action="${pageContext.request.contextPath}/bag?action=add" method="post">
-            <button class="btn btn-danger btn-lg btn-block" type="submit">Add to Bag</button>
-          </form>
+          <form:form action="${pageContext.request.contextPath}/bag?action=add&productId=${product.getId()}" method="post" modelAttribute="bagItem">
+            <form:input path="id" id="id" type="hidden" class="form-control" value="${product.getId()}" />
+            <form:input path="quantity" id="quantity" type="hidden" class="form-control" value="1" />
+            <form:input path="totalPrice" id="totalPrice" type="hidden" class="form-control" value="${product.getPrice()}" />
+            <form:button class="btn btn-danger btn-lg btn-block" type="submit">Add to Bag</form:button>
+          </form:form>
         </div>
       </div>
     </div>

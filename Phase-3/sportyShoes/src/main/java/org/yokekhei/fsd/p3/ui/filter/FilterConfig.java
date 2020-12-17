@@ -25,7 +25,8 @@ public class FilterConfig {
         FilterRegistrationBean<UserAuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new UserAuthenticationFilter());
         registrationBean.addUrlPatterns("/" + View.C_USER_CATALOG + "/*",
-        		"/" + View.C_USER_CATALOG_PRODUCT + "/*");
+        		"/" + View.C_USER_CATALOG_PRODUCT + "/*",
+        		"/" + View.C_USER_BAG + "/*");
 
         return registrationBean;
     }

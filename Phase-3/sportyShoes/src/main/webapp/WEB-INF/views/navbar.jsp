@@ -19,8 +19,20 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="${pageContext.request.contextPath}/bag">
+            <c:if test="${not empty sessionScope.bag}">
+              <i class="fas fa-shopping-bag"></i> Bag Items: <c:out value="${sessionScope.bag.getTotalQuantity()}" />
+            </c:if>
+            <c:if test="${empty sessionScope.bag}">
+              <i class="fas fa-shopping-bag"></i> Bag Items: 0
+            </c:if>
+          </a>
+        </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><c:out value="${sessionScope.loginUser.getFirstName()}"/></a>
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user"></i> <c:out value="${sessionScope.loginUser.getFirstName()}"/>
+          </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown01">
             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Sign out</a>
           </div>
