@@ -66,7 +66,7 @@ public class UserReportController {
 				session.setAttribute("alert", "User report action not supported");
 			}
 			
-			return View.V_ADMIN_USER_REPORT;
+			return "redirect:/" + View.C_ADMIN_USER_REPORT;
 		}
 		
 		if (!userSearchForm.getFirstName().isEmpty()) {
@@ -97,17 +97,14 @@ public class UserReportController {
 	
 	@ExceptionHandler(SportyShoesServiceException.class)
 	public String handlerException(SportyShoesServiceException exception,
-			Model model,
 			HttpServletRequest request) {
-		model.addAttribute("userSearchForm", new UserSearchForm());
-		
 		if (exception.getMessage().contains("parse")) {
 			request.getSession(false).setAttribute("alert", "Date could not be parsed");
 		} else {
 			request.getSession(false).setAttribute("alert", exception.getMessage());
 		}
 		
-		return View.V_ADMIN_USER_REPORT;
+		return "redirect:/" + View.C_ADMIN_USER_REPORT;
 	}
 	
 	private boolean isValidAction(String action) {
