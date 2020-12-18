@@ -35,7 +35,6 @@ public class User {
 	private String role;
 	private Boolean enabled;
 	private LocalDateTime createdDateTime;
-	private String createdDateString;
 	
 	public User() {
 	}
@@ -149,15 +148,11 @@ public class User {
 	}
 
 	public String getCreatedDateString() {
-		if (createdDateString == null && createdDateTime != null) {
-			createdDateString = Common.toLocalDateString(createdDateTime);
+		if (createdDateTime != null) {
+			return Common.toLocalDateString(createdDateTime);
 		}
 		
-		return createdDateString;
-	}
-
-	public void setCreatedDateString(String createdDateString) {
-		this.createdDateString = createdDateString;
+		return "";
 	}
 
 	@Override

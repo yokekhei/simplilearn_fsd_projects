@@ -11,6 +11,7 @@ public class UserSearchForm {
 	@NotEmpty(message = "From date must not empty")
 	private String fromDate;
 	
+	@NotNull
 	@NotEmpty(message = "To date must not empty")
 	private String toDate;
 	
