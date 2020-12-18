@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import org.yokekhei.fsd.p3.Common;
 import org.yokekhei.fsd.p3.dao.CategoryDao;
 import org.yokekhei.fsd.p3.dao.ProductDao;
+import org.yokekhei.fsd.p3.dao.PurchaseDao;
 import org.yokekhei.fsd.p3.dao.UserDao;
 import org.yokekhei.fsd.p3.dto.Category;
 import org.yokekhei.fsd.p3.dto.Product;
+import org.yokekhei.fsd.p3.dto.Purchase;
 import org.yokekhei.fsd.p3.dto.User;
 
 @Service
@@ -30,6 +32,10 @@ public class AdminServiceImpl implements AdminService {
 	@Resource
 	@Qualifier("jpa")
 	private ProductDao productDao;
+	
+	@Resource
+	@Qualifier("jpa")
+	private PurchaseDao purchaseDao;
 	
 	@Override
 	public User login(String email, String password) throws SportyShoesServiceException {
@@ -211,6 +217,39 @@ public class AdminServiceImpl implements AdminService {
 		} catch (Exception e) {
 			throw new SportyShoesServiceException(e.getMessage());
 		}
+	}
+
+	@Override
+	public List<Purchase> getAllPurchasesCreatedBetween(LocalDateTime start, LocalDateTime end)
+			throws SportyShoesServiceException {
+		List<Purchase> purchases = null;
+		
+		try {
+			purchases = purchaseDao.getAllPurchasesCreatedBetween(start, end);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return purchases;
+	}
+
+	@Override
+	public List<Purchase> getPurchasesByCategory(Long categoryId) throws SportyShoesServiceException {
+		List<Purchase> purchases = null;
+		
+		try {
+			Category category = categoryDao.getCategory(categoryId);
+			
+			if (category == null) {
+				throw new SportyShoesServiceException("Invalid category chosen to query purchases");
+			}
+			
+			purchases = purchaseDao.getPurchasesByCategory(category);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return purchases;
 	}
 
 }

@@ -27,4 +27,9 @@ public class JpaConfiguration {
 		return Mappers.getMapper(PaymentMapper.class);
 	}
 	
+	@Bean
+	public PurchaseMapper purchaseMapper() {
+		return Mappers.getMapper(PurchaseMapper.class);
+	}
+	
 }

@@ -22,11 +22,13 @@ public class View {
 	public static final String V_ADMIN_CATEGORY_LIST = "admin/category_list";
 	public static final String V_ADMIN_PRODUCT_LIST = "admin/product_list";
 	public static final String V_ADMIN_USER_REPORT = "admin/user_report";
+	public static final String V_ADMIN_PURCHASE_REPORT = "admin/purchase_report";
 	
 	public static final String C_ADMIN_CATEGORY = "admin/category";
 	public static final String C_ADMIN_PASSWORD = "admin/password";
 	public static final String C_ADMIN_PRODUCT = "admin/product";
 	public static final String C_ADMIN_USER_REPORT = "admin/report/user";
+	public static final String C_ADMIN_PURCHASE_REPORT = "admin/report/purchase";
 
 	public static final String DEFAULT_CATALOG_PRODUCT_IMAGE = "static/images/default.png";
 	

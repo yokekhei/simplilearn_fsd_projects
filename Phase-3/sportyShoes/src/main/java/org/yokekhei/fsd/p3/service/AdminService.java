@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.yokekhei.fsd.p3.dto.Category;
 import org.yokekhei.fsd.p3.dto.Product;
+import org.yokekhei.fsd.p3.dto.Purchase;
 import org.yokekhei.fsd.p3.dto.User;
 
 public interface AdminService {
@@ -27,5 +28,9 @@ public interface AdminService {
 	void addProduct(Product data) throws SportyShoesServiceException;
 	void updateProduct(Product data) throws SportyShoesServiceException;
 	void deleteProduct(Long id) throws SportyShoesServiceException;
+	
+	List<Purchase> getAllPurchasesCreatedBetween(LocalDateTime start, LocalDateTime end)
+			throws SportyShoesServiceException;
+	List<Purchase> getPurchasesByCategory(Long categoryId) throws SportyShoesServiceException;
 	
 }

@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yokekhei.fsd.p3.Common;
+
 public class Purchase {
 
 	private Long id;
@@ -60,6 +62,14 @@ public class Purchase {
 
 	public void setCreatedDateTime(LocalDateTime createdDateTime) {
 		this.createdDateTime = createdDateTime;
+	}
+	
+	public String getCreatedDateString() {
+		if (createdDateTime != null) {
+			return Common.toLocalDateString(createdDateTime);
+		}
+		
+		return "";
 	}
 
 	@Override
