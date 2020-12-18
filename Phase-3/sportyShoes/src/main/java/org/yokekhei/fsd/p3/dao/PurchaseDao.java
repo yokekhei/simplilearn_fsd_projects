@@ -11,5 +11,6 @@ public interface PurchaseDao {
 	List<Purchase> getAllPurchasesCreatedBetween(LocalDateTime start, LocalDateTime end)
 			throws SportyShoesDaoException;
 	List<Purchase> getPurchasesByCategory(Category category) throws SportyShoesDaoException;
+	Purchase getPurchase(Long id) throws SportyShoesDaoException;
 	
 }

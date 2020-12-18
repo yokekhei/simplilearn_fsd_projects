@@ -16,7 +16,8 @@ public class FilterConfig {
         		"/" + View.C_ADMIN_PASSWORD + "/*",
         		"/" + View.C_ADMIN_PRODUCT + "/*",
         		"/" + View.C_ADMIN_USER_REPORT + "/*",
-        		"/" + View.C_ADMIN_PURCHASE_REPORT + "/*");
+        		"/" + View.C_ADMIN_PURCHASE_REPORT + "/*",
+        		"/" + View.C_ADMIN_PURCHASE_REPORT_VIEW + "/*");
 
         return registrationBean;
     }

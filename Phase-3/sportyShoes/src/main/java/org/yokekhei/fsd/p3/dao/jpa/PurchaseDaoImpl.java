@@ -49,15 +49,30 @@ public class PurchaseDaoImpl implements PurchaseDao {
 
 	@Override
 	public List<Purchase> getPurchasesByCategory(Category category) throws SportyShoesDaoException {
-		List<Purchase> purchase = null;
+		List<Purchase> purchases = null;
 		
 		try {
 			List<PurchaseItem> items = itemRepository.findAllByCategory(
 					categoryMapper.toEntity(category));
-			purchase = repository.findDistinctByItemsIn(items)
+			purchases = repository.findDistinctByItemsIn(items)
 					.stream()
 					.map(entity -> mapper.toDto(entity))
 					.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new SportyShoesDaoException(e.getMessage());
+		}
+		
+		return purchases;
+	}
+
+	@Override
+	public Purchase getPurchase(Long id) throws SportyShoesDaoException {
+		Purchase purchase = null;
+		
+		try {
+			purchase = repository.findById(id)
+					.map(entity -> mapper.toDto(entity))
+					.orElse(null);
 		} catch (Exception e) {
 			throw new SportyShoesDaoException(e.getMessage());
 		}

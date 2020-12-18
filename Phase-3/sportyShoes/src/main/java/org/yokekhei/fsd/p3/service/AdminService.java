@@ -32,5 +32,6 @@ public interface AdminService {
 	List<Purchase> getAllPurchasesCreatedBetween(LocalDateTime start, LocalDateTime end)
 			throws SportyShoesServiceException;
 	List<Purchase> getPurchasesByCategory(Long categoryId) throws SportyShoesServiceException;
+	Purchase getPurchase(Long id) throws SportyShoesServiceException;
 	
 }

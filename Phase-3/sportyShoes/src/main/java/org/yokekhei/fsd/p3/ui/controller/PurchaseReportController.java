@@ -105,6 +105,19 @@ public class PurchaseReportController {
 		return View.V_ADMIN_PURCHASE_REPORT;
 	}
 	
+	@GetMapping("/admin/report/purchase/view")
+	public String viewPurchase(@RequestParam(name = "id") Long id,
+			Model model) throws SportyShoesServiceException {
+		if (id == null) {
+			throw new SportyShoesServiceException("id cannot be null to view purchase report");
+		}
+		
+		Purchase order = service.getPurchase(id);
+		model.addAttribute("order", order);
+		
+		return View.V_ADMIN_PURCHASE_VIEW;
+	}
+	
 	@ExceptionHandler(SportyShoesServiceException.class)
 	public String handlerException(SportyShoesServiceException exception,
 			HttpServletRequest request) {

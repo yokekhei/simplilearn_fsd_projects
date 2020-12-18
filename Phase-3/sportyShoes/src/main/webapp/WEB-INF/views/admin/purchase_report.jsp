@@ -76,7 +76,7 @@
               <tr>
                 <td>
                   <button type="button" class="btn btn-sm px-2" 
-                    onclick="location.href='${pageContext.request.contextPath}/admin/report/purchase?action=view&id=${order.getId()}'">
+                    onclick="location.href='${pageContext.request.contextPath}/admin/report/purchase/view?id=${order.getId()}'">
                     <i class="fas fa-eye mt-0 text-primary"></i>
                   </button>
                 </td>

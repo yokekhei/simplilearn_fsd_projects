@@ -252,4 +252,17 @@ public class AdminServiceImpl implements AdminService {
 		return purchases;
 	}
 
+	@Override
+	public Purchase getPurchase(Long id) throws SportyShoesServiceException {
+		Purchase purchase = null;
+		
+		try {
+			purchase = purchaseDao.getPurchase(id);
+		} catch (Exception e) {
+			throw new SportyShoesServiceException(e.getMessage());
+		}
+		
+		return purchase;
+	}
+
 }
