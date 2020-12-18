@@ -10,7 +10,7 @@
   <div class="container">
     <div class="mt-5 card card-cascade narrower">
       <div class="py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
-        <h4 class="text-primary">Signed Up Users</h4>
+        <h4 class="text-primary">Signed-Up Users</h4>
       </div>
       <div class="px-4 mb-3">
         <form:form action="${pageContext.request.contextPath}/admin/report/user?action=search" method="post" modelAttribute="userSearchForm">
@@ -67,7 +67,7 @@
             </tr>
           </thead>
           <tbody>
-            <c:forEach var="user" items="${sessionScope.userList}">
+            <c:forEach var="user" items="${requestScope.userList}">
               <tr>
                 <td><c:out value="${user.getEmail()}"/></td>
                 <td><c:out value="${user.getFirstName()} ${user.getLastName()}"/></td>

@@ -36,8 +36,7 @@ public class UserReportController {
 		LocalDateTime start = end.minusDays(7);
 		
 		List<User> userList = service.getAllUsersWithUserRoleCreatedBetween(start, end);
-		request.getSession(false).setAttribute("userList", userList);
-		
+		model.addAttribute("userList", userList);
 		model.addAttribute("userSearchForm", new UserSearchForm());
 		
 		try {
@@ -72,8 +71,7 @@ public class UserReportController {
 		
 		if (!userSearchForm.getFirstName().isEmpty()) {
 			List<User> userList = service.getUsersByFirstName(userSearchForm.getFirstName());
-			request.getSession(false).setAttribute("userList", userList);
-			
+			modelMap.addAttribute("userList", userList);
 			modelMap.addAttribute("startDate", "");
 			modelMap.addAttribute("endDate", "");
 		} else {
@@ -82,7 +80,7 @@ public class UserReportController {
 				LocalDateTime end = Common.toLocalDateTime(userSearchForm.getToDate() + " 23:59:59");
 				
 				List<User> userList = service.getAllUsersWithUserRoleCreatedBetween(start, end);
-				request.getSession(false).setAttribute("userList", userList);
+				modelMap.addAttribute("userList", userList);
 			} catch (Exception e) {
 				throw new SportyShoesServiceException(e.getMessage());
 			}
