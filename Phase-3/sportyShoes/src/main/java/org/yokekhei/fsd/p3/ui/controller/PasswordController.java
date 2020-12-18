@@ -26,7 +26,7 @@ public class PasswordController {
 	private AdminService service;
 
 	@GetMapping("/admin/password")
-	public String entry(Model model,
+	public String changePassword(Model model,
 			HttpServletRequest request) {
 		User loginUser = (User) request.getSession(false).getAttribute("loginUser");
 		model.addAttribute("user", new User(loginUser.getEmail()));
@@ -35,7 +35,7 @@ public class PasswordController {
 	}
 	
 	@PostMapping("/admin/password")
-	public String loginForm(@RequestParam(name = "action") String action,
+	public String changePasswordForm(@RequestParam(name = "action") String action,
 			@Valid @ModelAttribute("user") User user,
 			BindingResult result,
 			ModelMap modelMap,

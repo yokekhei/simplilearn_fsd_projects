@@ -32,7 +32,7 @@ public class PurchaseReportController {
 	AdminService service;
 	
 	@GetMapping("/admin/report/purchase")
-	public String userList(Model model, HttpServletRequest request) throws SportyShoesServiceException {
+	public String purchaseList(Model model, HttpServletRequest request) throws SportyShoesServiceException {
 		if (request.getSession(false).getAttribute("categoryList") != null) {
 			model.addAttribute("categoryList", request.getSession(false).getAttribute("categoryList"));
 		} else {
@@ -59,7 +59,7 @@ public class PurchaseReportController {
 	}
 	
 	@PostMapping("/admin/report/purchase")
-	public String categoryForm(@RequestParam(name = "action") String action,
+	public String purchaseReportForm(@RequestParam(name = "action") String action,
 			@Valid @ModelAttribute("purchaseFilterForm") PurchaseFilterForm purchaseFilterForm,
 			BindingResult result,
 			ModelMap modelMap,

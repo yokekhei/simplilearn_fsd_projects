@@ -50,7 +50,7 @@ public class UserReportController {
 	}
 	
 	@PostMapping("/admin/report/user")
-	public String categoryForm(@RequestParam(name = "action") String action,
+	public String userReportForm(@RequestParam(name = "action") String action,
 			@Valid @ModelAttribute("userSearchForm") UserSearchForm userSearchForm,
 			BindingResult result,
 			ModelMap modelMap,
