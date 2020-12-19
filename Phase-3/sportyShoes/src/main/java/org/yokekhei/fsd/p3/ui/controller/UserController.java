@@ -65,8 +65,7 @@ public class UserController {
 	@PostMapping("/register")
 	public String registerForm(@Valid @ModelAttribute("guest") User user,
 			BindingResult result,
-			ModelMap modelMap,
-			HttpServletRequest request) throws SportyShoesServiceException {
+			ModelMap modelMap) throws SportyShoesServiceException {
 		if (result.hasErrors()) {
 			modelMap.addAttribute("user", new User());
 			modelMap.addAttribute("guest", new User());
@@ -79,10 +78,7 @@ public class UserController {
 		
 		User loginUser = service.register(user);
 		
-		HttpSession session = request.getSession(true);
-		session.setAttribute("loginUser", loginUser);
-		
-		modelMap.addAttribute("user", new User());
+		modelMap.addAttribute("user", new User(loginUser.getEmail()));
 		modelMap.addAttribute("guest", new User());
 		modelMap.addAttribute("success", "Congratulations! You have signed up successfully.");
 		
