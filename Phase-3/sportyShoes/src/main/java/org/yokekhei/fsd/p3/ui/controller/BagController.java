@@ -35,10 +35,7 @@ public class BagController {
 		
 		if (bag == null) {
 			Bag newBag = new Bag();
-			model.addAttribute("bag", new Bag());
 			session.setAttribute("bag", newBag);
-		} else {
-			model.addAttribute("bag", bag);
 		}
 		
 		model.addAttribute("bagItem", new BagItem());
