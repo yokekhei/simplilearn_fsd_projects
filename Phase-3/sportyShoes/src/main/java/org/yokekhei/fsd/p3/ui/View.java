@@ -9,6 +9,7 @@ public class View {
 	public static final String C_USER_BAG = "bag";
 	public static final String C_USER_CHECKOUT = "checkout";
 	public static final String C_USER_PAYMENT = "payment";
+	public static final String C_USER_LOGOUT = "logout";
 	
 	public static final String V_USER_CATALOG_LIST = "catalog_list";
 	public static final String V_USER_PRODUCT = "product";
@@ -31,6 +32,7 @@ public class View {
 	public static final String C_ADMIN_USER_REPORT = "admin/report/user";
 	public static final String C_ADMIN_PURCHASE_REPORT = "admin/report/purchase";
 	public static final String C_ADMIN_PURCHASE_REPORT_VIEW = "admin/report/purchase/view";
+	public static final String C_ADMIN_LOGOUT = "admin/logout";
 
 	public static final String DEFAULT_CATALOG_PRODUCT_IMAGE = "static/images/default.png";
 	

@@ -17,7 +17,8 @@ public class FilterConfig {
         		"/" + View.C_ADMIN_PRODUCT + "/*",
         		"/" + View.C_ADMIN_USER_REPORT + "/*",
         		"/" + View.C_ADMIN_PURCHASE_REPORT + "/*",
-        		"/" + View.C_ADMIN_PURCHASE_REPORT_VIEW + "/*");
+        		"/" + View.C_ADMIN_PURCHASE_REPORT_VIEW + "/*",
+        		"/" + View.C_ADMIN_LOGOUT + "/*");
 
         return registrationBean;
     }
@@ -30,7 +31,8 @@ public class FilterConfig {
         		"/" + View.C_USER_CATALOG_PRODUCT + "/*",
         		"/" + View.C_USER_BAG + "/*",
         		"/" + View.C_USER_CHECKOUT + "/*",
-        		"/" + View.C_USER_PAYMENT + "/*");
+        		"/" + View.C_USER_PAYMENT + "/*",
+        		"/" + View.C_USER_LOGOUT + "/*");
 
         return registrationBean;
     }
