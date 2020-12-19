@@ -24,7 +24,7 @@ public class UserAuthenticationFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		
 		if (session == null || session.getAttribute("loginUser") == null) {
-			request.setAttribute("authMsg", "Session expired");
+			request.setAttribute("userFailMsg", "Session expired");
 			RequestDispatcher rd = request.getRequestDispatcher("/");
 			rd.include(request, response);
 		} else {
