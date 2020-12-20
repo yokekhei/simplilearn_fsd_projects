@@ -5,6 +5,7 @@
 2. Phase-2: Become a back-end expert
     - [Project 2](https://github.com/yokekhei/simplilearn_fsd_projects/tree/master/Phase-2/flyAway): FlyAway (An Airline Booking Portal)
 3. Phase-3: Implement Frameworks the DevOps way
+    - [Project 1](https://github.com/yokekhei/simplilearn_fsd_projects/tree/master/Phase-3/sportyShoes): SportyShoes (An E-Commerce Website for Sporty Shoes)
 4. Phase-4: Develop a Web Application using frontend stack
 5. Phase-5: Testing in a DevOps Lifecycle
 6. Capstone Project
