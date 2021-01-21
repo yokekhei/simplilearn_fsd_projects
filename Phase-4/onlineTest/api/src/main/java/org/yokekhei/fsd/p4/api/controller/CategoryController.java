@@ -13,7 +13,7 @@ import org.yokekhei.fsd.p4.api.service.CommonService;
 
 @RestController
 @RequestMapping(value = "/api",
-				produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+				produces = { MediaType.APPLICATION_JSON_VALUE })
 public class CategoryController {
 
 	@Autowired
