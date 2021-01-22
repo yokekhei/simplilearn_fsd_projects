@@ -13,17 +13,9 @@ import { DataService } from 'src/app/services/data.service';
 export class TesteeCategoryComponent implements OnInit, OnDestroy {
 
   categories: Category[] = [];
-  defaultCategoryId = 0;
   subscriptionCategories: Subscription;
-  subscriptionDefaultCategoryId: Subscription;
 
   constructor(private dataService: DataService, private router: Router) {
-    this.subscriptionDefaultCategoryId = this.dataService.defaultCategoryId.subscribe(
-      defaultCategoryId => {
-        this.defaultCategoryId = defaultCategoryId;
-      }
-    );
-
     this.subscriptionCategories = this.dataService.categories.subscribe(
       categories => {
         this.categories = categories;
@@ -40,7 +32,6 @@ export class TesteeCategoryComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptionCategories.unsubscribe();
-    this.subscriptionDefaultCategoryId.unsubscribe();
   }
 
 }

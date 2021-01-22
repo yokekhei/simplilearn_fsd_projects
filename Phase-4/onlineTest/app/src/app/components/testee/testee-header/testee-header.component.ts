@@ -16,13 +16,10 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
   isGuest: boolean;
   categories: Category[] = [];
   defaultCategoryId = 0;
-  subscriptionCategories: Subscription;
   subscriptionDefaultCategoryId: Subscription;
 
   constructor(private categoryService: CategoryService, private dataService: DataService) {
     this.isGuest = true;
-    this.subscriptionCategories = this.dataService.categories.subscribe(
-      categories => this.categories = categories);
     this.subscriptionDefaultCategoryId = this.dataService.defaultCategoryId.subscribe(
       defaultCategoryId => this.defaultCategoryId = defaultCategoryId);
   }
@@ -37,7 +34,6 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptionCategories.unsubscribe();
     this.subscriptionDefaultCategoryId.unsubscribe();
   }
 
