@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Category } from 'src/app/model/category';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -12,17 +11,14 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class TesteeCategoryComponent implements OnInit, OnDestroy {
 
-  categories: Category[] = [];
-  subscriptionCategories: Subscription;
+  private subscriptionCategories: Subscription;
 
   constructor(private dataService: DataService, private router: Router) {
     this.subscriptionCategories = this.dataService.categories.subscribe(
       categories => {
-        this.categories = categories;
-
-        if (this.categories.length > 0) {
-          this.dataService.changeDefaultCategoryId(this.categories[0].id);
-          this.router.navigate([`/testee/category/${this.categories[0].id}`]);
+        if (categories.length > 0) {
+          this.dataService.changeDefaultCategoryId(categories[0].id);
+          this.router.navigate([`/testee/category/${categories[0].id}`]);
         }
       });
   }

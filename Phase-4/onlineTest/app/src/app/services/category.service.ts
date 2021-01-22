@@ -11,7 +11,7 @@ import { ConfigurationService } from './configuration.service';
 })
 export class CategoryService {
 
-  rootUrl = '';
+  private rootUrl = '';
 
   constructor(private configuration: ConfigurationService, private http: HttpClient) {
     this.rootUrl = this.configuration.getValue('apiUrl');

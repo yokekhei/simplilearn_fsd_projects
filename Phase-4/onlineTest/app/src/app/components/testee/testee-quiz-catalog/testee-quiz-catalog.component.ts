@@ -13,8 +13,8 @@ import { DataService } from 'src/app/services/data.service';
 export class TesteeQuizCatalogComponent implements OnInit, OnDestroy {
 
   category: Category;
-  categories: Category[] = [];
-  subscriptionCategories: Subscription;
+  private categories: Category[] = [];
+  private subscriptionCategories: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute, private dataService: DataService) {
     this.category = { id: 0, name: 'Default Category' };
