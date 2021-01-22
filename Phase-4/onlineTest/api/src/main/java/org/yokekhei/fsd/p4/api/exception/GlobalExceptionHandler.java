@@ -14,8 +14,16 @@ public class GlobalExceptionHandler {
 	@ResponseBody
 	@ExceptionHandler(OnlineTestServiceException.class)
 	public ResponseEntity<OnlineTestError> handleException(OnlineTestServiceException e) {
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-				.body(new OnlineTestError(Common.DB_ERROR_CODE, e.getMessage()));
+		String code = Common.DB_ERROR_CODE;
+		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		
+		if (e.getCode() != null && !e.getCode().isEmpty()) {
+			code = e.getCode();
+			status = HttpStatus.BAD_REQUEST;
+		}
+		
+		return ResponseEntity.status(status)
+				.body(new OnlineTestError(code, e.getMessage()));
 	}
 	
 }
