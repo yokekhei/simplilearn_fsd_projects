@@ -1,7 +1,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
     <mdb-navbar-brand>
-        <a class="navbar-brand" routerLink="/testee"><img src="assets/images/logo.png" alt="Home" width="95"
-                height="38"></a>
+        <a class="navbar-brand" routerLink="/testee/category/{{ defaultCategoryId }}" routerLinkActive="active"><img
+                src="assets/images/logo.png" alt="Home" width="95" height="38"></a>
     </mdb-navbar-brand>
     <links>
         <ul class="navbar-nav ml-auto">
@@ -12,7 +12,8 @@
                 </a>
                 <ul *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
                     <li role="menuitem" *ngFor="let category of categories">
-                        <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/testee">{{ category }}</a>
+                        <a class="dropdown-item waves-light" mdbWavesEffect
+                            routerLink="/testee/category/{{ category.id }}">{{ category.name }}</a>
                     </li>
                 </ul>
             </li>
