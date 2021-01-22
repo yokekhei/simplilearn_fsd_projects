@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TesteeComponent } from './components/testee/testee/testee.component';
 import { TesteeCategoryComponent } from './components/testee/testee-category/testee-category.component';
 import { TesteeLoginComponent } from './components/testee/testee-login/testee-login.component';
+import { TesteeLogoutComponent } from './components/testee/testee-logout/testee-logout.component';
 import { TesteeQuizCatalogComponent } from './components/testee/testee-quiz-catalog/testee-quiz-catalog.component';
 import { TesterComponent } from './components/tester/tester/tester.component';
 
@@ -16,7 +17,8 @@ const routes: Routes = [
           { path: ':id', component: TesteeQuizCatalogComponent }
         ]
       },
-      { path: 'login', component: TesteeLoginComponent }
+      { path: 'login', component: TesteeLoginComponent },
+      { path: 'logout', component: TesteeLogoutComponent }
     ]
   },
 

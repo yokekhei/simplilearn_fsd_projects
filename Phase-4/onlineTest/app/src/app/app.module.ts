@@ -16,6 +16,7 @@ import { TesteeCategoryComponent } from './components/testee/testee-category/tes
 import { TesteeComponent } from './components/testee/testee/testee.component';
 import { TesteeHeaderComponent } from './components/testee/testee-header/testee-header.component';
 import { TesteeLoginComponent } from './components/testee/testee-login/testee-login.component';
+import { TesteeLogoutComponent } from './components/testee/testee-logout/testee-logout.component';
 import { TesteeQuizCatalogComponent } from './components/testee/testee-quiz-catalog/testee-quiz-catalog.component';
 import { TesterComponent } from './components/tester/tester/tester.component';
 import { UserService } from './services/user.service';
@@ -28,6 +29,7 @@ import { UserService } from './services/user.service';
     TesteeCategoryComponent,
     TesteeHeaderComponent,
     TesteeLoginComponent,
+    TesteeLogoutComponent,
     TesteeQuizCatalogComponent,
     TesterComponent
   ],
