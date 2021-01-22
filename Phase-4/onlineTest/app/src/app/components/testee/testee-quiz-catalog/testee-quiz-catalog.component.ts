@@ -30,6 +30,7 @@ export class TesteeQuizCatalogComponent implements OnInit, OnDestroy {
 
         if (result.length > 0) {
           this.category = result[0];
+          this.dataService.changeLatestCategoryId(this.category.id);
         }
       }
     });

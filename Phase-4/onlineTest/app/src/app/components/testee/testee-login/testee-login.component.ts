@@ -18,13 +18,14 @@ import { UserService } from 'src/app/services/user.service';
 export class TesteeLoginComponent implements OnInit, OnDestroy {
 
   private loginUser: LoginUser;
-  private subscriptionDefaultCategoryId: Subscription;
-  private defaultCategoryId = 0;
+  private subscriptionLatestCategoryId: Subscription;
+  private latestCategoryId = 0;
 
-  constructor(private userService: UserService, private dataService: DataService, private router: Router) {
+  constructor(private userService: UserService, private dataService: DataService,
+              private router: Router) {
     this.loginUser = { email: '', username: Common.GUEST_NAME, role: Common.ROLE_TESTEE };
-    this.subscriptionDefaultCategoryId = this.dataService.defaultCategoryId.subscribe(
-      defaultCategoryId => this.defaultCategoryId = defaultCategoryId);
+    this.subscriptionLatestCategoryId = this.dataService.latestCategoryId.subscribe(
+      latestCategoryId => this.latestCategoryId = latestCategoryId);
   }
 
   ngOnInit(): void {
@@ -45,13 +46,13 @@ export class TesteeLoginComponent implements OnInit, OnDestroy {
       (err: any) => swal(err.error.message, '', 'error'),
       () => {
         this.dataService.changeLoginUser(this.loginUser);
-        this.router.navigate([`/testee/category/${this.defaultCategoryId}`]);
+        this.router.navigate([`/testee/category/${this.latestCategoryId}`]);
       }
     );
   }
 
   ngOnDestroy(): void {
-    this.subscriptionDefaultCategoryId.unsubscribe();
+    this.subscriptionLatestCategoryId.unsubscribe();
   }
 
 }

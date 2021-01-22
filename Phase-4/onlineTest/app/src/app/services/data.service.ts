@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { Category } from 'src/app/model/category';
+import { Common } from 'src/app/core/common';
 import { LoginUser } from './../model/login-user';
 
 @Injectable({
@@ -12,8 +13,8 @@ export class DataService {
   private categoriesSource: BehaviorSubject<Category[]>;
   categories: Observable<Category[]>;
 
-  private defaultCategoryIdSource: BehaviorSubject<number>;
-  defaultCategoryId: Observable<number>;
+  private latestCategoryIdSource: BehaviorSubject<number>;
+  latestCategoryId: Observable<number>;
 
   private loginUserSource: BehaviorSubject<LoginUser>;
   loginUser: Observable<LoginUser>;
@@ -22,8 +23,8 @@ export class DataService {
     this.categoriesSource = new BehaviorSubject([] as Category[]);
     this.categories = this.categoriesSource.asObservable();
 
-    this.defaultCategoryIdSource = new BehaviorSubject(0);
-    this.defaultCategoryId = this.defaultCategoryIdSource.asObservable();
+    this.latestCategoryIdSource = new BehaviorSubject(Common.UNKNOWN_CATEGORY_ID);
+    this.latestCategoryId = this.latestCategoryIdSource.asObservable();
 
     this.loginUserSource = new BehaviorSubject({} as LoginUser);
     this.loginUser = this.loginUserSource.asObservable();
@@ -33,8 +34,8 @@ export class DataService {
     this.categoriesSource.next(categories);
   }
 
-  changeDefaultCategoryId(id: number): void {
-    this.defaultCategoryIdSource.next(id);
+  changeLatestCategoryId(id: number): void {
+    this.latestCategoryIdSource.next(id);
   }
 
   changeLoginUser(loginUser: LoginUser): void {

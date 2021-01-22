@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Category } from 'src/app/model/category';
@@ -18,11 +19,11 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
   isGuest: boolean;
   categories: Category[] = [];
   defaultCategoryId = 0;
-  private subscriptionDefaultCategoryId: Subscription;
   private subscriptionLoginUser: Subscription;
   private loginUser: LoginUser;
 
-  constructor(private categoryService: CategoryService, private dataService: DataService) {
+  constructor(private categoryService: CategoryService, private dataService: DataService,
+              private router: Router) {
     if (sessionStorage.loginUser) {
       this.loginUser = JSON.parse(sessionStorage.loginUser);
       this.isGuest = false;
@@ -33,8 +34,6 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
       this.userName = Common.GUEST_NAME;
     }
 
-    this.subscriptionDefaultCategoryId = this.dataService.defaultCategoryId.subscribe(
-      defaultCategoryId => this.defaultCategoryId = defaultCategoryId);
     this.subscriptionLoginUser = this.dataService.loginUser.subscribe(
       loginUser => {
         if (loginUser.username && loginUser.username !== this.userName) {
@@ -49,12 +48,16 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
       categories => {
         this.categories = categories;
         this.dataService.changeCategories(this.categories);
+
+        if (categories.length > 0) {
+          this.defaultCategoryId = categories[0].id;
+          this.router.navigate([`/testee/category/${this.defaultCategoryId}`]);
+        }
       }
     );
   }
 
   ngOnDestroy(): void {
-    this.subscriptionDefaultCategoryId.unsubscribe();
     this.subscriptionLoginUser.unsubscribe();
   }
 
