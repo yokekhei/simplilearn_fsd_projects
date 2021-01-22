@@ -27,12 +27,12 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
     if (sessionStorage.loginUser) {
       this.loginUser = JSON.parse(sessionStorage.loginUser);
       this.isGuest = false;
-      this.userName = this.loginUser.username;
     } else {
       this.loginUser = { email: '', username: Common.GUEST_NAME, role: Common.ROLE_TESTEE };
       this.isGuest = true;
-      this.userName = Common.GUEST_NAME;
     }
+
+    this.userName = this.loginUser.username;
 
     this.subscriptionLoginUser = this.dataService.loginUser.subscribe(
       loginUser => {
