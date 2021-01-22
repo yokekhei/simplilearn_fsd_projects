@@ -23,5 +23,11 @@ public class UserController {
 	public User login(@Validated @RequestBody User user) throws OnlineTestServiceException {
 		return commonService.login(user.getEmail(), user.getPassword(), user.getRole());
 	}
+	
+	@PostMapping("/register")
+	public User register(@Validated @RequestBody User user) throws OnlineTestServiceException {
+		user.setEnabled(true);
+		return commonService.register(user);
+	}
 
 }
