@@ -20,8 +20,8 @@ public class UserController {
 	private CommonService commonService;
 	
 	@PostMapping("/login")
-	public void login(@Validated @RequestBody User user) throws OnlineTestServiceException {
-		commonService.login(user.getEmail(), user.getPassword(), user.getRole());
+	public User login(@Validated @RequestBody User user) throws OnlineTestServiceException {
+		return commonService.login(user.getEmail(), user.getPassword(), user.getRole());
 	}
 
 }
