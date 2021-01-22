@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.yokekhei.fsd.p4.api.entity.Category;
+import org.yokekhei.fsd.p4.api.dto.Category;
 import org.yokekhei.fsd.p4.api.exception.OnlineTestServiceException;
 import org.yokekhei.fsd.p4.api.service.CommonService;
 

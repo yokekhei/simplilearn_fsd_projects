@@ -8,6 +8,11 @@ import org.springframework.context.annotation.Configuration;
 public class MapperConfiguration {
 
 	@Bean
+	public CategoryMapper categoryMapper() {
+		return Mappers.getMapper(CategoryMapper.class);
+	}
+	
+	@Bean
 	public UserMapper userMapper() {
 		return Mappers.getMapper(UserMapper.class);
 	}

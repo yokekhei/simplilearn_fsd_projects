@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.yokekhei.fsd.p4.api.Common;
 import org.yokekhei.fsd.p4.api.dao.CategoryDao;
 import org.yokekhei.fsd.p4.api.dao.UserDao;
+import org.yokekhei.fsd.p4.api.dto.Category;
 import org.yokekhei.fsd.p4.api.dto.User;
-import org.yokekhei.fsd.p4.api.entity.Category;
 import org.yokekhei.fsd.p4.api.exception.OnlineTestServiceException;
 
 @Service
