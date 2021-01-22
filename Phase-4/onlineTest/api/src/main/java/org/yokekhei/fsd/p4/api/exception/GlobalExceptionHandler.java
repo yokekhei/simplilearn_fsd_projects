@@ -2,6 +2,7 @@ package org.yokekhei.fsd.p4.api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,8 +31,15 @@ public class GlobalExceptionHandler {
 	@ResponseBody
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<OnlineTestError> handleException(MethodArgumentNotValidException e) {
+		String defaultMessage = e.getMessage();
+		
+		for (ObjectError o : e.getBindingResult().getAllErrors()) {
+			defaultMessage = o.getDefaultMessage();
+			break;
+		}
+		
 		return ResponseEntity.badRequest()
-				.body(new OnlineTestError(Common.SB_VALIDATION_FAIL, e.getMessage()));
+				.body(new OnlineTestError(Common.SB_VALIDATION_FAIL, defaultMessage));
 	}
 	
 }
