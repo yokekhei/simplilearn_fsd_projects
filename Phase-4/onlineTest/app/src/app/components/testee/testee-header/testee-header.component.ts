@@ -26,7 +26,8 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
   constructor(private categoryService: CategoryService, private dataService: DataService,
               private userService: UserService, private router: Router) {
     if (this.userService.isLoggedIn()) {
-      this.loginUser = this.userService.loginUser;
+      this.loginUser = this.userService.loginUser ||
+        { email: '', username: '', role: Common.ROLE_TESTEE };
       this.isGuest = false;
     } else {
       this.loginUser = { email: '', username: Common.GUEST_NAME, role: Common.ROLE_TESTEE };

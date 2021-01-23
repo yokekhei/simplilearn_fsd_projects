@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Common } from '../core/common';
 import { ConfigurationService } from './configuration.service';
 import { LoginUser } from '../model/login-user';
 import { User } from '../model/user';
@@ -17,16 +18,28 @@ export class UserService {
     this.rootUrl = this.configuration.getValue('apiUrl');
   }
 
-  get loginUser(): LoginUser {
-    return JSON.parse(sessionStorage.loginUser);
+  get loginUser(): LoginUser | null {
+    if (sessionStorage.loginUser) {
+      return JSON.parse(sessionStorage.loginUser);
+    }
+
+    return null;
   }
 
-  set loginUser(o: LoginUser) {
+  set loginUser(o: LoginUser | null) {
     sessionStorage.loginUser = JSON.stringify(o);
   }
 
-  isLoggedIn(): boolean {
-    return sessionStorage.loginUser;
+  isLoggedIn(role: string = Common.ROLE_TESTEE): boolean {
+    if (this.loginUser && this.loginUser.role === role) {
+      return true;
+    }
+
+    return false;
+  }
+
+  removeSession(): void {
+    sessionStorage.clear();
   }
 
   login(user: User): Observable<User> | any {
