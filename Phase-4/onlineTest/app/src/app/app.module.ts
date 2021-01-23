@@ -23,6 +23,7 @@ import { TesterComponent } from './components/tester/tester/tester.component';
 import { TesterHeaderComponent } from './components/tester/tester-header/tester-header.component';
 import { TesterHomeComponent } from './components/tester/tester-home/tester-home.component';
 import { TesterLoginComponent } from './components/tester/tester-login/tester-login.component';
+import { TesterRegisterComponent } from './components/tester/tester-register/tester-register.component';
 import { UserService } from './services/user.service';
 
 @NgModule({
@@ -39,7 +40,8 @@ import { UserService } from './services/user.service';
     TesterComponent,
     TesterHeaderComponent,
     TesterHomeComponent,
-    TesterLoginComponent
+    TesterLoginComponent,
+    TesterRegisterComponent
   ],
   imports: [
     AppRoutingModule,

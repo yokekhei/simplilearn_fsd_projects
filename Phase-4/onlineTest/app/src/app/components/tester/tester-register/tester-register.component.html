@@ -1,0 +1,34 @@
+<form #registerForm="ngForm" (ngSubmit)="submit(registerForm)" class="text-center border border-light p-5 my-5">
+    <a routerLink="/tester/login">
+        <img class="mb-4" src="assets/images/logo.png" alt="" width="290" height="113">
+    </a>
+    <p class="h4 mb-4">Tester Sign up</p>
+    <input type="text" id="username" name="username" ngModel #username="ngModel" class="form-control mb-4"
+        placeholder="Username" required maxlength="30">
+    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="alert alert-danger">
+        <div *ngIf="username.errors?.required">
+            <small>Username is required</small>
+        </div>
+        <div *ngIf="username.errors?.maxlength">
+            <small>Username must not exceed 30 characters length</small>
+        </div>
+    </div>
+    <input type="email" id="email" name="email" ngModel #email="ngModel" class="form-control mb-4" placeholder="E-mail"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+        <div *ngIf="email.errors?.required">
+            <small>Email is required</small>
+        </div>
+        <div *ngIf="email.errors?.pattern">
+            <small>Please provide a valid email address</small>
+        </div>
+    </div>
+    <input type="password" id="password" name="password" ngModel #password="ngModel" class="form-control mb-4"
+        placeholder="Password" required>
+    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+        <div *ngIf="password.errors?.required">
+            <small>Password is required</small>
+        </div>
+    </div>
+    <button mdbBtn color="info" class="my-4 btn-block" type="submit" [disabled]="registerForm.invalid">Sign up</button>
+</form>
