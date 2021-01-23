@@ -7,6 +7,7 @@ import { CategoryService } from './../../../services/category.service';
 import { Common } from 'src/app/core/common';
 import { DataService } from 'src/app/services/data.service';
 import { LoginUser } from './../../../model/login-user';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-testee-header',
@@ -23,9 +24,9 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
   private loginUser: LoginUser;
 
   constructor(private categoryService: CategoryService, private dataService: DataService,
-              private router: Router) {
-    if (sessionStorage.loginUser) {
-      this.loginUser = JSON.parse(sessionStorage.loginUser);
+              private userService: UserService, private router: Router) {
+    if (this.userService.isLoggedIn()) {
+      this.loginUser = this.userService.loginUser;
       this.isGuest = false;
     } else {
       this.loginUser = { email: '', username: Common.GUEST_NAME, role: Common.ROLE_TESTEE };
@@ -38,7 +39,7 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
       loginUser => {
         if (loginUser.username && loginUser.username !== this.userName) {
           this.userName = loginUser.username;
-          this.isGuest = sessionStorage.loginUser ? false : true;
+          this.isGuest = this.userService.isLoggedIn() ? false : true;
         }
       });
   }

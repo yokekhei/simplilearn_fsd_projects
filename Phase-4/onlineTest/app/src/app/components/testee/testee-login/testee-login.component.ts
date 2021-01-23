@@ -49,7 +49,7 @@ export class TesteeLoginComponent implements OnInit, OnDestroy {
         this.loginUser.email = user.email;
         this.loginUser.username = user.username || user.email;
         this.loginUser.role = user.role;
-        sessionStorage.loginUser = JSON.stringify(this.loginUser);
+        this.userService.loginUser = this.loginUser;
       },
       (err: any) => swal(err.error.message, '', 'error'),
       () => {
