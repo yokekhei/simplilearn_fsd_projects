@@ -1,1 +1,19 @@
-<p>tester-header works!</p>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark cyan" [containerInside]="false">
+    <mdb-navbar-brand>
+        <a class="navbar-brand" routerLink="/testee" routerLinkActive="active"><img src="assets/images/logo.png"
+                alt="Home" width="95" height="38"></a>
+    </mdb-navbar-brand>
+    <links>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    <mdb-icon fas icon="user"></mdb-icon> {{ userName }}<span class="caret"></span>
+                </a>
+                <ul *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/tester/logout">Log out</a>
+                </ul>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar>
