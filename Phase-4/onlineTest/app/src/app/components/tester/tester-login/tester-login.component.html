@@ -1,12 +1,12 @@
-<div *ngIf="registered" class="alert alert-success alert-dismissible">
-    <a [routerLink]="['/testee/login']" [queryParams]="{ email: userEmail }" class="close" data-dismiss="alert"
+<div *ngIf="registered" class="alert alert-success alert-dismissible my-2">
+    <a [routerLink]="['/tester/login']" [queryParams]="{ email: userEmail }" class="close" data-dismiss="alert"
         aria-label="close">&times;</a>
     <small>Congratulations! You have signed up successfully.</small>
 </div>
 <form #loginForm="ngForm" (ngSubmit)="submit(loginForm)" class="text-center border border-light p-5 my-5">
     <a routerLink="/tester/login">
         <img class="mb-4" src="assets/images/logo.png" alt="" width="290" height="113">
-      </a>
+    </a>
     <p class="h4 mb-4">Tester Sign in</p>
     <input type="email" id="email" name="email" [(ngModel)]="userEmail" #email="ngModel" class="form-control mb-4"
         placeholder="E-mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
