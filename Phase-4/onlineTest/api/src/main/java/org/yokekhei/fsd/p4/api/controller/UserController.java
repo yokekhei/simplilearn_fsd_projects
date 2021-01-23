@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yokekhei.fsd.p4.api.dto.User;
 import org.yokekhei.fsd.p4.api.exception.OnlineTestServiceException;
-import org.yokekhei.fsd.p4.api.service.CommonService;
+import org.yokekhei.fsd.p4.api.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api",
@@ -17,17 +17,17 @@ import org.yokekhei.fsd.p4.api.service.CommonService;
 public class UserController {
 	
 	@Autowired
-	private CommonService commonService;
+	private UserService service;
 	
 	@PostMapping("/login")
 	public User login(@Validated @RequestBody User user) throws OnlineTestServiceException {
-		return commonService.login(user.getEmail(), user.getPassword(), user.getRole());
+		return service.login(user.getEmail(), user.getPassword(), user.getRole());
 	}
 	
 	@PostMapping("/register")
 	public User register(@Validated @RequestBody User user) throws OnlineTestServiceException {
 		user.setEnabled(true);
-		return commonService.register(user);
+		return service.register(user);
 	}
 
 }

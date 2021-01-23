@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.yokekhei.fsd.p4.api.dto.Category;
 import org.yokekhei.fsd.p4.api.exception.OnlineTestServiceException;
-import org.yokekhei.fsd.p4.api.service.CommonService;
+import org.yokekhei.fsd.p4.api.service.CategoryService;
 
 @RestController
 @RequestMapping(value = "/api",
@@ -17,11 +17,11 @@ import org.yokekhei.fsd.p4.api.service.CommonService;
 public class CategoryController {
 
 	@Autowired
-	private CommonService commonService;
+	private CategoryService service;
 	
 	@GetMapping("/category")
 	public List<Category> getCategories() throws OnlineTestServiceException {
-		return commonService.getCategories();
+		return service.getCategories();
 	}
 	
 }
