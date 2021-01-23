@@ -47,7 +47,7 @@ export class TesteeLoginComponent implements OnInit, OnDestroy {
     }).subscribe(
       (user: User) => {
         this.loginUser.email = user.email;
-        this.loginUser.username = user.username || Common.GUEST_NAME;
+        this.loginUser.username = user.username || user.email;
         this.loginUser.role = user.role;
         sessionStorage.loginUser = JSON.stringify(this.loginUser);
       },
