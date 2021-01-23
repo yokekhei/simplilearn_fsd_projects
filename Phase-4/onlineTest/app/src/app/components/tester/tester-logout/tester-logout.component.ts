@@ -6,11 +6,11 @@ import { DataService } from 'src/app/services/data.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-testee-logout',
-  templateUrl: './testee-logout.component.html',
-  styleUrls: ['./testee-logout.component.scss']
+  selector: 'app-tester-logout',
+  templateUrl: './tester-logout.component.html',
+  styleUrls: ['./tester-logout.component.scss']
 })
-export class TesteeLogoutComponent implements OnInit {
+export class TesterLogoutComponent implements OnInit {
 
   constructor(private dataService: DataService, private userService: UserService,
               private router: Router) { }
@@ -19,8 +19,8 @@ export class TesteeLogoutComponent implements OnInit {
     this.userService.removeSession();
 
     this.dataService.changeLoginUser(
-      { email: '', username: Common.GUEST_NAME, role: Common.ROLE_TESTEE });
-    this.router.navigate(['/testee/login']);
+      { email: '', username: '', role: Common.ROLE_TESTER });
+    this.router.navigate(['/tester/login']);
   }
 
 }
