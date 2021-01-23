@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
@@ -17,18 +17,26 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TesteeLoginComponent implements OnInit, OnDestroy {
 
+  userEmail = '';
+  registered = false;
+
   private loginUser: LoginUser;
   private subscriptionLatestCategoryId: Subscription;
   private latestCategoryId = 0;
 
   constructor(private userService: UserService, private dataService: DataService,
-              private router: Router) {
+              private router: Router, private activatedRoute: ActivatedRoute) {
     this.loginUser = { email: '', username: Common.GUEST_NAME, role: Common.ROLE_TESTEE };
     this.subscriptionLatestCategoryId = this.dataService.latestCategoryId.subscribe(
       latestCategoryId => this.latestCategoryId = latestCategoryId);
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(
+      qs => {
+        this.userEmail = qs.email;
+        this.registered = qs.registered;
+      });
   }
 
   submit(form: NgForm): void {

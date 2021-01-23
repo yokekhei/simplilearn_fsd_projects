@@ -6,6 +6,7 @@ import { TesteeCategoryComponent } from './components/testee/testee-category/tes
 import { TesteeLoginComponent } from './components/testee/testee-login/testee-login.component';
 import { TesteeLogoutComponent } from './components/testee/testee-logout/testee-logout.component';
 import { TesteeQuizCatalogComponent } from './components/testee/testee-quiz-catalog/testee-quiz-catalog.component';
+import { TesteeRegisterComponent } from './components/testee/testee-register/testee-register.component';
 import { TesterComponent } from './components/tester/tester/tester.component';
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
         ]
       },
       { path: 'login', component: TesteeLoginComponent },
-      { path: 'logout', component: TesteeLogoutComponent }
+      { path: 'logout', component: TesteeLogoutComponent },
+      { path: 'register', component: TesteeRegisterComponent }
     ]
   },
 

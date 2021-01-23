@@ -19,4 +19,9 @@ export class UserService {
   login(user: User): Observable<User> | any {
     return this.http.post<User>(`${this.rootUrl}/login`, user);
   }
+
+  register(user: User): Observable<User> | any {
+    return this.http.post<User>(`${this.rootUrl}/register`, user);
+  }
+
 }
