@@ -38,7 +38,7 @@ export class TesteeHeaderComponent implements OnInit, OnDestroy {
       loginUser => {
         if (loginUser.username && loginUser.username !== this.userName) {
           this.userName = loginUser.username;
-          this.isGuest = false;
+          this.isGuest = sessionStorage.loginUser ? false : true;
         }
       });
   }
