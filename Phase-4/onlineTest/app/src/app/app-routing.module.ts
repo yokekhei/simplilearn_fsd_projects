@@ -11,6 +11,7 @@ import { TesteeRegisterComponent } from './components/testee/testee-register/tes
 import { TesterComponent } from './components/tester/tester/tester.component';
 import { TesterHomeComponent } from './components/tester/tester-home/tester-home.component';
 import { TesterLoginComponent } from './components/tester/tester-login/tester-login.component';
+import { TesterLogoutComponent } from './components/tester/tester-logout/tester-logout.component';
 import { TesterRegisterComponent } from './components/tester/tester-register/tester-register.component';
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   { path: 'tester', component: TesterComponent,
     children: [
       { path: 'login', component: TesterLoginComponent },
+      { path: 'logout', component: TesterLogoutComponent },
       { path: 'register', component: TesterRegisterComponent },
       { path: 'home', component: TesterHomeComponent, canActivate: [ AuthGuard ] },
       { path: '**', redirectTo: '/tester/login', pathMatch: 'full' }
