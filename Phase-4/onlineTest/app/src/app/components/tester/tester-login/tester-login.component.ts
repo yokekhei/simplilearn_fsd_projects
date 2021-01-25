@@ -4,10 +4,10 @@ import { NgForm } from '@angular/forms';
 import swal from 'sweetalert';
 
 import { Common } from 'src/app/core/common';
+import { DataService } from 'src/app/services/data.service';
 import { LoginUser } from 'src/app/model/login-user';
 import { User } from 'src/app/model/user';
 import { UserService } from 'src/app/services/user.service';
-import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-tester-login',
@@ -34,6 +34,10 @@ export class TesterLoginComponent implements OnInit {
         this.userEmail = qs.email;
         this.registered = qs.registered;
       });
+
+    if (this.userService.isLoggedIn(Common.ROLE_TESTER)) {
+        this.router.navigate(['/tester/home']);
+      }
   }
 
   submit(form: NgForm): void {
