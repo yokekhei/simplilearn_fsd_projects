@@ -1,9 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { Category } from 'src/app/model/category';
 import { DataService } from 'src/app/services/data.service';
+import { Quiz } from './../../../model/quiz';
+import { QuizService } from './../../../services/quiz.service';
 
 @Component({
   selector: 'app-testee-quiz-catalog',
@@ -12,11 +14,13 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class TesteeQuizCatalogComponent implements OnInit, OnDestroy {
 
+  quizzes: Quiz[] = [];
   category: Category;
   private categories: Category[] = [];
   private subscriptionCategories: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute, private dataService: DataService) {
+  constructor(private activatedRoute: ActivatedRoute, private dataService: DataService,
+              private quizService: QuizService) {
     this.category = { id: 0, name: 'Default Category' };
     this.subscriptionCategories = this.dataService.categories.subscribe(
       categories => this.categories = categories);
@@ -31,9 +35,15 @@ export class TesteeQuizCatalogComponent implements OnInit, OnDestroy {
         if (result.length > 0) {
           this.category = result[0];
           this.dataService.changeLatestCategoryId(this.category.id);
+          this.refreshQuizList();
         }
       }
     });
+  }
+
+  refreshQuizList(): void {
+    this.quizService.getQuizzesByCategory(this.category.id)
+      .subscribe(quizzes => this.quizzes = quizzes);
   }
 
   ngOnDestroy(): void {

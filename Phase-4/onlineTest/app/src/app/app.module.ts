@@ -19,6 +19,8 @@ import { TesteeHeaderComponent } from './components/testee/testee-header/testee-
 import { TesteeLoginComponent } from './components/testee/testee-login/testee-login.component';
 import { TesteeLogoutComponent } from './components/testee/testee-logout/testee-logout.component';
 import { TesteeQuizCatalogComponent } from './components/testee/testee-quiz-catalog/testee-quiz-catalog.component';
+import { TesteeQuizComponent } from './components/testee/testee-quiz/testee-quiz.component';
+import { TesteeQuizStepsComponent } from './components/testee/testee-quiz-steps/testee-quiz-steps.component';
 import { TesteeRegisterComponent } from './components/testee/testee-register/testee-register.component';
 import { TesterComponent } from './components/tester/tester/tester.component';
 import { TesterHeaderComponent } from './components/tester/tester-header/tester-header.component';
@@ -42,6 +44,8 @@ import { UserService } from './services/user.service';
     TesteeLoginComponent,
     TesteeLogoutComponent,
     TesteeQuizCatalogComponent,
+    TesteeQuizComponent,
+    TesteeQuizStepsComponent,
     TesteeRegisterComponent,
     TesterComponent,
     TesterHeaderComponent,

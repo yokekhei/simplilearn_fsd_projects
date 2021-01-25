@@ -7,7 +7,9 @@ import { TesteeCategoryComponent } from './components/testee/testee-category/tes
 import { TesteeLoginComponent } from './components/testee/testee-login/testee-login.component';
 import { TesteeLogoutComponent } from './components/testee/testee-logout/testee-logout.component';
 import { TesteeQuizCatalogComponent } from './components/testee/testee-quiz-catalog/testee-quiz-catalog.component';
+import { TesteeQuizComponent } from './components/testee/testee-quiz/testee-quiz.component';
 import { TesterQuizDetailsComponent } from './components/tester/tester-quiz-details/tester-quiz-details.component';
+import { TesteeQuizStepsComponent } from './components/testee/testee-quiz-steps/testee-quiz-steps.component';
 import { TesteeRegisterComponent } from './components/testee/testee-register/testee-register.component';
 import { TesterComponent } from './components/tester/tester/tester.component';
 import { TesterHomeComponent } from './components/tester/tester-home/tester-home.component';
@@ -29,7 +31,12 @@ const routes: Routes = [
       },
       { path: 'login', component: TesteeLoginComponent },
       { path: 'logout', component: TesteeLogoutComponent },
-      { path: 'register', component: TesteeRegisterComponent }
+      { path: 'register', component: TesteeRegisterComponent },
+      { path: 'quiz', component: TesteeQuizComponent,
+        children: [
+          { path: ':id', component: TesteeQuizStepsComponent }
+        ]
+      }
     ]
   },
 
