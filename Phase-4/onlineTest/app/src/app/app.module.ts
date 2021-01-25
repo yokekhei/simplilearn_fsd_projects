@@ -12,6 +12,7 @@ import { CategoryService } from './services/category.service';
 import { DataService } from './services/data.service';
 import { ENVIRONMENT, ConfigurationService } from './services/configuration.service';
 import { FooterComponent } from './components/common/footer/footer.component';
+import { QuizService } from './services/quiz.service';
 import { TesteeCategoryComponent } from './components/testee/testee-category/testee-category.component';
 import { TesteeComponent } from './components/testee/testee/testee.component';
 import { TesteeHeaderComponent } from './components/testee/testee-header/testee-header.component';
@@ -24,6 +25,10 @@ import { TesterHeaderComponent } from './components/tester/tester-header/tester-
 import { TesterHomeComponent } from './components/tester/tester-home/tester-home.component';
 import { TesterLoginComponent } from './components/tester/tester-login/tester-login.component';
 import { TesterLogoutComponent } from './components/tester/tester-logout/tester-logout.component';
+import { TesterQuizzesComponent } from './components/tester/tester-quizzes/tester-quizzes.component';
+import { TesterQuizCreateComponent } from './components/tester/tester-quiz-create/tester-quiz-create.component';
+import { TesterQuizDetailsComponent } from './components/tester/tester-quiz-details/tester-quiz-details.component';
+import { TesterQuizUpdateComponent } from './components/tester/tester-quiz-update/tester-quiz-update.component';
 import { TesterRegisterComponent } from './components/tester/tester-register/tester-register.component';
 import { UserService } from './services/user.service';
 
@@ -43,6 +48,10 @@ import { UserService } from './services/user.service';
     TesterHomeComponent,
     TesterLoginComponent,
     TesterLogoutComponent,
+    TesterQuizzesComponent,
+    TesterQuizCreateComponent,
+    TesterQuizDetailsComponent,
+    TesterQuizUpdateComponent,
     TesterRegisterComponent
   ],
   imports: [
@@ -57,6 +66,7 @@ import { UserService } from './services/user.service';
     CategoryService,
     ConfigurationService,
     DataService,
+    QuizService,
     UserService
   ],
   bootstrap: [AppComponent]

@@ -7,11 +7,15 @@ import { TesteeCategoryComponent } from './components/testee/testee-category/tes
 import { TesteeLoginComponent } from './components/testee/testee-login/testee-login.component';
 import { TesteeLogoutComponent } from './components/testee/testee-logout/testee-logout.component';
 import { TesteeQuizCatalogComponent } from './components/testee/testee-quiz-catalog/testee-quiz-catalog.component';
+import { TesterQuizDetailsComponent } from './components/tester/tester-quiz-details/tester-quiz-details.component';
 import { TesteeRegisterComponent } from './components/testee/testee-register/testee-register.component';
 import { TesterComponent } from './components/tester/tester/tester.component';
 import { TesterHomeComponent } from './components/tester/tester-home/tester-home.component';
 import { TesterLoginComponent } from './components/tester/tester-login/tester-login.component';
 import { TesterLogoutComponent } from './components/tester/tester-logout/tester-logout.component';
+import { TesterQuizzesComponent } from './components/tester/tester-quizzes/tester-quizzes.component';
+import { TesterQuizCreateComponent } from './components/tester/tester-quiz-create/tester-quiz-create.component';
+import { TesterQuizUpdateComponent } from './components/tester/tester-quiz-update/tester-quiz-update.component';
 import { TesterRegisterComponent } from './components/tester/tester-register/tester-register.component';
 
 const routes: Routes = [
@@ -35,7 +39,18 @@ const routes: Routes = [
       { path: 'login', component: TesterLoginComponent },
       { path: 'logout', component: TesterLogoutComponent },
       { path: 'register', component: TesterRegisterComponent },
-      { path: 'home', component: TesterHomeComponent, canActivate: [ AuthGuard ] },
+      { path: 'home', component: TesterHomeComponent, canActivate: [ AuthGuard ],
+        children: [
+          { path: 'quiz', component: TesterQuizzesComponent },
+          { path: 'quiz/add', component: TesterQuizCreateComponent },
+          { path: 'quiz/update', component: TesterQuizUpdateComponent,
+            children: [
+              { path: ':id', component: TesterQuizDetailsComponent }
+            ]
+          },
+          { path: '**', redirectTo: '/tester/home/quiz', pathMatch: 'full' }
+        ]
+      },
       { path: '**', redirectTo: '/tester/login', pathMatch: 'full' }
     ]
   },
