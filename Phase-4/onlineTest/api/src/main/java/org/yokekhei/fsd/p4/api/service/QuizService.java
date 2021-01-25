@@ -2,15 +2,16 @@ package org.yokekhei.fsd.p4.api.service;
 
 import java.util.List;
 
-import org.yokekhei.fsd.p4.api.dto.Category;
-import org.yokekhei.fsd.p4.api.dto.User;
+import org.yokekhei.fsd.p4.api.dto.Quiz;
 import org.yokekhei.fsd.p4.api.exception.OnlineTestServiceException;
 
-public interface CommonService {
-
-	List<Category> getCategories() throws OnlineTestServiceException;
+public interface QuizService {
 	
-	User login(String email, String password, String role) throws OnlineTestServiceException;
-	User register(User user) throws OnlineTestServiceException;
+	Quiz getQuiz(Long id) throws OnlineTestServiceException;
+	List<Quiz> getQuizzesByCategoryId(Long id) throws OnlineTestServiceException;
+	List<Quiz> getQuizzesByTesterEmail(String email) throws OnlineTestServiceException;
+	Quiz createQuiz(Quiz quiz) throws OnlineTestServiceException;
+	Quiz updateQuiz(Quiz quiz) throws OnlineTestServiceException;
+	Quiz deleteQuiz(Long id) throws OnlineTestServiceException;
 	
 }

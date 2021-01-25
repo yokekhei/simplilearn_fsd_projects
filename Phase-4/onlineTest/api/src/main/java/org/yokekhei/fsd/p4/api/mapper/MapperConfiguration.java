@@ -17,4 +17,24 @@ public class MapperConfiguration {
 		return Mappers.getMapper(UserMapper.class);
 	}
 	
+	@Bean
+	public QuizMapper quizMapper() {
+		return Mappers.getMapper(QuizMapper.class);
+	}
+	
+	@Bean
+	public QuestionMapper questionMapper() {
+		return Mappers.getMapper(QuestionMapper.class);
+	}
+	
+	@Bean
+	public ChoiceMapper choiceMapper() {
+		return Mappers.getMapper(ChoiceMapper.class);
+	}
+	
+	@Bean
+	public AnswerMapperService answerMapperService() {
+		return Mappers.getMapper(AnswerMapperService.class);
+	}
+	
 }
