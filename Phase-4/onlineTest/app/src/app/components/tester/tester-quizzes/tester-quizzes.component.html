@@ -38,10 +38,9 @@
                             <i class="far fa-trash-alt mt-0"></i>
                         </button>
                     </td>
-                    <td class="quizName">{{ quiz.name }}</td>
-                    <td class="quizCategory">{{ getCategory(quiz.categoryId) }}</td>
-                    <td class="quizCreatedDate">{{ getDate(quiz.createdDateTime) | date:'MM/dd/yyyy' }}</td>
-                    <td class="quizId" style="display:none;">{{ quiz.id }}</td>
+                    <td>{{ quiz.name }}</td>
+                    <td>{{ getCategory(quiz.categoryId) }}</td>
+                    <td>{{ getDate(quiz.createdDateTime) | date:'MM/dd/yyyy' }}</td>
                 </tr>
             </tbody>
         </table>
