@@ -75,7 +75,10 @@ export class TesterQuizDetailsComponent implements OnInit, OnDestroy {
     return quiz;
   }
 
-  onValidate(data: string): void {
+  onValidate(event: Event): void {
+    if (event === null) { return; }
+
+    const data: string = (event.target as HTMLTextAreaElement).value || '{}';
     const json: Quiz = JSON.parse(data);
 
     if (this.isValidated(json)) {

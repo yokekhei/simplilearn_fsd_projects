@@ -13,7 +13,6 @@
         <div *ngIf="quiz && validated" class="alert alert-success">
             <small>{{ message }}</small>
         </div>
-        <textarea class="form-control mb-4" rows="18"
-            (input)="onValidate($event.target.value)">{{ quiz | json }}</textarea>
+        <textarea class="form-control mb-4" rows="18" (input)="onValidate($event)">{{ quiz | json }}</textarea>
     </div>
 </div>
