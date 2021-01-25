@@ -3,6 +3,7 @@ package org.yokekhei.fsd.p4.api.dao;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.yokekhei.fsd.p4.api.dto.User;
 import org.yokekhei.fsd.p4.api.exception.OnlineTestDaoException;
 import org.yokekhei.fsd.p4.api.mapper.UserMapper;
@@ -47,6 +48,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	@Transactional
 	public User save(User user) throws OnlineTestDaoException {
 		User savedUser = null;
 		
