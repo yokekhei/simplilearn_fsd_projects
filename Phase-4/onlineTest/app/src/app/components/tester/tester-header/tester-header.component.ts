@@ -9,10 +9,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class TesterHeaderComponent implements OnInit {
 
-  userName: string;
+  userName = '';
 
   constructor(private userService: UserService) {
-    this.userName = this.userService.loginUser.username;
+    this.userName = this.userService.loginUser?.username || '';
   }
 
   ngOnInit(): void {
