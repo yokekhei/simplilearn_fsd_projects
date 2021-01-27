@@ -1,1 +1,44 @@
-<router-outlet></router-outlet>
+<h3 class="quiz-title">Quiz >> {{ quizName }}</h3>
+<div class="row">
+    <div class="col-md-9">
+        <div class="mt-3 card">
+            <div class="card-header text-white bg-grey">Question {{ getCurrentQuestionNo() }}</div>
+            <div class="card-body">
+                <form ngForm (ngSubmit)="onSubmit()">
+                    <div class="tab" [ngStyle]="{ display: stepViews[i].tabDisplay }"
+                        *ngFor="let question of questions; let i = index">
+                        <h4 class="mb-5">{{ question.desc }}</h4>
+                        <div class="form-check mt-3" *ngFor="let choice of questions[i].choices; let j = index">
+                            <input class="form-check-input" type="radio" [value]="j" name="q{{i}}" id="q{{i}}c{{j}}"
+                                ngModel (ngModelChange)="onChoiceChange(i, $event)">
+                            <label class="form-check-label" for="q{{i}}c{{j}}">
+                                {{ choice.desc }}
+                            </label>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button mdbBtn size="lg" class="btn btn-quiz text-white btn-block" type="button"
+                                [ngStyle]="{ display: prevBtnDisplay }" (click)="nextPrev(-1)">Previous</button>
+                        </div>
+                        <div class="col-md-6">
+                            <button mdbBtn size="lg" class="btn btn-quiz text-white btn-block" [type]="nextBtnType"
+                                [ngStyle]="{ display: nextBtnDisplay }" (click)="nextPrev(1)">{{ nextBtnText }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="mt-3 card">
+            <div class="card-header text-white bg-grey">Review</div>
+            <ul class="list-group list-group-flush">
+                <app-testee-quiz-review *ngFor="let view of stepViews" [review]="view.review"
+                    (tabChange)="onTabChange($event)">
+                </app-testee-quiz-review>
+            </ul>
+        </div>
+    </div>
+</div>

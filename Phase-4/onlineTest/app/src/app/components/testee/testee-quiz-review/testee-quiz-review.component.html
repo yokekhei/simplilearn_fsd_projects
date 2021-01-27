@@ -1,0 +1,6 @@
+<li class="list-group-item">
+    <div class="d-flex justify-content-between" (click)="onReviewSelected()">
+        <span>Question {{ review?.questionNo }}</span>
+        <i *ngIf="review?.isAnswered" class="fa fa-check text-quiz"></i>
+    </div>
+</li>

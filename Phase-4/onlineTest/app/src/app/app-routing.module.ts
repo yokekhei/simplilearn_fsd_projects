@@ -8,8 +8,7 @@ import { TesteeLoginComponent } from './components/testee/testee-login/testee-lo
 import { TesteeLogoutComponent } from './components/testee/testee-logout/testee-logout.component';
 import { TesteeQuizCatalogComponent } from './components/testee/testee-quiz-catalog/testee-quiz-catalog.component';
 import { TesteeQuizComponent } from './components/testee/testee-quiz/testee-quiz.component';
-import { TesterQuizDetailsComponent } from './components/tester/tester-quiz-details/tester-quiz-details.component';
-import { TesteeQuizStepsComponent } from './components/testee/testee-quiz-steps/testee-quiz-steps.component';
+import { TesteeQuizResultComponent } from './components/testee/testee-quiz-result/testee-quiz-result.component';
 import { TesteeRegisterComponent } from './components/testee/testee-register/testee-register.component';
 import { TesterComponent } from './components/tester/tester/tester.component';
 import { TesterHomeComponent } from './components/tester/tester-home/tester-home.component';
@@ -17,6 +16,7 @@ import { TesterLoginComponent } from './components/tester/tester-login/tester-lo
 import { TesterLogoutComponent } from './components/tester/tester-logout/tester-logout.component';
 import { TesterQuizzesComponent } from './components/tester/tester-quizzes/tester-quizzes.component';
 import { TesterQuizCreateComponent } from './components/tester/tester-quiz-create/tester-quiz-create.component';
+import { TesterQuizDetailsComponent } from './components/tester/tester-quiz-details/tester-quiz-details.component';
 import { TesterQuizUpdateComponent } from './components/tester/tester-quiz-update/tester-quiz-update.component';
 import { TesterRegisterComponent } from './components/tester/tester-register/tester-register.component';
 
@@ -32,11 +32,8 @@ const routes: Routes = [
       { path: 'login', component: TesteeLoginComponent },
       { path: 'logout', component: TesteeLogoutComponent },
       { path: 'register', component: TesteeRegisterComponent },
-      { path: 'quiz', component: TesteeQuizComponent,
-        children: [
-          { path: ':id', component: TesteeQuizStepsComponent }
-        ]
-      }
+      { path: 'quiz/:id', component: TesteeQuizComponent },
+      { path: 'quiz/:id/result', component: TesteeQuizResultComponent }
     ]
   },
 
