@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from './guards/auth.guard';
+import { CreditComponent } from './components/common/credit/credit.component';
 import { TesteeComponent } from './components/testee/testee/testee.component';
 import { TesteeCategoryComponent } from './components/testee/testee-category/testee-category.component';
 import { TesteeLoginComponent } from './components/testee/testee-login/testee-login.component';
@@ -55,6 +56,7 @@ const routes: Routes = [
   },
 
   // General
+  { path: 'credit', component: CreditComponent },
   { path: '**', redirectTo: '/testee/category', pathMatch: 'full' }
 ];
 

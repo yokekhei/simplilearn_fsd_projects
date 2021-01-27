@@ -9,6 +9,7 @@ import { environment } from './../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CategoryService } from './services/category.service';
+import { CreditComponent } from './components/common/credit/credit.component';
 import { DataService } from './services/data.service';
 import { ENVIRONMENT, ConfigurationService } from './services/configuration.service';
 import { FooterComponent } from './components/common/footer/footer.component';
@@ -37,6 +38,7 @@ import { UserService } from './services/user.service';
 @NgModule({
   declarations: [
     AppComponent,
+    CreditComponent,
     FooterComponent,
     TesteeComponent,
     TesteeCategoryComponent,
