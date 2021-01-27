@@ -4,11 +4,11 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
-import { Category } from './../../../model/category';
+import { Category } from '../../../models/category';
 import { Common } from 'src/app/core/common';
 import { DataService } from 'src/app/services/data.service';
-import { LoginUser } from './../../../model/login-user';
-import { User } from './../../../model/user';
+import { LoginUser } from '../../../models/login-user';
+import { User } from '../../../models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

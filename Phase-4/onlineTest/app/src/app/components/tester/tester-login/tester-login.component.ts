@@ -5,8 +5,8 @@ import swal from 'sweetalert';
 
 import { Common } from 'src/app/core/common';
 import { DataService } from 'src/app/services/data.service';
-import { LoginUser } from 'src/app/model/login-user';
-import { User } from 'src/app/model/user';
+import { LoginUser } from 'src/app/models/login-user';
+import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

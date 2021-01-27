@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-import { Review } from './../../../model/review';
+import { Review } from '../../../models/review';
 
 @Component({
   selector: 'app-testee-quiz-review',

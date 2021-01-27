@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Category } from 'src/app/model/category';
+import { Category } from 'src/app/models/category';
 import { CategoryService } from './../../../services/category.service';
 import { Common } from 'src/app/core/common';
 import { DataService } from 'src/app/services/data.service';
-import { LoginUser } from './../../../model/login-user';
+import { LoginUser } from '../../../models/login-user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

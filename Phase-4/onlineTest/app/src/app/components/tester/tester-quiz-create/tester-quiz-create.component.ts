@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
-import { Category } from './../../../model/category';
+import { Category } from '../../../models/category';
 import { DataService } from 'src/app/services/data.service';
-import { Quiz } from './../../../model/quiz';
+import { Quiz } from '../../../models/quiz';
 import { QuizService } from './../../../services/quiz.service';
 
 @Component({

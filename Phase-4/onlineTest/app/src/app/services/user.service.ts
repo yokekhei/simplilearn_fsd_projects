@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 
 import { Common } from '../core/common';
 import { ConfigurationService } from './configuration.service';
-import { LoginUser } from '../model/login-user';
-import { User } from '../model/user';
+import { LoginUser } from '../models/login-user';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'

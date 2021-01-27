@@ -3,14 +3,14 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
-import { Answer } from 'src/app/model/answer';
-import { Category } from './../../../model/category';
+import { Answer } from 'src/app/models/answer';
+import { Category } from '../../../models/category';
 import { DataService } from 'src/app/services/data.service';
-import { FormChoice } from './../../../model/form-choice';
-import { Question } from 'src/app/model/question';
-import { Quiz } from './../../../model/quiz';
+import { FormChoice } from '../../../models/form-choice';
+import { Question } from 'src/app/models/question';
+import { Quiz } from '../../../models/quiz';
 import { QuizService } from './../../../services/quiz.service';
-import { QuizStepView } from './../../../model/quiz-step-view';
+import { QuizStepView } from '../../../models/quiz-step-view';
 
 @Component({
   selector: 'app-testee-quiz',

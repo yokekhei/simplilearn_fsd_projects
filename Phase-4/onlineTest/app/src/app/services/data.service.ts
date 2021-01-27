@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Answer } from '../model/answer';
-import { Category } from 'src/app/model/category';
-import { LoginUser } from '../model/login-user';
+import { Answer } from '../models/answer';
+import { Category } from 'src/app/models/category';
+import { LoginUser } from '../models/login-user';
 
 @Injectable({
   providedIn: 'root'

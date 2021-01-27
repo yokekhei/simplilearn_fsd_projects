@@ -1,4 +1,4 @@
-import { Configuration } from 'src/app/model/configuration';
+import { Configuration } from 'src/app/models/configuration';
 
 export const environment: Configuration = {
   production: true,

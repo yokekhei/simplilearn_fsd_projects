@@ -1,13 +1,13 @@
-import { ResultListItemStyle } from './../../../model/result-list-item-style';
+import { ResultListItemStyle } from '../../../models/result-list-item-style';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
-import { Answer } from 'src/app/model/answer';
-import { FormChoice } from './../../../model/form-choice';
+import { Answer } from 'src/app/models/answer';
+import { FormChoice } from '../../../models/form-choice';
 import { DataService } from 'src/app/services/data.service';
-import { Question } from 'src/app/model/question';
-import { ResultView } from './../../../model/result-view';
+import { Question } from 'src/app/models/question';
+import { ResultView } from '../../../models/result-view';
 
 @Component({
   selector: 'app-testee-quiz-result',

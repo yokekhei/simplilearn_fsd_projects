@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { ConfigurationService } from './configuration.service';
-import { Quiz } from './../model/quiz';
+import { Quiz } from '../models/quiz';
 
 @Injectable({
   providedIn: 'root'

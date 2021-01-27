@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import swal from 'sweetalert';
 
 import { Common } from 'src/app/core/common';
-import { User } from 'src/app/model/user';
+import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

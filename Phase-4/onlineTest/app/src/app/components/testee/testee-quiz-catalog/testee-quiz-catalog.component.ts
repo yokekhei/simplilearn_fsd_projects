@@ -2,9 +2,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Category } from 'src/app/model/category';
+import { Category } from 'src/app/models/category';
 import { DataService } from 'src/app/services/data.service';
-import { Quiz } from './../../../model/quiz';
+import { Quiz } from '../../../models/quiz';
 import { QuizService } from './../../../services/quiz.service';
 
 @Component({
