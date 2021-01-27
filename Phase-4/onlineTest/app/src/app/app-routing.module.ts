@@ -16,7 +16,6 @@ import { TesterLoginComponent } from './components/tester/tester-login/tester-lo
 import { TesterLogoutComponent } from './components/tester/tester-logout/tester-logout.component';
 import { TesterQuizzesComponent } from './components/tester/tester-quizzes/tester-quizzes.component';
 import { TesterQuizCreateComponent } from './components/tester/tester-quiz-create/tester-quiz-create.component';
-import { TesterQuizDetailsComponent } from './components/tester/tester-quiz-details/tester-quiz-details.component';
 import { TesterQuizUpdateComponent } from './components/tester/tester-quiz-update/tester-quiz-update.component';
 import { TesterRegisterComponent } from './components/tester/tester-register/tester-register.component';
 
@@ -47,11 +46,7 @@ const routes: Routes = [
         children: [
           { path: 'quiz', component: TesterQuizzesComponent },
           { path: 'quiz/add', component: TesterQuizCreateComponent },
-          { path: 'quiz/update', component: TesterQuizUpdateComponent,
-            children: [
-              { path: ':id', component: TesterQuizDetailsComponent }
-            ]
-          },
+          { path: 'quiz/update/:id', component: TesterQuizUpdateComponent },
           { path: '**', redirectTo: '/tester/home/quiz', pathMatch: 'full' }
         ]
       },

@@ -30,7 +30,6 @@ import { TesterLoginComponent } from './components/tester/tester-login/tester-lo
 import { TesterLogoutComponent } from './components/tester/tester-logout/tester-logout.component';
 import { TesterQuizzesComponent } from './components/tester/tester-quizzes/tester-quizzes.component';
 import { TesterQuizCreateComponent } from './components/tester/tester-quiz-create/tester-quiz-create.component';
-import { TesterQuizDetailsComponent } from './components/tester/tester-quiz-details/tester-quiz-details.component';
 import { TesterQuizUpdateComponent } from './components/tester/tester-quiz-update/tester-quiz-update.component';
 import { TesterRegisterComponent } from './components/tester/tester-register/tester-register.component';
 import { UserService } from './services/user.service';
@@ -56,7 +55,6 @@ import { UserService } from './services/user.service';
     TesterLogoutComponent,
     TesterQuizzesComponent,
     TesterQuizCreateComponent,
-    TesterQuizDetailsComponent,
     TesterQuizUpdateComponent,
     TesterRegisterComponent
   ],

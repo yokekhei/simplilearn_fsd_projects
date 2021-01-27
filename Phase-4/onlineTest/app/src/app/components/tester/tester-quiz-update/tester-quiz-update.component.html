@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="mt-5 card card-cascade narrower">
+    <div class="py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+        <h4 class="quiz-title"><i class="fas fa-pencil-alt mt-0 text-primary px-2"></i> Quiz</h4>
+        <button mdbBtn size="sm" class="waves-light btn btn-primary" mdbWavesEffect (click)="onUpdateQuiz()"
+            [disabled]="!validated">
+            <span>Update</span>
+        </button>
+    </div>
+    <div class="px-4">
+        <div *ngIf="quiz && !validated" class="alert alert-danger">
+            <small>{{ message }}</small>
+        </div>
+        <div *ngIf="quiz && validated" class="alert alert-success">
+            <small>{{ message }}</small>
+        </div>
+        <textarea class="form-control mb-4" rows="18" (input)="onValidate($event)">{{ quiz | json }}</textarea>
+    </div>
+</div>
