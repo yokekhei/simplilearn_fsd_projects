@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
 import { Answer } from 'src/app/model/answer';
+import { Category } from './../../../model/category';
 import { DataService } from 'src/app/services/data.service';
 import { FormChoice } from './../../../model/form-choice';
 import { Question } from 'src/app/model/question';
@@ -27,16 +28,16 @@ export class TesteeQuizComponent implements OnInit, OnDestroy {
   nextBtnDisplay = 'none';
   nextBtnText = 'Next';
   nextBtnType = 'button';
-  private subscriptionLatestCategoryId: Subscription;
-  private latestCategoryId = 0;
+  private subscriptionLatestCategory: Subscription;
+  private latestCategory?: Category;
   private suscriptionAnswer: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router,
               private quizService: QuizService,
               private dataService: DataService) {
-    this.subscriptionLatestCategoryId = this.dataService.latestCategoryId
-      .subscribe(latestCategoryId => this.latestCategoryId = latestCategoryId);
+    this.subscriptionLatestCategory = this.dataService.latestCategory
+      .subscribe(latestCategory => this.latestCategory = latestCategory);
 
     this.suscriptionAnswer = this.dataService.answer.subscribe(
       answer => {
@@ -80,7 +81,7 @@ export class TesteeQuizComponent implements OnInit, OnDestroy {
 
           this.showTab(this.currentTab);
         },
-        (err: any) => this.router.navigate([`/testee/category/${this.latestCategoryId}`])
+        (err: any) => this.router.navigate([`/testee/category/${this.latestCategory?.id}`])
       );
     });
   }
@@ -168,7 +169,7 @@ export class TesteeQuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptionLatestCategoryId.unsubscribe();
+    this.subscriptionLatestCategory.unsubscribe();
     this.suscriptionAnswer.unsubscribe();
   }
 

@@ -1,9 +1,10 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
+import { Category } from './../../../model/category';
 import { Common } from 'src/app/core/common';
 import { DataService } from 'src/app/services/data.service';
 import { LoginUser } from './../../../model/login-user';
@@ -21,14 +22,14 @@ export class TesteeLoginComponent implements OnInit, OnDestroy {
   registered = false;
 
   private loginUser: LoginUser;
-  private subscriptionLatestCategoryId: Subscription;
-  private latestCategoryId = 0;
+  private subscriptionLatestCategory: Subscription;
+  private latestCategory?: Category;
 
   constructor(private userService: UserService, private dataService: DataService,
               private router: Router, private activatedRoute: ActivatedRoute) {
     this.loginUser = { email: '', username: Common.GUEST_NAME, role: Common.ROLE_TESTEE };
-    this.subscriptionLatestCategoryId = this.dataService.latestCategoryId.subscribe(
-      latestCategoryId => this.latestCategoryId = latestCategoryId);
+    this.subscriptionLatestCategory = this.dataService.latestCategory.subscribe(
+      latestCategory => this.latestCategory = latestCategory);
   }
 
   ngOnInit(): void {
@@ -54,13 +55,13 @@ export class TesteeLoginComponent implements OnInit, OnDestroy {
       (err: any) => swal(err.error.message, '', 'error'),
       () => {
         this.dataService.changeLoginUser(this.loginUser);
-        this.router.navigate([`/testee/category/${this.latestCategoryId}`]);
+        this.router.navigate([`/testee/category/${this.latestCategory?.id}`]);
       }
     );
   }
 
   ngOnDestroy(): void {
-    this.subscriptionLatestCategoryId.unsubscribe();
+    this.subscriptionLatestCategory.unsubscribe();
   }
 
 }

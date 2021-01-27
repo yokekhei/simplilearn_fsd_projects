@@ -6,6 +6,4 @@ export class Common {
 
     static GUEST_NAME = 'Guest';
 
-    static UNKNOWN_CATEGORY_ID = 0;
-
 }
