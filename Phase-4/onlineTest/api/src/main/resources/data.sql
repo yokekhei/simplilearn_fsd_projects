@@ -3,6 +3,8 @@ USE OnlineTest;
 delete from categories;
 insert into categories(category_id, category_name) values (1, 'Mathematics');
 insert into categories(category_id, category_name) values (2, 'English and Language Arts');
+insert into categories(category_id, category_name) values (3, 'Computer Science and Skills');
+insert into categories(category_id, category_name) values (4, 'Social Studies');
 
 delete from users;
 insert into users (user_email, user_password, user_name, user_role)
