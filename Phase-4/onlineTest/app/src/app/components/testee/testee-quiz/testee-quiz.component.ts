@@ -21,6 +21,7 @@ export class TesteeQuizComponent implements OnInit, OnDestroy {
 
   quiz?: Quiz;
   quizName = '';
+  categoryName = '';
   questions: Question[] = [];
   currentTab = 0;
   stepViews: QuizStepView[] = [];
@@ -37,7 +38,10 @@ export class TesteeQuizComponent implements OnInit, OnDestroy {
               private quizService: QuizService,
               private dataService: DataService) {
     this.subscriptionLatestCategory = this.dataService.latestCategory
-      .subscribe(latestCategory => this.latestCategory = latestCategory);
+      .subscribe(latestCategory => {
+        this.latestCategory = latestCategory;
+        this.categoryName = latestCategory.name;
+    });
 
     this.suscriptionAnswer = this.dataService.answer.subscribe(
       answer => {

@@ -1,12 +1,13 @@
-import { ResultListItemStyle } from '../../../models/result-list-item-style';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import swal from 'sweetalert';
 
 import { Answer } from 'src/app/models/answer';
-import { FormChoice } from '../../../models/form-choice';
 import { DataService } from 'src/app/services/data.service';
+import { FormChoice } from '../../../models/form-choice';
 import { Question } from 'src/app/models/question';
+import { ResultListItemStyle } from '../../../models/result-list-item-style';
 import { ResultView } from '../../../models/result-view';
 
 @Component({
@@ -18,6 +19,7 @@ export class TesteeQuizResultComponent implements OnInit, OnDestroy {
 
   answer?: Answer;
   quizName = '';
+  categoryName = '';
   questions: Question[] = [];
   resultViews: ResultView[] = [];
   correctStat = 0;
@@ -25,10 +27,18 @@ export class TesteeQuizResultComponent implements OnInit, OnDestroy {
   unattemptedStat = 0;
   score = 0;
   private suscriptionAnswer: Subscription;
+  private subscriptionLatestCategory: Subscription;
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private router: Router) {
+    this.subscriptionLatestCategory = this.dataService.latestCategory
+      .subscribe(latestCategory => {
+        this.categoryName = latestCategory.name;
+    });
+
     this.suscriptionAnswer = this.dataService.answer.subscribe(answer => {
-      if (answer !== undefined && answer.quiz !== undefined) {
+      if (answer === undefined || answer.quiz === undefined) {
+        this.router.navigate(['/testee/category']);
+      } else {
         this.answer = answer;
         this.quizName = this.answer.quiz.name;
 
@@ -104,6 +114,7 @@ export class TesteeQuizResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.suscriptionAnswer.unsubscribe();
+    this.subscriptionLatestCategory.unsubscribe();
   }
 
 }
