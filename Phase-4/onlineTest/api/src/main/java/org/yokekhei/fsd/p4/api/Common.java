@@ -6,6 +6,8 @@ public class Common {
 	public static final String ROLE_TESTER = "R";
 	public static final String ROLE_TESTEE = "E";
 	
+	public static final String DEFAULT_QUIZ_IMAGE = "static/images/default-quiz.png";
+	
 	public static final String DB_ERROR_CODE = "DB0001";
 	
 	public static final String SV_INVALID_CREDENTIAL = "SV0001";

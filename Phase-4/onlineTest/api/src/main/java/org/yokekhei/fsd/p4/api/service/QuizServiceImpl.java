@@ -145,7 +145,7 @@ public class QuizServiceImpl implements QuizService {
 			savedQuiz.clearQuestions();
 			
 			for (Question question : quiz.getQuestions()) {
-				question.setId(null);;
+				question.setId(null);
 				Question savedQuestion = questionDao.save(question, savedQuiz.getId());
 				savedQuestion.clearChoices();
 				
@@ -165,6 +165,19 @@ public class QuizServiceImpl implements QuizService {
 		}
 		
 		return savedQuiz;
+	}
+
+	@Override
+	public byte[] getQuizImage(Long quizId) throws OnlineTestServiceException {
+		byte[] image = null;
+		
+		try {
+			image = quizDao.getQuizImage(quizId);
+		} catch (Exception e) {
+			throw new OnlineTestServiceException(e.getMessage());
+		}
+		
+		return image;
 	}
 
 }

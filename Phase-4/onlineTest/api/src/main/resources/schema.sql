@@ -27,6 +27,7 @@ CREATE TABLE Quizzes (
     quiz_name VARCHAR(255) NOT NULL,
     quiz_category BIGINT NOT NULL,
     quiz_tester VARCHAR(255) NOT NULL,
+    quiz_image BLOB,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (quiz_id),
     CONSTRAINT fk_quiz_category FOREIGN KEY (quiz_category) REFERENCES Categories(category_id),

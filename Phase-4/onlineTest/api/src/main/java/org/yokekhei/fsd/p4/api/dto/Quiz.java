@@ -8,6 +8,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Quiz {
 	
 	private Long id;
@@ -27,6 +29,8 @@ public class Quiz {
 	private List<Question> questions = new ArrayList<>();
 	
 	private LocalDateTime createdDateTime;
+	
+	private MultipartFile image;
 	
 	public Quiz() {
 	}
@@ -83,6 +87,14 @@ public class Quiz {
 
 	public void setCreatedDateTime(LocalDateTime createdDateTime) {
 		this.createdDateTime = createdDateTime;
+	}
+
+	public MultipartFile getImage() {
+		return image;
+	}
+
+	public void setImage(MultipartFile image) {
+		this.image = image;
 	}
 
 	public void clearQuestions() {

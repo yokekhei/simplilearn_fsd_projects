@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.yokekhei.fsd.p4.api.dto.Category;
@@ -51,7 +52,13 @@ public class QuizDaoImpl implements QuizDao {
 		Quiz savedQuiz = null;
 		
 		try {
-			savedQuiz = mapper.toDto(repository.save(mapper.toEntity(quiz)));
+			org.yokekhei.fsd.p4.api.entity.Quiz entity = mapper.toEntity(quiz);
+			
+			if (quiz.getImage() != null && !quiz.getImage().isEmpty()) {
+				entity.setImage(IOUtils.toByteArray(quiz.getImage().getInputStream()));
+			}
+			
+			savedQuiz = mapper.toDto(repository.save(entity));
 		} catch (Exception e) {
 			throw new OnlineTestDaoException(e.getMessage());
 		}
@@ -99,6 +106,20 @@ public class QuizDaoImpl implements QuizDao {
 		} catch (Exception e) {
 			throw new OnlineTestDaoException(e.getMessage());
 		}
+	}
+
+	@Override
+	public byte[] getQuizImage(Long id) throws OnlineTestDaoException {
+		byte[] image = null;
+		
+		try {
+			org.yokekhei.fsd.p4.api.entity.Quiz quiz = repository.findWithImageAttachedById(id);
+			image = quiz.getImage();
+		} catch (Exception e) {
+			throw new OnlineTestDaoException(e.getMessage());
+		}
+		
+		return image;
 	}
 
 }

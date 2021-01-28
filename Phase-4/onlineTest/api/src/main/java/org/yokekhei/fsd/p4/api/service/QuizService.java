@@ -13,5 +13,6 @@ public interface QuizService {
 	Quiz createQuiz(Quiz quiz) throws OnlineTestServiceException;
 	Quiz updateQuiz(Quiz quiz) throws OnlineTestServiceException;
 	Quiz deleteQuiz(Long id) throws OnlineTestServiceException;
+	byte[] getQuizImage(Long quizId) throws OnlineTestServiceException;
 	
 }

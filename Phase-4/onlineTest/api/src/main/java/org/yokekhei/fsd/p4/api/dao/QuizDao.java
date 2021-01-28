@@ -14,5 +14,6 @@ public interface QuizDao {
 	List<Quiz> getQuizzesByCategory(Category category) throws OnlineTestDaoException;
 	List<Quiz> getQuizzesByTester(User user) throws OnlineTestDaoException;
 	void remove(Long id) throws OnlineTestDaoException;
+	byte[] getQuizImage(Long id) throws OnlineTestDaoException;
 	
 }

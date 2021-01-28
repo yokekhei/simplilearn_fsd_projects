@@ -4,12 +4,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -44,6 +47,11 @@ public class Quiz {
 	
 	@OneToMany(mappedBy="quiz")
 	private List<Question> questions = new ArrayList<>();
+	
+	@Lob
+    @Basic(fetch = FetchType.LAZY)
+	@Column(name = "quiz_image")
+    private byte[] image;
 	
 	public Quiz() {
 	}
@@ -94,6 +102,14 @@ public class Quiz {
 
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 	@Override
