@@ -7,16 +7,16 @@
 			"desc": "5 - 1 = ?",
 			"choices": [
 				{
-					"desc":"4"
+					"desc": "4"
 				},
 				{
-					"desc":"1"
+					"desc": "1"
 				},
 				{
-					"desc":"3"
+					"desc": "3"
 				},
 				{
-					"desc":"0"
+					"desc": "0"
 				}
 			],
 			"answerIndex": 0
@@ -34,10 +34,154 @@
 					"desc": "8"
 				},
 				{
-					"desc":"5"
+					"desc": "5"
 				}
 			],
-			"answerIndex":3
+			"answerIndex": 3
+		},
+		{
+			"desc": "9 - 8 = ?",
+			"choices": [
+				{
+					"desc": "3"
+				},
+				{
+					"desc": "1"
+				},
+				{
+					"desc": "8"
+				},
+				{
+					"desc": "5"
+				}
+			],
+			"answerIndex": 1
+		},
+		{
+			"desc": "7 - 2 = ?",
+			"choices": [
+				{
+					"desc": "3"
+				},
+				{
+					"desc": "2"
+				},
+				{
+					"desc": "5"
+				},
+				{
+					"desc": "6"
+				}
+			],
+			"answerIndex": 2
+		},
+		{
+			"desc": "2 - 2 = ?",
+			"choices": [
+				{
+					"desc": "0"
+				},
+				{
+					"desc": "1"
+				},
+				{
+					"desc": "8"
+				},
+				{
+					"desc": "5"
+				}
+			],
+			"answerIndex": 0
+		},
+		{
+			"desc": "6 - ? = 2",
+			"choices": [
+				{
+					"desc": "3"
+				},
+				{
+					"desc": "4"
+				},
+				{
+					"desc": "8"
+				},
+				{
+					"desc": "5"
+				}
+			],
+			"answerIndex": 1
+		},
+		{
+			"desc": "4 - ? = 3",
+			"choices": [
+				{
+					"desc": "3"
+				},
+				{
+					"desc": "4"
+				},
+				{
+					"desc": "1"
+				},
+				{
+					"desc": "5"
+				}
+			],
+			"answerIndex": 2
+		},
+		{
+			"desc": "? - 5 = 4",
+			"choices": [
+				{
+					"desc": "3"
+				},
+				{
+					"desc": "4"
+				},
+				{
+					"desc": "1"
+				},
+				{
+					"desc": "9"
+				}
+			],
+			"answerIndex": 3
+		},
+		{
+			"desc": "? - 6 = 2",
+			"choices": [
+				{
+					"desc": "8"
+				},
+				{
+					"desc": "4"
+				},
+				{
+					"desc": "1"
+				},
+				{
+					"desc": "9"
+				}
+			],
+			"answerIndex": 0
+		},
+		{
+			"desc": "? - 0 = 6",
+			"choices": [
+				{
+					"desc": "3"
+				},
+				{
+					"desc": "6"
+				},
+				{
+					"desc": "1"
+				},
+				{
+					"desc": "9"
+				}
+			],
+			"answerIndex": 1
 		}
 	]
 }
