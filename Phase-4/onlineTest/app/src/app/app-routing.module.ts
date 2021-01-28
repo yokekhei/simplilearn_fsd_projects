@@ -24,16 +24,14 @@ const routes: Routes = [
   // Testee
   { path: 'testee', component: TesteeComponent,
     children: [
-      { path: 'category', component: TesteeCategoryComponent,
-        children: [
-          { path: ':id', component: TesteeQuizCatalogComponent }
-        ]
-      },
+      { path: 'category', component: TesteeCategoryComponent },
+      { path: 'category/:id', component: TesteeQuizCatalogComponent },
       { path: 'login', component: TesteeLoginComponent },
       { path: 'logout', component: TesteeLogoutComponent },
       { path: 'register', component: TesteeRegisterComponent },
       { path: 'quiz/:id', component: TesteeQuizComponent },
-      { path: 'quiz/:id/result', component: TesteeQuizResultComponent }
+      { path: 'quiz/:id/result', component: TesteeQuizResultComponent },
+      { path: '**', redirectTo: '/testee/category', pathMatch: 'full' }
     ]
   },
 
