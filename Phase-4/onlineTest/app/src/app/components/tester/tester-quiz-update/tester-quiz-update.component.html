@@ -7,6 +7,18 @@
         </button>
     </div>
     <div class="px-4">
+        <div class="row">
+            <div class="col-md-3 md-form">
+                <div mdbBtn color="warning" size="sm" class="waves-light" mdbWavesEffect (click)="imageInput.click()">
+                    <span>Select image file</span>
+                </div>
+            </div>
+            <div class="form-group col-md-9 md-form">
+                <input mdbInput type="text" class="form-control" name="imageName" id="imageName"
+                    [(ngModel)]="imageFileName" disabled>
+            </div>
+        </div>
+        <input hidden type="file" (change)="onImageSelected($event)" #imageInput id="image">
         <div *ngIf="quiz && !validated" class="alert alert-danger">
             <small>{{ message }}</small>
         </div>

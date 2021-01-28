@@ -17,6 +17,10 @@ export class QuizService {
     this.url = `${this.configuration.getValue('apiUrl')}/quiz`;
   }
 
+  getQuizImageUrl(id: number): string {
+    return `${this.url}/${id}/image`;
+  }
+
   getQuizById(id: number): Observable<Quiz> {
     return this.http.get<Quiz>(`${this.url}/${id}`);
   }
@@ -59,8 +63,24 @@ export class QuizService {
     return this.http.post<Quiz>(this.url, quiz);
   }
 
+  createQuizWithImage(quiz: Quiz, image: File | null): Observable<Quiz> {
+    const formData: FormData = new FormData();
+    formData.append('quiz', new Blob([JSON.stringify(quiz)], {type: 'application/json'}));
+    formData.append('image', image || '');
+
+    return this.http.post<Quiz>(`${this.url}/image`, formData);
+  }
+
   updateQuiz(quiz: Quiz): Observable<Quiz> {
     return this.http.put<Quiz>(this.url, quiz);
+  }
+
+  updateQuizWithImage(quiz: Quiz, image: File | null): Observable<Quiz> {
+    const formData: FormData = new FormData();
+    formData.append('quiz', new Blob([JSON.stringify(quiz)], {type: 'application/json'}));
+    formData.append('image', image || '');
+
+    return this.http.put<Quiz>(`${this.url}/image`, formData);
   }
 
   deleteQuiz(id: number): Observable<Quiz> {

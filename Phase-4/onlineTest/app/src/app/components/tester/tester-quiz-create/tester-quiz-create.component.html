@@ -12,15 +12,28 @@
                 <div class="col-md-3 md-form">
                     <div mdbBtn color="primary" size="sm" class="waves-light" mdbWavesEffect
                         (click)="fileInput.click()">
-                        <span>Choose JSON file</span>
+                        <span>Select JSON file</span>
                     </div>
                 </div>
                 <div class="form-group col-md-9 md-form">
                     <input mdbInput type="text" class="form-control" name="fileName" id="fileName"
-                        [(ngModel)]="fileName" disabled>
+                        [(ngModel)]="jsonFileName" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 md-form">
+                    <div mdbBtn color="warning" size="sm" class="waves-light" mdbWavesEffect
+                        (click)="imageInput.click()">
+                        <span>Select image file</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-9 md-form">
+                    <input mdbInput type="text" class="form-control" name="imageName" id="imageName"
+                        [(ngModel)]="imageFileName" disabled>
                 </div>
             </div>
             <input hidden type="file" (change)="onFileSelected()" #fileInput id="file">
+            <input hidden type="file" (change)="onImageSelected($event)" #imageInput id="image">
         </form>
         <div *ngIf="data !== '' && !validated" class="alert alert-danger">
             <small>{{ message }}</small>

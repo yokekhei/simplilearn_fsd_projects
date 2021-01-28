@@ -1,41 +1,20 @@
-<div class="mt-5 card card-cascade narrower">
-    <div class="py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
-        <h3 class="table-title">{{ category.name }}</h3>
-    </div>
-    <div class="px-4">
-        <table class="table table-hover mb-0 small">
-            <thead>
-                <tr>
-                    <th>
-                        <span>No.</span>
-                    </th>
-                    <th>
-                        <span>Quiz Name</span>
-                    </th>
-                    <th>
-                        <span>No. of Question</span>
-                    </th>
-                    <th>
-                        <span>Creator</span>
-                    </th>
-                    <th>
-                        <span>Start Quiz</span>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let quiz of quizzes; let i = index;">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ quiz.name }}</td>
-                    <td>{{ quiz.questions.length }}</td>
-                    <td>{{ quiz.userId }}</td>
-                    <td>
-                        <button mdbBtn size="sm" class="btn px-3 btn-quiz" routerLink="/testee/quiz/{{quiz.id}}">
-                            <i class="fas fa-play text-white"></i>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<h3 class="page-title mb-4">{{ categoryName }}</h3>
+<div class="row mb-4" *ngFor="let quiz of quizList; let i = index;">
+    <div class="col-md-3" *ngFor="let quiz of quizList[i].quizzes">
+        <div class="card h-100">
+            <img class="card-img-top" [src]="getQuizImageUrl(quiz.id)" alt="{{quiz.name}}">
+            <div class="card-body">
+                <h5 class="card-title text-center">{{ quiz.name }}</h5>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <span><small>{{ quiz.questions.length }} Questions</small></span><br>
+                        <span><small>{{ quiz.userId }}</small></span>
+                    </div>
+                    <button mdbBtn size="sm" class="btn px-3 btn-quiz" routerLink="/testee/quiz/{{quiz.id}}">
+                        <i class="fas fa-play text-white"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

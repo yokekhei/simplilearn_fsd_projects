@@ -16,10 +16,12 @@ import { QuizService } from './../../../services/quiz.service';
 export class TesterQuizCreateComponent implements OnInit, OnDestroy {
 
   data = '';
-  fileName = '';
+  jsonFileName = '';
   validated = false;
   message = '';
   quiz: Quiz;
+  imageFileName = '';
+  private selectedImages?: FileList;
   private categories: Category[] = [];
   private subscriptionCategories: Subscription;
 
@@ -89,30 +91,34 @@ export class TesterQuizCreateComponent implements OnInit, OnDestroy {
       }
     };
 
-    this.fileName = inputNode.files[0].name;
+    this.jsonFileName = inputNode.files[0].name;
 
     reader.readAsText(inputNode.files[0]);
   }
 
   isValidated(fileData: string): boolean {
-    const json: Quiz = JSON.parse(fileData);
+    if (fileData) {
+      try {
+        const json: Quiz = JSON.parse(fileData);
 
-    // TODO::More accurate validation required here
-    if (json.name && json.categoryName && json.userId && json.questions &&
-      (json.questions.length > 0) && json.questions[0].desc && (json.questions[0].answerIndex >= 0) &&
-      json.questions[0].choices && (json.questions[0].choices.length > 0) &&
-      json.questions[0].choices[0].desc) {
-      if (this.categories.filter(category => category.name === json.categoryName).length === 0) {
-        this.message = 'Category name does not match';
-        return false;
-      }
+        // TODO::More accurate validation required here
+        if (json.name && json.categoryName && json.userId && json.questions &&
+              (json.questions.length > 0) && json.questions[0].desc &&
+              (json.questions[0].answerIndex >= 0) &&
+              json.questions[0].choices && (json.questions[0].choices.length > 0) &&
+              json.questions[0].choices[0].desc) {
+                if (this.categories.filter(category => category.name === json.categoryName).length === 0) {
+                  this.message = 'Category name does not match';
+                  return false;
+                }
 
-      this.message = 'Quiz JSON format is successfully validated';
-      return true;
+                this.message = 'Quiz JSON format is successfully validated';
+                return true;
+        }
+      } catch (e) { }
     }
 
     this.message = 'Quiz JSON format validation failed';
-
     return false;
   }
 
@@ -124,7 +130,24 @@ export class TesterQuizCreateComponent implements OnInit, OnDestroy {
   }
 
   onAddQuiz(): void {
+    if (this.selectedImages !== undefined) {
+      return this.addQuizWithImage(this.selectedImages.item(0) as File);
+    }
+
     this.quizService.createQuiz(this.quiz).subscribe(
+      (quiz: Quiz) => this.quiz = quiz,
+      (err: any) => swal(err.error.message, '', 'error'),
+      () => this.router.navigate(['/tester/home/quiz'])
+    );
+  }
+
+  onImageSelected(event: any): void {
+    this.selectedImages = event.target.files;
+    this.imageFileName = event.target.files[0].name;
+  }
+
+  addQuizWithImage(image: File): void {
+    this.quizService.createQuizWithImage(this.quiz, image).subscribe(
       (quiz: Quiz) => this.quiz = quiz,
       (err: any) => swal(err.error.message, '', 'error'),
       () => this.router.navigate(['/tester/home/quiz'])

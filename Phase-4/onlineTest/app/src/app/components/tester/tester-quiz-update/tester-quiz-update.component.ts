@@ -18,6 +18,8 @@ export class TesterQuizUpdateComponent implements OnInit, OnDestroy {
   validated = false;
   message = '';
   quiz?: Quiz;
+  imageFileName = '';
+  private selectedImages?: FileList;
   private categories: Category[] = [];
   private subscriptionCategories: Subscription;
 
@@ -34,7 +36,7 @@ export class TesterQuizUpdateComponent implements OnInit, OnDestroy {
           const reconstructedQuiz: Quiz = this.constructQuiz(quiz);
 
           if (this.isValidated(reconstructedQuiz)) {
-            this.quiz = quiz;
+            this.quiz = reconstructedQuiz;
             this.validated = true;
           }
         },
@@ -49,26 +51,30 @@ export class TesterQuizUpdateComponent implements OnInit, OnDestroy {
       (json.questions.length > 0) && json.questions[0].desc && (json.questions[0].answerIndex >= 0) &&
       json.questions[0].choices && (json.questions[0].choices.length > 0) &&
       json.questions[0].choices[0].desc) {
-      this.message = 'Quiz JSON format is successfully validated';
-      return true;
+        this.message = 'Quiz JSON format is successfully validated';
+        return true;
     }
 
     this.message = 'Quiz JSON format validation failed';
     return false;
   }
 
-  constructQuiz(quiz: Quiz): Quiz {
-    delete quiz.createdDateTime;
+  constructQuiz(quiz: Quiz | any): Quiz {
+    const category: Category = this.categories.filter(c => c.id === quiz.categoryId)[0];
 
-    quiz.categoryName = this.categories.filter(
-      category => category.id === quiz.categoryId)[0].name;
-    delete quiz.categoryId;
+    if (category !== undefined) {
+      quiz.categoryName = category.name;
+      delete quiz.categoryId;
 
-    for (const question of quiz.questions) {
-      delete question.id;
+      delete quiz.image;
+      delete quiz.createdDateTime;
 
-      for (const choice of question.choices) {
-        delete choice.id;
+      for (const question of quiz.questions) {
+        delete question.id;
+
+        for (const choice of question.choices) {
+          delete choice.id;
+        }
       }
     }
 
@@ -79,12 +85,18 @@ export class TesterQuizUpdateComponent implements OnInit, OnDestroy {
     if (event === null) { return; }
 
     const data: string = (event.target as HTMLTextAreaElement).value || '{}';
-    const json: Quiz = JSON.parse(data);
 
-    if (this.isValidated(json)) {
-      this.quiz = json;
-      this.validated = true;
-    } else {
+    try {
+      const json: Quiz = JSON.parse(data);
+
+      if (this.isValidated(json)) {
+        this.quiz = json;
+        this.validated = true;
+      } else {
+        this.validated = false;
+      }
+    } catch (e) {
+      this.message = 'Quiz JSON format validation failed';
       this.validated = false;
     }
   }
@@ -99,7 +111,24 @@ export class TesterQuizUpdateComponent implements OnInit, OnDestroy {
       category => category.name === input.categoryName)[0].id;
     delete input.categoryName;
 
+    if (this.selectedImages !== undefined) {
+      return this.updateQuizWithImage(input, this.selectedImages.item(0) as File);
+    }
+
     this.quizService.updateQuiz(input).subscribe(
+      (quiz: Quiz) => this.quiz = quiz,
+      (err: any) => swal(err.error.message, '', 'error'),
+      () => this.router.navigate(['/tester/home/quiz'])
+    );
+  }
+
+  onImageSelected(event: any): void {
+    this.selectedImages = event.target.files;
+    this.imageFileName = event.target.files[0].name;
+  }
+
+  updateQuizWithImage(inputQuiz: Quiz, image: File): void {
+    this.quizService.updateQuizWithImage(inputQuiz, image).subscribe(
       (quiz: Quiz) => this.quiz = quiz,
       (err: any) => swal(err.error.message, '', 'error'),
       () => this.router.navigate(['/tester/home/quiz'])
