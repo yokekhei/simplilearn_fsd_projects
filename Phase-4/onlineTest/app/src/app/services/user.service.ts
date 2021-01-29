@@ -31,7 +31,8 @@ export class UserService {
   }
 
   isLoggedIn(role: string = Common.ROLE_TESTEE): boolean {
-    if (this.loginUser && this.loginUser.role === role) {
+    if (this.loginUser && (this.loginUser.role === role ||
+      this.loginUser.role === Common.ROLE_TESTER)) {
       return true;
     }
 
