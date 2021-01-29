@@ -43,7 +43,7 @@ public class QuizController {
 			value = "/quiz/image",
 			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
 	public Quiz createQuizWithImage(
-			@RequestPart("quiz") Quiz quiz,
+			@Validated @RequestPart("quiz") Quiz quiz,
 			@RequestPart("image") MultipartFile image) throws OnlineTestServiceException {
 		quiz.setImage(image);
 		return service.createQuiz(quiz);
@@ -58,7 +58,7 @@ public class QuizController {
 			value = "/quiz/image",
 			consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE })
 	public Quiz updateQuizWithImage(
-			@RequestPart("quiz") Quiz quiz,
+			@Validated @RequestPart("quiz") Quiz quiz,
 			@RequestPart("image") MultipartFile image) throws OnlineTestServiceException {
 		quiz.setImage(image);
 		return service.updateQuiz(quiz);
