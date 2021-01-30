@@ -99,6 +99,8 @@ export class TesteeQuizResultComponent implements OnInit, OnDestroy {
 
         if (this.score === 100) {
           swal('Congratulations!!!', 'You scored 100%', 'success');
+        } else {
+          swal('Quiz Result', `Your score is ${Math.round(this.score)}%`, 'info');
         }
       }
     });
