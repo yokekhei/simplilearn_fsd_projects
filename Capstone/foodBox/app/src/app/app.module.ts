@@ -1,9 +1,14 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { environment } from './../environments/environment';
+
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CategoryService } from './services/category.service';
+import { ConfigurationService, ENVIRONMENT } from './services/configuration.service';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
@@ -22,9 +27,14 @@ import { UserHomeComponent } from './components/user/user-home/user-home.compone
   imports: [
     AppRoutingModule,
     BrowserModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: ENVIRONMENT, useValue: environment },
+    CategoryService,
+    ConfigurationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
