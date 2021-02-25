@@ -1,6 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
+import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logout.component';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
@@ -22,6 +26,19 @@ const routes: Routes = [
   },
 
   // Admin
+  {
+    path: 'admin', component: AdminComponent,
+    children: [
+      { path: 'login', component: AdminLoginComponent },
+      { path: 'logout', component: AdminLogoutComponent },
+      { path: 'home', component: AdminHomeComponent,
+        children: [
+
+        ]
+      },
+      { path: '**', redirectTo: '/admin/login', pathMatch: 'full' }
+    ]
+  },
 
   // General
   { path: 'credit', component: CreditComponent },

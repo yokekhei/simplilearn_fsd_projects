@@ -6,6 +6,11 @@ import { NgModule } from '@angular/core';
 
 import { environment } from './../environments/environment';
 
+import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminHeaderComponent } from './components/admin/admin-header/admin-header.component';
+import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
+import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
+import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logout.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './services/authentication.service';
@@ -23,6 +28,11 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
 
 @NgModule({
   declarations: [
+    AdminComponent,
+    AdminHeaderComponent,
+    AdminHomeComponent,
+    AdminLoginComponent,
+    AdminLogoutComponent,
     AppComponent,
     CreditComponent,
     FooterComponent,

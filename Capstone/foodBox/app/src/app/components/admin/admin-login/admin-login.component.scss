@@ -1,0 +1,16 @@
+form {
+    width: 100%;
+    min-width: 350px;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .ng-touched .ng-invalid {
+    border: 1px solid red;
+  }
+  
+  .alert-top {
+    margin: auto;
+    min-width: 350px;
+    max-width: 400px;
+  }
