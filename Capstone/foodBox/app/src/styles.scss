@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
+.table-title, .page-title {
+    font-family: 'Noto Serif', serif;
+    color: #541900
+}
+
+.btn-foodbox {
+    color: #fff;
+    background-color: #F0C701;
+    border-color: #F0C701;
+}
+
+.bg-grey {
+    background-color: #6c757d !important;
+}

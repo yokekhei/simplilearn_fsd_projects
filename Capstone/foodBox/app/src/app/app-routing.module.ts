@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
+import { UserLoginComponent } from './components/user/user-login/user-login.component';
+import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
+import { UserRegisterComponent } from './components/user/user-register/user-register.component';
 
 const routes: Routes = [
   // User
@@ -11,6 +14,9 @@ const routes: Routes = [
     path: 'user', component: UserHomeComponent,
     children: [
       { path: 'category', component: UserCategoryComponent },
+      { path: 'login', component: UserLoginComponent },
+      { path: 'logout', component: UserLogoutComponent },
+      { path: 'register', component: UserRegisterComponent },
       { path: '**', redirectTo: '/user/category', pathMatch: 'full' }
     ]
   },
