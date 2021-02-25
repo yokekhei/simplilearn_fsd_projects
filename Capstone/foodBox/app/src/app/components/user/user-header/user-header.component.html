@@ -5,6 +5,12 @@
     </mdb-navbar-brand>
     <links>
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <span class="badge badge-pill bg-danger" *ngIf="cartItemNo > 0">{{ cartItemNo }}</span>
+                    <span><i class="fas fa-shopping-cart"></i></span>
+                </a>
+            </li>
             <li class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect>

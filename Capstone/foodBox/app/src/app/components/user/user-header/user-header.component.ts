@@ -10,6 +10,7 @@ export class UserHeaderComponent implements OnInit {
 
   userName = Common.GUEST_NAME;
   isGuest = true;
+  cartItemNo = 0;
 
   constructor() { }
 
