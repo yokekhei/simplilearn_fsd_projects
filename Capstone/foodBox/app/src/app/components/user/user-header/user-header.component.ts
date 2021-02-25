@@ -34,8 +34,11 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
     this.subscriptionLoginUser = this.dataService.loginUser.subscribe(
       loginUser => {
         if (loginUser.username && loginUser.username !== this.userName) {
-          this.userName = loginUser.username;
           this.isGuest = this.authService.isLoggedIn(Common.ROLE_USER) ? false : true;
+
+          if (!this.isGuest) {
+            this.userName = loginUser.username;
+          }
         }
       }
     );
