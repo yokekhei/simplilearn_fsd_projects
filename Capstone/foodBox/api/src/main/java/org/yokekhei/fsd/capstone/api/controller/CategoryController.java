@@ -82,9 +82,9 @@ public class CategoryController {
 
 	@PutMapping("/category/{id}/enabled")
 	@ResponseBody
-	public Category setEnabled(@PathVariable("id") Long id, @RequestBody Boolean enabled)
+	public Category setEnabled(@PathVariable("id") Long id, @RequestBody Category category)
 			throws FoodBoxServiceException {
-		return service.setEnabled(id, enabled);
+		return service.setEnabled(id, category.getEnabled());
 	}
 
 	@DeleteMapping("/category/{id}")
