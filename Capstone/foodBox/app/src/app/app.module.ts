@@ -6,6 +6,9 @@ import { NgModule } from '@angular/core';
 
 import { environment } from './../environments/environment';
 
+import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
+import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
+import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
 import { AdminHeaderComponent } from './components/admin/admin-header/admin-header.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
@@ -28,6 +31,9 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
 
 @NgModule({
   declarations: [
+    AdminCategoriesComponent,
+    AdminCategoryCreateComponent,
+    AdminCategoryUpdateComponent,
     AdminComponent,
     AdminHeaderComponent,
     AdminHomeComponent,

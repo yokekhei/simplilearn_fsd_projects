@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
+import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
+import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
@@ -33,7 +36,10 @@ const routes: Routes = [
       { path: 'logout', component: AdminLogoutComponent },
       { path: 'home', component: AdminHomeComponent,
         children: [
-
+          { path: 'category', component: AdminCategoriesComponent },
+          { path: 'category/add', component: AdminCategoryCreateComponent },
+          { path: 'category/update/:id', component: AdminCategoryUpdateComponent },
+          { path: '**', redirectTo: '/admin/home/category', pathMatch: 'full' }
         ]
       },
       { path: '**', redirectTo: '/admin/login', pathMatch: 'full' }

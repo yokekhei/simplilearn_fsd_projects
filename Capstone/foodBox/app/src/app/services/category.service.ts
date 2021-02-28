@@ -11,17 +11,32 @@ import { ConfigurationService } from './configuration.service';
 })
 export class CategoryService {
 
-  private rootUrl = '';
+  private url = '';
 
   constructor(private configuration: ConfigurationService, private http: HttpClient) {
-    this.rootUrl = this.configuration.getValue('apiUrl');
+    this.url = `${this.configuration.getValue('apiUrl')}/category`;
+  }
+
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.url}`).pipe(
+      map(categories => {
+        return categories.map(category => {
+          return {
+            id: category.id,
+            name: category.name,
+            createdDateTime: category.createdDateTime,
+            enabled: category.enabled
+          };
+        });
+      })
+    );
   }
 
   getCategories(): Observable<Category[]> {
     let params = new HttpParams();
     params = params.append('enabled', 'true');
 
-    return this.http.get<Category[]>(`${this.rootUrl}/category`, { params }).pipe(
+    return this.http.get<Category[]>(`${this.url}`, { params }).pipe(
       map(categories => {
         return categories.map(category => {
           return {
@@ -34,7 +49,44 @@ export class CategoryService {
   }
 
   getCategoryImageUrl(id: number): string {
-    return `${this.rootUrl}/category/${id}/image`;
+    return `${this.url}/${id}/image`;
+  }
+
+  getCategoryById(id: number): Observable<Category> {
+    return this.http.get<Category>(`${this.url}/${id}`);
+  }
+
+  createCategory(category: Category): Observable<Category> {
+    return this.http.post<Category>(this.url, category);
+  }
+
+  createCategoryWithImage(category: Category, image: File | null): Observable<Category> {
+    const formData: FormData = new FormData();
+    formData.append('category', new Blob([JSON.stringify(category)], { type: 'application/json' }));
+    formData.append('image', image || '');
+
+    return this.http.post<Category>(`${this.url}/image`, formData);
+  }
+
+  updateCategory(category: Category): Observable<Category> {
+    return this.http.put<Category>(this.url, category);
+  }
+
+  updateCategoryWithImage(category: Category, image: File | null): Observable<Category> {
+    const formData: FormData = new FormData();
+    formData.append('category', new Blob([JSON.stringify(category)], { type: 'application/json' }));
+    formData.append('image', image || '');
+
+    return this.http.put<Category>(`${this.url}/image`, formData);
+  }
+
+  deleteCategory(id: number): Observable<Category> {
+    return this.http.delete<Category>(`${this.url}/${id}`);
+  }
+
+  setCategoryEnabled(category: Category, enabledStatus: boolean): Observable<Category> {
+    category.enabled = enabledStatus;
+    return this.http.put<Category>(`${this.url}/${category.id}/enabled`, category);
   }
 
 }
