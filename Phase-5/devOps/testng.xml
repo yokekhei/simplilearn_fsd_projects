@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<test thread-count="5" name="Chrome Testing" parallel="methods">
+		<parameter name="BrowserType" value="chrome"></parameter>
+		<classes>
+			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
+		</classes>
+	</test>
+	<test thread-count="5" name="Firefox Testing" parallel="methods">
+		<parameter name="BrowserType" value="firefox"></parameter>
+		<classes>
+			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
+		</classes>
+	</test>
+</suite> <!-- Suite -->
