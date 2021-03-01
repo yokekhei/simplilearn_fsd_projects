@@ -28,3 +28,30 @@ CREATE TABLE Users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (user_email)
 ) ENGINE=INNODB;
+DROP TABLE IF EXISTS Offers;
+CREATE TABLE Offers (
+	offer_id BIGINT NOT NULL AUTO_INCREMENT,
+    offer_name VARCHAR(255) NOT NULL,
+    offer_discount_type CHAR(3) NOT NULL,
+    offer_discount DECIMAL(18, 5) NOT NULL,
+    PRIMARY KEY (offer_id)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS Foods;
+CREATE TABLE Foods (
+	food_id BIGINT NOT NULL AUTO_INCREMENT,
+    food_name VARCHAR(255) NOT NULL,
+    food_category BIGINT NOT NULL,
+    food_price DECIMAL(18, 5) NOT NULL,
+    food_desc VARCHAR(255) NOT NULL,
+    food_offer BIGINT,
+    food_image BLOB,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (food_id),
+    CONSTRAINT fk_food_category FOREIGN KEY (food_category) REFERENCES Categories(category_id),
+    CONSTRAINT fk_food_offer FOREIGN KEY (food_offer) REFERENCES Offers(offer_id)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS Fees;
+CREATE TABLE Fees (
+	fee_type VARCHAR(50) NOT NULL,
+    fee_value DECIMAL(18, 5) NOT NULL DEFAULT 0
+) ENGINE=INNODB;
