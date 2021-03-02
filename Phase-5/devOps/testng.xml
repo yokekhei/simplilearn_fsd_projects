@@ -7,10 +7,10 @@
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 		</classes>
 	</test>
-	<!-- <test name="Firefox Testing">
+	<test name="Firefox Testing">
 		<parameter name="BrowserType" value="firefox headless"></parameter>
 		<classes>
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 		</classes>
-	</test> -->
+	</test>
 </suite>
