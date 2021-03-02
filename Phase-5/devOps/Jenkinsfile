@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "M2"
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                // Get some code from a GitHub repository
+                git 'https://github.com/yokekhei/simplilearn_fsd_projects.git'
+
+                // Run Maven on a Unix agent.
+                sh "cd Phase-5 && cd devOps && mvn -DskipTests clean compile package"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "cd Phase-5 && cd devOps && bin/docker-stop.sh"
+                sh "cd Phase-5 && cd devOps && chmod +x selenium/chromedriver"
+                sh "cd Phase-5 && cd devOps && chmod +x selenium/geckodriver"
+                sh "cd Phase-5 && cd devOps && mvn test"
+            }
+         
+            post {
+                // If Maven was able to run the tests, even if some of the test
+                // failed, record the test results.
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "cd Phase-5 && cd devOps && bin/docker-build.sh"
+                sh "cd Phase-5 && cd devOps && bin/docker-run.sh"
+            }
+        }
+    }
+}
