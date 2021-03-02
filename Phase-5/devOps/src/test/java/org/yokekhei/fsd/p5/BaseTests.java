@@ -26,8 +26,9 @@ public class BaseTests extends AbstractTestNGSpringContextTests {
 	@Test
 	public void launchBrowser(String browserType) {
 		String driverPath = "";
+		String browser = browserType.toLowerCase();
 
-		if (browserType.equalsIgnoreCase("chrome")) {
+		if (browser.contains("chrome")) {
 			driverPath = "selenium/chromedriver";
 
 			if (TestUtils.isWindows()) {
@@ -39,8 +40,19 @@ public class BaseTests extends AbstractTestNGSpringContextTests {
 			options.addArguments("--ignore-ssl-errors=yes");
 			options.addArguments("--ignore-certificate-errors");
 
+			if (browser.contains("headless")) {
+				options.addArguments("--headless");
+				options.addArguments("window-size=1400,1500");
+				options.addArguments("--disable-gpu");
+				options.addArguments("--no-sandbox");
+				options.addArguments("start-maximized");
+				options.addArguments("enable-automation");
+				options.addArguments("--disable-infobars");
+				options.addArguments("--disable-dev-shm-usage");
+			}
+
 			driver = new ChromeDriver(options);
-		} else if (browserType.equalsIgnoreCase("firefox")) {
+		} else if (browser.contains("firefox")) {
 			driverPath = "selenium/geckodriver";
 
 			if (TestUtils.isWindows()) {
@@ -51,6 +63,10 @@ public class BaseTests extends AbstractTestNGSpringContextTests {
 			FirefoxOptions options = new FirefoxOptions();
 			options.addArguments("--ignore-ssl-errors=yes");
 			options.addArguments("--ignore-certificate-errors");
+
+			if (browser.contains("headless")) {
+				options.setHeadless(true);
+			}
 
 			driver = new FirefoxDriver(options);
 		}
