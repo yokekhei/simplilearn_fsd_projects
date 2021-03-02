@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite">
-	<test thread-count="5" name="Chrome Testing" parallel="methods">
+<suite name="Headless Browser Suite" thread-count="5" parallel="tests">
+	<test name="Chrome Testing">
 		<parameter name="BrowserType" value="chrome headless"></parameter>
 		<classes>
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 		</classes>
 	</test>
-	<test thread-count="5" name="Firefox Testing" parallel="methods">
+	<!-- <test name="Firefox Testing">
 		<parameter name="BrowserType" value="firefox headless"></parameter>
 		<classes>
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 		</classes>
-	</test>
+	</test> -->
 </suite>
