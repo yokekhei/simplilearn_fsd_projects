@@ -58,6 +58,7 @@ pipeline {
                             verbose: true,
                             transfers: [
                                 sshTransfer(execCommand: "docker kill \$(docker container ls -a | grep ${baseImageName} | awk '{print \$1}');docker rm \$(docker container ls -a | grep ${baseImageName} | awk '{print \$1}');docker rmi \$(docker image ls -a | grep ${baseImageName} | awk '{print \$3}');docker run -it --rm -d -p 8443:8443 ${imageName}:${BUILD_NUMBER};exit 0;"),
+                            ]
                         )
                     ]
                 )
