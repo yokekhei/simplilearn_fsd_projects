@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -22,8 +21,8 @@ public class BaseTests extends AbstractTestNGSpringContextTests {
 	@LocalServerPort
 	private int serverPort;
 
-	@Parameters({ "BrowserType" })
 	@Test
+	@Parameters({ "browserType" })
 	public void launchBrowser(String browserType) {
 		String driverPath = "";
 		String browser = browserType.toLowerCase();
@@ -76,7 +75,6 @@ public class BaseTests extends AbstractTestNGSpringContextTests {
 
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
-		driver.get("https://localhost:" + serverPort);
 
 		try {
 			Thread.sleep(4000);
@@ -85,9 +83,8 @@ public class BaseTests extends AbstractTestNGSpringContextTests {
 		}
 	}
 
-	@AfterTest
-	public void tearDown() {
-		driver.quit();
+	protected String getBaseUrl() {
+		return "https://localhost:" + serverPort;
 	}
 
 }
