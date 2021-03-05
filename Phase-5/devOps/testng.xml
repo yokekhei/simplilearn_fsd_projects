@@ -6,6 +6,7 @@
 		<classes>
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 			<class name="org.yokekhei.fsd.p5.UserRegisterTests" />
+			<class name="org.yokekhei.fsd.p5.UserLogoutTests" />
 		</classes>
 	</test>
 	<test name="Firefox Testing">
@@ -13,6 +14,7 @@
 		<classes>
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 			<class name="org.yokekhei.fsd.p5.UserRegisterTests" />
+			<class name="org.yokekhei.fsd.p5.UserLogoutTests" />
 		</classes>
 	</test>
 </suite>
