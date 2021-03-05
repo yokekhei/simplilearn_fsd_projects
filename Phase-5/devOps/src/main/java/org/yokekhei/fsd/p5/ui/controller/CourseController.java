@@ -12,4 +12,9 @@ public class CourseController {
 		return View.V_USER_COURSE_CATALOG;
 	}
 
+	@GetMapping("/admin/courses")
+	public String courseList() {
+		return View.V_ADMIN_COURSE_LIST;
+	}
+
 }

@@ -7,4 +7,10 @@ public class View {
 
 	public static final String C_USER_COURSES = "courses";
 
+	public static final String V_ADMIN_HOME = "admin";
+	public static final String V_ADMIN_SIGNIN = "admin/index";
+	public static final String V_ADMIN_COURSE_LIST = "admin/course_list";
+
+	public static final String C_ADMIN_COURSES = "admin/courses";
+
 }

@@ -4,7 +4,7 @@ import org.yokekhei.fsd.p5.dto.User;
 
 public interface UserService {
 
-	User login(String email, String password) throws DevOpsServiceException;
+	User login(String email, String password, String role) throws DevOpsServiceException;
 
 	User register(User user) throws DevOpsServiceException;
 

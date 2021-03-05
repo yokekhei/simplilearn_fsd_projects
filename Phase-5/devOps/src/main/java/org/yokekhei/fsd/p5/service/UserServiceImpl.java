@@ -3,7 +3,6 @@ package org.yokekhei.fsd.p5.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.yokekhei.fsd.p5.Common;
 import org.yokekhei.fsd.p5.dao.UserDao;
 import org.yokekhei.fsd.p5.dto.User;
 
@@ -14,7 +13,7 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
-	public User login(String email, String password) throws DevOpsServiceException {
+	public User login(String email, String password, String role) throws DevOpsServiceException {
 		User user = null;
 
 		try {
@@ -22,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
 			if (user == null) {
 				throw new DevOpsServiceException("Invalid credentials");
-			} else if (!user.getRole().equals(Common.ROLE_USER)) {
+			} else if (!user.getRole().equals(role)) {
 				throw new DevOpsServiceException("Invalid user privileges");
 			} else if (!user.getEnabled()) {
 				throw new DevOpsServiceException("User permission is disabled");

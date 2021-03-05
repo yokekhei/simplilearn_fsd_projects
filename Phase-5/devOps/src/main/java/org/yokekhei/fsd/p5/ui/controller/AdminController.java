@@ -20,75 +20,49 @@ import org.yokekhei.fsd.p5.service.UserService;
 import org.yokekhei.fsd.p5.ui.View;
 
 @Controller
-public class UserController {
+public class AdminController {
 
 	@Autowired
 	private UserService service;
 
-	@GetMapping("/")
+	@GetMapping("/admin")
 	public String home(Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("guest", new User());
 
-		return View.V_USER_HOME;
+		return View.V_ADMIN_SIGNIN;
 	}
 
-	@PostMapping("/login")
+	@PostMapping("/admin/login")
 	public String loginForm(@Valid @ModelAttribute("user") User user, BindingResult result, ModelMap modelMap,
 			HttpServletRequest request) throws DevOpsServiceException {
 		if (result.hasErrors()) {
 			modelMap.addAttribute("user", new User(user.getEmail()));
-			modelMap.addAttribute("guest", new User());
-			modelMap.addAttribute("userFailMsg", result.getAllErrors().get(0).getDefaultMessage());
-			return View.V_USER_HOME;
+			modelMap.addAttribute("authMsg", result.getAllErrors().get(0).getDefaultMessage());
+			return View.V_ADMIN_SIGNIN;
 		}
 
-		User loginUser = service.login(user.getEmail(), user.getPassword(), Common.ROLE_USER);
+		User loginUser = service.login(user.getEmail(), user.getPassword(), Common.ROLE_ADMIN);
 
 		HttpSession session = request.getSession(true);
 		session.setAttribute("loginUser", loginUser);
 
-		return "redirect:/" + View.C_USER_COURSES;
+		return "redirect:/" + View.C_ADMIN_COURSES;
 	}
 
-	@GetMapping("/logout")
+	@GetMapping("/admin/logout")
 	public String logout(Model model, HttpServletRequest request) {
 		request.getSession(false).invalidate();
 		model.addAttribute("user", new User());
-		model.addAttribute("guest", new User());
 
-		return View.V_USER_HOME;
-	}
-
-	@PostMapping("/register")
-	public String registerForm(@Valid @ModelAttribute("guest") User user, BindingResult result, ModelMap modelMap)
-			throws DevOpsServiceException {
-		if (result.hasErrors()) {
-			modelMap.addAttribute("user", new User());
-			modelMap.addAttribute("guest", new User());
-			modelMap.addAttribute("userFailMsg", result.getAllErrors().get(0).getDefaultMessage());
-			return View.V_USER_HOME;
-		}
-
-		user.setRole(Common.ROLE_USER);
-		user.setEnabled(true);
-
-		User loginUser = service.register(user);
-
-		modelMap.addAttribute("user", new User(loginUser.getEmail()));
-		modelMap.addAttribute("guest", new User());
-		modelMap.addAttribute("success", "Congratulations! You have signed up successfully.");
-
-		return View.V_USER_HOME;
+		return View.V_ADMIN_SIGNIN;
 	}
 
 	@ExceptionHandler(DevOpsServiceException.class)
 	public String handlerException(DevOpsServiceException exception, Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("guest", new User());
-		model.addAttribute("userFailMsg", exception.getMessage());
+		model.addAttribute("authMsg", exception.getMessage());
 
-		return View.V_USER_HOME;
+		return View.V_ADMIN_SIGNIN;
 	}
 
 }
