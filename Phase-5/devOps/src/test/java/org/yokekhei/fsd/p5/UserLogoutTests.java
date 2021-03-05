@@ -39,11 +39,13 @@ public class UserLogoutTests extends BaseTests {
 		userDropDown.click();
 
 		WebElement logoutDropItem = driver.findElement(By.xpath("//div//ul//li//div//a[@href='/logout']"));
+		WebDriverWait wait3 = new WebDriverWait(driver, 30);
+		wait3.until(ExpectedConditions.visibilityOf(logoutDropItem));
 		logoutDropItem.click();
 
 		WebElement signInButton = driver.findElement(By.xpath("//button[@name='loginBtn']"));
-		WebDriverWait wait3 = new WebDriverWait(driver, 30);
-		wait3.until(ExpectedConditions.visibilityOf(signInButton));
+		WebDriverWait wait4 = new WebDriverWait(driver, 30);
+		wait4.until(ExpectedConditions.visibilityOf(signInButton));
 
 		Assert.assertNotNull(signInButton);
 		Assert.assertEquals(signInButton.getText(), "Sign in");
