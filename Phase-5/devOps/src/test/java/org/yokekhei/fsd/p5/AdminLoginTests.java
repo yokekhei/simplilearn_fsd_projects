@@ -60,7 +60,7 @@ public class AdminLoginTests extends BaseTests {
 		Assert.assertTrue(alert.getText().contains("Invalid credentials"));
 	}
 
-	@Test(dependsOnMethods = "launchBrowser", priority = 1)
+	@Test(dependsOnMethods = "launchBrowser", priority = 2)
 	public void testLoginInvalidUserPrivileges() {
 		driver.get(this.getBaseUrl() + "/admin");
 
