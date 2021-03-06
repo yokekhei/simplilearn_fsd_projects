@@ -1,4 +1,4 @@
-package org.yokekhei.fsd.p5.dao;
+package org.yokekhei.fsd.p5.repository;
 
 import java.util.Optional;
 

@@ -3,9 +3,9 @@ package org.yokekhei.fsd.p5.dao;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.yokekhei.fsd.p5.dto.User;
 import org.yokekhei.fsd.p5.mapper.UserMapper;
+import org.yokekhei.fsd.p5.repository.UserRepository;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -32,7 +32,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	@Transactional
 	public User save(User user) throws DevOpsDaoException {
 		User savedUser = null;
 

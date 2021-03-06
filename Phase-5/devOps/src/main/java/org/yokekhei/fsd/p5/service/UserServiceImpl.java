@@ -3,6 +3,7 @@ package org.yokekhei.fsd.p5.service;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.yokekhei.fsd.p5.dao.UserDao;
 import org.yokekhei.fsd.p5.dto.User;
 
@@ -13,6 +14,7 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 
 	@Override
+	@Transactional
 	public User login(String email, String password, String role) throws DevOpsServiceException {
 		User user = null;
 
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public User register(User user) throws DevOpsServiceException {
 		User savedUser = null;
 
@@ -53,6 +56,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional
 	public User changePassword(User user, String newPassword) throws DevOpsServiceException {
 		User savedUser = null;
 
