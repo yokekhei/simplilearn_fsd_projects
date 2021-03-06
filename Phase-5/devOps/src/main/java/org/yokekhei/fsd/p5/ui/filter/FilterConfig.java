@@ -17,4 +17,14 @@ public class FilterConfig {
 		return registrationBean;
 	}
 
+	@Bean
+	public FilterRegistrationBean<AdminAuthenticationFilter> adminAuthenticationFilter() {
+		FilterRegistrationBean<AdminAuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
+		registrationBean.setFilter(new AdminAuthenticationFilter());
+		registrationBean.addUrlPatterns("/" + View.C_ADMIN_COURSES + "/*",
+				"/" + View.C_ADMIN_LOGOUT + "/*");
+
+		return registrationBean;
+	}
+
 }
