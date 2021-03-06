@@ -19,6 +19,17 @@ import org.testng.annotations.Test;
 public class AdminCourseTests extends BaseTests {
 
 	@Test(dependsOnMethods = "launchBrowser", priority = 0)
+	public void testSessionExpired() {
+		driver.get(this.getBaseUrl() + "/admin/courses");
+
+		WebElement alert = driver.findElement(By.xpath("//div[@id='failAlert']"));
+		WebDriverWait wait2 = new WebDriverWait(driver, 30);
+		wait2.until(ExpectedConditions.visibilityOf(alert));
+
+		Assert.assertTrue(alert.getText().contains("Session expired"));
+	}
+
+	@Test(dependsOnMethods = "launchBrowser", priority = 1)
 	public void testListCourseSuccess() {
 		driver.get(this.getBaseUrl() + "/admin");
 
