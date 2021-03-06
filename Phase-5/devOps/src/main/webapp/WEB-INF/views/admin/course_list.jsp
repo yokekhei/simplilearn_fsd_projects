@@ -54,7 +54,7 @@
                 <td>
                   <div class="custom-control custom-switch">
                     <input class="custom-control-input" type="checkbox" id="courseEnabled${course.getId()}"
-                      checked="${course.getEnabled()}"
+                      ${course.getEnabled() ? "checked" : ""}
                       onchange="location.href='${pageContext.request.contextPath}/admin/course/enabled" />
                     <label class="custom-control-label" for="courseEnabled${course.getId()}">
                       ${course.getEnabled() ? 'Enabled' : 'Disabled'}
