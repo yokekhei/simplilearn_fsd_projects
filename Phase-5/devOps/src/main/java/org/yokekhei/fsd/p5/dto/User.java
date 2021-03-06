@@ -1,6 +1,8 @@
 package org.yokekhei.fsd.p5.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -28,6 +30,7 @@ public class User {
 	private String role;
 	private Boolean enabled;
 	private LocalDateTime createdDateTime;
+	private List<Course> courses = new ArrayList<>();
 
 	public User() {
 	}
@@ -100,11 +103,19 @@ public class User {
 		return "";
 	}
 
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", confirmPassword=" + confirmPassword
 				+ ", userName=" + userName + ", role=" + role + ", enabled=" + enabled + ", createdDateTime="
-				+ createdDateTime + "]";
+				+ createdDateTime + ", courses=" + courses + "]";
 	}
 
 }

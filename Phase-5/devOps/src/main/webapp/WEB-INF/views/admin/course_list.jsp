@@ -38,6 +38,32 @@
             </tr>
           </thead>
           <tbody>
+            <c:forEach var="course" items="${sessionScope.courseList}">
+              <tr>
+                <td>
+                  <button type="button" class="btn btn-sm px-2"
+                    onclick="location.href='${pageContext.request.contextPath}/admin/course/update/${course.getId()}'">
+                    <i class="fas fa-pencil-alt mt-0 text-primary"></i>
+                  </button>
+                  <button type="button" class="btn btn-sm px-2">
+                    <i class="far fa-trash-alt mt-0 text-danger"></i>
+                  </button>
+                </td>
+                <td><c:out value="${course.getName()}"/></td>
+                <td><c:out value="${course.getCreatedDateString()}"/></td>
+                <td>
+                  <div class="custom-control custom-switch">
+                    <input class="custom-control-input" type="checkbox" id="courseEnabled${course.getId()}"
+                      checked="${course.getEnabled()}"
+                      onchange="location.href='${pageContext.request.contextPath}/admin/course/enabled" />
+                    <label class="custom-control-label" for="courseEnabled${course.getId()}">
+                      ${course.getEnabled() ? 'Enabled' : 'Disabled'}
+                    </label>
+                  </div>
+                </td>
+                <td style="display:none;"><c:out value="${course.getId()}"/></td>
+            </tr>
+            </c:forEach>
           </tbody>
         </table>
       </div>

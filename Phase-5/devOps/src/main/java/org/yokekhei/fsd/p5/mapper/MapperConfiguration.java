@@ -12,4 +12,9 @@ public class MapperConfiguration {
 		return Mappers.getMapper(UserMapper.class);
 	}
 
+	@Bean
+	public CourseMapper courseMapper() {
+		return Mappers.getMapper(CourseMapper.class);
+	}
+
 }

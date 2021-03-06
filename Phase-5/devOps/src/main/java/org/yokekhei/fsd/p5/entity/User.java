@@ -1,10 +1,15 @@
 package org.yokekhei.fsd.p5.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,6 +39,12 @@ public class User {
 	@CreationTimestamp
 	@Column(name = "created_at")
 	private LocalDateTime createdDateTime;
+
+	@ManyToMany
+	@JoinTable(name = "student_course",
+		joinColumns = @JoinColumn(name = "student_id"),
+		inverseJoinColumns = @JoinColumn(name = "course_id"))
+	private List<Course> courses = new ArrayList<>();
 
 	public User() {
 	}
@@ -86,10 +97,18 @@ public class User {
 		this.createdDateTime = createdDateTime;
 	}
 
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", userName=" + userName + ", role=" + role
-				+ ", enabled=" + enabled + ", createdDateTime=" + createdDateTime + "]";
+				+ ", enabled=" + enabled + ", createdDateTime=" + createdDateTime + ", courses=" + courses + "]";
 	}
 
 }
