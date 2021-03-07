@@ -28,6 +28,19 @@ public class CourseServiceImpl implements CourseService {
 	}
 
 	@Override
+	public Course getCourse(Long id) throws DevOpsServiceException {
+		Course course = null;
+
+		try {
+			course = courseDao.getCourse(id);
+		} catch (Exception e) {
+			throw new DevOpsServiceException(e.getMessage());
+		}
+
+		return course;
+	}
+
+	@Override
 	public void addCourse(Course course) throws DevOpsServiceException {
 		try {
 			courseDao.save(course);

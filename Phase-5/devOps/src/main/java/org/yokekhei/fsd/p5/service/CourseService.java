@@ -8,6 +8,8 @@ public interface CourseService {
 
 	List<Course> getAllCourses() throws DevOpsServiceException;
 
+	Course getCourse(Long id) throws DevOpsServiceException;
+
 	void addCourse(Course course) throws DevOpsServiceException;
 
 	void updateCourse(Course course) throws DevOpsServiceException;
