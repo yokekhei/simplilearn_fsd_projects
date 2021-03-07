@@ -7,6 +7,7 @@
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 			<class name="org.yokekhei.fsd.p5.UserRegisterTests" />
 			<class name="org.yokekhei.fsd.p5.UserLogoutTests" />
+			<class name="org.yokekhei.fsd.p5.UserCourseTests" />
 			<class name="org.yokekhei.fsd.p5.AdminLoginTests" />
 			<class name="org.yokekhei.fsd.p5.AdminLogoutTests" />
 			<class name="org.yokekhei.fsd.p5.AdminCourseTests" />
@@ -18,6 +19,7 @@
 			<class name="org.yokekhei.fsd.p5.UserLoginTests" />
 			<class name="org.yokekhei.fsd.p5.UserRegisterTests" />
 			<class name="org.yokekhei.fsd.p5.UserLogoutTests" />
+			<class name="org.yokekhei.fsd.p5.UserCourseTests" />
 			<class name="org.yokekhei.fsd.p5.AdminLoginTests" />
 			<class name="org.yokekhei.fsd.p5.AdminLogoutTests" />
 			<class name="org.yokekhei.fsd.p5.AdminCourseTests" />
