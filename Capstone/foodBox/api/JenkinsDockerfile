@@ -1,0 +1,11 @@
+FROM openjdk:8-jdk-alpine
+
+RUN mkdir -p /usr/src/app
+
+WORKDIR /usr/src/app
+
+COPY Capstone/foodBox/api/target/foodBoxApi.jar /usr/src/app
+
+EXPOSE 7070
+
+CMD [ "java", "-jar", "foodBoxApi.jar" ]
