@@ -16,7 +16,7 @@ services:
             - "3306:3306"
 
     api:
-        image: foodbox-api
+        image: yokekhei/foodbox-api:latest
         container_name: foodbox-api
         depends_on:
             - "db"
@@ -24,7 +24,7 @@ services:
         restart: on-failure
 
     app:
-        image: foodbox-app
+        image: yokekhei/foodbox-app:latest
         container_name: foodbox-app
         depends_on:
             - "api"
