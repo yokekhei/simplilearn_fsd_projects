@@ -8,7 +8,6 @@ sleep 5
 
 ${base_dir}/stop.sh
 
-sudo rm -rf ${PWD}/db_data
 mkdir -p ${PWD}/db_data
 
 cp ${base_dir}/../../../db/startup.sql ${base_dir}
