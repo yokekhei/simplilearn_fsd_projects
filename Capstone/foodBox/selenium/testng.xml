@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Headless Browser Suite" thread-count="5" parallel="tests">
+	<test name="Chrome Testing">
+		<parameter name="browserType" value="chrome headless"></parameter>
+		<classes>
+			<class name="org.yokekhei.fsd.capstone.selenium.UserCategoryTests" />
+			<!-- <class name="org.yokekhei.fsd.capstone.selenium.UserLoginTests" />  -->
+			<class name="org.yokekhei.fsd.capstone.selenium.UserLogoutTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.UserRegisterTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.AdminLoginTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.AdminLogoutTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.AdminCategoryTests" />
+		</classes>
+	</test>
+	<test name="Firefox Testing">
+		<parameter name="browserType" value="firefox headless"></parameter>
+		<classes>
+			<class name="org.yokekhei.fsd.capstone.selenium.UserCategoryTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.UserLoginTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.UserLogoutTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.UserRegisterTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.AdminLoginTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.AdminLogoutTests" />
+			<class name="org.yokekhei.fsd.capstone.selenium.AdminCategoryTests" />
+		</classes>
+	</test>
+</suite>
