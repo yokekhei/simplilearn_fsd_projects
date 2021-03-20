@@ -1,7 +1,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light white" [containerInside]="false">
     <mdb-navbar-brand>
         <a class="navbar-brand" routerLink="/user" routerLinkActive="active"><img src="assets/images/logo.png"
-                alt="Home" width="60" height="61"></a>
+                alt="Home" width="60" height="52"></a>
     </mdb-navbar-brand>
     <links>
         <ul class="navbar-nav ml-auto">
@@ -13,7 +13,7 @@
             </li>
             <li class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
-                    mdbWavesEffect>
+                    mdbWavesEffect id="userNavDropDown">
                     <mdb-icon fas icon="user"></mdb-icon> {{ userName }}<span class="caret"></span>
                 </a>
                 <ul *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
