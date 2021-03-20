@@ -35,10 +35,7 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
       loginUser => {
         if (loginUser.username && loginUser.username !== this.userName) {
           this.isGuest = this.authService.isLoggedIn(Common.ROLE_USER) ? false : true;
-
-          if (!this.isGuest) {
-            this.userName = loginUser.username;
-          }
+          this.userName = loginUser.username;
         }
       }
     );
