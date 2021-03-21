@@ -25,6 +25,15 @@ public class User {
 	public User() {
 	}
 
+	public User(String email, String password, String username, String role, Address address, Boolean enabled) {
+		this.email = email;
+		this.password = password;
+		this.username = username;
+		this.role = role;
+		this.address = address;
+		this.enabled = enabled;
+	}
+
 	public String getEmail() {
 		return email;
 	}

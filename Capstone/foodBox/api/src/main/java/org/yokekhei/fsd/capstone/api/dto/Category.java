@@ -26,6 +26,12 @@ public class Category {
 	public Category() {
 	}
 
+	public Category(Long id, String name, Boolean enabled) {
+		this.id = id;
+		this.name = name;
+		this.enabled = enabled;
+	}
+
 	public Long getId() {
 		return id;
 	}
