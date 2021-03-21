@@ -1,4 +1,4 @@
-<div *ngIf="registered" class="alert alert-success alert-dismissible my-2 alert-top">
+<div *ngIf="registered" class="alert alert-success alert-dismissible my-2 alert-top" id="successAlert">
     <a [routerLink]="['/user/login']" [queryParams]="{ email: userEmail }" class="close" data-dismiss="alert"
         aria-label="close">&times;</a>
     <small>Congratulations! You have signed up successfully.</small>

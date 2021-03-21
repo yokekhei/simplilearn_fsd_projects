@@ -1,0 +1,31 @@
+version: '3.6'
+
+services:
+    db:
+        image: mysql:8.0.23
+        container_name: foodbox-db
+        restart: always
+        volumes:
+            - ./db/startup.sql:/docker-entrypoint-initdb.d/startup.sql
+        environment:
+            - MYSQL_ROOT_PASSWORD=password
+            - MYSQL_USER=foodbox_user
+            - MYSQL_PASSWORD=password
+            - MYSQL_ROOT_HOST=%
+        ports:
+            - "3306:3306"
+
+    api:
+        image: yokekhei/foodbox-api:latest
+        container_name: foodbox-api
+        depends_on:
+            - "db"
+        network_mode: host
+        restart: on-failure
+
+    app:
+        image: yokekhei/foodbox-app:latest
+        container_name: foodbox-app
+        depends_on:
+            - "api"
+        network_mode: host
