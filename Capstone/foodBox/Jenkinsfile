@@ -1,0 +1,140 @@
+pipeline {
+    agent none
+    
+    environment {
+        baseImageName = "foodbox"
+        apiImageName = "yokekhei/${baseImageName}-api"
+        appImageName = "yokekhei/${baseImageName}-app"
+        registryCredential = 'dockerhub_id'
+        apiDockerImage = ''
+        appDockerImage = ''
+    }
+    
+    stages {
+        stage('Setup') {
+            agent any
+            steps {
+                checkout([$class: 'GitSCM', 
+                          branches: [[name: "develop"]], 
+                          doGenerateSubmoduleConfigurations: false, 
+                          extensions: [], 
+                          gitTool: 'Default', 
+                          submoduleCfg: [], 
+                          userRemoteConfigs: [[url: 'https://github.com/yokekhei/simplilearn_fsd_projects.git']]
+                        ])
+                sh 'cd Capstone/foodBox/bin/docker/db && ./run.sh'
+                sh 'cp Capstone/foodBox/db/startup.sql Capstone/foodBox/aws_ec2/docker'
+            }
+        }
+        
+        stage('Build API') {
+            agent {
+                docker {
+                    image 'maven:3.6.3-openjdk-8'
+                    args '-v $HOME/.m2:/root/.m2 --net=host'
+                }
+            }
+            steps {
+                sh 'cd Capstone/foodBox/api && mvn -Dmaven.test.failure.ignore=true clean compile package'
+            }
+            post {
+                success {
+                    step([$class: 'Publisher', reportFilenamePattern: 'Capstone/foodBox/api/target/surefire-reports/testng-results.xml'])
+                }
+            }
+        }
+        
+        stage('Build APP') {
+            agent {
+                docker {
+                    image 'node:14.15.4-alpine'
+                }
+            }
+            environment {
+                // or override default cache directory (~/.npm)
+                NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+            }
+            steps {
+                sh 'cd Capstone/foodBox/app && npm install && ng build --prod'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            agent any
+            steps {
+                sh 'cd Capstone/foodBox/bin/docker/db && ./stop.sh'
+                script {
+                    apiDockerImage = docker.build("${apiImageName}:${BUILD_NUMBER}", "-f Capstone/foodBox/api/JenkinsDockerfile .")
+                    appDockerImage = docker.build("${appImageName}:${BUILD_NUMBER}", "-f Capstone/foodBox/app/JenkinsDockerfile .")
+                    apiDockerImage.tag('latest')
+                    appDockerImage.tag('latest')
+                }
+            }
+        }
+        
+        stage('Test') {
+            agent any
+            steps {
+                sh 'cd ~/simplilearn_fsd_projects/Capstone/foodBox && docker-compose up -d'
+                sh 'chmod +x Capstone/foodBox/selenium/bin/chromedriver'
+                sh 'chmod +x Capstone/foodBox/selenium/bin/geckodriver'
+                sh 'cd Capstone && cd foodBox && mvn test'
+            }
+            post {
+                success {
+                    step([$class: 'Publisher', reportFilenamePattern: 'Capstone/foodBox/selenium/target/surefire-reports/testng-results.xml'])
+                }
+            }
+        }
+		
+        stage('Publish Docker Image') {
+            agent any
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        apiDockerImage.push("${BUILD_NUMBER}")
+                        apiDockerImage.push('latest')
+                        appDockerImage.push("${BUILD_NUMBER}")
+                        appDockerImage.push('latest')
+                    }
+                }
+            }
+        }
+
+        stage('Deploy to AWS EC2 Instance') {
+            agent any
+            steps([$class: 'BapSshPromotionPublisherPlugin']) {
+                sshPublisher(
+                    continueOnError: false, failOnError: true,
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: "web-app-server",
+                            verbose: true,
+                            transfers: [
+                                sshTransfer(sourceFiles: "Capstone/foodBox/aws_ec2/docker/**"),
+                                sshTransfer(execCommand: "./start-db.sh;./start-api.sh ${BUILD_NUMBER};./start-app.sh ${BUILD_NUMBER};")
+                            ]
+                        )
+                    ]
+                )
+            }
+        }
+        
+        stage('Clean Up') {
+            agent any
+            steps {
+                sh 'cd ~/simplilearn_fsd_projects/Capstone/foodBox && docker-compose down'
+                sh "docker rmi ${appImageName}:${BUILD_NUMBER}"
+                sh "docker rmi ${appImageName}:latest"
+                sh "docker rmi ${apiImageName}:${BUILD_NUMBER}"
+                sh "docker rmi ${apiImageName}:latest"
+                sh "docker rmi nginx:alpine"
+                sh "docker rmi node:14.15.4-alpine"
+                sh "docker rmi maven:3.6.3-openjdk-8"
+                sh "docker rmi openjdk:8-jdk-alpine"
+                sh 'cd ~/simplilearn_fsd_projects/Capstone/foodBox/bin/docker/db && ./stop.sh'
+                sh "docker rmi mysql:8.0.23"
+            }
+        }
+    }
+}
