@@ -41,8 +41,9 @@ public class FoodController {
 	@GetMapping("/food")
 	@ResponseBody
 	public Foods getFoods(@RequestParam(required = false) String enabled, @RequestParam int page,
-			@RequestParam int size, @RequestParam(required = false) String sortBy) throws FoodBoxServiceException {
-		PageInfo pageInfo = new PageInfo(page, size, sortBy);
+			@RequestParam int size, @RequestParam(required = false) String sortBy,
+			@RequestParam(required = false) String direction) throws FoodBoxServiceException {
+		PageInfo pageInfo = new PageInfo(page, size, sortBy, direction);
 
 		if (enabled != null) {
 			return service.getFoods(enabled.equalsIgnoreCase("true"), pageInfo);
@@ -54,9 +55,9 @@ public class FoodController {
 	@GetMapping("/food/name/{name}")
 	@ResponseBody
 	public Foods getFoodsByName(@PathVariable("name") String name, @RequestParam(required = false) String enabled,
-			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy)
-			throws FoodBoxServiceException {
-		PageInfo pageInfo = new PageInfo(page, size, sortBy);
+			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy,
+			@RequestParam(required = false) String direction) throws FoodBoxServiceException {
+		PageInfo pageInfo = new PageInfo(page, size, sortBy, direction);
 
 		if (enabled != null) {
 			return service.getFoodsByName(name, enabled.equalsIgnoreCase("true"), pageInfo);
@@ -68,9 +69,9 @@ public class FoodController {
 	@GetMapping("/food/category/{id}")
 	@ResponseBody
 	public Foods getFoodsByCategory(@PathVariable("id") Long id, @RequestParam(required = false) String enabled,
-			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy)
-			throws FoodBoxServiceException {
-		PageInfo pageInfo = new PageInfo(page, size, sortBy);
+			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy,
+			@RequestParam(required = false) String direction) throws FoodBoxServiceException {
+		PageInfo pageInfo = new PageInfo(page, size, sortBy, direction);
 		Category category = new Category(id);
 
 		if (enabled != null) {
@@ -82,10 +83,11 @@ public class FoodController {
 
 	@GetMapping("/food/price/{price}")
 	@ResponseBody
-	public Foods getFoodsByPrice(@PathVariable("price") BigDecimal price, @RequestParam(required = false) String enabled,
-			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy)
+	public Foods getFoodsByPrice(@PathVariable("price") BigDecimal price,
+			@RequestParam(required = false) String enabled, @RequestParam int page, @RequestParam int size,
+			@RequestParam(required = false) String sortBy, @RequestParam(required = false) String direction)
 			throws FoodBoxServiceException {
-		PageInfo pageInfo = new PageInfo(page, size, sortBy);
+		PageInfo pageInfo = new PageInfo(page, size, sortBy, direction);
 
 		if (enabled != null) {
 			return service.getFoodsByPrice(price, enabled.equalsIgnoreCase("true"), pageInfo);
@@ -97,9 +99,9 @@ public class FoodController {
 	@GetMapping("/food/offer/{id}")
 	@ResponseBody
 	public Foods getFoodsByOffer(@PathVariable("id") Long id, @RequestParam(required = false) String enabled,
-			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy)
-			throws FoodBoxServiceException {
-		PageInfo pageInfo = new PageInfo(page, size, sortBy);
+			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy,
+			@RequestParam(required = false) String direction) throws FoodBoxServiceException {
+		PageInfo pageInfo = new PageInfo(page, size, sortBy, direction);
 		Offer offer = new Offer(id);
 
 		if (enabled != null) {

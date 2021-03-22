@@ -8,6 +8,7 @@ public class PageInfo {
 	long totalElements;
 	int totalPages;
 	String sortBy;
+	String direction;
 
 	public PageInfo() {
 	}
@@ -17,19 +18,22 @@ public class PageInfo {
 		this.size = size;
 	}
 
-	public PageInfo(int page, int size, String sortBy) {
+	public PageInfo(int page, int size, String sortBy, String direction) {
 		this.page = page;
 		this.size = size;
 		this.sortBy = sortBy;
+		this.direction = direction;
 	}
 
-	public PageInfo(int page, int size, int numberOfElements, long totalElements, int totalPages, String sortBy) {
+	public PageInfo(int page, int size, int numberOfElements, long totalElements, int totalPages, String sortBy,
+			String direction) {
 		this.page = page;
 		this.size = size;
 		this.numberOfElements = numberOfElements;
 		this.totalElements = totalElements;
 		this.totalPages = totalPages;
 		this.sortBy = sortBy;
+		this.direction = direction;
 	}
 
 	public int getPage() {
@@ -80,10 +84,19 @@ public class PageInfo {
 		this.sortBy = sortBy;
 	}
 
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
 	@Override
 	public String toString() {
 		return "PageInfo [page=" + page + ", size=" + size + ", numberOfElements=" + numberOfElements
-				+ ", totalElements=" + totalElements + ", totalPages=" + totalPages + ", sortBy=" + sortBy + "]";
+				+ ", totalElements=" + totalElements + ", totalPages=" + totalPages + ", sortBy=" + sortBy
+				+ ", direction=" + direction + "]";
 	}
 
 }
