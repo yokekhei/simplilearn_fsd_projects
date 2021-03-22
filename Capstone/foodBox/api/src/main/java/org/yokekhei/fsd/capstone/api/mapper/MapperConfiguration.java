@@ -17,4 +17,19 @@ public class MapperConfiguration {
 		return Mappers.getMapper(UserMapper.class);
 	}
 
+	@Bean
+	public OfferMapper offerMapper() {
+		return Mappers.getMapper(OfferMapper.class);
+	}
+
+	@Bean
+	public FeeMapper feeMapper() {
+		return Mappers.getMapper(FeeMapper.class);
+	}
+
+	@Bean
+	public FoodMapper foodMapper() {
+		return Mappers.getMapper(FoodMapper.class);
+	}
+
 }

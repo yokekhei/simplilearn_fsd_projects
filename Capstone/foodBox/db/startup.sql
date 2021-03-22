@@ -45,6 +45,7 @@ CREATE TABLE foods (
     food_desc VARCHAR(255) NOT NULL,
     food_offer BIGINT,
     food_image BLOB,
+    food_enabled BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (food_id),
     CONSTRAINT fk_food_category FOREIGN KEY (food_category) REFERENCES categories(category_id),
@@ -53,7 +54,8 @@ CREATE TABLE foods (
 DROP TABLE IF EXISTS fees;
 CREATE TABLE fees (
     fee_type VARCHAR(50) NOT NULL,
-    fee_value DECIMAL(18, 5) NOT NULL DEFAULT 0
+    fee_value DECIMAL(18, 5) NOT NULL DEFAULT 0,
+    PRIMARY KEY (fee_type)
 ) ENGINE=INNODB;
 
 DROP USER IF EXISTS 'foodbox_user'@'172.17.0.1';
