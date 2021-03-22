@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.yokekhei.fsd.capstone.api.dao.FeeDao;
 import org.yokekhei.fsd.capstone.api.dto.Fee;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxServiceException;
 
+@Service
 public class FeeServiceImpl implements FeeService {
 
 	@Resource
