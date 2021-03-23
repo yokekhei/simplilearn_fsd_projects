@@ -1,3 +1,4 @@
+import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -14,7 +15,7 @@ export class AdminCategoriesComponent implements OnInit {
 
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private router: Router) { }
+  constructor(private categoryService: CategoryService, private dataService: DataService, private router: Router) { }
 
   ngOnInit(): void {
     this.getCategoryList();
@@ -22,7 +23,11 @@ export class AdminCategoriesComponent implements OnInit {
 
   getCategoryList(): void {
     this.categoryService.getAllCategories().subscribe(
-      categories => this.categories = categories);
+      categories => {
+        this.categories = categories;
+        this.dataService.changeCategories(categories);
+      }
+    );
   }
 
   getDate(strDate?: string): Date {

@@ -5,6 +5,7 @@ import { AdminCategoriesComponent } from './components/admin/admin-categories/ad
 import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
 import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminFoodsComponent } from './components/admin/admin-foods/admin-foods.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
 import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logout.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
           { path: 'category', component: AdminCategoriesComponent },
           { path: 'category/add', component: AdminCategoryCreateComponent },
           { path: 'category/update/:id', component: AdminCategoryUpdateComponent },
+          { path: 'food', component: AdminFoodsComponent },
           { path: '**', redirectTo: '/admin/home/category', pathMatch: 'full' }
         ]
       },

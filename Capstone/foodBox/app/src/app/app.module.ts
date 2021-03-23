@@ -10,6 +10,7 @@ import { AdminCategoriesComponent } from './components/admin/admin-categories/ad
 import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
 import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminFoodsComponent } from './components/admin/admin-foods/admin-foods.component';
 import { AdminHeaderComponent } from './components/admin/admin-header/admin-header.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
@@ -21,6 +22,7 @@ import { CategoryService } from './services/category.service';
 import { ConfigurationService, ENVIRONMENT } from './services/configuration.service';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { DataService } from './services/data.service';
+import { FoodService } from './services/food.service';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
 import { UserHeaderComponent } from './components/user/user-header/user-header.component';
@@ -35,6 +37,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AdminCategoryCreateComponent,
     AdminCategoryUpdateComponent,
     AdminComponent,
+    AdminFoodsComponent,
     AdminHeaderComponent,
     AdminHomeComponent,
     AdminLoginComponent,
@@ -61,7 +64,8 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AuthenticationService,
     CategoryService,
     ConfigurationService,
-    DataService
+    DataService,
+    FoodService
   ],
   bootstrap: [AppComponent]
 })
