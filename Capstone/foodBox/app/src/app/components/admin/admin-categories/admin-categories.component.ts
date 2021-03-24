@@ -15,7 +15,9 @@ export class AdminCategoriesComponent implements OnInit {
 
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private dataService: DataService, private router: Router) { }
+  constructor(private categoryService: CategoryService,
+              private dataService: DataService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getCategoryList();
@@ -52,7 +54,8 @@ export class AdminCategoriesComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           this.categoryService.deleteCategory(id).subscribe(
-            (category: Category) => Swal.fire(`Category ${category.name} removed successfully`, '', 'success'),
+            (category: Category) => Swal.fire(`Category ${category.name} removed successfully`,
+              '', 'success'),
             (err: any) => Swal.fire(err.error.message, '', 'error'),
             () => {
               this.getCategoryList();
@@ -67,7 +70,8 @@ export class AdminCategoriesComponent implements OnInit {
     const checked = event.target.checked;
 
     this.categoryService.setCategoryEnabled(category, checked).subscribe(
-      (c: Category) => Swal.fire(`Category ${c.name} ${checked ? 'enabled' : 'disabled'} successfully`, '', 'success'),
+      (c: Category) => Swal.fire(`Category ${c.name} ${checked ? 'enabled' : 'disabled'} successfully`,
+        '', 'success'),
       (err: any) => Swal.fire(err.error.message, '', 'error'),
       () => {
         this.getCategoryList();
