@@ -9,6 +9,9 @@ import { AdminFoodsComponent } from './components/admin/admin-foods/admin-foods.
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
 import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logout.component';
+import { AdminOfferCreateComponent } from './components/admin/admin-offer-create/admin-offer-create.component';
+import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update/admin-offer-update.component';
+import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
@@ -41,6 +44,9 @@ const routes: Routes = [
           { path: 'category/add', component: AdminCategoryCreateComponent },
           { path: 'category/update/:id', component: AdminCategoryUpdateComponent },
           { path: 'food', component: AdminFoodsComponent },
+          { path: 'offer', component: AdminOffersComponent },
+          { path: 'offer/add', component: AdminOfferCreateComponent },
+          { path: 'offer/update/:id', component: AdminOfferUpdateComponent },
           { path: '**', redirectTo: '/admin/home/category', pathMatch: 'full' }
         ]
       },

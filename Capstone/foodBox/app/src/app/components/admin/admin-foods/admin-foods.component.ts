@@ -10,6 +10,7 @@ import { DataService } from './../../../services/data.service';
 import { Food } from './../../../models/food';
 import { FoodService } from './../../../services/food.service';
 import { Offer } from './../../../models/offer';
+import { OfferService } from 'src/app/services/offer.service';
 import { PageInfo } from './../../../models/page-info';
 
 @Component({
@@ -25,9 +26,11 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
   private offers: Offer[] = [];
   private subscriptionPageInfo: Subscription;
   private subscriptionCategories: Subscription;
+  private subscriptionOffers: Subscription;
 
   constructor(private foodService: FoodService, private dataService: DataService,
-              private categoryService: CategoryService, private router: Router) {
+              private categoryService: CategoryService, private offerService: OfferService,
+              private router: Router) {
     this.pageInfo = {
       page: 0,
       size: 1,
@@ -56,6 +59,21 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
           );
         } else {
           this.categories = categories;
+        }
+      }
+    );
+
+    this.subscriptionOffers = this.dataService.offers.subscribe(
+      offers => {
+        if (offers.length === 0) {
+          this.offerService.getAllOffers().subscribe(
+            ofrs => {
+              this.offers = ofrs;
+              this.dataService.changeOffers(ofrs);
+            }
+          );
+        } else {
+          this.offers = offers;
         }
       }
     );
@@ -203,19 +221,34 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  getOfferName(offerId: number | undefined): string {
+    if (offerId === undefined || offerId === null) {
+      return 'N/A';
+    }
+
+    const result: Offer[] = this.offers.filter(offer => offer.id === offerId);
+
+    if (result.length > 0) {
+      return result[0].name;
+    }
+
+    return '';
+  }
+
   onChangeNumberOfEntries(event: any): void {
     if (event !== undefined &&
       event.target !== undefined &&
       event.target.value !== undefined &&
       event.target.value !== '') {
-        this.pageInfo.size = event.target.value;
-        this.dataService.changeAdminFoodPageInfo(this.pageInfo);
+      this.pageInfo.size = event.target.value;
+      this.dataService.changeAdminFoodPageInfo(this.pageInfo);
     }
   }
 
   ngOnDestroy(): void {
     this.subscriptionPageInfo.unsubscribe();
     this.subscriptionCategories.unsubscribe();
+    this.subscriptionOffers.unsubscribe();
   }
 
 }

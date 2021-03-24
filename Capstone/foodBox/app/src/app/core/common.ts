@@ -15,4 +15,20 @@ export class Common {
     static SORT_DIRECTION_ASC = 'asc';
     static SORT_DIRECTION_DESC = 'desc';
 
+    static OFFER_TYPE_PCT = 'PCT';
+    static OFFER_TYPE_CSH = 'CSH';
+
+    static getOfferDiscountType(type: string | undefined): string {
+        switch (type) {
+            case 'PCT':
+                return 'Percentage';
+
+            case 'CSH':
+                return 'Cash';
+
+            default:
+                return 'N/A';
+        }
+    }
+
 }

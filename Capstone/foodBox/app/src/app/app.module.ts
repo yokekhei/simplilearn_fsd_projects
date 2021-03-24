@@ -15,6 +15,9 @@ import { AdminHeaderComponent } from './components/admin/admin-header/admin-head
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
 import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logout.component';
+import { AdminOfferCreateComponent } from './components/admin/admin-offer-create/admin-offer-create.component';
+import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update/admin-offer-update.component';
+import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './services/authentication.service';
@@ -24,6 +27,7 @@ import { CreditComponent } from './components/common/credit/credit.component';
 import { DataService } from './services/data.service';
 import { FoodService } from './services/food.service';
 import { FooterComponent } from './components/common/footer/footer.component';
+import { OfferService } from './services/offer.service';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
 import { UserHeaderComponent } from './components/user/user-header/user-header.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
@@ -42,6 +46,9 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AdminHomeComponent,
     AdminLoginComponent,
     AdminLogoutComponent,
+    AdminOfferCreateComponent,
+    AdminOfferUpdateComponent,
+    AdminOffersComponent,
     AppComponent,
     CreditComponent,
     FooterComponent,
@@ -65,7 +72,8 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     CategoryService,
     ConfigurationService,
     DataService,
-    FoodService
+    FoodService,
+    OfferService
   ],
   bootstrap: [AppComponent]
 })
