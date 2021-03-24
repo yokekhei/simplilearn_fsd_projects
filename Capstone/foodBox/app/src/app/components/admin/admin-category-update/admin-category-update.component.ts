@@ -15,7 +15,6 @@ export class AdminCategoryUpdateComponent implements OnInit {
 
   category?: Category;
   name = '';
-  validated = false;
   imageFileName = '';
   private selectedImages?: FileList;
 
