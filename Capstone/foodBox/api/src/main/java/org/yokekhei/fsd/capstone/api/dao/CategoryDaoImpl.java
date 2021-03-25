@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Repository;
 import org.yokekhei.fsd.capstone.api.dto.Category;
+import org.yokekhei.fsd.capstone.api.dto.Food;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.CategoryMapper;
 
@@ -66,6 +67,34 @@ public class CategoryDaoImpl implements CategoryDao {
 			throw new FoodBoxDaoException(e.getMessage());
 		}
 
+		return savedCategory;
+	}
+	
+	@Override
+	public Category update(Category category) throws FoodBoxDaoException {
+		Category savedCategory = null;
+		
+		try {
+			org.yokekhei.fsd.capstone.api.entity.Category current =
+					repository.findById(category.getId()).orElse(null);
+			
+			if (current == null) {
+				return save(category);
+			}
+			
+			org.yokekhei.fsd.capstone.api.entity.Category entity = mapper.toEntity(category);
+			
+			current.setName(entity.getName());
+			
+			if (category.getImage() != null && !category.getImage().isEmpty()) {
+				current.setImage(IOUtils.toByteArray(category.getImage().getInputStream()));
+			}
+			
+			savedCategory = mapper.toDto(repository.save(current));
+		} catch (Exception e) {
+			throw new FoodBoxDaoException(e.getMessage());
+		}
+		
 		return savedCategory;
 	}
 

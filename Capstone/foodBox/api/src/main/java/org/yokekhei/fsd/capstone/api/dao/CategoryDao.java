@@ -12,7 +12,9 @@ public interface CategoryDao {
 	List<Category> getCategories() throws FoodBoxDaoException;
 
 	Category save(Category category) throws FoodBoxDaoException;
-
+	
+	Category update(Category category) throws FoodBoxDaoException;
+	
 	void remove(Long id) throws FoodBoxDaoException;
 
 	void setEnabled(Long id, Boolean enabled) throws FoodBoxDaoException;

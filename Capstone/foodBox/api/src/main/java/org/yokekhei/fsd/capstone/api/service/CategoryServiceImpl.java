@@ -79,7 +79,7 @@ public class CategoryServiceImpl implements CategoryService {
 				throw new FoodBoxServiceException("Category " + category.getId() + "not found.");
 			}
 
-			savedCategory = categoryDao.save(category);
+			savedCategory = categoryDao.update(category);
 		} catch (Exception e) {
 			throw new FoodBoxServiceException(e.getMessage());
 		}
