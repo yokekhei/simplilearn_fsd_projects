@@ -10,6 +10,8 @@ import { AdminCategoriesComponent } from './components/admin/admin-categories/ad
 import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
 import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminFoodCreateComponent } from './components/admin/admin-food-create/admin-food-create.component';
+import { AdminFoodUpdateComponent } from './components/admin/admin-food-update/admin-food-update.component';
 import { AdminFoodsComponent } from './components/admin/admin-foods/admin-foods.component';
 import { AdminHeaderComponent } from './components/admin/admin-header/admin-header.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
@@ -41,6 +43,8 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AdminCategoryCreateComponent,
     AdminCategoryUpdateComponent,
     AdminComponent,
+    AdminFoodCreateComponent,
+    AdminFoodUpdateComponent,
     AdminFoodsComponent,
     AdminHeaderComponent,
     AdminHomeComponent,

@@ -51,6 +51,71 @@ export class FoodService {
     );
   }
 
+  getFoods(pageNumber: number, pageSize: number,
+           sortBy: string | undefined,
+           sortDirection: string | undefined): Observable<Foods> {
+    let params = new HttpParams();
+    params = params.append('enabled', 'true');
+    params = params.append('page', '' + pageNumber);
+    params = params.append('size', '' + pageSize);
+    params = params.append('sortBy', sortBy || Common.SORT_BY_NAME);
+    params = params.append('direction', sortDirection || Common.SORT_DIRECTION_ASC);
+
+    return this.http.get<Foods>(`${this.url}`, { params }).pipe(
+      map(foods => {
+        const retFoods: Foods = {
+          list: foods.list.map(food => {
+            return {
+              id: food.id,
+              name: food.name,
+              categoryId: food.categoryId,
+              price: food.price,
+              desc: food.desc,
+              offerId: food.offerId,
+              createdDateTime: food.createdDateTime,
+              enabled: food.enabled
+            };
+          }),
+          pageInfo: foods.pageInfo
+        };
+
+        return retFoods;
+      })
+    );
+  }
+
+  getFoodImageUrl(id: number): string {
+    return `${this.url}/${id}/image`;
+  }
+
+  getFoodById(id: number): Observable<Food> {
+    return this.http.get<Food>(`${this.url}/${id}`);
+  }
+
+  createFood(food: Food): Observable<Food> {
+    return this.http.post<Food>(this.url, food);
+  }
+
+  createFoodWithImage(food: Food, image: File | null): Observable<Food> {
+    const formData: FormData = new FormData();
+    formData.append('food', new Blob([JSON.stringify(food)], { type: 'application/json' }));
+    formData.append('image', image || '');
+
+    return this.http.post<Food>(`${this.url}/image`, formData);
+  }
+
+  updateFood(food: Food): Observable<Food> {
+    return this.http.put<Food>(this.url, food);
+  }
+
+  updateFoodWithImage(food: Food, image: File | null): Observable<Food> {
+    const formData: FormData = new FormData();
+    formData.append('food', new Blob([JSON.stringify(food)], { type: 'application/json' }));
+    formData.append('image', image || '');
+
+    return this.http.put<Food>(`${this.url}/image`, formData);
+  }
+
   deleteFood(id: number): Observable<Food> {
     return this.http.delete<Food>(`${this.url}/${id}`);
   }

@@ -5,6 +5,8 @@ import { AdminCategoriesComponent } from './components/admin/admin-categories/ad
 import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
 import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminFoodCreateComponent } from './components/admin/admin-food-create/admin-food-create.component';
+import { AdminFoodUpdateComponent } from './components/admin/admin-food-update/admin-food-update.component';
 import { AdminFoodsComponent } from './components/admin/admin-foods/admin-foods.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
@@ -44,6 +46,8 @@ const routes: Routes = [
           { path: 'category/add', component: AdminCategoryCreateComponent },
           { path: 'category/update/:id', component: AdminCategoryUpdateComponent },
           { path: 'food', component: AdminFoodsComponent },
+          { path: 'food/add', component: AdminFoodCreateComponent },
+          { path: 'food/update/:id', component: AdminFoodUpdateComponent },
           { path: 'offer', component: AdminOffersComponent },
           { path: 'offer/add', component: AdminOfferCreateComponent },
           { path: 'offer/update/:id', component: AdminOfferUpdateComponent },

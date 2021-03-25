@@ -120,7 +120,8 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
             (food: Food) => Swal.fire(`Food ${food.name} removed successfully`, '', 'success'),
             (err: any) => Swal.fire(err.error.message, '', 'error'),
             () => {
-              this.getFoodList();
+              this.pageInfo.page = 0;
+              this.dataService.changeAdminFoodPageInfo(this.pageInfo);
               this.router.navigate(['/admin/home/food']);
             }
           );
