@@ -173,6 +173,38 @@ public class FoodDaoImpl implements FoodDao {
 
 		return savedFood;
 	}
+	
+	@Override
+	public Food update(Food food) throws FoodBoxDaoException {
+		Food savedFood = null;
+		
+		try {
+			org.yokekhei.fsd.capstone.api.entity.Food current =
+					repository.findById(food.getId()).orElse(null);
+			
+			if (current == null) {
+				return save(food);
+			}
+			
+			org.yokekhei.fsd.capstone.api.entity.Food entity = mapper.toEntity(food);
+			
+			current.setName(entity.getName());
+			current.setCategory(entity.getCategory());
+			current.setPrice(entity.getPrice());
+			current.setDesc(entity.getDesc());
+			current.setOffer(entity.getOffer());
+			
+			if (food.getImage() != null && !food.getImage().isEmpty()) {
+				current.setImage(IOUtils.toByteArray(food.getImage().getInputStream()));
+			}
+			
+			savedFood = mapper.toDto(repository.save(current));
+		} catch (Exception e) {
+			throw new FoodBoxDaoException(e.getMessage());
+		}
+		
+		return savedFood;
+	}
 
 	@Override
 	public void remove(Long id) throws FoodBoxDaoException {

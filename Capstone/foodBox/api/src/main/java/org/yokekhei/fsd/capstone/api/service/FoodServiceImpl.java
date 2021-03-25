@@ -154,12 +154,12 @@ public class FoodServiceImpl implements FoodService {
 			if (food.getId() == null) {
 				throw new FoodBoxServiceException("Food id cannot be null.");
 			}
-
+			
 			if (foodDao.getFood(food.getId()) == null) {
 				throw new FoodBoxServiceException("Food " + food.getId() + "not found.");
 			}
-
-			savedFood = foodDao.save(food);
+			
+			savedFood = foodDao.update(food);
 		} catch (Exception e) {
 			throw new FoodBoxServiceException(e.getMessage());
 		}
