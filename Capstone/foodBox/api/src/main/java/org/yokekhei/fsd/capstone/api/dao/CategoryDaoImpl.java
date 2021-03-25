@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Repository;
 import org.yokekhei.fsd.capstone.api.dto.Category;
-import org.yokekhei.fsd.capstone.api.dto.Food;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.CategoryMapper;
 
