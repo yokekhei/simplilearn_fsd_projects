@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthenticationService } from './../../../services/authentication.service';
@@ -19,7 +20,8 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
   private loginUser: LoginUser;
   private subscriptionLoginUser: Subscription;
 
-  constructor(private authService: AuthenticationService, private dataService: DataService) {
+  constructor(private authService: AuthenticationService, private dataService: DataService,
+              private router: Router) {
     if (this.authService.isLoggedIn(Common.ROLE_USER)) {
       this.loginUser = this.authService.loginUser ||
         { email: '', username: '', role: Common.ROLE_USER };
@@ -42,6 +44,12 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+  }
+
+  search(event: any): void {
+    if (event.key === 'Enter') {
+      this.router.navigate([`/user/food/search/${event.target.value}`]);
+    }
   }
 
   ngOnDestroy(): void {
