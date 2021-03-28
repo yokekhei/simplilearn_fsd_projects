@@ -11,13 +11,15 @@
             <div class="row mb-3">
                 <label for="categoryName" class="col-md-3 col-form-label">Name</label>
                 <div class="col-md-9">
-                    <input type="text" id="categoryName" name="categoryName" [(ngModel)]="name"
-                        #categoryName="ngModel" class="form-control" placeholder="Category name" required
-                        maxlength="50">
+                    <input type="text" id="categoryName" name="categoryName" [(ngModel)]="name" #categoryName="ngModel"
+                        class="form-control" placeholder="Category name" required maxlength="15">
                     <div *ngIf="categoryName.invalid && (categoryName.dirty || categoryName.touched)"
                         class="alert alert-danger">
                         <div *ngIf="categoryName.errors?.required">
                             <small>Category name is required</small>
+                        </div>
+                        <div *ngIf="categoryName.errors?.maxlength">
+                            <small>Maximum category name length is 15</small>
                         </div>
                     </div>
                 </div>

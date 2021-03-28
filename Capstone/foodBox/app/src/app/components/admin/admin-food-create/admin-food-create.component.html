@@ -12,10 +12,13 @@
                 <label for="foodName" class="col-md-3 col-form-label">Name</label>
                 <div class="col-md-9">
                     <input type="text" id="foodName" name="foodName" ngModel #foodName="ngModel" class="form-control"
-                        placeholder="Food name" required maxlength="50">
+                        placeholder="Food name" required maxlength="31">
                     <div *ngIf="foodName.invalid && (foodName.dirty || foodName.touched)" class="alert alert-danger">
                         <div *ngIf="foodName.errors?.required">
                             <small>Food name is required</small>
+                        </div>
+                        <div *ngIf="foodName.errors?.maxlength">
+                            <small>Maximum food name length is 31</small>
                         </div>
                     </div>
                 </div>
