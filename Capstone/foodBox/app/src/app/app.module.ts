@@ -31,6 +31,7 @@ import { FoodService } from './services/food.service';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { OfferService } from './services/offer.service';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
+import { UserFoodComponent } from './components/user/user-food/user-food.component';
 import { UserFoodsComponent } from './components/user/user-foods/user-foods.component';
 import { UserHeaderComponent } from './components/user/user-header/user-header.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
@@ -58,6 +59,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     CreditComponent,
     FooterComponent,
     UserCategoryComponent,
+    UserFoodComponent,
     UserFoodsComponent,
     UserHeaderComponent,
     UserHomeComponent,
