@@ -14,7 +14,7 @@ public class Category {
 
 	@NotNull
 	@NotEmpty(message = "Category name must not empty")
-	@Size(max = 50, message = "Category name length must be less than or equal to 50")
+	@Size(max = 15, message = "Category name length must be less than or equal to 15")
 	private String name;
 
 	private Boolean enabled;

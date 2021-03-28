@@ -16,7 +16,7 @@ public class Food {
 
 	@NotNull
 	@NotEmpty(message = "Food name must not empty")
-	@Size(max = 50, message = "Food name length must be less than or equal to 50")
+	@Size(max = 31, message = "Food name length must be less than or equal to 31")
 	private String name;
 
 	@NotNull(message = "Category id must not be null")

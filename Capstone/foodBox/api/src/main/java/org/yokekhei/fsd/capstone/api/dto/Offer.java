@@ -13,7 +13,7 @@ public class Offer {
 
 	@NotNull
 	@NotEmpty(message = "Offer name must not empty")
-	@Size(max = 50, message = "Offer name length must be less than or equal to 50")
+	@Size(max = 30, message = "Offer name length must be less than or equal to 30")
 	private String name;
 
 	@NotNull
