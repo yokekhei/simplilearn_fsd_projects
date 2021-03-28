@@ -23,6 +23,9 @@ export class DataService {
   private adminFoodPageInfoSource: BehaviorSubject<PageInfo>;
   adminFoodPageInfo: Observable<PageInfo>;
 
+  private userFoodPageInfoSource: BehaviorSubject<PageInfo>;
+  userFoodPageInfo: Observable<PageInfo>;
+
   constructor() {
     this.categoriesSource = new BehaviorSubject([] as Category[]);
     this.categories = this.categoriesSource.asObservable();
@@ -35,6 +38,9 @@ export class DataService {
 
     this.adminFoodPageInfoSource = new BehaviorSubject({} as PageInfo);
     this.adminFoodPageInfo = this.adminFoodPageInfoSource.asObservable();
+
+    this.userFoodPageInfoSource = new BehaviorSubject({} as PageInfo);
+    this.userFoodPageInfo = this.userFoodPageInfoSource.asObservable();
   }
 
   changeCategories(categories: Category[]): void {
@@ -51,6 +57,10 @@ export class DataService {
 
   changeAdminFoodPageInfo(pageInfo: PageInfo): void {
     this.adminFoodPageInfoSource.next(pageInfo);
+  }
+
+  changeUserFoodPageInfo(pageInfo: PageInfo): void {
+    this.userFoodPageInfoSource.next(pageInfo);
   }
 
 }

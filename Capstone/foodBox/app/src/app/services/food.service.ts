@@ -84,6 +84,139 @@ export class FoodService {
     );
   }
 
+  getFoodsByCategory(categoryId: number, pageNumber: number, pageSize: number,
+                     sortBy: string | undefined,
+                     sortDirection: string | undefined): Observable<Foods> {
+    let params = new HttpParams();
+    params = params.append('enabled', 'true');
+    params = params.append('page', '' + pageNumber);
+    params = params.append('size', '' + pageSize);
+    params = params.append('sortBy', sortBy || Common.SORT_BY_NAME);
+    params = params.append('direction', sortDirection || Common.SORT_DIRECTION_ASC);
+
+    return this.http.get<Foods>(`${this.url}/category/${categoryId}`, { params }).pipe(
+      map(foods => {
+        const retFoods: Foods = {
+          list: foods.list.map(food => {
+            return {
+              id: food.id,
+              name: food.name,
+              categoryId: food.categoryId,
+              price: food.price,
+              desc: food.desc,
+              offerId: food.offerId,
+              createdDateTime: food.createdDateTime,
+              enabled: food.enabled
+            };
+          }),
+          pageInfo: foods.pageInfo
+        };
+
+        return retFoods;
+      })
+    );
+  }
+
+  getFoodsByOffer(offerId: number, pageNumber: number, pageSize: number,
+                  sortBy: string | undefined,
+                  sortDirection: string | undefined): Observable<Foods> {
+    let params = new HttpParams();
+    params = params.append('enabled', 'true');
+    params = params.append('page', '' + pageNumber);
+    params = params.append('size', '' + pageSize);
+    params = params.append('sortBy', sortBy || Common.SORT_BY_NAME);
+    params = params.append('direction', sortDirection || Common.SORT_DIRECTION_ASC);
+
+    return this.http.get<Foods>(`${this.url}/offer/${offerId}`, { params }).pipe(
+      map(foods => {
+        const retFoods: Foods = {
+          list: foods.list.map(food => {
+            return {
+              id: food.id,
+              name: food.name,
+              categoryId: food.categoryId,
+              price: food.price,
+              desc: food.desc,
+              offerId: food.offerId,
+              createdDateTime: food.createdDateTime,
+              enabled: food.enabled
+            };
+          }),
+          pageInfo: foods.pageInfo
+        };
+
+        return retFoods;
+      })
+    );
+  }
+
+  getFoodsByCategoryAndOffer(categoryId: number, offerId: number,
+                             pageNumber: number, pageSize: number,
+                             sortBy: string | undefined,
+                             sortDirection: string | undefined): Observable<Foods> {
+    let params = new HttpParams();
+    params = params.append('enabled', 'true');
+    params = params.append('page', '' + pageNumber);
+    params = params.append('size', '' + pageSize);
+    params = params.append('sortBy', sortBy || Common.SORT_BY_NAME);
+    params = params.append('direction', sortDirection || Common.SORT_DIRECTION_ASC);
+
+    return this.http.get<Foods>(`${this.url}/category/${categoryId}/offer/${offerId}`,
+      { params }).pipe(map(foods => {
+        const retFoods: Foods = {
+          list: foods.list.map(food => {
+            return {
+              id: food.id,
+              name: food.name,
+              categoryId: food.categoryId,
+              price: food.price,
+              desc: food.desc,
+              offerId: food.offerId,
+              createdDateTime: food.createdDateTime,
+              enabled: food.enabled
+            };
+          }),
+          pageInfo: foods.pageInfo
+        };
+
+        return retFoods;
+      })
+      );
+  }
+
+  getFoodsByKeyword(keyword: string, pageNumber: number, pageSize: number,
+                    sortBy: string | undefined,
+                    sortDirection: string | undefined): Observable<Foods> {
+    let params = new HttpParams();
+    params = params.append('enabled', 'true');
+    params = params.append('page', '' + pageNumber);
+    params = params.append('size', '' + pageSize);
+    params = params.append('sortBy', sortBy || Common.SORT_BY_NAME);
+    params = params.append('direction', sortDirection || Common.SORT_DIRECTION_ASC);
+
+    return this.http.get<Foods>(`${this.url}/search/${keyword}`, { params }).pipe(
+      map(foods => {
+        const retFoods: Foods = {
+          list: foods.list.map(food => {
+            return {
+              id: food.id,
+              name: food.name,
+              categoryId: food.categoryId,
+              price: food.price,
+              desc: food.desc,
+              offerId: food.offerId,
+              createdDateTime: food.createdDateTime,
+              enabled: food.enabled
+            };
+          }),
+          pageInfo: foods.pageInfo
+        };
+
+        return retFoods;
+      })
+    );
+  }
+
   getFoodImageUrl(id: number): string {
     return `${this.url}/${id}/image`;
   }

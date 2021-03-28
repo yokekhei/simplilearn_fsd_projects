@@ -16,6 +16,7 @@ import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update
 import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
+import { UserFoodsComponent } from './components/user/user-foods/user-foods.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
@@ -27,6 +28,8 @@ const routes: Routes = [
     path: 'user', component: UserHomeComponent,
     children: [
       { path: 'category', component: UserCategoryComponent },
+      { path: 'category/:id', component: UserFoodsComponent },
+      { path: 'food/search/:keyword', component: UserFoodsComponent },
       { path: 'login', component: UserLoginComponent },
       { path: 'logout', component: UserLogoutComponent },
       { path: 'register', component: UserRegisterComponent },

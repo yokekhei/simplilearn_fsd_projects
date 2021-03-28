@@ -18,6 +18,8 @@ export class Common {
     static OFFER_TYPE_PCT = 'PCT';
     static OFFER_TYPE_CSH = 'CSH';
 
+    static ALL_VALUES = 9999;
+
     static getOfferDiscountType(type: string | undefined): string {
         switch (type) {
             case 'PCT':
