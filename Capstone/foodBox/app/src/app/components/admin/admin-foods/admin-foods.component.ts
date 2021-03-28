@@ -22,6 +22,7 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
 
   foods: Food[] = [];
   pageInfo: PageInfo;
+  entriesNum = 4;
   private categories: Category[] = [];
   private offers: Offer[] = [];
   private subscriptionPageInfo: Subscription;
@@ -33,7 +34,7 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
               private router: Router) {
     this.pageInfo = {
       page: 0,
-      size: 1,
+      size: this.entriesNum,
       totalPages: 1,
       sortBy: Common.SORT_BY_NAME,
       direction: Common.SORT_DIRECTION_ASC
@@ -144,36 +145,42 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
   }
 
   onSortByName(): void {
+    this.pageInfo.page = 0;
     this.pageInfo.sortBy = Common.SORT_BY_NAME;
     this.pageInfo.direction = Common.SORT_DIRECTION_ASC;
     this.dataService.changeAdminFoodPageInfo(this.pageInfo);
   }
 
   onSortByCategory(): void {
+    this.pageInfo.page = 0;
     this.pageInfo.sortBy = Common.SORT_BY_CATEGORY;
     this.pageInfo.direction = Common.SORT_DIRECTION_ASC;
     this.dataService.changeAdminFoodPageInfo(this.pageInfo);
   }
 
   onSortByPrice(): void {
+    this.pageInfo.page = 0;
     this.pageInfo.sortBy = Common.SORT_BY_PRICE;
     this.pageInfo.direction = Common.SORT_DIRECTION_ASC;
     this.dataService.changeAdminFoodPageInfo(this.pageInfo);
   }
 
   onSortByOffer(): void {
+    this.pageInfo.page = 0;
     this.pageInfo.sortBy = Common.SORT_BY_OFFER;
     this.pageInfo.direction = Common.SORT_DIRECTION_ASC;
     this.dataService.changeAdminFoodPageInfo(this.pageInfo);
   }
 
   onSortByDate(): void {
+    this.pageInfo.page = 0;
     this.pageInfo.sortBy = Common.SORT_BY_DATE;
     this.pageInfo.direction = Common.SORT_DIRECTION_ASC;
     this.dataService.changeAdminFoodPageInfo(this.pageInfo);
   }
 
   onSortByEnabled(): void {
+    this.pageInfo.page = 0;
     this.pageInfo.sortBy = Common.SORT_BY_ENABLED;
     this.pageInfo.direction = Common.SORT_DIRECTION_ASC;
     this.dataService.changeAdminFoodPageInfo(this.pageInfo);
@@ -239,9 +246,10 @@ export class AdminFoodsComponent implements OnInit, OnDestroy {
   onChangeNumberOfEntries(event: any): void {
     if (event !== undefined &&
       event.target !== undefined &&
-      event.target.value !== undefined &&
-      event.target.value !== '') {
+      event.target.value !== undefined) {
+      this.entriesNum = event.target.value;
       this.pageInfo.size = event.target.value;
+      this.pageInfo.page = 0;
       this.dataService.changeAdminFoodPageInfo(this.pageInfo);
     }
   }

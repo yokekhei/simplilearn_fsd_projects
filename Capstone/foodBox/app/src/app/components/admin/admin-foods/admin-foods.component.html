@@ -1,8 +1,9 @@
 <div class="row justify-content-end mt-3">
     <form class="form-inline mx-3">
         <div class="form-group">
-            <select class="form-control" id="entries" (change)="onChangeNumberOfEntries($event)">
-                <option value="">-- Number of entries --</option>
+            <label for="entries" class="mx-2"><span class="text-foodbox">Number of Entries:</span></label>
+            <select class="form-control" id="entries" (change)="onChangeNumberOfEntries($event)"
+                name="entries" [(ngModel)]="entriesNum">
                 <option *ngFor="let n of getNumberRange(10)" [value]="n">{{ n }}</option>
             </select>
         </div>
