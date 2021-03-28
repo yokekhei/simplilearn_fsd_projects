@@ -68,6 +68,34 @@ public class CategoryDaoImpl implements CategoryDao {
 
 		return savedCategory;
 	}
+	
+	@Override
+	public Category update(Category category) throws FoodBoxDaoException {
+		Category savedCategory = null;
+		
+		try {
+			org.yokekhei.fsd.capstone.api.entity.Category current =
+					repository.findById(category.getId()).orElse(null);
+			
+			if (current == null) {
+				return save(category);
+			}
+			
+			org.yokekhei.fsd.capstone.api.entity.Category entity = mapper.toEntity(category);
+			
+			current.setName(entity.getName());
+			
+			if (category.getImage() != null && !category.getImage().isEmpty()) {
+				current.setImage(IOUtils.toByteArray(category.getImage().getInputStream()));
+			}
+			
+			savedCategory = mapper.toDto(repository.save(current));
+		} catch (Exception e) {
+			throw new FoodBoxDaoException(e.getMessage());
+		}
+		
+		return savedCategory;
+	}
 
 	@Override
 	public void remove(Long id) throws FoodBoxDaoException {

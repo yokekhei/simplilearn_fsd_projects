@@ -1,0 +1,84 @@
+<div class="mt-5 card card-cascade narrower">
+    <div class="px-4">
+        <form #addFoodForm="ngForm" (ngSubmit)="submit(addFoodForm)">
+            <div class="py-4 mb-3 d-flex justify-content-between align-items-center">
+                <h4 class="page-title"><i class="fas fa-plus-circle mt-0 text-success px-2"></i> Food</h4>
+                <button mdbBtn size="sm" class="waves-light btn btn-success" mdbWavesEffect type="submit"
+                    [disabled]="addFoodForm.invalid">
+                    <span>Add</span>
+                </button>
+            </div>
+            <div class="row mb-3">
+                <label for="foodName" class="col-md-3 col-form-label">Name</label>
+                <div class="col-md-9">
+                    <input type="text" id="foodName" name="foodName" ngModel #foodName="ngModel" class="form-control"
+                        placeholder="Food name" required maxlength="31">
+                    <div *ngIf="foodName.invalid && (foodName.dirty || foodName.touched)" class="alert alert-danger">
+                        <div *ngIf="foodName.errors?.required">
+                            <small>Food name is required</small>
+                        </div>
+                        <div *ngIf="foodName.errors?.maxlength">
+                            <small>Maximum food name length is 31</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="foodCategory" class="col-md-3 col-form-label">Category</label>
+                <div class="col-md-9">
+                    <select class="form-control" name="foodCategory" id="foodCategory" ngModel #foodCategory="ngModel"
+                        required="required">
+                        <option value="">-- Food category --</option>
+                        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="foodOffer" class="col-md-3 col-form-label">Offer</label>
+                <div class="col-md-9">
+                    <select class="form-control" name="foodOffer" id="foodOffer" ngModel #foodOffer="ngModel">
+                        <option value="">-- Food offer --</option>
+                        <option *ngFor="let offer of offers" [value]="offer.id">{{ offer.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="foodPrice" class="col-md-3 col-form-label">Price</label>
+                <div class="col-md-9">
+                    <input type="text" id="foodPrice" name="foodPrice" ngModel #foodPrice="ngModel" class="form-control"
+                        placeholder="Food price" required>
+                    <div *ngIf="foodPrice.invalid && (foodPrice.dirty || foodPrice.touched)" class="alert alert-danger">
+                        <div *ngIf="foodPrice.errors?.required">
+                            <small>Food price is required</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="foodDesc" class="col-md-3 col-form-label">Description</label>
+                <div class="col-md-9">
+                    <textarea rows="3" id="foodDesc" name="foodDesc" ngModel #foodDesc="ngModel" class="form-control"
+                        placeholder="Food description" required maxlength="255"></textarea>
+                    <div *ngIf="foodDesc.invalid && (foodDesc.dirty || foodDesc.touched)" class="alert alert-danger">
+                        <div *ngIf="foodDesc.errors?.required">
+                            <small>Food description is required</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-3 md-form">
+                    <div mdbBtn color="warning" size="sm" class="waves-light" mdbWavesEffect
+                        (click)="imageInput.click()">
+                        <span>Select image file</span>
+                    </div>
+                </div>
+                <div class="form-group col-md-9 md-form">
+                    <input mdbInput type="text" class="form-control" name="imageName" id="imageName"
+                        [(ngModel)]="imageFileName" disabled>
+                </div>
+            </div>
+            <input hidden type="file" (change)="onImageSelected($event)" #imageInput id="image">
+        </form>
+    </div>
+</div>

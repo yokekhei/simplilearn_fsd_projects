@@ -1,5 +1,7 @@
 package org.yokekhei.fsd.capstone.api.dto;
 
+import java.time.LocalDateTime;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -21,6 +23,7 @@ public class User {
 	private String role;
 	private Address address;
 	private Boolean enabled;
+	private LocalDateTime createdDateTime;
 
 	public User() {
 	}
@@ -82,10 +85,18 @@ public class User {
 		this.enabled = enabled;
 	}
 
+	public LocalDateTime getCreatedDateTime() {
+		return createdDateTime;
+	}
+
+	public void setCreatedDateTime(LocalDateTime createdDateTime) {
+		this.createdDateTime = createdDateTime;
+	}
+
 	@Override
 	public String toString() {
 		return "User [email=" + email + ", password=" + password + ", username=" + username + ", role=" + role
-				+ ", address=" + address + ", enabled=" + enabled + "]";
+				+ ", address=" + address + ", enabled=" + enabled + ", createdDateTime=" + createdDateTime + "]";
 	}
 
 }

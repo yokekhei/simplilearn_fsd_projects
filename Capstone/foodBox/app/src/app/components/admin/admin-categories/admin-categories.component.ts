@@ -1,3 +1,4 @@
+import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -14,7 +15,9 @@ export class AdminCategoriesComponent implements OnInit {
 
   categories: Category[] = [];
 
-  constructor(private categoryService: CategoryService, private router: Router) { }
+  constructor(private categoryService: CategoryService,
+              private dataService: DataService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getCategoryList();
@@ -22,7 +25,11 @@ export class AdminCategoriesComponent implements OnInit {
 
   getCategoryList(): void {
     this.categoryService.getAllCategories().subscribe(
-      categories => this.categories = categories);
+      categories => {
+        this.categories = categories;
+        this.dataService.changeCategories(categories);
+      }
+    );
   }
 
   getDate(strDate?: string): Date {
@@ -47,7 +54,8 @@ export class AdminCategoriesComponent implements OnInit {
       .then((result) => {
         if (result.value) {
           this.categoryService.deleteCategory(id).subscribe(
-            (category: Category) => Swal.fire(`Category ${category.name} removed successfully`, '', 'success'),
+            (category: Category) => Swal.fire(`Category ${category.name} removed successfully`,
+              '', 'success'),
             (err: any) => Swal.fire(err.error.message, '', 'error'),
             () => {
               this.getCategoryList();
@@ -62,7 +70,8 @@ export class AdminCategoriesComponent implements OnInit {
     const checked = event.target.checked;
 
     this.categoryService.setCategoryEnabled(category, checked).subscribe(
-      (c: Category) => Swal.fire(`Category ${c.name} ${checked ? 'enabled' : 'disabled'} successfully`, '', 'success'),
+      (c: Category) => Swal.fire(`Category ${c.name} ${checked ? 'enabled' : 'disabled'} successfully`,
+        '', 'success'),
       (err: any) => Swal.fire(err.error.message, '', 'error'),
       () => {
         this.getCategoryList();

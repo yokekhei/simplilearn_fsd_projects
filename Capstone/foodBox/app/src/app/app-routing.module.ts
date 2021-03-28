@@ -5,11 +5,19 @@ import { AdminCategoriesComponent } from './components/admin/admin-categories/ad
 import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
 import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
 import { AdminComponent } from './components/admin/admin/admin.component';
+import { AdminFoodCreateComponent } from './components/admin/admin-food-create/admin-food-create.component';
+import { AdminFoodUpdateComponent } from './components/admin/admin-food-update/admin-food-update.component';
+import { AdminFoodsComponent } from './components/admin/admin-foods/admin-foods.component';
 import { AdminHomeComponent } from './components/admin/admin-home/admin-home.component';
 import { AdminLoginComponent } from './components/admin/admin-login/admin-login.component';
 import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logout.component';
+import { AdminOfferCreateComponent } from './components/admin/admin-offer-create/admin-offer-create.component';
+import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update/admin-offer-update.component';
+import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
+import { UserFoodComponent } from './components/user/user-food/user-food.component';
+import { UserFoodsComponent } from './components/user/user-foods/user-foods.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
@@ -21,6 +29,9 @@ const routes: Routes = [
     path: 'user', component: UserHomeComponent,
     children: [
       { path: 'category', component: UserCategoryComponent },
+      { path: 'category/:id', component: UserFoodsComponent },
+      { path: 'food/search/:keyword', component: UserFoodsComponent },
+      { path: 'food/:id', component: UserFoodComponent },
       { path: 'login', component: UserLoginComponent },
       { path: 'logout', component: UserLogoutComponent },
       { path: 'register', component: UserRegisterComponent },
@@ -39,6 +50,12 @@ const routes: Routes = [
           { path: 'category', component: AdminCategoriesComponent },
           { path: 'category/add', component: AdminCategoryCreateComponent },
           { path: 'category/update/:id', component: AdminCategoryUpdateComponent },
+          { path: 'food', component: AdminFoodsComponent },
+          { path: 'food/add', component: AdminFoodCreateComponent },
+          { path: 'food/update/:id', component: AdminFoodUpdateComponent },
+          { path: 'offer', component: AdminOffersComponent },
+          { path: 'offer/add', component: AdminOfferCreateComponent },
+          { path: 'offer/update/:id', component: AdminOfferUpdateComponent },
           { path: '**', redirectTo: '/admin/home/category', pathMatch: 'full' }
         ]
       },

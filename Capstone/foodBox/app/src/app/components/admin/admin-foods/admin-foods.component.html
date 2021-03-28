@@ -1,0 +1,108 @@
+<div class="row justify-content-end mt-3">
+    <form class="form-inline mx-3">
+        <div class="form-group">
+            <label for="entries" class="mx-2"><span class="text-foodbox">Number of Entries:</span></label>
+            <select class="form-control" id="entries" (change)="onChangeNumberOfEntries($event)"
+                name="entries" [(ngModel)]="entriesNum">
+                <option *ngFor="let n of getNumberRange(10)" [value]="n">{{ n }}</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="mt-3 card card-cascade narrower">
+    <div class="py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+        <h3 class="table-title">Foods</h3>
+        <div>
+            <button mdbBtn size="sm" class="btn btn-success px-2" routerLink="/admin/home/food/add">
+                <i class="fas fa-plus-circle mt-0"></i>
+            </button>
+        </div>
+    </div>
+    <div class="px-4">
+        <table class="table table-hover mb-0 small">
+            <thead>
+                <tr>
+                    <th>
+                        <span>
+                            <i class="far fa-window-maximize"></i>
+                        </span>
+                    </th>
+                    <th>
+                        <span>Name</span>&nbsp;
+                        <a (click)="onSortByName()"><i class="fas fa-sort"></i></a>
+                    </th>
+                    <th>
+                        <span>Category</span>&nbsp;
+                        <a (click)="onSortByCategory()"><i class="fas fa-sort"></i></a>
+                    </th>
+                    <th>
+                        <span>Price $</span>&nbsp;
+                        <a (click)="onSortByPrice()"><i class="fas fa-sort"></i></a>
+                    </th>
+                    <th>
+                        <span>Offer</span>&nbsp;
+                        <a (click)="onSortByOffer()"><i class="fas fa-sort"></i></a>
+                    </th>
+                    <th>
+                        <span>Date Created</span>&nbsp;
+                        <a (click)="onSortByDate()"><i class="fas fa-sort"></i></a>
+                    </th>
+                    <th>
+                        <span>Enabled/Disabled</span>&nbsp;
+                        <a (click)="onSortByEnabled()"><i class="fas fa-sort"></i></a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let food of foods">
+                    <td>
+                        <button mdbBtn size="sm" class="btn btn-primary px-2"
+                            routerLink="/admin/home/food/update/{{food.id}}">
+                            <i class="fas fa-pencil-alt mt-0"></i>
+                        </button>
+                        <button mdbBtn size="sm" class="btn btn-danger px-2" (click)="onDeleteFood(food.id)">
+                            <i class="far fa-trash-alt mt-0"></i>
+                        </button>
+                    </td>
+                    <td>{{ food.name }}</td>
+                    <td>{{ getCategoryName(food.categoryId) }}</td>
+                    <td>{{ food.price | number : '1.2-2' }}</td>
+                    <td>{{ getOfferName(food.offerId) }}</td>
+                    <td>{{ getDate(food.createdDateTime) | date:'MM/dd/yyyy' }}</td>
+                    <td>
+                        <div class="custom-control custom-switch">
+                            <input class="custom-control-input" type="checkbox" id="foodEnabled{{ food.id }}"
+                                [checked]="food.enabled" (change)="onChangeFoodEnabled(food, $event)" />
+                            <label class="custom-control-label" for="foodEnabled{{ food.id }}">{{
+                                food.enabled ?
+                                'Enabled' : 'Disabled' }}</label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row justify-content-end">
+            <nav id="pager" class="col-8">
+                <ul class="pagination mt-2 mb-4">
+                    <li [class]="getFirstPageItemStyle()">
+                        <a class="page-link" (click)="setPage(0)"><i class="fas fa-angle-double-left"></i></a>
+                    </li>
+                    <li [class]="getFirstPageItemStyle()">
+                        <a class="page-link" (click)="setPage(pageInfo.page - 1)"><i class="fas fa-angle-left"></i></a>
+                    </li>
+                    <li *ngFor="let page of getPageNumberRange()" id="page-{{page}}"
+                        [class]="getCurrentPageItemStyle(page)">
+                        <a class="page-link" (click)="setPage(page - 1)">{{ page }}</a>
+                    </li>
+                    <li [class]="getLastPageItemStyle()">
+                        <a class="page-link" (click)="setPage(pageInfo.page + 1)"><i class="fas fa-angle-right"></i></a>
+                    </li>
+                    <li [class]="getLastPageItemStyle()">
+                        <a class="page-link" (click)="setPage(pageInfo.totalPages - 1)"><i
+                                class="fas fa-angle-double-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

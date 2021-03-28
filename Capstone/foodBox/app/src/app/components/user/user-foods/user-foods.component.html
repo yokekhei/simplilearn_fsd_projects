@@ -1,0 +1,69 @@
+<div class="row justify-content-between mt-3 mb-5">
+    <form class="form-inline mx-3">
+        <div class="form-group">
+            <select class="form-control" id="categoryFilter" (change)="onChangeCategory($event)" name="categoryFilter"
+                [(ngModel)]="currentCategoryId">
+                <option value="9999">All Categories</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            </select>
+        </div>
+        <div class="form-group mx-3">
+            <select class="form-control" id="offerFilter" (change)="onChangeOffer($event)">
+                <option value="9999">All Offers</option>
+                <option *ngFor="let offer of offers" [value]="offer.id">{{ offer.name }}</option>
+            </select>
+        </div>
+    </form>
+    <form class="form-inline mx-3">
+        <div class="form-group mx-3">
+            <label for="sortBy" class="mx-2"><span class="text-foodbox">Sort By:</span></label>
+            <select class="form-control" id="sortBy" (change)="onChangeSort($event)">
+                <option value="name">Name</option>
+                <option value="lowestPrice">Lowest Price</option>
+                <option value="highestPrice">Highest Price</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="entries" class="mx-2"><span class="text-foodbox">Number of Items:</span></label>
+            <select class="form-control" id="entries" (change)="onChangeNumberOfEntries($event)" name="entries"
+                [(ngModel)]="entriesNum">
+                <option *ngFor="let n of getNumberRange(12)" [value]="n">{{ n }}</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="row mt-4" *ngFor="let foodSubList of foodList">
+    <div class="col-md-3" *ngFor="let food of foodSubList.foods">
+        <a routerLink="/user/food/{{ food.id }}" class="food-card">
+            <div class="card h-100">
+                <img class="card-img-top" [src]="getFoodImageUrl(food.id)" alt="{{ food.name }}">
+                <div class="card-body">
+                    <p class="card-title text-center text-foodbox"><small><strong>{{ food.name }}</strong></small></p>
+                    <p class="card-text text-right text-foodbox"><small>$ {{ food.price | number : '1.2-2' }}</small></p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row justify-content-end mt-4">
+    <nav id="pager" class="col-8">
+        <ul class="pagination mt-2 mb-4">
+            <li [class]="getFirstPageItemStyle()">
+                <a class="page-link" (click)="setPage(0)"><i class="fas fa-angle-double-left"></i></a>
+            </li>
+            <li [class]="getFirstPageItemStyle()">
+                <a class="page-link" (click)="setPage(pageInfo.page - 1)"><i class="fas fa-angle-left"></i></a>
+            </li>
+            <li *ngFor="let page of getPageNumberRange()" id="page-{{page}}" [class]="getCurrentPageItemStyle(page)">
+                <a class="page-link" (click)="setPage(page - 1)">{{ page }}</a>
+            </li>
+            <li [class]="getLastPageItemStyle()">
+                <a class="page-link" (click)="setPage(pageInfo.page + 1)"><i class="fas fa-angle-right"></i></a>
+            </li>
+            <li [class]="getLastPageItemStyle()">
+                <a class="page-link" (click)="setPage(pageInfo.totalPages - 1)"><i
+                        class="fas fa-angle-double-right"></i></a>
+            </li>
+        </ul>
+    </nav>
+</div>

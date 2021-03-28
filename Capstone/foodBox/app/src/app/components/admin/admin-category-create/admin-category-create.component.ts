@@ -14,7 +14,6 @@ import { CategoryService } from './../../../services/category.service';
 export class AdminCategoryCreateComponent implements OnInit {
 
   category?: Category;
-  validated = false;
   imageFileName = '';
   private selectedImages?: FileList;
 

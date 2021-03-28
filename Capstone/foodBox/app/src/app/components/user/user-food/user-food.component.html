@@ -1,0 +1,36 @@
+<div class="card mt-3">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-5">
+                <img class="card-img-top" [src]="getFoodImageUrl(food?.id)" alt="{{ food?.name }}">
+            </div>
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-9">
+                        <h5 class="title">{{ food?.name }}</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="text-right">$ {{ food?.price | number : '1.2-2' }}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-muted">{{ getCategoryName(food?.categoryId) }} Cuisine</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>{{ food?.desc }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <form>
+            <div class="row justify-content-end mx-1">
+                <button mdbBtn color="warning" class="btn" type="submit">Add to Cart</button>
+            </div>
+        </form>
+    </div>
+</div>
