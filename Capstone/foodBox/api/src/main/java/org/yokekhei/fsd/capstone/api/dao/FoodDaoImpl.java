@@ -78,13 +78,15 @@ public class FoodDaoImpl implements FoodDao {
 		Foods foods = null;
 
 		try {
-			List<Food> list = IterableUtils
-					.toList(repository.findAllByName(name,
-							PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo))))
-					.stream().map(entity -> mapper.toDto(entity)).collect(Collectors.toList());
+			Page<org.yokekhei.fsd.capstone.api.entity.Food> page = repository.findByNameIgnoreCase(name,
+					PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo)));
+			List<Food> list = IterableUtils.toList(page.getContent()).stream().map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
 
 			foods = new Foods();
-			foods.setPageInfo(pageInfo);
+			PageInfo pgInfo = new PageInfo(page.getNumber(), page.getSize(), page.getNumberOfElements(),
+					page.getTotalElements(), page.getTotalPages(), pageInfo.getSortBy(), pageInfo.getDirection());
+			foods.setPageInfo(pgInfo);
 			foods.setList(list);
 		} catch (Exception e) {
 			throw new FoodBoxDaoException(e.getMessage());
@@ -99,13 +101,15 @@ public class FoodDaoImpl implements FoodDao {
 
 		try {
 			org.yokekhei.fsd.capstone.api.entity.Category categoryEntity = categoryMapper.toEntity(category);
-			List<Food> list = IterableUtils
-					.toList(repository.findAllByCategory(categoryEntity,
-							PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo))))
-					.stream().map(entity -> mapper.toDto(entity)).collect(Collectors.toList());
+			Page<org.yokekhei.fsd.capstone.api.entity.Food> page = repository.findByCategory(categoryEntity,
+					PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo)));
+			List<Food> list = IterableUtils.toList(page.getContent()).stream().map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
 
 			foods = new Foods();
-			foods.setPageInfo(pageInfo);
+			PageInfo pgInfo = new PageInfo(page.getNumber(), page.getSize(), page.getNumberOfElements(),
+					page.getTotalElements(), page.getTotalPages(), pageInfo.getSortBy(), pageInfo.getDirection());
+			foods.setPageInfo(pgInfo);
 			foods.setList(list);
 		} catch (Exception e) {
 			throw new FoodBoxDaoException(e.getMessage());
@@ -119,13 +123,15 @@ public class FoodDaoImpl implements FoodDao {
 		Foods foods = null;
 
 		try {
-			List<Food> list = IterableUtils
-					.toList(repository.findAllByPrice(price,
-							PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo))))
-					.stream().map(entity -> mapper.toDto(entity)).collect(Collectors.toList());
+			Page<org.yokekhei.fsd.capstone.api.entity.Food> page = repository.findByPrice(price,
+					PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo)));
+			List<Food> list = IterableUtils.toList(page.getContent()).stream().map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
 
 			foods = new Foods();
-			foods.setPageInfo(pageInfo);
+			PageInfo pgInfo = new PageInfo(page.getNumber(), page.getSize(), page.getNumberOfElements(),
+					page.getTotalElements(), page.getTotalPages(), pageInfo.getSortBy(), pageInfo.getDirection());
+			foods.setPageInfo(pgInfo);
 			foods.setList(list);
 		} catch (Exception e) {
 			throw new FoodBoxDaoException(e.getMessage());
@@ -140,13 +146,62 @@ public class FoodDaoImpl implements FoodDao {
 
 		try {
 			org.yokekhei.fsd.capstone.api.entity.Offer offerEntity = offerMapper.toEntity(offer);
-			List<Food> list = IterableUtils
-					.toList(repository.findAllByOffer(offerEntity,
-							PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo))))
-					.stream().map(entity -> mapper.toDto(entity)).collect(Collectors.toList());
+			Page<org.yokekhei.fsd.capstone.api.entity.Food> page = repository.findByOffer(offerEntity,
+					PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo)));
+			List<Food> list = IterableUtils.toList(page.getContent()).stream().map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
 
 			foods = new Foods();
-			foods.setPageInfo(pageInfo);
+			PageInfo pgInfo = new PageInfo(page.getNumber(), page.getSize(), page.getNumberOfElements(),
+					page.getTotalElements(), page.getTotalPages(), pageInfo.getSortBy(), pageInfo.getDirection());
+			foods.setPageInfo(pgInfo);
+			foods.setList(list);
+		} catch (Exception e) {
+			throw new FoodBoxDaoException(e.getMessage());
+		}
+
+		return foods;
+	}
+
+	@Override
+	public Foods getFoodsByCategoryAndOffer(Category category, Offer offer, PageInfo pageInfo)
+			throws FoodBoxDaoException {
+		Foods foods = null;
+
+		try {
+			org.yokekhei.fsd.capstone.api.entity.Category categoryEntity = categoryMapper.toEntity(category);
+			org.yokekhei.fsd.capstone.api.entity.Offer offerEntity = offerMapper.toEntity(offer);
+			Page<org.yokekhei.fsd.capstone.api.entity.Food> page = repository.findByCategoryAndOffer(categoryEntity,
+					offerEntity, PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo)));
+			List<Food> list = IterableUtils.toList(page.getContent()).stream().map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+
+			foods = new Foods();
+			PageInfo pgInfo = new PageInfo(page.getNumber(), page.getSize(), page.getNumberOfElements(),
+					page.getTotalElements(), page.getTotalPages(), pageInfo.getSortBy(), pageInfo.getDirection());
+			foods.setPageInfo(pgInfo);
+			foods.setList(list);
+		} catch (Exception e) {
+			throw new FoodBoxDaoException(e.getMessage());
+		}
+
+		return foods;
+	}
+
+	@Override
+	public Foods search(String keyword, PageInfo pageInfo) throws FoodBoxDaoException {
+		Foods foods = null;
+
+		try {
+			Page<org.yokekhei.fsd.capstone.api.entity.Food> page = repository.search(keyword,
+					PageRequest.of(pageInfo.getPage(), pageInfo.getSize(), getSort(pageInfo)));
+			List<Food> list = IterableUtils.toList(page.getContent()).stream().map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+
+			foods = new Foods();
+			PageInfo pgInfo = new PageInfo(page.getNumber(), page.getSize(), page.getNumberOfElements(),
+					page.getTotalElements(), page.getTotalPages(), pageInfo.getSortBy(), pageInfo.getDirection());
+			foods.setPageInfo(pgInfo);
 			foods.setList(list);
 		} catch (Exception e) {
 			throw new FoodBoxDaoException(e.getMessage());
@@ -173,36 +228,35 @@ public class FoodDaoImpl implements FoodDao {
 
 		return savedFood;
 	}
-	
+
 	@Override
 	public Food update(Food food) throws FoodBoxDaoException {
 		Food savedFood = null;
-		
+
 		try {
-			org.yokekhei.fsd.capstone.api.entity.Food current =
-					repository.findById(food.getId()).orElse(null);
-			
+			org.yokekhei.fsd.capstone.api.entity.Food current = repository.findById(food.getId()).orElse(null);
+
 			if (current == null) {
 				return save(food);
 			}
-			
+
 			org.yokekhei.fsd.capstone.api.entity.Food entity = mapper.toEntity(food);
-			
+
 			current.setName(entity.getName());
 			current.setCategory(entity.getCategory());
 			current.setPrice(entity.getPrice());
 			current.setDesc(entity.getDesc());
 			current.setOffer(entity.getOffer());
-			
+
 			if (food.getImage() != null && !food.getImage().isEmpty()) {
 				current.setImage(IOUtils.toByteArray(food.getImage().getInputStream()));
 			}
-			
+
 			savedFood = mapper.toDto(repository.save(current));
 		} catch (Exception e) {
 			throw new FoodBoxDaoException(e.getMessage());
 		}
-		
+
 		return savedFood;
 	}
 

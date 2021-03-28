@@ -119,6 +119,44 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	@Transactional
+	public Foods getFoodsByCategoryAndOffer(Category category, Offer offer, Boolean enabled, PageInfo pageInfo)
+			throws FoodBoxServiceException {
+		Foods foods = null;
+
+		try {
+			foods = foodDao.getFoodsByCategoryAndOffer(category, offer, pageInfo);
+
+			if (enabled != null) {
+				foods.setList(
+						foods.getList().stream().filter(c -> c.getEnabled() == enabled).collect(Collectors.toList()));
+			}
+		} catch (Exception e) {
+			throw new FoodBoxServiceException(e.getMessage());
+		}
+
+		return foods;
+	}
+
+	@Override
+	public Foods searchFoods(String keyword, Boolean enabled, PageInfo pageInfo) throws FoodBoxServiceException {
+		Foods foods = null;
+
+		try {
+			foods = foodDao.search(keyword, pageInfo);
+
+			if (enabled != null) {
+				foods.setList(
+						foods.getList().stream().filter(c -> c.getEnabled() == enabled).collect(Collectors.toList()));
+			}
+		} catch (Exception e) {
+			throw new FoodBoxServiceException(e.getMessage());
+		}
+
+		return foods;
+	}
+
+	@Override
+	@Transactional
 	public Food getFood(Long id) throws FoodBoxServiceException {
 		Food food = null;
 
@@ -154,11 +192,11 @@ public class FoodServiceImpl implements FoodService {
 			if (food.getId() == null) {
 				throw new FoodBoxServiceException("Food id cannot be null.");
 			}
-			
+
 			if (foodDao.getFood(food.getId()) == null) {
 				throw new FoodBoxServiceException("Food " + food.getId() + "not found.");
 			}
-			
+
 			savedFood = foodDao.update(food);
 		} catch (Exception e) {
 			throw new FoodBoxServiceException(e.getMessage());

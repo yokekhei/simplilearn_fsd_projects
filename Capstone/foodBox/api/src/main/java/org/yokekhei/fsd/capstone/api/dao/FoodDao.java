@@ -23,8 +23,12 @@ public interface FoodDao {
 
 	Foods getFoodsByOffer(Offer offer, PageInfo pageInfo) throws FoodBoxDaoException;
 
+	Foods getFoodsByCategoryAndOffer(Category category, Offer offer, PageInfo pageInfo) throws FoodBoxDaoException;
+
+	Foods search(String keyword, PageInfo pageInfo) throws FoodBoxDaoException;
+
 	Food save(Food food) throws FoodBoxDaoException;
-	
+
 	Food update(Food food) throws FoodBoxDaoException;
 
 	void remove(Long id) throws FoodBoxDaoException;

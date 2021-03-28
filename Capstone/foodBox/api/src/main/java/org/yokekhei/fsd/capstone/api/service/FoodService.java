@@ -21,6 +21,11 @@ public interface FoodService {
 
 	Foods getFoodsByOffer(Offer offer, Boolean enabled, PageInfo pageInfo) throws FoodBoxServiceException;
 
+	Foods getFoodsByCategoryAndOffer(Category category, Offer offer, Boolean enabled, PageInfo pageInfo)
+			throws FoodBoxServiceException;
+
+	Foods searchFoods(String keyword, Boolean enabled, PageInfo pageInfo) throws FoodBoxServiceException;
+
 	Food getFood(Long id) throws FoodBoxServiceException;
 
 	Food createFood(Food food) throws FoodBoxServiceException;

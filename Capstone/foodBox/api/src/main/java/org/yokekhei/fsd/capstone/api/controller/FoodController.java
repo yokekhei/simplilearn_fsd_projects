@@ -111,6 +111,38 @@ public class FoodController {
 		return service.getFoodsByOffer(offer, null, pageInfo);
 	}
 
+	@GetMapping("/food/category/{categoryId}/offer/{offerId}")
+	@ResponseBody
+	public Foods getFoodsByCategoryAndOffer(@PathVariable("categoryId") Long categoryId,
+			@PathVariable("offerId") Long offerId, @RequestParam(required = false) String enabled,
+			@RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sortBy,
+			@RequestParam(required = false) String direction) throws FoodBoxServiceException {
+		PageInfo pageInfo = new PageInfo(page, size, sortBy, direction);
+		Category category = new Category(categoryId);
+		Offer offer = new Offer(offerId);
+
+		if (enabled != null) {
+			return service.getFoodsByCategoryAndOffer(category, offer, enabled.equalsIgnoreCase("true"), pageInfo);
+		}
+
+		return service.getFoodsByOffer(offer, null, pageInfo);
+	}
+	
+	@GetMapping("/food/search/{keyword}")
+	@ResponseBody
+	public Foods searchFoods(@PathVariable("keyword") String keyword,
+			@RequestParam(required = false) String enabled, @RequestParam int page, @RequestParam int size,
+			@RequestParam(required = false) String sortBy, @RequestParam(required = false) String direction)
+			throws FoodBoxServiceException {
+		PageInfo pageInfo = new PageInfo(page, size, sortBy, direction);
+
+		if (enabled != null) {
+			return service.searchFoods(keyword, enabled.equalsIgnoreCase("true"), pageInfo);
+		}
+
+		return service.searchFoods(keyword, null, pageInfo);
+	}
+
 	@GetMapping("/food/{id}")
 	@ResponseBody
 	public Food getFoodById(@PathVariable("id") Long id) throws FoodBoxServiceException {
