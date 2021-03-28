@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>org.yokekhei.fsd.capstone</groupId>
 	<artifactId>foodBoxApi</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>foodBox</name>
 	<description>Foodbox Web API</description>
 	<properties>
