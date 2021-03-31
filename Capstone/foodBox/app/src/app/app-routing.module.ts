@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminAuthenticationGuard } from './guards/admin-authentication.guard';
 import { AdminCategoriesComponent } from './components/admin/admin-categories/admin-categories.component';
 import { AdminCategoryCreateComponent } from './components/admin/admin-category-create/admin-category-create.component';
 import { AdminCategoryUpdateComponent } from './components/admin/admin-category-update/admin-category-update.component';
@@ -50,7 +51,7 @@ const routes: Routes = [
     children: [
       { path: 'login', component: AdminLoginComponent },
       { path: 'logout', component: AdminLogoutComponent },
-      { path: 'home', component: AdminHomeComponent,
+      { path: 'home', component: AdminHomeComponent, canActivate: [ AdminAuthenticationGuard ],
         children: [
           { path: 'category', component: AdminCategoriesComponent },
           { path: 'category/add', component: AdminCategoryCreateComponent },
