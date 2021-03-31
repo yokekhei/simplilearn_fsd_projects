@@ -31,7 +31,7 @@ public class FeeController {
 		return service.getFees();
 	}
 
-	@GetMapping("/fee/{id}")
+	@GetMapping("/fee/{type}")
 	@ResponseBody
 	public Fee getFeeById(@PathVariable("type") String type) throws FoodBoxServiceException {
 		return service.getFee(type);
