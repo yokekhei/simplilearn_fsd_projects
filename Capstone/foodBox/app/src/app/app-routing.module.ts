@@ -15,8 +15,10 @@ import { AdminOfferCreateComponent } from './components/admin/admin-offer-create
 import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update/admin-offer-update.component';
 import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { CreditComponent } from './components/common/credit/credit.component';
+import { UserAuthenticationGuard } from './guards/user-authentication.guard';
 import { UserCartComponent } from './components/user/user-cart/user-cart.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
+import { UserCheckoutComponent } from './components/user/user-checkout/user-checkout.component';
 import { UserFoodComponent } from './components/user/user-food/user-food.component';
 import { UserFoodsComponent } from './components/user/user-foods/user-foods.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
@@ -34,6 +36,7 @@ const routes: Routes = [
       { path: 'food/search/:keyword', component: UserFoodsComponent },
       { path: 'food/:id', component: UserFoodComponent },
       { path: 'cart', component: UserCartComponent },
+      { path: 'checkout', component: UserCheckoutComponent, canActivate: [ UserAuthenticationGuard ] },
       { path: 'login', component: UserLoginComponent },
       { path: 'logout', component: UserLogoutComponent },
       { path: 'register', component: UserRegisterComponent },

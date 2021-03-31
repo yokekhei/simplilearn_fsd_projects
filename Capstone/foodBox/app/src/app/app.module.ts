@@ -34,6 +34,7 @@ import { FooterComponent } from './components/common/footer/footer.component';
 import { OfferService } from './services/offer.service';
 import { UserCartComponent } from './components/user/user-cart/user-cart.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
+import { UserCheckoutComponent } from './components/user/user-checkout/user-checkout.component';
 import { UserFoodComponent } from './components/user/user-food/user-food.component';
 import { UserFoodsComponent } from './components/user/user-foods/user-foods.component';
 import { UserHeaderComponent } from './components/user/user-header/user-header.component';
@@ -63,6 +64,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     FooterComponent,
     UserCartComponent,
     UserCategoryComponent,
+    UserCheckoutComponent,
     UserFoodComponent,
     UserFoodsComponent,
     UserHeaderComponent,

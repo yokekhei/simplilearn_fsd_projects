@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 import { AuthenticationService } from '../../../services/authentication.service';
+import { CartService } from './../../../services/cart.service';
 import { Common } from 'src/app/core/common';
 import { DataService } from '../../../services/data.service';
 import { LoginUser } from '../../../models/login-user';
@@ -21,8 +22,11 @@ export class UserLoginComponent implements OnInit {
 
   private loginUser: LoginUser;
 
-  constructor(private authService: AuthenticationService, private dataService: DataService,
-              private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private authService: AuthenticationService,
+              private dataService: DataService,
+              private cartService: CartService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     this.loginUser = { email: '', username: Common.GUEST_NAME, role: Common.ROLE_USER };
   }
 
@@ -50,7 +54,12 @@ export class UserLoginComponent implements OnInit {
       (err: any) => Swal.fire(err.error.message, '', 'error'),
       () => {
         this.dataService.changeLoginUser(this.loginUser);
-        this.router.navigate(['/user/category']);
+
+        if (this.cartService.cartDetails !== null) {
+          this.router.navigate(['/user/cart']);
+        } else {
+          this.router.navigate(['/user/category']);
+        }
       }
     );
   }

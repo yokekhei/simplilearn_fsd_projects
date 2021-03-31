@@ -1,5 +1,5 @@
-import { Fee } from './../../../models/fee';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Cart } from 'src/app/models/cart';
@@ -8,6 +8,7 @@ import { CartService } from './../../../services/cart.service';
 import { Category } from './../../../models/category';
 import { Common } from 'src/app/core/common';
 import { DataService } from './../../../services/data.service';
+import { Fee } from './../../../models/fee';
 import { FeeService } from './../../../services/fee.service';
 import { Food } from './../../../models/food';
 import { FoodService } from './../../../services/food.service';
@@ -29,7 +30,7 @@ export class UserCartComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService, private foodService: FoodService,
               private offerService: OfferService, private feeService: FeeService,
-              private dataService: DataService) {
+              private dataService: DataService, private router: Router) {
     this.cartDetails = this.cartService.cartDetails;
 
     if (this.cartDetails === null) {
@@ -177,6 +178,7 @@ export class UserCartComponent implements OnInit, OnDestroy {
   }
 
   onCheckout(): void {
+    this.router.navigate(['/user/checkout']);
   }
 
   ngOnDestroy(): void {
