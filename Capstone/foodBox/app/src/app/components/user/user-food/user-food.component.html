@@ -12,6 +12,8 @@
                     </div>
                     <div class="col-md-3">
                         <h5 class="text-right">$ {{ food?.price | number : '1.2-2' }}</h5>
+                        <p class="text-right small text-red" *ngIf="hasDiscount(food?.offerId)">{{
+                            getOfferDesc(food?.offerId) }}</p>
                     </div>
                 </div>
                 <div class="row">
@@ -30,7 +32,7 @@
     <div class="card-footer">
         <form>
             <div class="row justify-content-end mx-1">
-                <button mdbBtn color="warning" class="btn" type="submit">Add to Cart</button>
+                <button mdbBtn color="warning" class="btn" type="submit" (click)="onAddToCart()">Add to Cart</button>
             </div>
         </form>
     </div>

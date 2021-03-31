@@ -23,13 +23,16 @@ import { AdminOffersComponent } from './components/admin/admin-offers/admin-offe
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './services/authentication.service';
+import { CartService } from './services/cart.service';
 import { CategoryService } from './services/category.service';
 import { ConfigurationService, ENVIRONMENT } from './services/configuration.service';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { DataService } from './services/data.service';
+import { FeeService } from './services/fee.service';
 import { FoodService } from './services/food.service';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { OfferService } from './services/offer.service';
+import { UserCartComponent } from './components/user/user-cart/user-cart.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
 import { UserFoodComponent } from './components/user/user-food/user-food.component';
 import { UserFoodsComponent } from './components/user/user-foods/user-foods.component';
@@ -58,6 +61,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AppComponent,
     CreditComponent,
     FooterComponent,
+    UserCartComponent,
     UserCategoryComponent,
     UserFoodComponent,
     UserFoodsComponent,
@@ -77,9 +81,11 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
   providers: [
     { provide: ENVIRONMENT, useValue: environment },
     AuthenticationService,
+    CartService,
     CategoryService,
     ConfigurationService,
     DataService,
+    FeeService,
     FoodService,
     OfferService
   ],
