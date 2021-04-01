@@ -92,8 +92,6 @@ export class UserCartComponent implements OnInit, OnDestroy {
       cartItems[0].totalPrice = cartItems[0].quantity * food.price;
       cartItems[0].discount = cartItems[0].quantity * this.getFoodDiscount(food);
       this.calculate();
-      this.cartService.cartDetails = this.cartDetails;
-      this.dataService.changeUserCartInfo(this.cartDetails);
     }
   }
 
@@ -109,8 +107,6 @@ export class UserCartComponent implements OnInit, OnDestroy {
         if (index > -1) {
           this.cartDetails.items.splice(index, 1);
           this.calculate();
-          this.cartService.cartDetails = this.cartDetails;
-          this.dataService.changeUserCartInfo(this.cartDetails);
         }
       }
   }
@@ -171,10 +167,14 @@ export class UserCartComponent implements OnInit, OnDestroy {
   }
 
   calculate(): void {
+    if (this.cartDetails === null) { return; }
+
     this.setSubTotalPrice();
     this.setDiscountPrice();
     this.setDeliveryFee();
     this.setTotalPrice();
+    this.cartService.cartDetails = this.cartDetails;
+    this.dataService.changeUserCartInfo(this.cartDetails);
   }
 
   onCheckout(): void {
