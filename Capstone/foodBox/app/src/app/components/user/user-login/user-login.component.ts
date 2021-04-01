@@ -49,6 +49,7 @@ export class UserLoginComponent implements OnInit {
         this.loginUser.username = user.username || user.email;
         this.loginUser.role = user.role;
         this.loginUser.address = user.address;
+        this.loginUser.phone = user.phone;
         this.authService.loginUser = this.loginUser;
       },
       (err: any) => Swal.fire(err.error.message, '', 'error'),
