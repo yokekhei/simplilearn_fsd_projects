@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgModule } from '@angular/core';
+import { NgxStripeModule } from 'ngx-stripe';
 
 import { environment } from './../environments/environment';
 
@@ -25,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './services/authentication.service';
 import { CartService } from './services/cart.service';
 import { CategoryService } from './services/category.service';
+import { ChargeService } from './services/charge.service';
 import { ConfigurationService, ENVIRONMENT } from './services/configuration.service';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { DataService } from './services/data.service';
@@ -78,6 +80,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    NgxStripeModule.forRoot(environment.stripePublicKey),
     MDBBootstrapModule.forRoot()
   ],
   providers: [
@@ -85,6 +88,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AuthenticationService,
     CartService,
     CategoryService,
+    ChargeService,
     ConfigurationService,
     DataService,
     FeeService,

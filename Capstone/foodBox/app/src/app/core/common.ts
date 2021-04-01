@@ -20,6 +20,10 @@ export class Common {
 
     static ALL_VALUES = 9999;
 
+    static CURRENCY_USD = 'usd';
+    static CURRENCY_EUR = 'eur';
+    static CURRENCY_MYR = 'myr';
+
     static getOfferDiscountType(type: string | undefined): string {
         switch (type) {
             case 'PCT':
