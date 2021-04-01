@@ -30,7 +30,7 @@ public class AuthenticationControllerTests extends AbstractTestNGSpringContextTe
 	public void setup() {
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 		address = new Address("123 Sunshine Apartment", "St NW", "Kuala Lumpur", "57000");
-		user = new User("johndoe@gmail.com", "Pa$sw0rd", "johndoe", "U", address, true);
+		user = new User("johndoe@gmail.com", "Pa$sw0rd", "johndoe", "+60-127813456", "U", address, true);
 	}
 
 	@Test(priority = 0)

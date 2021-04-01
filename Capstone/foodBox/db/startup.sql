@@ -19,6 +19,7 @@ CREATE TABLE users (
     user_email VARCHAR(255) NOT NULL,
     user_password VARCHAR(255) NOT NULL,
     user_name VARCHAR(255) NOT NULL,
+    user_phone VARCHAR(255) NOT NULL,
     user_role CHAR(1) NOT NULL,
     address_line1 VARCHAR(255),
     address_line2 VARCHAR(255),
@@ -70,10 +71,10 @@ delete from categories;
 insert into categories(category_id, category_name) values (1, 'Chinese');
 
 delete from users;
-insert into users (user_email, user_password, user_name, user_role)
-values ('admin@foodbox.com', 'Pa$sw0rd', 'admin', 'A');
-insert into users (user_email, user_password, user_name, user_role, address_line1, address_line2, address_city, address_postcode)
-values ('johndoe@gmail.com', 'Pa$sw0rd', 'johndoe', 'U', '123 Sunshine Apartment', 'St NW', 'Kuala Lumpur', '57000');
+insert into users (user_email, user_password, user_name, user_phone, user_role)
+values ('admin@foodbox.com', 'Pa$sw0rd', 'admin', '+60-333411289', 'A');
+insert into users (user_email, user_password, user_name, user_phone, user_role, address_line1, address_line2, address_city, address_postcode)
+values ('johndoe@gmail.com', 'Pa$sw0rd', 'johndoe', '+60-127813456', 'U', '123 Sunshine Apartment', 'St NW', 'Kuala Lumpur', '57000');
 
 delete from offers;
 insert into offers (offer_id, offer_name, offer_discount_type, offer_discount)
