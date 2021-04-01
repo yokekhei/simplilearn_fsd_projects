@@ -80,6 +80,9 @@
                 <div *ngIf="phone.errors?.required">
                     <small>Phone number is required</small>
                 </div>
+                <div *ngIf="phone.errors?.pattern">
+                    <small>Invalid phone number</small>
+                </div>
             </div>
         </div>
     </div>
