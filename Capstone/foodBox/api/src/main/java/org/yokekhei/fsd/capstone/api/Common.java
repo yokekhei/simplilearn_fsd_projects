@@ -16,4 +16,8 @@ public class Common {
 
 	public static final String DEFAULT_IMAGE = "static/images/default-image.png";
 
+	public static final String CURRENCY_USD = "usd";
+	public static final String CURRENCY_EUR = "eur";
+	public static final String CURRENCY_MYR = "myr";
+
 }
