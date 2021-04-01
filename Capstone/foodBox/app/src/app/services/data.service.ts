@@ -27,8 +27,8 @@ export class DataService {
   private userFoodPageInfoSource: BehaviorSubject<PageInfo>;
   userFoodPageInfo: Observable<PageInfo>;
 
-  private userCartSource: BehaviorSubject<Cart>;
-  userCartInfo: Observable<Cart>;
+  private userCartSource: BehaviorSubject<Cart | null>;
+  userCartInfo: Observable<Cart | null>;
 
   constructor() {
     this.categoriesSource = new BehaviorSubject([] as Category[]);
@@ -46,7 +46,7 @@ export class DataService {
     this.userFoodPageInfoSource = new BehaviorSubject({} as PageInfo);
     this.userFoodPageInfo = this.userFoodPageInfoSource.asObservable();
 
-    this.userCartSource = new BehaviorSubject({} as Cart);
+    this.userCartSource = new BehaviorSubject({} as Cart | null);
     this.userCartInfo = this.userCartSource.asObservable();
   }
 
@@ -70,7 +70,7 @@ export class DataService {
     this.userFoodPageInfoSource.next(pageInfo);
   }
 
-  changeUserCartInfo(cart: Cart): void {
+  changeUserCartInfo(cart: Cart | null): void {
     this.userCartSource.next(cart);
   }
 

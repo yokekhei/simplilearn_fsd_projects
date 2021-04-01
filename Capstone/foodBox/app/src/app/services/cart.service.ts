@@ -21,4 +21,18 @@ export class CartService {
     sessionStorage.cartDetails = JSON.stringify(o);
   }
 
+  reset(): void {
+    if (sessionStorage.cartDetails) {
+      const cartInfo = {
+        items: [],
+        subTotalPrice: 0.0,
+        totalDiscount: 0.0,
+        deliveryFee: 0.0,
+        totalPrice: 0.0
+      };
+
+      sessionStorage.cartDetails = JSON.stringify(cartInfo);
+    }
+  }
+
 }
