@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
 export class UserCheckoutComponent implements OnInit {
 
   private payorName = '';
-  private currency = Common.CURRENCY_MYR;
+  private currency = Common.CURRENCY_USD;
   loginUser: LoginUser | null;
   cartDetails: Cart | null;
   cardErrorMessage: string | undefined = '';
