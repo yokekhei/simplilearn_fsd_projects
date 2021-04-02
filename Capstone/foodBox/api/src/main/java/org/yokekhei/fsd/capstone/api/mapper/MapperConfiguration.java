@@ -32,4 +32,14 @@ public class MapperConfiguration {
 		return Mappers.getMapper(FoodMapper.class);
 	}
 
+	@Bean
+	public OrderMapper orderMapper() {
+		return Mappers.getMapper(OrderMapper.class);
+	}
+
+	@Bean
+	public OrderItemMapper orderItemMapper() {
+		return Mappers.getMapper(OrderItemMapper.class);
+	}
+
 }

@@ -58,6 +58,35 @@ CREATE TABLE fees (
     fee_value DECIMAL(18, 5) NOT NULL DEFAULT 0,
     PRIMARY KEY (fee_type)
 ) ENGINE=INNODB;
+DROP TABLE IF EXISTS orderitems;
+CREATE TABLE orderitems (
+    oitem_id BIGINT NOT NULL AUTO_INCREMENT,
+    oitem_food BIGINT NOT NULL,
+    oitem_quantity INT NOT NULL,
+    oitem_price DECIMAL(18, 5) NOT NULL,
+    oitem_discount DECIMAL(18, 5),
+    PRIMARY KEY (oitem_id),
+    CONSTRAINT fk_orderitems_food FOREIGN KEY (oitem_food) REFERENCES foods(food_id)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+    order_id BIGINT NOT NULL AUTO_INCREMENT,
+    order_charge_id VARCHAR(255) NOT NULL,
+    order_user VARCHAR(255) NOT NULL,
+    order_price DECIMAL(18, 5) NOT NULL,
+    order_discount DECIMAL(18, 5),
+    order_delivery_fee DECIMAL(18, 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (order_id),
+    CONSTRAINT fk_orders_user FOREIGN KEY (order_user) REFERENCES Users(user_email)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS orderdetails;
+CREATE TABLE orderdetails (
+    order_id BIGINT NOT NULL,
+    oitem_id BIGINT NOT NULL,
+    CONSTRAINT fk_orders FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    CONSTRAINT fk_orderitems FOREIGN KEY (oitem_id) REFERENCES orderitems(oitem_id)
+) ENGINE=INNODB;
 
 DROP USER IF EXISTS 'foodbox_user'@'172.17.0.1';
 CREATE USER 'foodbox_user'@'172.17.0.1' IDENTIFIED BY 'password';
