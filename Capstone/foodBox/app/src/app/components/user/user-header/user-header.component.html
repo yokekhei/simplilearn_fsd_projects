@@ -30,6 +30,9 @@
                         <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/user/register">Sign up</a>
                     </li>
                     <li role="menuitem" *ngIf="!isGuest">
+                        <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/user/order/history">Order History</a>
+                    </li>
+                    <li role="menuitem" *ngIf="!isGuest">
                         <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/user/logout">Log out</a>
                     </li>
                 </ul>
