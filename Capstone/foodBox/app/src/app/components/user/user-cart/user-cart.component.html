@@ -14,9 +14,9 @@
                         <p class="text-muted">{{ getCategoryName(item.food.categoryId) }} Cuisine</p>
                         <form>
                             <div class="form-group row">
-                                <label path="quantity" for="quantity" class="col-sm-6 col-form-label">Quantity</label>
+                                <label name="quantity" for="quantity" class="col-sm-6 col-form-label">Quantity</label>
                                 <div class="col-sm-4">
-                                    <input path="quantity" type="number" class="form-control" name="quantity"
+                                    <input name="quantity" type="number" class="form-control" name="quantity"
                                         placeholder="1" min="1" [value]="item.quantity"
                                         (change)="onUpdateItem($event, item.food)" />
                                 </div>
