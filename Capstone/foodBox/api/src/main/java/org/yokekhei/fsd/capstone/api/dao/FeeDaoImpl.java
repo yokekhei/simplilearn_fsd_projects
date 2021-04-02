@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.yokekhei.fsd.capstone.api.dto.Fee;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.FeeMapper;
+import org.yokekhei.fsd.capstone.api.repository.FeeRepository;
 
 @Repository
 public class FeeDaoImpl implements FeeDao {

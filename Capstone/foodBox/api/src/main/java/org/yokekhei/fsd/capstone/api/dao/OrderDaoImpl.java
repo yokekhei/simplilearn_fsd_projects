@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.yokekhei.fsd.capstone.api.dto.Order;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.OrderMapper;
+import org.yokekhei.fsd.capstone.api.repository.OrderRepository;
 
 @Repository
 public class OrderDaoImpl implements OrderDao {

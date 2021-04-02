@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.yokekhei.fsd.capstone.api.dto.Offer;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.OfferMapper;
+import org.yokekhei.fsd.capstone.api.repository.OfferRepository;
 
 @Repository
 public class OfferDaoImpl implements OfferDao {

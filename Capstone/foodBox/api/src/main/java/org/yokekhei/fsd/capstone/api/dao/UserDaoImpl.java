@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.yokekhei.fsd.capstone.api.dto.User;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.UserMapper;
+import org.yokekhei.fsd.capstone.api.repository.UserRepository;
 
 @Repository
 public class UserDaoImpl implements UserDao {

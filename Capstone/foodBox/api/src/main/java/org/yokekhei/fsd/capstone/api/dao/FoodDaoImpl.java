@@ -22,6 +22,7 @@ import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.CategoryMapper;
 import org.yokekhei.fsd.capstone.api.mapper.FoodMapper;
 import org.yokekhei.fsd.capstone.api.mapper.OfferMapper;
+import org.yokekhei.fsd.capstone.api.repository.FoodRepository;
 
 @Repository
 public class FoodDaoImpl implements FoodDao {

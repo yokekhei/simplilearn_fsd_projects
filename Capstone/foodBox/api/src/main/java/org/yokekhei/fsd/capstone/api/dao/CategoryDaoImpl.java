@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.yokekhei.fsd.capstone.api.dto.Category;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 import org.yokekhei.fsd.capstone.api.mapper.CategoryMapper;
+import org.yokekhei.fsd.capstone.api.repository.CategoryRepository;
 
 @Repository
 public class CategoryDaoImpl implements CategoryDao {
