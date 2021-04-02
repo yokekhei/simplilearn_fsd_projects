@@ -16,7 +16,6 @@ import { AdminOfferCreateComponent } from './components/admin/admin-offer-create
 import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update/admin-offer-update.component';
 import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { CreditComponent } from './components/common/credit/credit.component';
-import { OrderComponent } from './components/order/order.component';
 import { UserAuthenticationGuard } from './guards/user-authentication.guard';
 import { UserCartComponent } from './components/user/user-cart/user-cart.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
@@ -26,6 +25,7 @@ import { UserFoodsComponent } from './components/user/user-foods/user-foods.comp
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
+import { UserOrderComponent } from './components/user/user-order/user-order.component';
 import { UserOrderHistoryComponent } from './components/user/user-order-history/user-order-history.component';
 import { UserRegisterComponent } from './components/user/user-register/user-register.component';
 
@@ -41,7 +41,7 @@ const routes: Routes = [
       { path: 'cart', component: UserCartComponent },
       { path: 'checkout', component: UserCheckoutComponent, canActivate: [ UserAuthenticationGuard ] },
       { path: 'order/history', component: UserOrderHistoryComponent, canActivate: [ UserAuthenticationGuard ] },
-      { path: 'order/:id', component: OrderComponent, canActivate: [ UserAuthenticationGuard ] },
+      { path: 'order/:id', component: UserOrderComponent, canActivate: [ UserAuthenticationGuard ] },
       { path: 'login', component: UserLoginComponent },
       { path: 'logout', component: UserLogoutComponent },
       { path: 'register', component: UserRegisterComponent },

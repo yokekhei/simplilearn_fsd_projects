@@ -1,20 +1,20 @@
-import { CategoryService } from 'src/app/services/category.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Category } from './../../models/category';
+import { Category } from './../../../models/category';
+import { CategoryService } from 'src/app/services/category.service';
 import { DataService } from 'src/app/services/data.service';
-import { FoodService } from './../../services/food.service';
-import { Order } from './../../models/order';
-import { OrderService } from './../../services/order.service';
+import { FoodService } from './../../../services/food.service';
+import { Order } from './../../../models/order';
+import { OrderService } from './../../../services/order.service';
 
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  selector: 'app-user-order',
+  templateUrl: './user-order.component.html',
+  styleUrls: ['./user-order.component.scss']
 })
-export class OrderComponent implements OnInit, OnDestroy {
+export class UserOrderComponent implements OnInit, OnDestroy {
 
   confirmed = false;
   order?: Order;
