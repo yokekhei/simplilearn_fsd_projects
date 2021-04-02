@@ -6,6 +6,7 @@ import { Cart } from 'src/app/models/cart';
 import { CartItem } from './../../../models/cart-item';
 import { CartService } from './../../../services/cart.service';
 import { Category } from './../../../models/category';
+import { CategoryService } from 'src/app/services/category.service';
 import { Common } from 'src/app/core/common';
 import { DataService } from './../../../services/data.service';
 import { Fee } from './../../../models/fee';
@@ -30,7 +31,8 @@ export class UserCartComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService, private foodService: FoodService,
               private offerService: OfferService, private feeService: FeeService,
-              private dataService: DataService, private router: Router) {
+              private dataService: DataService, private categoryService: CategoryService,
+              private router: Router) {
     this.cartDetails = this.cartService.cartDetails;
 
     if (this.cartDetails === null) {
@@ -44,7 +46,19 @@ export class UserCartComponent implements OnInit, OnDestroy {
     }
 
     this.subscriptionCategories = this.dataService.categories.subscribe(
-      categories => this.categories = categories);
+      categories => {
+        if (categories.length === 0) {
+          this.categoryService.getAllCategories().subscribe(
+            ctgrs => {
+              this.categories = ctgrs;
+              this.dataService.changeCategories(ctgrs);
+            }
+          );
+        } else {
+          this.categories = categories;
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
