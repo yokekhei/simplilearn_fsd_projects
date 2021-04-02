@@ -34,6 +34,8 @@ import { FeeService } from './services/fee.service';
 import { FoodService } from './services/food.service';
 import { FooterComponent } from './components/common/footer/footer.component';
 import { OfferService } from './services/offer.service';
+import { OrderComponent } from './components/order/order.component';
+import { OrderService } from './services/order.service';
 import { UserCartComponent } from './components/user/user-cart/user-cart.component';
 import { UserCategoryComponent } from './components/user/user-category/user-category.component';
 import { UserCheckoutComponent } from './components/user/user-checkout/user-checkout.component';
@@ -43,6 +45,7 @@ import { UserHeaderComponent } from './components/user/user-header/user-header.c
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { UserLoginComponent } from './components/user/user-login/user-login.component';
 import { UserLogoutComponent } from './components/user/user-logout/user-logout.component';
+import { UserOrderHistoryComponent } from './components/user/user-order-history/user-order-history.component';
 import { UserRegisterComponent } from './components/user/user-register/user-register.component';
 
 @NgModule({
@@ -64,6 +67,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AppComponent,
     CreditComponent,
     FooterComponent,
+    OrderComponent,
     UserCartComponent,
     UserCategoryComponent,
     UserCheckoutComponent,
@@ -73,6 +77,7 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     UserHomeComponent,
     UserLoginComponent,
     UserLogoutComponent,
+    UserOrderHistoryComponent,
     UserRegisterComponent
   ],
   imports: [
@@ -93,7 +98,8 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     DataService,
     FeeService,
     FoodService,
-    OfferService
+    OfferService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

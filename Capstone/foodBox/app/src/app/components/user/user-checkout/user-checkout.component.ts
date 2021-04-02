@@ -11,7 +11,12 @@ import { ChargeRequest } from './../../../models/charge-request';
 import { ChargeResponse } from './../../../models/charge-response';
 import { ChargeService } from './../../../services/charge.service';
 import { Common } from 'src/app/core/common';
+import { DataService } from 'src/app/services/data.service';
 import { LoginUser } from './../../../models/login-user';
+import { Order } from './../../../models/order';
+import { OrderItem } from './../../../models/order-item';
+import { OrderService } from './../../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-checkout',
@@ -48,7 +53,10 @@ export class UserCheckoutComponent implements OnInit {
   constructor(private authService: AuthenticationService,
               private cartService: CartService,
               private stripeService: StripeService,
-              private chargeService: ChargeService) {
+              private chargeService: ChargeService,
+              private orderService: OrderService,
+              private dataService: DataService,
+              private router: Router) {
     this.loginUser = this.authService.loginUser;
     this.cartDetails = this.cartService.cartDetails;
   }
@@ -77,7 +85,19 @@ export class UserCheckoutComponent implements OnInit {
 
           this.chargeService.createCharge(chargeRequest).subscribe(
             (chargeResponse: ChargeResponse) => {
-              console.log(chargeResponse);
+              if (chargeResponse.status === 'succeeded') {
+                const order = this.createOrder(chargeResponse);
+
+                if (order !== null) {
+                  this.orderService.createOrder(order).subscribe(
+                    (o: Order) => {
+                      this.resetCart();
+                      this.router.navigate([`/user/order/${o.id}`], { queryParams: { confirmed: 1 } });
+                    },
+                    (err: any) => Swal.fire(err.error.message, '', 'error'),
+                  );
+                }
+              }
             },
             (err: any) => Swal.fire(err.error.message, '', 'error'),
           );
@@ -90,6 +110,41 @@ export class UserCheckoutComponent implements OnInit {
   onPlaceOrder(form: NgForm): void {
     this.payorName = form.form.value.payorName;
     this.createToken();
+  }
+
+  createOrderItems(): OrderItem[] | null {
+    if (this.cartDetails === null) { return null; }
+
+    const orderItems: OrderItem[] = [];
+    this.cartDetails.items.forEach(item => orderItems.push({
+      food: item.food,
+      quantity: item.quantity,
+      price: item.totalPrice,
+      discount: item.discount
+    }));
+
+    return orderItems;
+  }
+
+  createOrder(chargeResponse: ChargeResponse): Order | null {
+    if (this.loginUser === null || this.cartDetails === null) { return null; }
+
+    const orderItems = this.createOrderItems();
+    if (orderItems === null) { return null; }
+
+    return {
+      chargeId: chargeResponse.id,
+      userId: this.loginUser.email,
+      items: orderItems,
+      price: this.cartDetails?.totalPrice || 0.0,
+      discount: this.cartDetails?.totalDiscount || 0.0,
+      deliveryFee: this.cartDetails?.deliveryFee || 0.0
+    };
+  }
+
+  resetCart(): void {
+    this.cartService.reset();
+    this.dataService.changeUserCartInfo(null);
   }
 
 }
