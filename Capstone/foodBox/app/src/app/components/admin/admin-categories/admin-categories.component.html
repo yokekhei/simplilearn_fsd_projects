@@ -39,7 +39,7 @@
                         </button>
                     </td>
                     <td>{{ category.name }}</td>
-                    <td>{{ getDate(category.createdDateTime) | date:'MM/dd/yyyy' }}</td>
+                    <td>{{ getDate(category.createdDateTime) | date:'dd/MM/yyyy' }}</td>
                     <td>
                         <div class="custom-control custom-switch">
                             <input class="custom-control-input" type="checkbox" id="categoryEnabled{{ category.id }}"

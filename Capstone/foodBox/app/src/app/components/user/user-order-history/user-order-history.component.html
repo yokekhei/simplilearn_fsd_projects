@@ -28,7 +28,7 @@
                         <span>Order #</span>
                     </th>
                     <th>
-                        <span>Total Paid</span>
+                        <span>Total Paid $</span>
                     </th>
                     <th>
                         <span>Order Date</span>
@@ -44,7 +44,7 @@
                     </td>
                     <td>{{ order.id }}</td>
                     <td>{{ order.price | number : '1.2-2' }}</td>
-                    <td>{{ getDate(order.createdDateTime) | date:'MM/dd/yyyy' }}</td>
+                    <td>{{ getDate(order.createdDateTime) | date:'dd/MM/yyyy' }}</td>
                 </tr>
             </tbody>
         </table>

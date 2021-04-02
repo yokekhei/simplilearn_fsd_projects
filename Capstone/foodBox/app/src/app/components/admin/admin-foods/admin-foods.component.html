@@ -68,7 +68,7 @@
                     <td>{{ getCategoryName(food.categoryId) }}</td>
                     <td>{{ food.price | number : '1.2-2' }}</td>
                     <td>{{ getOfferName(food.offerId) }}</td>
-                    <td>{{ getDate(food.createdDateTime) | date:'MM/dd/yyyy' }}</td>
+                    <td>{{ getDate(food.createdDateTime) | date:'dd/MM/yyyy' }}</td>
                     <td>
                         <div class="custom-control custom-switch">
                             <input class="custom-control-input" type="checkbox" id="foodEnabled{{ food.id }}"
