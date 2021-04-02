@@ -1,5 +1,6 @@
 package org.yokekhei.fsd.capstone.api.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,15 @@ public class OrderController {
 	@ResponseBody
 	public List<Order> getOrders() throws FoodBoxServiceException {
 		return service.getOrders();
+	}
+
+	@GetMapping("/order/history/{days}")
+	@ResponseBody
+	public List<Order> getOrders(@PathVariable("days") Integer days) throws FoodBoxServiceException {
+		LocalDateTime end = LocalDateTime.now();
+		LocalDateTime start = end.minusDays(days);
+
+		return service.getOrdersCreatedBetween(start, end);
 	}
 
 	@GetMapping("/order/{id}")

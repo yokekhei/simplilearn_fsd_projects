@@ -1,5 +1,6 @@
 package org.yokekhei.fsd.capstone.api.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.yokekhei.fsd.capstone.api.dto.Order;
@@ -8,6 +9,8 @@ import org.yokekhei.fsd.capstone.api.exception.FoodBoxServiceException;
 public interface OrderService {
 
 	List<Order> getOrders() throws FoodBoxServiceException;
+
+	List<Order> getOrdersCreatedBetween(LocalDateTime start, LocalDateTime end) throws FoodBoxServiceException;
 
 	Order getOrder(Long id) throws FoodBoxServiceException;
 

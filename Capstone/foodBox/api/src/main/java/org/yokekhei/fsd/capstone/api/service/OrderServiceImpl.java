@@ -1,5 +1,6 @@
 package org.yokekhei.fsd.capstone.api.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,6 +24,20 @@ public class OrderServiceImpl implements OrderService {
 
 		try {
 			orders = orderDao.getOrders();
+		} catch (Exception e) {
+			throw new FoodBoxServiceException(e.getMessage());
+		}
+
+		return orders;
+	}
+	
+	@Override
+	@Transactional
+	public List<Order> getOrdersCreatedBetween(LocalDateTime start, LocalDateTime end) throws FoodBoxServiceException {
+		List<Order> orders = null;
+
+		try {
+			orders = orderDao.getOrdersCreatedBetween(start, end);
 		} catch (Exception e) {
 			throw new FoodBoxServiceException(e.getMessage());
 		}

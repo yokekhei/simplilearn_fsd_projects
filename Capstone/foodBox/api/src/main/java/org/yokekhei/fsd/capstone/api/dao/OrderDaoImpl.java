@@ -1,5 +1,6 @@
 package org.yokekhei.fsd.capstone.api.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,22 @@ public class OrderDaoImpl implements OrderDao {
 
 		try {
 			orders = repository.findAll()
+					.stream()
+					.map(entity -> mapper.toDto(entity))
+					.collect(Collectors.toList());
+		} catch (Exception e) {
+			throw new FoodBoxDaoException(e.getMessage());
+		}
+
+		return orders;
+	}
+	
+	@Override
+	public List<Order> getOrdersCreatedBetween(LocalDateTime start, LocalDateTime end) throws FoodBoxDaoException {
+		List<Order> orders = null;
+
+		try {
+			orders = repository.findAllByCreatedDateTimeBetween(start, end)
 					.stream()
 					.map(entity -> mapper.toDto(entity))
 					.collect(Collectors.toList());
