@@ -36,6 +36,25 @@ export class OrderService {
     );
   }
 
+  getOrdersByDays(days: number): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.url}/history/${days}`).pipe(
+      map(orders => {
+        return orders.map(order => {
+          return {
+            id: order.id,
+            chargeId: order.chargeId,
+            userId: order.userId,
+            items: order.items,
+            price: order.price,
+            discount: order.discount,
+            deliveryFee: order.deliveryFee,
+            createdDateTime: order.createdDateTime
+          };
+        });
+      })
+    );
+  }
+
   getOrderById(id: number): Observable<Order> {
     return this.http.get<Order>(`${this.url}/${id}`);
   }
