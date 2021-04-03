@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.yokekhei.fsd.capstone.api.dto.Order;
+import org.yokekhei.fsd.capstone.api.dto.User;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxDaoException;
 
 public interface OrderDao {
@@ -13,6 +14,11 @@ public interface OrderDao {
 	List<Order> getOrders() throws FoodBoxDaoException;
 
 	List<Order> getOrdersCreatedBetween(LocalDateTime start, LocalDateTime end) throws FoodBoxDaoException;
+
+	List<Order> getOrdersByUser(User user) throws FoodBoxDaoException;
+
+	List<Order> getOrdersByUserAndCreatedBetween(User user, LocalDateTime start, LocalDateTime end)
+			throws FoodBoxDaoException;
 
 	Order save(Order order) throws FoodBoxDaoException;
 

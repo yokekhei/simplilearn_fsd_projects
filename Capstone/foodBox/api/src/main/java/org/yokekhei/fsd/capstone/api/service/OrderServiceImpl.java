@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.yokekhei.fsd.capstone.api.dao.OrderDao;
 import org.yokekhei.fsd.capstone.api.dto.Order;
+import org.yokekhei.fsd.capstone.api.dto.User;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxServiceException;
 
 @Service
@@ -30,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
 
 		return orders;
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Order> getOrdersCreatedBetween(LocalDateTime start, LocalDateTime end) throws FoodBoxServiceException {
@@ -38,6 +39,34 @@ public class OrderServiceImpl implements OrderService {
 
 		try {
 			orders = orderDao.getOrdersCreatedBetween(start, end);
+		} catch (Exception e) {
+			throw new FoodBoxServiceException(e.getMessage());
+		}
+
+		return orders;
+	}
+
+	@Override
+	@Transactional
+	public List<Order> getOrdersByUser(User user) throws FoodBoxServiceException {
+		List<Order> orders = null;
+
+		try {
+			orders = orderDao.getOrdersByUser(user);
+		} catch (Exception e) {
+			throw new FoodBoxServiceException(e.getMessage());
+		}
+
+		return orders;
+	}
+	
+	@Override
+	public List<Order> getOrdersByUserAndCreatedBetween(User user, LocalDateTime start, LocalDateTime end)
+			throws FoodBoxServiceException {
+		List<Order> orders = null;
+
+		try {
+			orders = orderDao.getOrdersByUserAndCreatedBetween(user, start, end);
 		} catch (Exception e) {
 			throw new FoodBoxServiceException(e.getMessage());
 		}

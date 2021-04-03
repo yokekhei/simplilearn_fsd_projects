@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.yokekhei.fsd.capstone.api.Common;
 import org.yokekhei.fsd.capstone.api.dto.Order;
+import org.yokekhei.fsd.capstone.api.dto.User;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxServiceException;
 import org.yokekhei.fsd.capstone.api.service.OrderService;
 
@@ -41,13 +42,19 @@ public class OrderController {
 		return service.getOrders();
 	}
 
-	@GetMapping("/order/history/{days}")
+	@GetMapping("/order/user/{email}")
 	@ResponseBody
-	public List<Order> getOrderHistoryByDayRange(@PathVariable("days") Integer days) throws FoodBoxServiceException {
-		LocalDateTime end = LocalDateTime.now();
-		LocalDateTime start = end.minusDays(days);
+	public List<Order> getOrderByUserAndDayRange(@PathVariable("email") String email,
+			@RequestParam(required = false) Integer days) throws FoodBoxServiceException {
+		User user = new User(email);
 
-		return service.getOrdersCreatedBetween(start, end);
+		if (days != null) {
+			LocalDateTime end = LocalDateTime.now();
+			LocalDateTime start = end.minusDays(days);
+			return service.getOrdersByUserAndCreatedBetween(user, start, end);
+		}
+
+		return service.getOrdersByUser(user);
 	}
 
 	@GetMapping("/order/{id}")
