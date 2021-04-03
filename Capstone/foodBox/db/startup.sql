@@ -78,7 +78,7 @@ CREATE TABLE orders (
     order_delivery_fee DECIMAL(18, 5),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (order_id),
-    CONSTRAINT fk_orders_user FOREIGN KEY (order_user) REFERENCES Users(user_email)
+    CONSTRAINT fk_orders_user FOREIGN KEY (order_user) REFERENCES users(user_email)
 ) ENGINE=INNODB;
 DROP TABLE IF EXISTS orderdetails;
 CREATE TABLE orderdetails (
