@@ -44,6 +44,9 @@ public class UserRegisterTests extends BaseTests {
 		String postcodeData = getPostcode(browserType);
 		Assert.assertNotNull(postcodeData);
 
+		String phoneData = getPhone(browserType);
+		Assert.assertNotNull(phoneData);
+
 		WebElement userDropDown = driver.findElement(By.xpath("//a[@id='userNavDropDown']"));
 		WebDriverWait wait1 = new WebDriverWait(driver, 30);
 		wait1.until(ExpectedConditions.visibilityOf(userDropDown));
@@ -74,6 +77,9 @@ public class UserRegisterTests extends BaseTests {
 
 		WebElement postcode = driver.findElement(By.cssSelector("input[id=postcode]"));
 		postcode.sendKeys(postcodeData);
+
+		WebElement phone = driver.findElement(By.cssSelector("input[id=phone]"));
+		phone.sendKeys(phoneData);
 
 		WebElement button = driver.findElement(By.xpath("//button[@type='submit']"));
 		button.click();
@@ -278,6 +284,37 @@ public class UserRegisterTests extends BaseTests {
 		}
 
 		return postcode;
+	}
+
+	private String getPhone(String browserType) {
+		String phone = null;
+
+		try {
+			fis = new FileInputStream(TestUtils.TEST_DATA_FILE_PATH);
+			wb = new XSSFWorkbook(fis);
+			sheet = wb.getSheet("user-register");
+
+			for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+				String bwsrType = sheet.getRow(i).getCell(0).getStringCellValue();
+
+				if (browserType.toLowerCase().contains(bwsrType)) {
+					phone = sheet.getRow(i).getCell(7).getStringCellValue();
+					break;
+				}
+			}
+		} catch (IOException e) {
+		} finally {
+			try {
+				wb.close();
+				fis.close();
+			} catch (IOException e) {
+			} finally {
+				wb = null;
+				fis = null;
+			}
+		}
+
+		return phone;
 	}
 
 }
