@@ -22,6 +22,8 @@ services:
             - "db"
         network_mode: host
         restart: on-failure
+        environment:
+            - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
 
     app:
         image: yokekhei/foodbox-app:latest
