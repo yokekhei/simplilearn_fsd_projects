@@ -36,8 +36,11 @@ export class OrderService {
     );
   }
 
-  getOrdersByDays(days: number): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.url}/history/${days}`).pipe(
+  getOrdersByUserAndDays(email: string, days: number): Observable<Order[]> {
+    let params = new HttpParams();
+    params = params.append('days', '' + days);
+
+    return this.http.get<Order[]>(`${this.url}/user/${email}`, { params }).pipe(
       map(orders => {
         return orders.map(order => {
           return {

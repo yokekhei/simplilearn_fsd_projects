@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { AuthenticationService } from './../../../services/authentication.service';
 import { Order } from './../../../models/order';
 import { OrderService } from './../../../services/order.service';
 
@@ -12,17 +13,19 @@ export class UserOrderHistoryComponent implements OnInit {
 
   numOfDays = 7;
   orders: Order[] = [];
+  private userEmail = '';
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private authService: AuthenticationService) {
+    this.userEmail = this.authService.loginUser?.email || '';
+  }
 
   ngOnInit(): void {
     this.getOrders();
   }
 
   getOrders(): void {
-    this.orderService.getOrdersByDays(this.numOfDays).subscribe(orders => {
-      this.orders = orders;
-    });
+    this.orderService.getOrdersByUserAndDays(this.userEmail, this.numOfDays).subscribe(
+      orders => this.orders = orders);
   }
 
   getDate(strDate?: string): Date {
