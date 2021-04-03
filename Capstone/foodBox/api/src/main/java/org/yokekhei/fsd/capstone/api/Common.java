@@ -1,5 +1,8 @@
 package org.yokekhei.fsd.capstone.api;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Common {
 
 	public static final String ROLE_ADMIN = "A";
@@ -19,5 +22,16 @@ public class Common {
 	public static final String CURRENCY_USD = "usd";
 	public static final String CURRENCY_EUR = "eur";
 	public static final String CURRENCY_MYR = "myr";
+
+	public static final String DATETIME_FORMAT = "dd-MM-yyyy HH:mm:ss";
+
+	public static LocalDateTime toLocalDateTime(String strDateTime) {
+		return Common.toLocalDateTime(strDateTime, DATETIME_FORMAT);
+	}
+
+	public static LocalDateTime toLocalDateTime(String strDateTime, String format) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		return LocalDateTime.parse(strDateTime, formatter);
+	}
 
 }

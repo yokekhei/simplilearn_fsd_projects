@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.yokekhei.fsd.capstone.api.Common;
 import org.yokekhei.fsd.capstone.api.dto.Order;
 import org.yokekhei.fsd.capstone.api.exception.FoodBoxServiceException;
 import org.yokekhei.fsd.capstone.api.service.OrderService;
@@ -28,13 +30,20 @@ public class OrderController {
 
 	@GetMapping("/order")
 	@ResponseBody
-	public List<Order> getOrders() throws FoodBoxServiceException {
+	public List<Order> getOrders(@RequestParam(required = false) String startDate,
+			@RequestParam(required = false) String endDate) throws FoodBoxServiceException {
+		if (startDate != null && endDate != null) {
+			LocalDateTime start = Common.toLocalDateTime(startDate + " 00:00:00");
+			LocalDateTime end = Common.toLocalDateTime(endDate + " 23:59:59");
+			return service.getOrdersCreatedBetween(start, end);
+		}
+
 		return service.getOrders();
 	}
 
 	@GetMapping("/order/history/{days}")
 	@ResponseBody
-	public List<Order> getOrders(@PathVariable("days") Integer days) throws FoodBoxServiceException {
+	public List<Order> getOrderHistoryByDayRange(@PathVariable("days") Integer days) throws FoodBoxServiceException {
 		LocalDateTime end = LocalDateTime.now();
 		LocalDateTime start = end.minusDays(days);
 
