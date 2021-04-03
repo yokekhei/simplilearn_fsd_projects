@@ -37,4 +37,10 @@ export class Common {
         }
     }
 
+    static paddy(value: number, padLen: number, padChar: string): string {
+        const padStr = typeof padChar !== 'undefined' ? padChar : '0';
+        const pad = new Array(1 + padLen).join(padStr);
+        return (pad + value).slice(-pad.length);
+    }
+
 }

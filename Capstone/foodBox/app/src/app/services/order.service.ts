@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -38,6 +38,29 @@ export class OrderService {
 
   getOrdersByDays(days: number): Observable<Order[]> {
     return this.http.get<Order[]>(`${this.url}/history/${days}`).pipe(
+      map(orders => {
+        return orders.map(order => {
+          return {
+            id: order.id,
+            chargeId: order.chargeId,
+            userId: order.userId,
+            items: order.items,
+            price: order.price,
+            discount: order.discount,
+            deliveryFee: order.deliveryFee,
+            createdDateTime: order.createdDateTime
+          };
+        });
+      })
+    );
+  }
+
+  getOrdersBetweenDate(startDate: string, endDate: string): Observable<Order[]> {
+    let params = new HttpParams();
+    params = params.append('startDate', startDate);
+    params = params.append('endDate', endDate);
+
+    return this.http.get<Order[]>(`${this.url}`, { params }).pipe(
       map(orders => {
         return orders.map(order => {
           return {

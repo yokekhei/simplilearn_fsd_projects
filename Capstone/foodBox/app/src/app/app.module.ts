@@ -21,6 +21,8 @@ import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logo
 import { AdminOfferCreateComponent } from './components/admin/admin-offer-create/admin-offer-create.component';
 import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update/admin-offer-update.component';
 import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
+import { AdminOrderComponent } from './components/admin/admin-order/admin-order.component';
+import { AdminOrderReportComponent } from './components/admin/admin-order-report/admin-order-report.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './services/authentication.service';
@@ -64,6 +66,8 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     AdminOfferCreateComponent,
     AdminOfferUpdateComponent,
     AdminOffersComponent,
+    AdminOrderComponent,
+    AdminOrderReportComponent,
     AppComponent,
     CreditComponent,
     FooterComponent,

@@ -15,6 +15,8 @@ import { AdminLogoutComponent } from './components/admin/admin-logout/admin-logo
 import { AdminOfferCreateComponent } from './components/admin/admin-offer-create/admin-offer-create.component';
 import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update/admin-offer-update.component';
 import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
+import { AdminOrderComponent } from './components/admin/admin-order/admin-order.component';
+import { AdminOrderReportComponent } from './components/admin/admin-order-report/admin-order-report.component';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { UserAuthenticationGuard } from './guards/user-authentication.guard';
 import { UserCartComponent } from './components/user/user-cart/user-cart.component';
@@ -66,6 +68,8 @@ const routes: Routes = [
           { path: 'offer', component: AdminOffersComponent },
           { path: 'offer/add', component: AdminOfferCreateComponent },
           { path: 'offer/update/:id', component: AdminOfferUpdateComponent },
+          { path: 'report/order', component: AdminOrderReportComponent },
+          { path: 'order/:id', component: AdminOrderComponent },
           { path: '**', redirectTo: '/admin/home/category', pathMatch: 'full' }
         ]
       },

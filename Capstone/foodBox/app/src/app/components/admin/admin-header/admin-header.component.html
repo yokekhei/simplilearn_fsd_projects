@@ -16,6 +16,15 @@
             </li>
             <li class="nav-item dropdown" dropdown>
                 <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect id="adminReportNavDropDown">
+                    Reports<span class="caret"></span>
+                </a>
+                <ul *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/admin/home/report/order">Orders</a>
+                </ul>
+            </li>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
                     mdbWavesEffect id="adminNavDropDown">
                     <mdb-icon fas icon="user"></mdb-icon> {{ userName }}<span class="caret"></span>
                 </a>
