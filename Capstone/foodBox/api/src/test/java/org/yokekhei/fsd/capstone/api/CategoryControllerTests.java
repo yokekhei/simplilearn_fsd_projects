@@ -68,7 +68,7 @@ public class CategoryControllerTests extends AbstractTestNGSpringContextTests {
 				.andExpect(jsonPath("$.enabled").value(false));
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 3)
 	public void testUpdateCategory() throws Exception {
 		category.setEnabled(true);
 		mockMvc.perform(put("/api/category")

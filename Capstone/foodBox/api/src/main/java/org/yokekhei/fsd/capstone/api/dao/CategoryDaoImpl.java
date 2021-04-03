@@ -85,6 +85,7 @@ public class CategoryDaoImpl implements CategoryDao {
 			org.yokekhei.fsd.capstone.api.entity.Category entity = mapper.toEntity(category);
 			
 			current.setName(entity.getName());
+			current.setEnabled(entity.getEnabled());
 			
 			if (category.getImage() != null && !category.getImage().isEmpty()) {
 				current.setImage(IOUtils.toByteArray(category.getImage().getInputStream()));
