@@ -49,16 +49,16 @@ public class AuthenticationControllerTests extends AbstractTestNGSpringContextTe
 	
 	@Test(priority = 1)
 	public void testRegister() throws Exception {
-		user.setEmail("marry@gmail.com");
-		user.setUsername("marry");
+		user.setEmail("ramesh@gmail.com");
+		user.setUsername("ramesh");
 		mockMvc.perform(post("/api/register").content(TestUtils.asJsonString(user))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
-				.andExpect(jsonPath("$.email").value("marry@gmail.com"))
+				.andExpect(jsonPath("$.email").value("ramesh@gmail.com"))
 				.andExpect(jsonPath("$.password").value("Pa$sw0rd"))
-				.andExpect(jsonPath("$.username").value("marry"))
+				.andExpect(jsonPath("$.username").value("ramesh"))
 				.andExpect(jsonPath("$.role").value("U"))
 				.andExpect(jsonPath("$.enabled").value(true));
 	}
