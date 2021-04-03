@@ -38,43 +38,28 @@
     <div class="col-md-5">
         <div class="card">
             <div class="card-header text-white bg-foodbox">
-                <div class="row">
-                    <div class="col-md-7">
-                        <span>Total</span>
-                    </div>
-                    <div class="col-md-5 text-right">
+                <div class="d-flex justify-content-between">
+                    <span>Total</span>
+                    <div class="text-right">
                         <strong>{{ cartDetails?.totalPrice | number : '1.2-2' }} $</strong>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-7">
-                        <p><small>Sub-Total</small></p>
-                    </div>
-                    <div class="col-md-5">
-                        <p class="text-right"><small>{{ cartDetails?.subTotalPrice | number : '1.2-2' }} $</small></p>
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <p><small>Sub-Total</small></p>
+                    <p class="text-right"><small>{{ cartDetails?.subTotalPrice | number : '1.2-2' }} $</small></p>
                 </div>
-                <div class="row">
-                    <div class="col-md-7">
-                        <p><small>Discount</small></p>
-                    </div>
-                    <div class="col-md-5">
-                        <p class="text-right"><small>{{ cartDetails?.totalDiscount | number : '1.2-2' }} $</small></p>
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <p><small>Discount</small></p>
+                    <p class="text-right"><small>{{ cartDetails?.totalDiscount | number : '1.2-2' }} $</small></p>
                 </div>
-                <div class="row">
-                    <div class="col-md-7">
-                        <p><small>Delivery</small></p>
-                    </div>
-                    <div class="col-md-5">
-                        <p class="text-right"><small>{{ cartDetails?.deliveryFee | number : '1.2-2' }} $</small></p>
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <p><small>Delivery</small></p>
+                    <p class="text-right"><small>{{ cartDetails?.deliveryFee | number : '1.2-2' }} $</small></p>
                 </div>
             </div>
         </div>
-
         <div class="card mt-4">
             <div class="card-header text-white bg-foodbox">
                 <span>Delivery Information</span>

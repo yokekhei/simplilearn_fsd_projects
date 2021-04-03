@@ -6,26 +6,16 @@
                     height="364">
             </div>
             <div class="col-md-7">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h5 class="title">{{ food?.name }}</h5>
-                    </div>
-                    <div class="col-md-3">
-                        <h5 class="text-right">$ {{ food?.price | number : '1.2-2' }}</h5>
-                        <p class="text-right small text-red" *ngIf="hasDiscount(food?.offerId)">{{
-                            getOfferDesc(food?.offerId) }}</p>
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <h5 class="title">{{ food?.name }}</h5>
+                    <h5 class="text-right">$ {{ food?.price | number : '1.2-2' }}</h5>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p class="text-muted">{{ getCategoryName(food?.categoryId) }} Cuisine</p>
-                    </div>
+                <div class="d-flex justify-content-between">
+                    <p class="text-muted">{{ getCategoryName(food?.categoryId) }} Cuisine</p>
+                    <p class="text-right small text-red" *ngIf="hasDiscount(food?.offerId)">{{
+                        getOfferDesc(food?.offerId) }}</p>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p>{{ food?.desc }}</p>
-                    </div>
-                </div>
+                <p>{{ food?.desc }}</p>
             </div>
         </div>
     </div>
