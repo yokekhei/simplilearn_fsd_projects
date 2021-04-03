@@ -17,6 +17,7 @@ import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update
 import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { AdminOrderComponent } from './components/admin/admin-order/admin-order.component';
 import { AdminOrderReportComponent } from './components/admin/admin-order-report/admin-order-report.component';
+import { AdminUserReportComponent } from './components/admin/admin-user-report/admin-user-report.component';
 import { CreditComponent } from './components/common/credit/credit.component';
 import { UserAuthenticationGuard } from './guards/user-authentication.guard';
 import { UserCartComponent } from './components/user/user-cart/user-cart.component';
@@ -70,6 +71,7 @@ const routes: Routes = [
           { path: 'offer/update/:id', component: AdminOfferUpdateComponent },
           { path: 'report/order', component: AdminOrderReportComponent },
           { path: 'order/:id', component: AdminOrderComponent },
+          { path: 'report/user', component: AdminUserReportComponent },
           { path: '**', redirectTo: '/admin/home/category', pathMatch: 'full' }
         ]
       },

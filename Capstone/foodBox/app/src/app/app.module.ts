@@ -23,6 +23,7 @@ import { AdminOfferUpdateComponent } from './components/admin/admin-offer-update
 import { AdminOffersComponent } from './components/admin/admin-offers/admin-offers.component';
 import { AdminOrderComponent } from './components/admin/admin-order/admin-order.component';
 import { AdminOrderReportComponent } from './components/admin/admin-order-report/admin-order-report.component';
+import { AdminUserReportComponent } from './components/admin/admin-user-report/admin-user-report.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationService } from './services/authentication.service';
@@ -69,6 +70,7 @@ import { UserService } from './services/user.service';
     AdminOffersComponent,
     AdminOrderComponent,
     AdminOrderReportComponent,
+    AdminUserReportComponent,
     AppComponent,
     CreditComponent,
     FooterComponent,

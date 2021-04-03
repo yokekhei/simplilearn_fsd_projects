@@ -1,0 +1,50 @@
+<div class="row justify-content-start mt-3">
+    <form class="form-inline mx-3" #filterForm="ngForm" (ngSubmit)="onFilter(filterForm)">
+        <div class="form-group">
+            <label for="fromDate" class="mx-2"><span class="text-foodbox">Start Date:</span></label>
+            <input type="date" class="form-control" name="fromDate" id="fromDate" #fromDate="ngModel"
+                [(ngModel)]="startDate" [value]="startDate" required="required" />
+        </div>
+        <div class="form-group mx-3">
+            <label for="toDate" class="mx-2"><span class="text-foodbox">End Date:</span></label>
+            <input type="date" class="form-control" name="toDate" id="toDate" #toDate="ngModel" [(ngModel)]="endDate"
+                [value]="endDate" required="required" />
+        </div>
+        <button mdbBtn size="sm" color="warning" class="btn mx-1" type="submit">Filter</button>
+    </form>
+</div>
+<div class="mt-3 card card-cascade narrower">
+    <h3 class="table-title py-2 mx-4 mb-3">User Report</h3>
+    <div class="px-4">
+        <table class="table table-hover mb-0 small">
+            <thead>
+                <tr>
+                    <th>
+                        <span>Username</span>
+                    </th>
+                    <th>
+                        <span>Email</span>
+                    </th>
+                    <th>
+                        <span>Phone</span>
+                    </th>
+                    <th>
+                        <span>Address</span>
+                    </th>
+                    <th>
+                        <span>Sign-up Date</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ getAddress(user.address) }}</td>
+                    <td>{{ getDate(user.createdDateTime) | date:'dd/MM/yyyy' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
