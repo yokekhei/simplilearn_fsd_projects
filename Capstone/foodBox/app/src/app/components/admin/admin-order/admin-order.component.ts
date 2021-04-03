@@ -8,6 +8,8 @@ import { FoodService } from './../../../services/food.service';
 import { DataService } from 'src/app/services/data.service';
 import { Category } from './../../../models/category';
 import { Order } from 'src/app/models/order';
+import { User } from './../../../models/user';
+import { UserService } from './../../../services/user.service';
 
 @Component({
   selector: 'app-admin-order',
@@ -17,6 +19,7 @@ import { Order } from 'src/app/models/order';
 export class AdminOrderComponent implements OnInit, OnDestroy {
 
   order?: Order;
+  user?: User;
   private categories: Category[] = [];
   private subscriptionCategories: Subscription;
 
@@ -24,6 +27,7 @@ export class AdminOrderComponent implements OnInit, OnDestroy {
               private foodService: FoodService,
               private orderService: OrderService,
               private categoryService: CategoryService,
+              private userService: UserService,
               private activatedRoute: ActivatedRoute) {
     this.subscriptionCategories = this.dataService.categories.subscribe(
       categories => {
@@ -45,6 +49,9 @@ export class AdminOrderComponent implements OnInit, OnDestroy {
       if (params.id !== undefined) {
         this.orderService.getOrderById(+params.id).subscribe(order => {
           this.order = order;
+
+          this.userService.getUserById(this.order.userId).subscribe(
+            user => this.user = user);
         });
       }
     });

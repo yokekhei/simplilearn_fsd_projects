@@ -8,4 +8,5 @@ export interface User {
     role: string;
     address?: Address;
     enabled?: boolean;
+    createdDateTime?: string;
 }

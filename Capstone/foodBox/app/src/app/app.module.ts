@@ -49,6 +49,7 @@ import { UserLogoutComponent } from './components/user/user-logout/user-logout.c
 import { UserOrderComponent } from './components/user/user-order/user-order.component';
 import { UserOrderHistoryComponent } from './components/user/user-order-history/user-order-history.component';
 import { UserRegisterComponent } from './components/user/user-register/user-register.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -103,7 +104,8 @@ import { UserRegisterComponent } from './components/user/user-register/user-regi
     FeeService,
     FoodService,
     OfferService,
-    OrderService
+    OrderService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
