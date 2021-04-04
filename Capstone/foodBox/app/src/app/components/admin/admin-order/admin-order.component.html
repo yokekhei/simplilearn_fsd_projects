@@ -1,0 +1,61 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8 px-4">
+                <h4 class="page-title">Order #{{ order?.id }}</h4>
+                <div class="row py-4" *ngFor="let item of order?.items">
+                    <div class="col-md-3">
+                        <img class="card-img-top" [src]="getFoodImageUrl(item.food.id)" [alt]="item.food.name">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="text-foodbox">{{ item.food.name }}</h6>
+                            <p class="text-right">$ {{ item.price | number : '1.2-2' }}</p>
+                        </div>
+                        <p class="text-muted">{{ getCategoryName(item.food.categoryId) }} Cuisine</p>
+                        <form>
+                            <div class="form-group row">
+                                <label for="quantity" class="col-sm-6 col-form-label">Quantity</label>
+                                <div class="col-sm-6">
+                                    <input name="quantity" type="number" class="form-control" name="quantity"
+                                        placeholder="1" min="1" [value]="item.quantity" disabled />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="col-md-4">
+                <h5 class="text-foodbox mb-4 mt-3">Order Summary</h5>
+                <div class="d-flex justify-content-between">
+                    <p>Sub-Total</p>
+                    <p class="text-right">{{ getSubTotalPrice() | number : '1.2-2' }} $</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Discount</p>
+                    <p class="text-right">{{ order?.discount | number : '1.2-2' }} $</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Delivery</p>
+                    <p class="text-right">{{ order?.deliveryFee | number : '1.2-2' }} $</p>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between">
+                    <h5>Total</h5>
+                    <h5 class="text-right">{{ order?.price | number : '1.2-2' }} $</h5>
+                </div>
+                <hr />
+                <h5 class="text-foodbox mb-4 mt-4">Delivery Information</h5>
+                <p>
+                    <i class="fas fa-user"></i>&nbsp;&nbsp;{{ user?.username }}<br />
+                    <i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ user?.email }}<br />
+                    <i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;{{ user?.phone }}<br />
+                    <i class="fas fa-home"></i>&nbsp;&nbsp;{{ user?.address?.line1 }}
+                    {{ user?.address?.line2}} {{ user?.address?.postcode }}
+                    {{ user?.address?.city }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

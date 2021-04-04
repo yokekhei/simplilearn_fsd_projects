@@ -1,0 +1,65 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-8 px-4">
+                <h4 class="page-title">Cart</h4>
+                <div class="row py-4" *ngFor="let item of cartDetails?.items">
+                    <div class="col-md-3">
+                        <a routerLink="/user/food/{{ item.food.id }}">
+                            <img class="card-img-top" [src]="getFoodImageUrl(item.food.id)" [alt]="item.food.name">
+                        </a>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="text-foodbox">{{ item.food.name }}</h6>
+                            <p class="text-right">$ {{ item.totalPrice | number : '1.2-2' }}</p>
+                        </div>
+                        <p class="text-muted">{{ getCategoryName(item.food.categoryId) }} Cuisine</p>
+                        <form>
+                            <div class="form-group row">
+                                <label name="quantity" for="quantity" class="col-sm-6 col-form-label">Quantity</label>
+                                <div class="col-sm-4">
+                                    <input name="quantity" type="number" class="form-control" name="quantity"
+                                        placeholder="1" min="1" [value]="item.quantity"
+                                        (change)="onUpdateItem($event, item.food)" />
+                                </div>
+                                <div class="col-sm-2 px-0">
+                                    <button mdbBtn size="sm" class="btn btn-dark px-2" type="submit"
+                                        (click)="onRemoveItem(item.food.id)"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div class="col-md-4">
+                <h5 class="text-foodbox mb-4 mt-3">Summary</h5>
+                <div class="d-flex justify-content-between">
+                    <p>Sub-Total</p>
+                    <p class="text-right">{{ cartDetails?.subTotalPrice | number : '1.2-2' }} $</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Discount</p>
+                    <p class="text-right">{{ cartDetails?.totalDiscount | number : '1.2-2' }} $</p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p>Delivery</p>
+                    <p class="text-right">{{ getDeliveryFee() | number : '1.2-2' }} $</p>
+                </div>
+                <hr />
+                <div class="d-flex justify-content-between">
+                    <h5>Total</h5>
+                    <h5 class="text-right">{{ cartDetails?.totalPrice | number : '1.2-2' }} $</h5>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <button mdbBtn color="warning" class="btn btn-lg btn-block" type="submit"
+                            (click)="onCheckout()">Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
+import { Cart } from '../models/cart';
 import { Category } from './../models/category';
 import { LoginUser } from './../models/login-user';
 import { Offer } from './../models/offer';
@@ -26,6 +27,9 @@ export class DataService {
   private userFoodPageInfoSource: BehaviorSubject<PageInfo>;
   userFoodPageInfo: Observable<PageInfo>;
 
+  private userCartSource: BehaviorSubject<Cart | null>;
+  userCartInfo: Observable<Cart | null>;
+
   constructor() {
     this.categoriesSource = new BehaviorSubject([] as Category[]);
     this.categories = this.categoriesSource.asObservable();
@@ -41,6 +45,9 @@ export class DataService {
 
     this.userFoodPageInfoSource = new BehaviorSubject({} as PageInfo);
     this.userFoodPageInfo = this.userFoodPageInfoSource.asObservable();
+
+    this.userCartSource = new BehaviorSubject({} as Cart | null);
+    this.userCartInfo = this.userCartSource.asObservable();
   }
 
   changeCategories(categories: Category[]): void {
@@ -61,6 +68,10 @@ export class DataService {
 
   changeUserFoodPageInfo(pageInfo: PageInfo): void {
     this.userFoodPageInfoSource.next(pageInfo);
+  }
+
+  changeUserCartInfo(cart: Cart | null): void {
+    this.userCartSource.next(cart);
   }
 
 }

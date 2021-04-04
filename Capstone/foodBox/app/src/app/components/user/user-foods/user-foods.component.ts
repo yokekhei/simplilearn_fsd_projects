@@ -21,6 +21,7 @@ import { OfferService } from 'src/app/services/offer.service';
 export class UserFoodsComponent implements OnInit, OnDestroy {
 
   private COL_NUM = 4;
+  private keyword = '';
   private subscriptionPageInfo: Subscription;
   private subscriptionCategories: Subscription;
   private subscriptionOffers: Subscription;
@@ -29,8 +30,8 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
   offers: Offer[] = [];
   categories: Category[] = [];
   entriesNum = this.COL_NUM;
-  currentCategoryId = Common.ALL_VALUES;
-  currentOfferId = Common.ALL_VALUES;
+  currentCategoryId = 0;
+  currentOfferId = 0;
 
   constructor(private foodService: FoodService, private dataService: DataService,
               private categoryService: CategoryService, private offerService: OfferService,
@@ -47,7 +48,12 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
       pageInfo => {
         if (pageInfo !== undefined && pageInfo.page !== undefined) {
           this.pageInfo = pageInfo;
-          this.refreshFoodList();
+
+          if (this.keyword.length > 0) {
+            this.refreshFoodListByKeyword(this.keyword);
+          } else {
+            this.refreshFoodList();
+          }
         }
       }
     );
@@ -85,13 +91,27 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
+      this.initPageInfo();
+
       if (params.id !== undefined) {
         this.currentCategoryId = +params.id;
-        this.refreshFoodListByCategory(this.currentCategoryId);
+        this.dataService.changeUserFoodPageInfo(this.pageInfo);
       } else if (params.keyword !== undefined) {
-        this.refreshFoodListByKeyword(params.keyword);
+        this.keyword = params.keyword;
+        this.currentCategoryId = Common.ALL_VALUES;
+        this.dataService.changeUserFoodPageInfo(this.pageInfo);
       }
     });
+  }
+
+  initPageInfo(): void {
+    this.pageInfo = {
+      page: 0,
+      size: this.entriesNum,
+      totalPages: 1,
+      sortBy: Common.SORT_BY_NAME,
+      direction: Common.SORT_DIRECTION_ASC
+    };
   }
 
   getFoodImageUrl(foodId: number | undefined): string {
@@ -104,13 +124,13 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
     if (this.currentCategoryId === Common.ALL_VALUES &&
       this.currentOfferId === Common.ALL_VALUES) {
       this.refreshFoodListByAll();
-    } else if (this.currentCategoryId < Common.ALL_VALUES &&
-      this.currentOfferId < Common.ALL_VALUES) {
+    } else if (this.currentCategoryId > 0 && this.currentCategoryId < Common.ALL_VALUES &&
+      this.currentOfferId > 0 && this.currentOfferId < Common.ALL_VALUES) {
       this.refreshFoodListByCategoryAndOffer(
         this.currentCategoryId, this.currentOfferId);
-    } else if (this.currentCategoryId < Common.ALL_VALUES) {
+    } else if (this.currentCategoryId > 0 && this.currentCategoryId < Common.ALL_VALUES) {
       this.refreshFoodListByCategory(this.currentCategoryId);
-    } else if (this.currentOfferId < Common.ALL_VALUES) {
+    } else if (this.currentOfferId > 0 && this.currentOfferId < Common.ALL_VALUES) {
       this.refreshFoodListByOffer(this.currentOfferId);
     }
   }
@@ -290,6 +310,7 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
         this.currentOfferId = event.target.value;
       }
 
+      this.keyword = '';
       this.pageInfo.page = 0;
       this.dataService.changeUserFoodPageInfo(this.pageInfo);
     }
@@ -305,6 +326,7 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
         this.currentCategoryId = event.target.value;
       }
 
+      this.keyword = '';
       this.pageInfo.page = 0;
       this.dataService.changeUserFoodPageInfo(this.pageInfo);
     }

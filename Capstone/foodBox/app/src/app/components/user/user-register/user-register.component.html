@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <input type="text" id="city" name="city" ngModel #city="ngModel" class="form-control mb-4"
                 placeholder="City" required maxlength="30">
             <div *ngIf="city.invalid && (city.dirty || city.touched)" class="alert alert-danger">
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
             <input type="text" id="postcode" name="postcode" ngModel #postcode="ngModel" class="form-control mb-4"
                 placeholder="Postcode" required maxlength="5">
             <div *ngIf="postcode.invalid && (postcode.dirty || postcode.touched)" class="alert alert-danger">
@@ -72,6 +72,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <input type="tel" id="phone" name="phone" ngModel #phone="ngModel" class="form-control mb-4"
+                placeholder="+00-123456789" pattern="[\+]\d{2,}[\-]\d{1,}" title='Phone Number (Format: +00-123456789'
+                required>
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert alert-danger">
+                <div *ngIf="phone.errors?.required">
+                    <small>Phone number is required</small>
+                </div>
+                <div *ngIf="phone.errors?.pattern">
+                    <small>Invalid phone number</small>
+                </div>
+            </div>
+        </div>
     </div>
-    <button mdbBtn color="warning" class="my-4 btn-block" type="submit" [disabled]="registerForm.invalid">Sign up</button>
+    <button mdbBtn color="warning" class="my-4 btn-block" type="submit" [disabled]="registerForm.invalid">Sign
+        up</button>
 </form>

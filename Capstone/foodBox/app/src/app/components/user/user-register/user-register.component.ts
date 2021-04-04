@@ -34,6 +34,7 @@ export class UserRegisterComponent implements OnInit {
       email: form.form.value.email,
       password: form.form.value.password,
       username: form.form.value.username,
+      phone: form.form.value.phone,
       role: Common.ROLE_USER,
       address: formAddress
     }).subscribe(

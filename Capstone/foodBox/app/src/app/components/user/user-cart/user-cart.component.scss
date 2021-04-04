@@ -1,0 +1,19 @@
+.foods-result {
+    min-height: 70vh;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+a.food-card,
+a.food-card:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+.card-title {
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    color: #541900;
+}
+

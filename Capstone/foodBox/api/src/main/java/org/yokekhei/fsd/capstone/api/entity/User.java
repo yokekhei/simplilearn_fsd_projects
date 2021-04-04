@@ -24,6 +24,9 @@ public class User {
 	@Column(name = "user_name", nullable = false)
 	private String username;
 
+	@Column(name = "user_phone", nullable = false)
+	private String phone;
+
 	@Column(name = "user_role", nullable = false, length = 1)
 	private String role;
 
@@ -64,6 +67,14 @@ public class User {
 		this.username = username;
 	}
 
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public String getRole() {
 		return role;
 	}
@@ -98,8 +109,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password + ", username=" + username + ", role=" + role
-				+ ", address=" + address + ", enabled=" + enabled + ", createdDateTime=" + createdDateTime + "]";
+		return "User [email=" + email + ", password=" + password + ", username=" + username + ", phone=" + phone
+				+ ", role=" + role + ", address=" + address + ", enabled=" + enabled + ", createdDateTime="
+				+ createdDateTime + "]";
 	}
 
 }

@@ -20,6 +20,7 @@ public class User {
 	private String password;
 
 	private String username;
+	private String phone;
 	private String role;
 	private Address address;
 	private Boolean enabled;
@@ -28,10 +29,16 @@ public class User {
 	public User() {
 	}
 
-	public User(String email, String password, String username, String role, Address address, Boolean enabled) {
+	public User(String email) {
+		this.email = email;
+	}
+
+	public User(String email, String password, String username, String phone, String role, Address address,
+			Boolean enabled) {
 		this.email = email;
 		this.password = password;
 		this.username = username;
+		this.phone = phone;
 		this.role = role;
 		this.address = address;
 		this.enabled = enabled;
@@ -59,6 +66,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public String getRole() {
@@ -95,8 +110,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", password=" + password + ", username=" + username + ", role=" + role
-				+ ", address=" + address + ", enabled=" + enabled + ", createdDateTime=" + createdDateTime + "]";
+		return "User [email=" + email + ", password=" + password + ", username=" + username + ", phone=" + phone
+				+ ", role=" + role + ", address=" + address + ", enabled=" + enabled + ", createdDateTime="
+				+ createdDateTime + "]";
 	}
 
 }

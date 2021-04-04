@@ -1,12 +1,14 @@
-<div class="row mt-3" *ngFor="let categorySubList of categoryList">
-    <div class="col-md-3" *ngFor="let category of categorySubList.categories">
-        <a routerLink="/user/category/{{ category.id }}" class="category-card">
-            <div class="card h-100">
-                <img class="card-img-top" [src]="getCategoryImageUrl(category.id)" alt="{{ category.name }}">
-                <div class="card-body">
-                    <h5 class="card-title text-center">{{ category.name }}</h5>
+<div class="mt-5">
+    <div class="row mt-3" *ngFor="let categorySubList of categoryList">
+        <div class="col-md-3" *ngFor="let category of categorySubList.categories">
+            <a routerLink="/user/category/{{ category.id }}" class="category-card">
+                <div class="card h-100">
+                    <img class="card-img-top" [src]="getCategoryImageUrl(category.id)" alt="{{ category.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ category.name }}</h5>
+                    </div>
                 </div>
-            </div>
-        </a>
+            </a>
+        </div>
     </div>
 </div>

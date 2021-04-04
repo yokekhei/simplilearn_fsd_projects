@@ -1,0 +1,79 @@
+<h4 class="page-title mb-3">Checkout</h4>
+<div class="row">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header text-white bg-foodbox">Credit/Debit Card</div>
+            <div class="card-body">
+                <form #stripeForm="ngForm" (ngSubmit)="onPlaceOrder(stripeForm)">
+                    <div class="row mb-4">
+                        <div class="col">
+                            <input type="text" id="payorName" name="payorName" ngModel #payorName="ngModel"
+                                class="form-control" placeholder="Name on Card" required>
+                            <div *ngIf="payorName.invalid && (payorName.dirty || payorName.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="payorName.errors?.required">
+                                    <small>Name on card is required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col">
+                            <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+                            </ngx-stripe-card>
+                            <div *ngIf="cardErrorMessage !== ''" class="alert alert-danger mt-4">
+                                <div>
+                                    <small>{{ cardErrorMessage }}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <button mdbBtn color="warning" class="btn btn-lg btn-block" type="submit"
+                        [disabled]="stripeForm.invalid">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header text-white bg-foodbox">
+                <div class="d-flex justify-content-between">
+                    <span>Total</span>
+                    <div class="text-right">
+                        <strong>{{ cartDetails?.totalPrice | number : '1.2-2' }} $</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <p><small>Sub-Total</small></p>
+                    <p class="text-right"><small>{{ cartDetails?.subTotalPrice | number : '1.2-2' }} $</small></p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p><small>Discount</small></p>
+                    <p class="text-right"><small>{{ cartDetails?.totalDiscount | number : '1.2-2' }} $</small></p>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <p><small>Delivery</small></p>
+                    <p class="text-right"><small>{{ cartDetails?.deliveryFee | number : '1.2-2' }} $</small></p>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-4">
+            <div class="card-header text-white bg-foodbox">
+                <span>Delivery Information</span>
+            </div>
+            <div class="card-body">
+                <p>
+                    <i class="fas fa-user"></i>&nbsp;&nbsp;{{ loginUser?.username }}<br/>
+                    <i class="fas fa-envelope"></i>&nbsp;&nbsp;{{ loginUser?.email }}<br/>
+                    <i class="fas fa-mobile-alt"></i>&nbsp;&nbsp;{{ loginUser?.phone }}<br/>
+                    <i class="fas fa-home"></i>&nbsp;&nbsp;{{ loginUser?.address?.line1 }} 
+                    {{ loginUser?.address?.line2}} {{ loginUser?.address?.postcode }} 
+                    {{ loginUser?.address?.city }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,6 +19,7 @@ CREATE TABLE users (
     user_email VARCHAR(255) NOT NULL,
     user_password VARCHAR(255) NOT NULL,
     user_name VARCHAR(255) NOT NULL,
+    user_phone VARCHAR(255) NOT NULL,
     user_role CHAR(1) NOT NULL,
     address_line1 VARCHAR(255),
     address_line2 VARCHAR(255),
@@ -57,6 +58,35 @@ CREATE TABLE fees (
     fee_value DECIMAL(18, 5) NOT NULL DEFAULT 0,
     PRIMARY KEY (fee_type)
 ) ENGINE=INNODB;
+DROP TABLE IF EXISTS orderitems;
+CREATE TABLE orderitems (
+    oitem_id BIGINT NOT NULL AUTO_INCREMENT,
+    oitem_food BIGINT NOT NULL,
+    oitem_quantity INT NOT NULL,
+    oitem_price DECIMAL(18, 5) NOT NULL,
+    oitem_discount DECIMAL(18, 5),
+    PRIMARY KEY (oitem_id),
+    CONSTRAINT fk_orderitems_food FOREIGN KEY (oitem_food) REFERENCES foods(food_id)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS orders;
+CREATE TABLE orders (
+    order_id BIGINT NOT NULL AUTO_INCREMENT,
+    order_charge_id VARCHAR(255) NOT NULL,
+    order_user VARCHAR(255) NOT NULL,
+    order_price DECIMAL(18, 5) NOT NULL,
+    order_discount DECIMAL(18, 5),
+    order_delivery_fee DECIMAL(18, 5),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (order_id),
+    CONSTRAINT fk_orders_user FOREIGN KEY (order_user) REFERENCES users(user_email)
+) ENGINE=INNODB;
+DROP TABLE IF EXISTS orderdetails;
+CREATE TABLE orderdetails (
+    order_id BIGINT NOT NULL,
+    oitem_id BIGINT NOT NULL,
+    CONSTRAINT fk_orders FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    CONSTRAINT fk_orderitems FOREIGN KEY (oitem_id) REFERENCES orderitems(oitem_id)
+) ENGINE=INNODB;
 
 DROP USER IF EXISTS 'foodbox_user'@'172.17.0.1';
 CREATE USER 'foodbox_user'@'172.17.0.1' IDENTIFIED BY 'password';
@@ -70,10 +100,10 @@ delete from categories;
 insert into categories(category_id, category_name) values (1, 'Chinese');
 
 delete from users;
-insert into users (user_email, user_password, user_name, user_role)
-values ('admin@foodbox.com', 'Pa$sw0rd', 'admin', 'A');
-insert into users (user_email, user_password, user_name, user_role, address_line1, address_line2, address_city, address_postcode)
-values ('johndoe@gmail.com', 'Pa$sw0rd', 'johndoe', 'U', '123 Sunshine Apartment', 'St NW', 'Kuala Lumpur', '57000');
+insert into users (user_email, user_password, user_name, user_phone, user_role)
+values ('admin@foodbox.com', 'Pa$sw0rd', 'admin', '+60-333411289', 'A');
+insert into users (user_email, user_password, user_name, user_phone, user_role, address_line1, address_line2, address_city, address_postcode)
+values ('johndoe@gmail.com', 'Pa$sw0rd', 'johndoe', '+60-127813456', 'U', '123 Sunshine Apartment', 'St NW', 'Kuala Lumpur', '57000');
 
 delete from offers;
 insert into offers (offer_id, offer_name, offer_discount_type, offer_discount)

@@ -13,6 +13,8 @@ docker run -it --rm -p 3306:3306 --name foodbox-db \
  -e MYSQL_PASSWORD=password \
  -d mysql:8.0.23
 
+sleep 20
+
 docker exec -i foodbox-db sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < startup.sql
 
 exit 0

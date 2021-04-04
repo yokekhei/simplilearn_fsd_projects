@@ -1,4 +1,4 @@
-package org.yokekhei.fsd.capstone.api.dao;
+package org.yokekhei.fsd.capstone.api.repository;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

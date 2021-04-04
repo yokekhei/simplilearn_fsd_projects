@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthenticationService } from './../../../services/authentication.service';
+import { CartService } from './../../../services/cart.service';
 import { Common } from 'src/app/core/common';
 import { DataService } from './../../../services/data.service';
 import { LoginUser } from './../../../models/login-user';
@@ -19,9 +20,10 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
   cartItemNo = 0;
   private loginUser: LoginUser;
   private subscriptionLoginUser: Subscription;
+  private subscriptionCart: Subscription;
 
   constructor(private authService: AuthenticationService, private dataService: DataService,
-              private router: Router) {
+              private cartService: CartService, private router: Router) {
     if (this.authService.isLoggedIn(Common.ROLE_USER)) {
       this.loginUser = this.authService.loginUser ||
         { email: '', username: '', role: Common.ROLE_USER };
@@ -41,9 +43,22 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
         }
       }
     );
+
+    this.subscriptionCart = this.dataService.userCartInfo.subscribe(
+      cart => this.setCartItemNo());
   }
 
   ngOnInit(): void {
+    this.setCartItemNo();
+  }
+
+  setCartItemNo(): void {
+    this.cartItemNo = 0;
+
+    const cartDetails = this.cartService.cartDetails;
+    if (cartDetails !== null) {
+      cartDetails.items.forEach(item => this.cartItemNo += item.quantity);
+    }
   }
 
   search(event: any): void {
@@ -54,6 +69,7 @@ export class UserHeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptionLoginUser.unsubscribe();
+    this.subscriptionCart.unsubscribe();
   }
 
 }
