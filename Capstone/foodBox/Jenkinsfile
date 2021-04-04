@@ -14,20 +14,16 @@ pipeline {
         stage('Setup') {
             agent any
             steps {
-                checkout([$class: 'GitSCM', 
-                          branches: [[name: "develop"]], 
-                          doGenerateSubmoduleConfigurations: false, 
-                          extensions: [], 
-                          gitTool: 'Default', 
-                          submoduleCfg: [], 
-                          userRemoteConfigs: [[url: 'https://github.com/yokekhei/simplilearn_fsd_projects.git']]
-                        ])
                 sh 'cd Capstone/foodBox/bin/docker/db && ./run.sh'
                 sh 'cp Capstone/foodBox/db/startup.sql Capstone/foodBox/aws_ec2/docker'
+                sh 'cp $HOME/env/api/.env Capstone/foodBox/aws_ec2/docker/env'
+                sh 'cp $HOME/env/api/.env Capstone/foodBox/api'
+                sh 'cp $HOME/env/app/.env Capstone/foodBox/app'
+                sh 'cd Capstone/foodBox/app && export $(cat ./.env | xargs) && envsubst < src/assets/env.template.js > src/assets/env.js'
             }
         }
         
-        stage('Build API') {
+        stage('Build & Test API') {
             agent {
                 docker {
                     image 'maven:3.6.3-openjdk-8'
@@ -35,11 +31,11 @@ pipeline {
                 }
             }
             steps {
-                sh 'cd Capstone/foodBox/api && mvn -Dmaven.test.failure.ignore=true clean compile package'
+                sh 'cd Capstone/foodBox/api && export $(cat ./.env | xargs) && mvn -Dmaven.test.failure.ignore=true clean compile package'
             }
             post {
                 success {
-                    step([$class: 'Publisher', reportFilenamePattern: 'Capstone/foodBox/api/target/surefire-reports/testng-results.xml'])
+                    junit 'Capstone/foodBox/api/target/surefire-reports/TEST-*.xml'
                 }
             }
         }
@@ -51,11 +47,11 @@ pipeline {
                 }
             }
             environment {
-                // or override default cache directory (~/.npm)
+                // override default cache directory (~/.npm)
                 NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
             }
             steps {
-                sh 'cd Capstone/foodBox/app && npm install && ng build --prod'
+                sh 'cd Capstone/foodBox/app && npm install && npm run build-prod'
             }
         }
         
@@ -72,13 +68,14 @@ pipeline {
             }
         }
         
-        stage('Test') {
+        stage('Selenium Test') {
             agent any
             steps {
-                sh 'cd ~/simplilearn_fsd_projects/Capstone/foodBox && docker-compose up -d'
+                sh 'cd Capstone/foodBox/selenium && export $(cat $HOME/env/api/.env | xargs) && docker-compose up -d'
                 sh 'chmod +x Capstone/foodBox/selenium/bin/chromedriver'
                 sh 'chmod +x Capstone/foodBox/selenium/bin/geckodriver'
-                sh 'cd Capstone && cd foodBox && mvn test'
+                sh 'sleep 15'
+                sh 'cd Capstone/foodBox/selenium && mvn clean test'
             }
             post {
                 success {
@@ -111,8 +108,8 @@ pipeline {
                             configName: "web-app-server",
                             verbose: true,
                             transfers: [
-                                sshTransfer(sourceFiles: "Capstone/foodBox/aws_ec2/docker/**"),
-                                sshTransfer(execCommand: "./start-db.sh;./start-api.sh ${BUILD_NUMBER};./start-app.sh ${BUILD_NUMBER};")
+                                sshTransfer(sourceFiles: "Capstone/foodBox/aws_ec2/docker/*"),
+                                sshTransfer(execCommand: "cd Capstone/foodBox/aws_ec2/docker/;chmod 755 start-*.sh;./start-db.sh;./start-api.sh ${BUILD_NUMBER};./start-app.sh ${BUILD_NUMBER};")
                             ]
                         )
                     ]
@@ -123,17 +120,12 @@ pipeline {
         stage('Clean Up') {
             agent any
             steps {
-                sh 'cd ~/simplilearn_fsd_projects/Capstone/foodBox && docker-compose down'
+                sh 'cd Capstone/foodBox && docker-compose down'
                 sh "docker rmi ${appImageName}:${BUILD_NUMBER}"
                 sh "docker rmi ${appImageName}:latest"
                 sh "docker rmi ${apiImageName}:${BUILD_NUMBER}"
                 sh "docker rmi ${apiImageName}:latest"
-                sh "docker rmi nginx:alpine"
-                sh "docker rmi node:14.15.4-alpine"
-                sh "docker rmi maven:3.6.3-openjdk-8"
-                sh "docker rmi openjdk:8-jdk-alpine"
-                sh 'cd ~/simplilearn_fsd_projects/Capstone/foodBox/bin/docker/db && ./stop.sh'
-                sh "docker rmi mysql:8.0.23"
+                sh 'cd Capstone/foodBox/bin/docker/db && ./stop.sh'
             }
         }
     }
