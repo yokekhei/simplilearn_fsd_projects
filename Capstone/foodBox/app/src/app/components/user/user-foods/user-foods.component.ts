@@ -95,10 +95,12 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
 
       if (params.id !== undefined) {
         this.currentCategoryId = +params.id;
+        this.currentOfferId = Common.ALL_VALUES;
         this.dataService.changeUserFoodPageInfo(this.pageInfo);
       } else if (params.keyword !== undefined) {
         this.keyword = params.keyword;
         this.currentCategoryId = Common.ALL_VALUES;
+        this.currentOfferId = Common.ALL_VALUES;
         this.dataService.changeUserFoodPageInfo(this.pageInfo);
       }
     });

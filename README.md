@@ -10,4 +10,5 @@
     - [Project 1](https://github.com/yokekhei/simplilearn_fsd_projects/tree/master/Phase-4/onlineTest): Online Test Application
 5. Phase-5: Testing in a DevOps Lifecycle
     - [Project 1](https://github.com/yokekhei/simplilearn_fsd_projects/tree/master/Phase-5/devOps): CI/CD Deployment for Springboot Application
-7. Capstone Project
+6. Capstone Project
+    - [Project 2](https://github.com/yokekhei/simplilearn_fsd_projects/tree/master/Capstone/foodBox): Foodbox
