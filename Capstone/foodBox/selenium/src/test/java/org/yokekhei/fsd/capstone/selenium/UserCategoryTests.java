@@ -23,10 +23,10 @@ public class UserCategoryTests extends BaseTests {
 		wait.until(ExpectedConditions.visibilityOf(cardImgTop));
 
 		List<WebElement> cardImgTops = driver.findElements(By.xpath("//img[@class='card-img-top']"));
-		Assert.assertEquals(cardImgTops.size(), 1);
+		Assert.assertEquals(cardImgTops.size(), 4);
 
 		List<WebElement> cardTitles = driver.findElements(By.xpath("//h5[@class='card-title text-center']"));
-		Assert.assertEquals(cardTitles.size(), 1);
+		Assert.assertEquals(cardTitles.size(), 4);
 		Assert.assertEquals(cardTitles.get(0).getText(), "Chinese");
 	}
 
