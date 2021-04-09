@@ -48,7 +48,7 @@ public class CategoryControllerTests extends AbstractTestNGSpringContextTests {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
 				.andExpect(jsonPath("$").isArray())
-				.andExpect(jsonPath("$", hasSize(1)))
+				.andExpect(jsonPath("$", hasSize(4)))
 				.andExpect(jsonPath("$[0].id").value(1))
 				.andExpect(jsonPath("$[0].name").value("Chinese"))
 				.andExpect(jsonPath("$[0].enabled").value(true));

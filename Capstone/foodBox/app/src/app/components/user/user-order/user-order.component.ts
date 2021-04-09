@@ -18,6 +18,7 @@ export class UserOrderComponent implements OnInit, OnDestroy {
 
   confirmed = false;
   order?: Order;
+  orderLink: string[] = [];
   private categories: Category[] = [];
   private subscriptionCategories: Subscription;
 
@@ -46,6 +47,7 @@ export class UserOrderComponent implements OnInit, OnDestroy {
       if (params.id !== undefined) {
         this.orderService.getOrderById(+params.id).subscribe(order => {
           this.order = order;
+          this.orderLink = [`/user/order/${ this.order.id }`];
         });
       }
     });

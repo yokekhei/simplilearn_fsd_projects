@@ -61,7 +61,7 @@ export class UserFoodsComponent implements OnInit, OnDestroy {
     this.subscriptionCategories = this.dataService.categories.subscribe(
       categories => {
         if (categories.length === 0) {
-          this.categoryService.getAllCategories().subscribe(
+          this.categoryService.getCategories().subscribe(
             ctgrs => {
               this.categories = ctgrs;
               this.dataService.changeCategories(ctgrs);

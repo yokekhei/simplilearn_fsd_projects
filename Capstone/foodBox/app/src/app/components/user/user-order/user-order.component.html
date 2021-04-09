@@ -1,5 +1,5 @@
 <div *ngIf="confirmed" class="alert alert-success alert-dismissible">
-    <a [routerLink]="['/user/order/{{ order?.id}}']" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <a [routerLink]="orderLink" class="close" data-dismiss="alert" aria-label="close">&times;</a>
     Your order is confirmed. Food will be delivered in one hour. Thank you and have a nice day!
 </div>
 <div class="card">

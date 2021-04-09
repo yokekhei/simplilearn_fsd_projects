@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Category } from './../../../models/category';
 import { CategoryService } from './../../../services/category.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-user-category',
@@ -13,7 +14,7 @@ export class UserCategoryComponent implements OnInit {
   categoryList: { categories: Category[] }[] = [];
   private COL_NUM = 4;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.refreshCategoryList();
@@ -30,6 +31,8 @@ export class UserCategoryComponent implements OnInit {
       this.categoryList = [];
 
       if (categories.length > 0) {
+        this.dataService.changeCategories(categories);
+
         const rowNumber = (categories.length / this.COL_NUM) + (categories.length % this.COL_NUM) - 1;
         let index = 0;
         let count = categories.length;

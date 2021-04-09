@@ -37,7 +37,7 @@ public class AdminCategoryTests extends BaseTests {
 		Assert.assertNotNull(table);
 
 		List<WebElement> rows = driver.findElements(By.xpath("//table/tbody/tr/td[1]"));
-		Assert.assertEquals(rows.size(), 1);
+		Assert.assertEquals(rows.size(), 4);
 
 		WebElement thc2 = driver.findElement(By.xpath("//table/thead/tr[1]/th[2]/span"));
 		Assert.assertEquals(thc2.getText(), "Name");

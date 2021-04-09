@@ -98,6 +98,9 @@ GRANT ALL PRIVILEGES ON *.* TO 'foodbox_user'@'%' WITH GRANT OPTION;
 
 delete from categories;
 insert into categories(category_id, category_name) values (1, 'Chinese');
+insert into categories(category_id, category_name) values (2, 'Indian');
+insert into categories(category_id, category_name) values (3, 'Thai');
+insert into categories(category_id, category_name) values (4, 'Korean');
 
 delete from users;
 insert into users (user_email, user_password, user_name, user_phone, user_role)
@@ -113,11 +116,11 @@ values (2, 'Valentine''s Day Special', 'CSH', 3.0);
 
 delete from foods;
 insert into foods (food_id, food_name, food_category, food_price, food_desc, food_offer)
-values (1, 'Condensed Milk Hainan Toast', 1, 6.5, 'Breakfast/Supper cuisines', null);
+values (1, 'Lion'' Head Soup', 1, 6.5, 'Chinese soup best served with white sticky rice.', null);
 insert into foods (food_id, food_name, food_category, food_price, food_desc, food_offer)
-values (2, 'Prawn Meehoon & Mee', 1, 12.5, 'Lunch/Dinner cuisines', 2);
+values (2, 'Spareribs', 1, 12.5, 'Tender, juicy, tangy ribs cooked on the grill.', 2);
 insert into foods (food_id, food_name, food_category, food_price, food_desc, food_offer)
-values (3, 'Nasi Lemak with Chicken Rendang', 1, 15.5, 'Lunch/Dinner cuisines', 1);
+values (3, 'Sweet and Sour Chicken', 1, 15.5, 'Pan fried chicken cubes served with a sweet and sour sauce.', 1);
 
 delete from fees;
 insert into fees(fee_type, fee_value) VALUES('delivery', 5.0);
