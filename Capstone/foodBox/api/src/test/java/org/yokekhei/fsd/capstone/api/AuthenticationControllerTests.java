@@ -43,6 +43,7 @@ public class AuthenticationControllerTests extends AbstractTestNGSpringContextTe
 				.andExpect(jsonPath("$.email").value("johndoe@gmail.com"))
 				.andExpect(jsonPath("$.password").value("Pa$sw0rd"))
 				.andExpect(jsonPath("$.username").value("johndoe"))
+				.andExpect(jsonPath("$.phone").value("+60-127813456"))
 				.andExpect(jsonPath("$.role").value("U"))
 				.andExpect(jsonPath("$.enabled").value(true));
 	}
@@ -59,6 +60,7 @@ public class AuthenticationControllerTests extends AbstractTestNGSpringContextTe
 				.andExpect(jsonPath("$.email").value("ramesh@gmail.com"))
 				.andExpect(jsonPath("$.password").value("Pa$sw0rd"))
 				.andExpect(jsonPath("$.username").value("ramesh"))
+				.andExpect(jsonPath("$.phone").value("+60-127813456"))
 				.andExpect(jsonPath("$.role").value("U"))
 				.andExpect(jsonPath("$.enabled").value(true));
 	}
