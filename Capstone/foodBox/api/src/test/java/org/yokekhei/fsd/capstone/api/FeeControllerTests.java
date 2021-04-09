@@ -35,7 +35,7 @@ public class FeeControllerTests extends AbstractTestNGSpringContextTests {
 	}
 
 	@Test(priority = 1)
-	public void testGetUsers() throws Exception {
+	public void testGetFees() throws Exception {
 		mockMvc.perform(get("/api/fee"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
